@@ -1,0 +1,5 @@
+{
+ "compilerOptions":{"strict":true,"checkJs":false,"lib":["deno.window","dom","dom.iterable","esnext"]},
+ "lock":"./deno.lock",
+ "imports":{"jsr:@std/bytes@1":"jsr:@std/bytes@1.0.6","jsr:@std/encoding@1/base64url":"jsr:@std/encoding@1.0.10/base64url"}
+}

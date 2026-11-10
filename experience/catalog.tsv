@@ -1,0 +1,519 @@
+key	en	fr	aeb-TN
+app.title	Between us · a little light	Entre nous · une petite lumière	بيناتنا · ضو صغير
+app.brand	Between us	Entre nous	بيناتنا
+app.tagline	A little place to come back to · private access	Un petit endroit où revenir · accès privé	بلاصة صغيرة نرجعولها · دخول خاص
+app.skip	Skip to content	Aller au contenu	امشي للمحتوى
+app.footer	Real accounts, no simulated presence. Sync and storage need an activated project; this app never creates users or pairs.	De vrais comptes, sans présence simulée. La synchronisation et le stockage nécessitent un projet activé ; cette app ne crée jamais de comptes ni de couples.	حسابات بالحق، موش حضور مزيّف. باش تتزامن وتتخزّن الداتا يلزم مشروع مفعّل؛ التطبيق ما يعملش حسابات ولا يربط زوز عباد وحدو.
+nav.label	Your space	Votre espace	بلاصتك
+nav.today	Today	Aujourd’hui	اليوم
+nav.journal	Journal	Journal	كراسك
+nav.questions	Questions	Questions	أسئلة
+nav.garden	Garden	Jardin	الجنينة
+common.save	Save	Enregistrer	سجّل
+common.cancel	Cancel	Annuler	بطّل
+common.edit	Edit	Modifier	بدّل
+common.delete	Delete	Supprimer	فسّخ
+common.remove	Remove	Retirer	نحّي
+common.retry	Try again	Réessayer	عاود جرّب
+common.close	Close	Fermer	سكّر
+common.back	Back	Retour	ارجع
+common.next	Next	Suivant	اللي بعدو
+common.previous	Previous	Précédent	اللي قبلو
+common.loading	Loading…	Chargement…	قاعد يتحلّ…
+common.saving	Saving…	Enregistrement…	قاعد يتسجّل…
+common.waitSave	Wait for the save to finish.	Attendez la fin de l’enregistrement.	استنّى لين يكمل التسجيل.
+common.unknownError	Something went wrong. Your draft has been kept.	Une erreur est survenue. Votre brouillon est conservé.	صارت غلطة. اللي كتبتو ما ضاعش.
+common.optional	Optional	Facultatif	موش لازم
+common.required	Required	Obligatoire	لازم
+common.all	All	Tout	الكل
+common.show	Show	Afficher	ورّي
+common.confirm	Confirm	Confirmer	أكّد
+common.empty	Nothing here yet.	Rien ici pour le moment.	ما فما شي لهنا توّا.
+auth.title	Your private space	Votre espace privé	بلاصتك الخاصة
+auth.inviteOnly	Access is by invitation only. There is no public sign-up.	L’accès se fait uniquement sur invitation. Aucune inscription publique.	الدخول كان بدعوة. ما فماش تسجيل محلول للناس الكل.
+auth.adapterNotice	Use the real sign-in method configured by the owner. A username is only a routing alias, never proof of identity. Do not enter your partner’s email.	Utilisez le mode de connexion réel configuré par le propriétaire. Un nom d’utilisateur n’est qu’un alias de routage, jamais une preuve d’identité. Ne saisissez pas l’adresse de votre partenaire.	استعمل طريقة الدخول الحقيقية اللي هيّأها المالك. اسم المستخدم كان اسم يوجّه الدخول، موش إثبات شكون إنت. ما تكتبش إيميل الشخص الآخر.
+auth.email	Your email	Votre adresse e-mail	الإيميل متاعك
+auth.username	Your username	Votre nom d’utilisateur	اسم المستخدم متاعك
+auth.password	Your password	Votre mot de passe	كلمة السر متاعك
+auth.signIn	Sign in	Se connecter	ادخل
+auth.signOut	Sign out	Se déconnecter	اخرج
+auth.signedOut	Signed out. Private views and file URLs have been cleared.	Déconnexion effectuée. Les vues privées et les URL de fichiers ont été effacées.	خرجت من الحساب. تنحّاو العرض الخاص وروابط الملفات.
+auth.noSession	Not signed in	Non connecté	موش داخل للحساب
+auth.validating	Checking access…	Vérification de l’accès…	قاعدين نثبّتوا في الدخول…
+auth.checkingAccount	Checking your account and activation…	Vérification du compte et de son activation…	قاعدين نثبّتوا في حسابك وتفعيلو…
+auth.pending	Real session · activation pending	Session réelle · activation en attente	داخل بالحق · التفعيل مازال
+auth.checkActivation	Check activation	Vérifier l’activation	ثبّت في التفعيل
+auth.notEnrolled	Your account is signed in but is not enrolled in this pair. Ask the owner to check activation.	Votre compte est connecté, mais ne fait pas partie de ce couple. Demandez au propriétaire de vérifier l’activation.	دخلت لحسابك، أما مازال موش مربوط بالثنائي هذا. اطلب من المالك يثبّت في التفعيل.
+auth.invalidCredentials	Sign-in failed. Check your details and try again.	Connexion impossible. Vérifiez vos identifiants et réessayez.	ما نجمناش ندخلوك. ثبّت في معلوماتك وعاود جرّب.
+auth.expired	Your session has expired. Sign in again.	Votre session a expiré. Reconnectez-vous.	وفى وقت الدخول متاعك. عاود ادخل.
+auth.invalidLink	Use a valid invitation or recovery link.	Utilisez un lien d’invitation ou de récupération valide.	استعمل رابط دعوة ولا استرجاع مازال يخدم.
+auth.usernameUnavailable	Username-only access is not configured. No session was created.	L’accès par nom d’utilisateur seul n’est pas configuré. Aucune session n’a été créée.	الدخول بالاسم وحدو مازال موش مهيّأ. ما تفتحت حتى جلسة.
+auth.recover	Recover access	Récupérer l’accès	رجّع الدخول لحسابك
+auth.recoverySent	If that account exists, a recovery link will arrive. No new account is created.	Si ce compte existe, un lien de récupération sera envoyé. Aucun nouveau compte n’est créé.	كان الحساب موجود، يوصلك رابط ترجع بيه تدخل. ما يتعمل حتى حساب جديد.
+auth.setPassword	Set your password	Définir votre mot de passe	اختار كلمة السر متاعك
+auth.setupNotice	Only for your authenticated invitation or recovery session.	Uniquement dans votre session authentifiée d’invitation ou de récupération.	كان كي تكون داخل برابط دعوة ولا استرجاع متثبّت منّو.
+auth.newPassword	New password	Nouveau mot de passe	كلمة سر جديدة
+auth.confirmPassword	Repeat password	Répéter le mot de passe	عاود كلمة السر
+auth.savePassword	Save password	Enregistrer le mot de passe	سجّل كلمة السر
+auth.changePassword	Set or change my password	Définir ou changer mon mot de passe	اختار ولا بدّل كلمة السر متاعي
+auth.passwordMismatch	The passwords do not match.	Les mots de passe ne correspondent pas.	كلمتا السر موش كيف كيف.
+auth.passwordShort	Use at least {{min}} characters.	Utilisez au moins {{min}} caractères.	استعمل على الأقل {{min}} حروف ولا رموز.
+auth.passwordUpdated	Your account password has been updated.	Le mot de passe de votre compte a été mis à jour.	تبدّلت كلمة السر متاع حسابك.
+auth.linkAccepted	Authenticated link received. Choose your own password.	Lien authentifié reçu. Choisissez votre propre mot de passe.	الرابط تثبّت. اختار إنت كلمة السر متاعك.
+auth.signOutUnconfirmed	Private views were cleared, but sign-out was not confirmed. Try again.	Les vues privées ont été effacées, mais la déconnexion n’a pas été confirmée. Réessayez.	تنحّى العرض الخاص، أما الخروج من الحساب ما تأكّدش. عاود جرّب.
+auth.rateLimited	Too many attempts. Wait a little before trying again.	Trop de tentatives. Patientez avant de réessayer.	برشة محاولات. استنّى شوية وعاود جرّب.
+sync.checkingConfig	Checking configuration; no active connection yet.	Vérification de la configuration ; aucune connexion active pour le moment.	قاعدين نثبّتوا في الإعدادات؛ ما فماش ربط يخدم توّا.
+sync.configMissing	Configuration pending. No simulated data or sessions.	Configuration en attente. Aucune donnée ni session simulée.	الإعدادات مازالت. ما فماش داتا ولا دخول مزيّف.
+sync.configured	Project configured. Sign in; synchronization has not been checked yet.	Projet configuré. Connectez-vous ; la synchronisation n’a pas encore été vérifiée.	المشروع مهيّأ. ادخل؛ التزامن مازال ما تثبّتناش منّو.
+sync.noSession	Signed out. Private data is hidden.	Non connecté. Les données privées sont masquées.	موش داخل. الداتا الخاصة موش ظاهرة.
+sync.offline	Offline. Your draft is still here; save again when connected.	Hors connexion. Votre brouillon est conservé ; enregistrez à nouveau une fois connecté.	ما فماش كونكسيون. اللي كتبتو مازال لهنا؛ عاود سجّل كي ترجع الشبكة.
+sync.stale	Data may be out of date. Drafts have not been sent.	Les données peuvent être périmées. Les brouillons n’ont pas été envoyés.	الداتا تنجم تكون قديمة. اللي كتبتو ما تبعثش.
+sync.reconnecting	Reconnecting and checking the latest data…	Reconnexion et vérification des dernières données…	قاعدين نعاودوا نربطوا ونثبّتوا في آخر داتا…
+sync.refreshing	Refreshing authorized data…	Actualisation des données autorisées…	قاعدين نحيّنوا الداتا المسموح بيها…
+sync.synced	Authorized data is up to date as of {{time}}. This does not mean your partner is online.	Données autorisées à jour à {{time}}. Cela ne signifie pas que votre partenaire est en ligne.	الداتا المسموح بيها تحيّنت في {{time}}. هذا ما يعنيش اللي الشخص الآخر متصل.
+sync.unverified	Synchronization has not been verified. Try again; no active connection is claimed.	La synchronisation n’a pas été vérifiée. Réessayez ; aucune connexion active n’est annoncée.	التزامن موش متثبّت منّو. عاود جرّب؛ ما نقولوش اللي الربط يخدم.
+sync.notReady	Session or activation pending. Nothing was saved.	Session ou activation en attente. Rien n’a été enregistré.	الدخول ولا التفعيل مازال. ما تسجّل شي.
+sync.pendingPartner	Second account awaiting activation	Deuxième compte en attente d’activation	الحساب الثاني يستنّى التفعيل
+sync.twoMembers	Two enrolled accounts · no presence signal	Deux comptes inscrits · aucun indicateur de présence	زوز حسابات مربوطين · من غير علامة حضور
+sync.changedSession	The session changed. Your operation was stopped.	La session a changé. Votre opération a été arrêtée.	تبدّل الحساب المفتوح. العملية وقفت.
+errors.forbidden	This account cannot perform that action.	Ce compte ne peut pas effectuer cette action.	الحساب هذا ما ينجمش يعمل العملية هاذي.
+errors.conflict	Another session changed this record. Review the latest version before saving; your draft is kept.	Une autre session a modifié cet élément. Vérifiez la dernière version avant d’enregistrer ; votre brouillon est conservé.	جلسة أخرى بدّلت الحاجة هاذي. شوف آخر نسخة قبل ما تسجّل؛ اللي كتبتو ما ضاعش.
+errors.duplicate	A note, open round or immutable answer already exists. Refresh and review it.	Une note, une manche ouverte ou une réponse définitive existe déjà. Actualisez et vérifiez.	فما ديجا ملاحظة ولا جولة محلولة ولا جواب ما يتبدّلش. حيّن وشوفو.
+errors.invalidValue	A field has an invalid value or exceeds its limit.	Un champ contient une valeur invalide ou dépasse sa limite.	فما خانة فيها قيمة موش صحيحة ولا فاتت الحدّ.
+errors.required	Fill in all required fields.	Remplissez tous les champs obligatoires.	عمّر الخانات اللازمة الكل.
+errors.unknownQuestion	This question is not in the approved question bank.	Cette question ne figure pas dans la liste approuvée.	السؤال هذا موش من الأسئلة المتّفق عليها.
+errors.arguments	The request or upload state is invalid. Refresh before retrying.	La demande ou l’état du transfert est invalide. Actualisez avant de réessayer.	الطلب ولا حالة رفع الملف موش صحيحة. حيّن قبل ما تعاود.
+errors.quota	Your storage or record limit has been reached. Remove files or ask the owner for help.	Votre limite de stockage ou d’éléments est atteinte. Supprimez des fichiers ou contactez le propriétaire.	وصلت للحدّ متاع التخزين ولا العناصر. نحّي ملفات ولا اطلب مساعدة المالك.
+errors.writeRate	Too many changes this minute. Wait before saving again.	Trop de modifications cette minute. Attendez avant d’enregistrer à nouveau.	برشة تبديلات في الدقيقة هاذي. استنّى قبل ما تعاود تسجّل.
+errors.network	The network request failed. Your draft is kept; check before retrying an uncertain save.	La requête réseau a échoué. Votre brouillon est conservé ; vérifiez avant de réessayer un enregistrement incertain.	الطلب ما عداش عالشبكة. اللي كتبتو ما ضاعش؛ ثبّت قبل ما تعاود تسجيل موش متأكّد منّو.
+errors.localStorage	Local storage is unavailable. Nothing was silently saved in memory.	Le stockage local est indisponible. Aucune sauvegarde silencieuse en mémoire.	التخزين على الجهاز موش متوفّر. ما سجّلنا شي في الذاكرة بالسكات.
+errors.localQuota	Your browser has no space left. Export a copy or remove files.	Votre navigateur n’a plus d’espace. Exportez une copie ou supprimez des fichiers.	المتصفّح ما عادش فيه بلاصة. هبّط نسخة ولا نحّي ملفات.
+errors.config	A valid project configuration is required. No connection has been made.	Une configuration de projet valide est nécessaire. Aucune connexion n’a été établie.	يلزم إعدادات مشروع صحيحة. ما صار حتى ربط.
+errors.profileSave	Preferences could not be verified after saving. Try again; do not assume they synchronized.	Les préférences n’ont pas pu être vérifiées après enregistrement. Réessayez, sans supposer qu’elles sont synchronisées.	ما نجمناش نثبّتوا في الاختيارات بعد التسجيل. عاود جرّب؛ ما تعتبرهاش تزامنت.
+today.eyebrow	You do not need anything extraordinary to say.	Pas besoin d’avoir quelque chose d’extraordinaire à dire.	موش لازم يكون عندك كلام كبير باش تحكي.
+today.title	A little light. A place for us.	Une petite lumière. Un endroit à nous.	ضو صغير. بلاصة لينا.
+today.intro	Leave what you would like to remember today. A sentence, a voice, something that does not fit in a quick message.	Déposez ici ce que vous aimeriez retenir d’aujourd’hui. Une phrase, une voix, quelque chose qui ne tient pas dans un message rapide.	خلّي لهنا اللي تحب تتفكّرو من نهارك. جملة، صوت، حاجة ما تتقالش في ميساج مستعجل.
+today.write	Write something	Écrire quelque chose	اكتب حاجة
+today.openQuestion	Open a question	Ouvrir une question	حلّ سؤال
+today.scene	A moon, stars and candles lighting up	Une lune, des étoiles et des bougies qui s’allument	قمر ونجوم وشمع يضوي
+today.littleLight	A little light	Un peu de lumière	شوية ضو
+today.threadEyebrow	What you leave here	Ce que vous déposez ici	اللي تخلّيه لهنا
+today.threadTitle	The thread of your days	Le fil de vos journées	خيط أيّاماتك
+today.empty	You have not written yet. A single sentence is enough to start.	Vous n’avez pas encore écrit. Une seule phrase suffit pour commencer.	ما كتبت شي مازال. جملة وحدة تكفي باش تبدأ.
+today.viewJournal	View my journal	Voir mon journal	شوف كرّاسي
+today.summary	Your saved memories: {{count}}.	Vos souvenirs enregistrés : {{count}}.	الذكريات اللي سجّلتهم: {{count}}.
+today.connection	Our connection	Notre lien	اللي يربطنا
+today.honestTitle	On the other side, without pretending	De l’autre côté, sans faire semblant	عالشيرة الأخرى، من غير تمثيل
+today.honestBody	The other account only appears once activated. No simulated sessions or presence. Every shared post is your decision.	L’autre compte n’apparaît qu’une fois activé. Ni session ni présence simulée. Chaque publication partagée relève de votre choix.	الحساب الآخر ما يظهر كان كي يتفعّل. ما فماش دخول ولا حضور مزيّف. كل حاجة تشاركها تختارها إنت.
+journal.eyebrow	Say it your way	Dites-le à votre façon	احكي بطريقتك
+journal.title	Your journal	Votre journal	كرّاسك
+journal.intro	A note, a poem, a little piece of the day.	Une note, un poème, un petit bout de journée.	ملاحظة، قصيدة، طرف صغير من النهار.
+journal.new	A new entry	Une nouvelle entrée	حاجة جديدة تكتبها
+journal.edit	Edit entry	Modifier l’entrée	بدّل اللي كتبتو
+journal.saved	What you have saved	Ce que vous avez enregistré	اللي سجّلتو
+journal.filter	Journal visibility	Visibilité du journal	شنوّة يظهر في الكرّاس
+journal.authorized	All authorized entries	Toutes les entrées autorisées	كل الكتابات المسموح بيهم
+journal.mine	My entries	Mes entrées	كتاباتي
+journal.shared	Shared entries only	Uniquement les entrées partagées	كان الكتابات المشاركة
+journal.owner	{{name}} · authenticated access	{{name}} · accès authentifié	{{name}} · دخول متثبّت منّو
+journal.empty	No entries match this filter. Save your first note.	Aucune entrée avec ce filtre. Enregistrez votre première note.	ما فماش كتابات بالفلتر هذا. سجّل أول ملاحظة.
+form.body	What you want to keep	Ce que vous souhaitez garder	اللي تحب تحتفظ بيه
+form.answer	Your answer	Votre réponse	جوابك
+form.journalPlaceholder	Today I would like to remember…	Aujourd’hui, j’aimerais me souvenir de…	اليوم نحب نتفكّر…
+form.answerPlaceholder	At your own pace, in your own words…	À votre rythme, avec vos mots…	على راحتك وبكلامك إنت…
+form.mood	How you feel	Votre humeur	كيفاش حاسس روحك
+form.kind	Form	Forme	النوع
+form.note	Note	Note	ملاحظة
+form.poem	Poem	Poème	قصيدة
+form.entryVisibility	Who can read this entry	Qui peut lire cette entrée	شكون ينجم يقرا اللي كتبتو
+form.answerVisibility	Who can read this answer	Qui peut lire cette réponse	شكون ينجم يقرا الجواب
+form.visibility	Visibility	Visibilité	شكون يشوف
+form.private	Only me	Moi uniquement	كان أنا
+form.shared	Share with my partner	Partager avec mon ou ma partenaire	نشارك مع الشخص الآخر
+form.shareHint	Sharing also publishes attached files to your real partner. Only you can read it by default.	Le partage rend aussi les pièces jointes accessibles à votre partenaire réel. Par défaut, vous seul pouvez lire ce contenu.	كي تشارك، الملفات المرفوقة زادة يراهم الشخص الآخر بالحق. في الأصل كان إنت تنجم تقرا.
+form.shareConfirm	Sharing this note also gives your partner access to all its attachments. Continue?	Partager cette note donne aussi accès à toutes ses pièces jointes à votre partenaire. Continuer ?	كي تشارك الملاحظة هاذي، الشخص الآخر ينجم يفتح مرفقاتها الكل. نكمّلوا؟
+form.shareCancelled	Sharing cancelled.	Partage annulé.	بطّلنا المشاركة.
+form.files	Photo, audio or video · 25 MiB per file, 100 MiB per person	Photo, audio ou vidéo · 25 Mio par fichier, 100 Mio par personne	تصويرة ولا صوت ولا فيديو · 25 ميبيبايت للملف، و100 للشخص
+form.saveEntry	Save entry	Enregistrer l’entrée	سجّل الكتابة
+form.saveAnswer	Save answer	Enregistrer la réponse	سجّل الجواب
+form.saveChanges	Save changes	Enregistrer les modifications	سجّل التبديلات
+form.discardDraft	Discard draft	Abandonner le brouillon	نحّي المسوّدة
+form.empty	Write something or attach a memory.	Écrivez quelque chose ou joignez un souvenir.	اكتب حاجة ولا زيد ذكرى في ملف.
+form.saved	Saved on the server.	Enregistré sur le serveur.	تسجّل في السيرفر.
+form.newerDraft	The submitted version was saved; your newer draft is still here.	La version envoyée a été enregistrée ; votre brouillon plus récent est conservé.	تسجّلت النسخة اللي بعثتها؛ اللي زدت كتبتو مازال لهنا.
+form.draftKept	Your draft and retry identifiers have been kept.	Votre brouillon et les identifiants de nouvelle tentative sont conservés.	اللي كتبتو ومعرّفات إعادة المحاولة ما ضاعوش.
+form.editingVersion	Editing version {{version}}. Manage saved attachments in the entry.	Modification de la version {{version}}. Gérez les pièces jointes enregistrées dans l’entrée.	قاعد تبدّل النسخة {{version}}. المرفقات المسجّلة تلقاهم في الكتابة.
+form.replaceDraft	Replace your draft with this server version?	Remplacer votre brouillon par cette version du serveur ?	نعوّضوا اللي كتبتو بالنسخة هاذي من السيرفر؟
+form.reconcile	Use the latest version as a base, keeping my draft	Utiliser la dernière version comme base en gardant mon brouillon	استعمل آخر نسخة كقاعدة وخلّي اللي كتبتو
+form.reconcileConfirm	Server version: {{body}}. Use it as the base for your draft? Your next save replaces its fields.	Version du serveur : {{body}}. L’utiliser comme base pour votre brouillon ? Le prochain enregistrement remplacera ses champs.	نسخة السيرفر: {{body}}. نستعملوها قاعدة للي كتبتو؟ التسجيل الجاي يعوّض خاناتها.
+form.baseUpdated	Base version updated. Draft unchanged; nothing saved yet.	Version de base mise à jour. Brouillon intact ; rien n’est encore enregistré.	تبدّلت النسخة القاعدة. اللي كتبتو كيف ما هو؛ ما تسجّل شي مازال.
+form.deleteConfirm	Delete this record and mark its files for cleanup?	Supprimer cet élément et marquer ses fichiers pour nettoyage ?	نفسّخوا الحاجة هاذي ونعلّموا ملفاتها باش يتنحّاو؟
+form.visibilityConfirm	Change visibility for this record and all its files?	Changer la visibilité de cet élément et de tous ses fichiers ?	نبدّلوا شكون يشوف الحاجة هاذي وملفاتها الكل؟
+form.makePrivate	Make private	Rendre privé	خلّيها خاصة
+form.share	Share	Partager	شارك
+form.incomplete	Entry incomplete: an attachment still needs finalizing. Retry from the draft or pending files.	Entrée incomplète : une pièce jointe reste à finaliser. Réessayez depuis le brouillon ou les fichiers en attente.	الكتابة موش كاملة: مرفق مازال ما كملش. عاود من المسوّدة ولا الملفات اللي تستنّى.
+record.hint	Recording needs permission, a microphone or camera, and HTTPS or localhost. You can attach a file instead.	L’enregistrement nécessite une autorisation, un micro ou une caméra, et HTTPS ou localhost. Vous pouvez joindre un fichier à la place.	باش تسجّل يلزم إذن وميكرو ولا كاميرا، وHTTPS ولا localhost. تنجم تزيد ملف في عوض هذا.
+record.audio	Record audio	Enregistrer un audio	سجّل صوت
+record.video	Record video	Enregistrer une vidéo	سجّل فيديو
+record.stop	Stop and preview	Arrêter et prévisualiser	وقّف وشوف التسجيل
+record.cancelEdit	Cancel editing	Annuler la modification	بطّل التبديل
+record.tooLarge	The recording exceeded 25 MiB and was discarded. Try a shorter note.	L’enregistrement a dépassé 25 Mio et a été abandonné. Essayez une note plus courte.	التسجيل فات 25 ميبيبايت وتنحّى. جرّب ملاحظة أقصر.
+record.empty	The recording was empty. Try again.	L’enregistrement était vide. Réessayez.	التسجيل خرج فارغ. عاود جرّب.
+record.previewReady	Recording ready to preview. You can remove it, record again or save.	Enregistrement prêt à prévisualiser. Vous pouvez le retirer, recommencer ou enregistrer.	التسجيل حاضر باش تشوفو ولا تسمعو. تنجم تنحّيه ولا تعاود تسجّل ولا تحفظو.
+record.voiceFilename	Voice note	Note vocale	ملاحظة صوتية
+record.videoFilename	Video note	Note vidéo	ملاحظة فيديو
+music.recordingPause	Music paused for recording. It will not resume automatically.	Musique en pause pour l’enregistrement. Elle ne reprend pas automatiquement.	الموسيقى واقفة باش تسجّل. ما ترجعش وحدها.
+auth.loginIdentifier	Your username or email	Votre nom d’utilisateur ou e-mail	اسم المستخدم ولا الإيميل متاعك
+auth.invalidIdentifier	Enter a configured username or a valid email.	Saisissez un nom d’utilisateur configuré ou une adresse e-mail valide.	اكتب اسم مستخدم مهيّأ ولا إيميل صحيح.
+auth.aliasMissing	That username has no configured sign-in identifier. No session or account was created.	Aucun identifiant de connexion n’est configuré pour ce nom d’utilisateur. Aucune session ni compte n’a été créé.	اسم المستخدم هذا ما عندوش معرّف دخول مهيّأ. ما تفتحت جلسة وما تعمل حساب.
+auth.aliasInvalid	The public login alias configuration is invalid. Ask the owner to check it.	La configuration publique des alias de connexion est invalide. Demandez au propriétaire de la vérifier.	إعدادات أسامي الدخول العمومية موش صحيحة. اطلب من المالك يثبّت فيها.
+auth.assistedRecovery	This technical sign-in has no inbox. Recovery needs owner assistance and an ownership check; no email will be sent.	Cet accès technique n’a pas de boîte de réception. La récupération nécessite l’aide du propriétaire et une vérification de titularité ; aucun e-mail ne sera envoyé.	الدخول التقني هذا ما عندوش صندوق إيميل. الاسترجاع يلزمو مساعدة المالك والتثبّت من صاحب الحساب؛ ما يتبعث حتى إيميل.
+errors.configFields	Public configuration contains unsupported fields.	La configuration publique contient des champs non pris en charge.	الإعدادات العمومية فيها خانات موش مقبولة.
+errors.projectURL	Configure the real project’s HTTPS URL; example or arbitrary servers are not accepted.	Configurez l’URL HTTPS du projet réel ; les exemples et serveurs arbitraires sont refusés.	حطّ رابط HTTPS متاع المشروع الحقيقي؛ الأمثلة والسيرفرات العشوائية موش مقبولة.
+errors.publishableKey	A real publishable key is missing. Never use secret or administrator keys in the browser.	La clé publique réelle manque. N’utilisez jamais de clé secrète ou administrateur dans le navigateur.	مفتاح النشر الحقيقي ناقص. ما تستعملش مفاتيح سرّية ولا مفاتيح المسؤول في المتصفّح.
+errors.configRead	Could not read the configuration. Open this app over HTTPS or localhost.	Impossible de lire la configuration. Ouvrez cette app via HTTPS ou localhost.	ما نجمناش نقراو الإعدادات. حلّ التطبيق بـHTTPS ولا localhost.
+errors.serverShape	The server did not return exactly one record.	Le serveur n’a pas renvoyé exactement un élément.	السيرفر ما رجّعش عنصر واحد بالضبط.
+errors.invalidRead	The server returned an invalid read response.	Le serveur a renvoyé une réponse de lecture invalide.	السيرفر رجّع جواب قراءة موش صحيح.
+errors.changedDuringRead	Data changed while loading. Refresh and try again.	Les données ont changé pendant le chargement. Actualisez et réessayez.	الداتا تبدّلت وإحنا نحلّوا فيها. حيّن وعاود جرّب.
+errors.invalidDownload	The file download was invalid. The stored original has not been deleted.	Le téléchargement du fichier est invalide. L’original stocké n’a pas été supprimé.	تهبيط الملف موش صحيح. الملف الأصلي المخزّن ما تفسّخش.
+errors.invalidFile	Unsupported format, empty file, or file larger than 25 MiB.	Format non pris en charge, fichier vide ou supérieur à 25 Mio.	فورما ما يخدمش، ولا ملف فارغ، ولا أكبر من 25 ميبيبايت.
+sync.revision	Authorized data checked · revision {{revision}}. This is not partner presence.	Données autorisées vérifiées · révision {{revision}}. Ce n’est pas un indicateur de présence du partenaire.	تثبّتنا في الداتا المسموح بيها · النسخة {{revision}}. موش علامة حضور الشخص الآخر.
+sync.transportConnected	Transport connected; checking data. This is not presence.	Transport connecté ; vérification des données. Ce n’est pas un indicateur de présence.	الربط خدم؛ قاعدين نثبّتوا في الداتا. موش علامة حضور.
+sync.transportStale	Transport state: {{status}}. Data may be out of date.	État du transport : {{status}}. Les données peuvent être périmées.	حالة الربط: {{status}}. الداتا تنجم تكون قديمة.
+music.creditRecording	사랑의 빈도 (Love Frequency) — Adeline Yeo (HP). Copyright, lyrics and composition: Adeline Yeo (HP). Released November 25, 2025. The supplied source describes full or partial AI generation; this is not a commercial band recording.	사랑의 빈도 (Love Frequency) — Adeline Yeo (HP). Droits d’auteur, paroles et composition : Adeline Yeo (HP). Sortie le 25 novembre 2025. La source fournie indique une génération totale ou partielle par IA ; il ne s’agit pas d’un enregistrement d’un groupe commercial.	사랑의 빈도 (Love Frequency) — Adeline Yeo (HP). حقوق التأليف والكلمات والتلحين: Adeline Yeo (HP). خرجت نهار 25 نوفمبر 2025. المصدر الموجود يقول تولّدت الكل ولا جزء منها بالذكاء الاصطناعي؛ موش تسجيل فرقة تجارية.
+music.creditSource	Source and artist	Source et artiste	المصدر والفنانة
+music.creditRights	Original bytes unchanged; a local file is included with this app. Adjustable volume. No implied artist endorsement and no additional restrictions on the recording.	Données originales inchangées ; un fichier local est inclus dans cette app. Volume réglable. Aucun soutien implicite de l’artiste ni restriction supplémentaire sur l’enregistrement.	الملف الأصلي ما تبدّلش؛ نسخة محلية موجودة مع التطبيق. الصوت يتعدّل. هذا ما يعنيش موافقة ضمنية من الفنانة، وما فماش قيود زايدة على التسجيل.
+record.discard	Discard recording	Abandonner l’enregistrement	نحّي التسجيل
+record.idle	Not recording.	Aucun enregistrement en cours.	موش قاعدين نسجّلوا.
+record.requesting	Requesting microphone or camera access…	Demande d’accès au micro ou à la caméra…	قاعدين نطلبوا الإذن للميكرو ولا الكاميرا…
+record.active	Recording… up to {{seconds}} seconds.	Enregistrement… jusqu’à {{seconds}} secondes.	قاعدين نسجّلوا… حتى {{seconds}} ثانية.
+record.unsupported	Recording is unavailable in this browser or context. Attach a file instead.	L’enregistrement est indisponible dans ce navigateur ou contexte. Joignez un fichier à la place.	التسجيل موش متوفّر في المتصفّح ولا السياق هذا. زيد ملف في عوضو.
+record.denied	Microphone or camera access was not granted.	L’accès au micro ou à la caméra n’a pas été accordé.	ما تعطاتش الموافقة للميكرو ولا الكاميرا.
+record.failed	Recording failed. Your earlier attachments are kept.	L’enregistrement a échoué. Vos pièces jointes précédentes sont conservées.	التسجيل ما نجحش. المرفقات اللي قبل ما ضاعوش.
+record.stopBeforeSave	Stop recording before saving.	Arrêtez l’enregistrement avant de sauvegarder.	وقّف التسجيل قبل ما تسجّل الكتابة.
+record.finishBeforePlay	Finish or cancel the recording before listening.	Terminez ou annulez l’enregistrement avant d’écouter.	كمّل ولا بطّل التسجيل قبل ما تسمع.
+record.kept	Recording added to your draft; it has not been saved yet.	Enregistrement ajouté au brouillon ; il n’est pas encore sauvegardé.	التسجيل تزاد للي كتبتو؛ ما تسجّلش مازال.
+media.removeAttachment	Remove attachment	Retirer la pièce jointe	نحّي المرفق
+media.photoAlt	Attached photo	Photo jointe	تصويرة مرفوقة
+media.file	File	Fichier	ملف
+media.open	Open private file	Ouvrir le fichier privé	حلّ الملف الخاص
+media.delete	Delete file	Supprimer le fichier	فسّخ الملف
+media.deleteConfirm	Delete this file? Your partner loses access before the stored bytes are removed.	Supprimer ce fichier ? Votre partenaire perdra l’accès avant la suppression des données stockées.	نفسّخوا الملف هذا؟ الشخص الآخر يفقد الدخول ليه قبل ما تتنحّى الداتا المخزّنة.
+media.decodeError	This format cannot be played or displayed. The original file is kept.	Ce format ne peut pas être lu ou affiché. Le fichier original est conservé.	الفورما هاذي ما تنجمش تتعرض ولا تتسمع. الملف الأصلي ما ضاعش.
+media.tooLarge	Each file must be no larger than {{limit}} MiB.	Chaque fichier doit faire au maximum {{limit}} Mio.	كل ملف ما يفوتش {{limit}} ميبيبايت.
+media.tooMany	At most {{count}} attachments per entry.	Au maximum {{count}} pièces jointes par entrée.	أكثر حاجة {{count}} مرفقات لكل كتابة.
+media.unsupported	Choose a supported photo, audio or video format.	Choisissez un format photo, audio ou vidéo pris en charge.	اختار فورما تصويرة ولا صوت ولا فيديو يخدم.
+media.pending	Pending upload	Transfert en attente	الرفع مازال
+media.ready	File finalized	Fichier finalisé	الملف كمل
+media.deleting	Deletion pending	Suppression en attente	الفسخ مازال
+questions.eyebrow	Get to know each other, slowly	Se découvrir sans se presser	نعرفوا بعضنا على راحتنا
+questions.title	A question opens a door	Une question ouvre une porte	سؤال يحلّ باب
+questions.intro	Private or shared multimedia notes. Blind rounds are separate and text-only.	Notes multimédias privées ou partagées. Les manches à l’aveugle sont distinctes et uniquement textuelles.	ملاحظات خاصة ولا مشاركة فيها ميديا. الجولات المخفية وحدها، وكان بالكتابة.
+questions.theme	Topic	Thème	الموضوع
+questions.allThemes	All topics	Tous les thèmes	المواضيع الكل
+questions.all	All questions	Toutes les questions	الأسئلة الكل
+questions.pending	Unanswered	Sans réponse	من غير جواب
+questions.answered	My answers	Mes réponses	أجوبتي
+questions.hasNote	You have a note	Vous avez une note	عندك ملاحظة
+questions.noNote	No note of your own	Aucune note personnelle	ما عندكش ملاحظة متاعك
+questions.unavailable	No questions available	Aucune question disponible	ما فماش أسئلة متوفّرة
+questions.empty	No questions match. Change the topic or show all.	Aucune question ne correspond. Changez de thème ou affichez tout.	ما فماش أسئلة بالاختيار هذا. بدّل الموضوع ولا ورّي الكل.
+questions.switchConfirm	Discard your draft and switch question?	Abandonner votre brouillon et changer de question ?	نحّيو اللي كتبتو ونبدّلوا السؤال؟
+questions.savedAnswer	Your saved answer	Votre réponse enregistrée	جوابك المسجّل
+questions.replaceAnswer	You already have an answer. Saving again updates your note for this question.	Vous avez déjà une réponse. Un nouvel enregistrement mettra à jour votre note pour cette question.	عندك ديجا جواب. كان تعاود تسجّل، تتبدّل ملاحظتك للسؤال هذا.
+questionThemes.everyday	Everyday life	Le quotidien	حياتنا كل يوم
+questionThemes.memories	Memories	Les souvenirs	الذكريات
+questionThemes.future	What lies ahead	Ce qui vient	اللي جاي
+questionThemes.care	Caring for each other	Prendre soin de nous	نهتمّوا ببعضنا
+questions.q1	What small detail from today would you have liked me to see?	Quel petit détail d’aujourd’hui aurais-tu aimé que je voie ?	شنوّة الحاجة الصغيرة من نهارك اللي كنت تحبّني نشوفها؟
+questions.q2	What would a quiet afternoon where you felt completely at ease be like?	À quoi ressemblerait un après-midi tranquille où tu te sentirais parfaitement à l’aise ?	كيفاش تكون عشية هانية تحسّ فيها روحك مرتاح بالكل؟
+questions.q3	What smell or sound takes you to a place that still feels like yours?	Quelle odeur ou quel son te ramène dans un endroit qui te semble encore être le tien ?	شنوّة الريحة ولا الصوت اللي يرجّعك لبلاصة مازلت تحسّها متاعك؟
+questions.q4	Which version of yourself from years ago would you like to hug, and what would you say?	Quelle version de toi d’il y a quelques années aimerais-tu prendre dans tes bras, et que lui dirais-tu ?	كان تنجم تعانق روحك متاع قبل بسنين، في أنهي فترة تختار وشنوّة تقوللها؟
+questions.q5	What hope for the future feels a little scary to say out loud?	Quel espoir pour l’avenir te fait un peu peur à dire à voix haute ?	شنوّة الأمنية اللي تفرّحك أما تخاف شوية تقولها بصوت عالي؟
+questions.q6	What little tradition would you like us to invent one day?	Quelle petite tradition aimerais-tu qu’on invente un jour ?	شنوّة العادة الصغيرة اللي تحب نعملوها بيناتنا نهار آخر؟
+questions.q7	When the day feels heavy, would you rather have company, words or a little silence?	Quand la journée est lourde, préfères-tu de la compagnie, des mots ou un moment de silence ?	كي يثقل عليك النهار، تحب شكون يقعد معاك، كلام، ولا شوية سكات؟
+questions.q8	What gesture helps you feel that someone is really listening?	Quel geste t’aide à sentir que quelqu’un t’écoute vraiment ?	شنوّة الحركة اللي تحسّسك اللي فما شكون يسمع فيك بالحق؟
+round.title	Blind round · text only	Manche à l’aveugle · texte uniquement	جولة مخفية · كتابة برك
+round.hint	Separate from multimedia notes. Your answer cannot be changed, and your partner cannot see it until both accounts answer. No partner progress or presence hints.	Distincte des notes multimédias. Votre réponse est définitive et reste cachée à votre partenaire jusqu’aux deux réponses. Aucun indice de progression ou de présence.	وحدها، موش كيف ملاحظات الميديا. جوابك ما يتبدّلش، والشخص الآخر ما يراه كان كي تجاوبوا الزوز. ما نورّيوش تقدّمو ولا حضورو.
+round.start	Start with the selected question	Commencer avec la question choisie	ابدأ بالسؤال اللي اخترتو
+round.body	Your private answer for this round	Votre réponse privée pour cette manche	جوابك الخاص للجولة هاذي
+round.submit	Submit final answer	Envoyer la réponse définitive	ابعث الجواب النهائي
+round.open	Open. No partner progress is shown.	Ouverte. La progression du partenaire n’est pas affichée.	محلولة. ما نورّيوش وين وصل الشخص الآخر.
+round.revealed	Revealed by the server at {{time}}	Révélée par le serveur à {{time}}	كشفها السيرفر في {{time}}
+round.recovered	An open round already exists; it has been recovered.	Une manche ouverte existe déjà ; elle a été récupérée.	فما جولة محلولة ديجا؛ رجّعناها.
+round.immutable	Once submitted, your answer cannot be edited. Submit now?	Une fois envoyée, votre réponse ne pourra plus être modifiée. Envoyer ?	كي تبعث الجواب، ما عادش تنجم تبدّلو. نبعثوه توّا؟
+mood.title	How I am today	Mon humeur aujourd’hui	كيفاش أنا اليوم
+mood.value	Mood	Humeur	كيفاش حاسس روحك
+mood.note	An optional sentence	Une phrase facultative	جملة كان تحب
+mood.visibility	Mood visibility	Visibilité de l’humeur	شكون يشوف إحساسك
+mood.save	Save mood	Enregistrer l’humeur	سجّل إحساسك
+mood.none	No label	Sans étiquette	من غير تسمية
+mood.calm	Calm	Au calme	مرتاح
+mood.hopeful	Hopeful	Plein d’espoir	عندي أمل
+mood.nostalgic	Nostalgic	Nostalgique	توحّشت
+mood.hug	I need a hug	Besoin d’un câlin	نستحق عناقة
+mood.difficult	A difficult day	Journée difficile	نهار صعيب
+mood.animal	Mood animal	Animal de l’humeur	حيوان يعبّر على إحساسك
+mood.animal.none	Paw prints · no mood label	Empreintes · sans humeur définie	آثار كفوف · من غير تسمية
+mood.animal.calm	Turtle · calm	Tortue · calme	فكرون · مرتاح
+mood.animal.hopeful	Butterfly · hopeful	Papillon · plein d’espoir	فراشة · عندي أمل
+mood.animal.nostalgic	Elephant · nostalgic	Éléphant · nostalgique	فيل · توحّشت
+mood.animal.hug	Bear · a hug	Ours · un câlin	دبّ · عناقة
+mood.animal.difficult	Hedgehog · a difficult day	Hérisson · journée difficile	قنفود · نهار صعيب
+mood.reconcile	Use the latest mood as a base, keeping my sentence	Utiliser la dernière humeur comme base en gardant ma phrase	استعمل آخر إحساس كقاعدة وخلّي جملتي
+mood.reconcileConfirm	Use the latest mood as a base and keep your sentence for a new save?	Utiliser la dernière humeur comme base et garder votre phrase pour un nouvel enregistrement ?	نستعملوا آخر إحساس كقاعدة ونخلّيو جملتك لتسجيل جديد؟
+garden.eyebrow	Something small to care for	Une petite chose dont prendre soin	حاجة صغيرة نهتمّوا بيها
+garden.title	Your midnight corner	Votre coin de minuit	ركنك وقت الليل
+garden.intro	Plant a flower. Come back to water it. A shared garden for the activated pair.	Plantez une fleur. Revenez l’arroser. Un jardin partagé pour le couple activé.	اغرس وردة وارجع اسقيها. جنينة مشتركة للثنائي المفعّل.
+garden.empty	The soil is waiting for your first flower.	La terre attend votre première fleur.	التراب يستنّى أول وردة منك.
+garden.calmSoil	Quiet soil	Terre paisible	تراب هاني
+garden.nextFlower	Your next flower	Votre prochaine fleur	الوردة الجاية متاعك
+garden.plant	Plant	Planter	اغرس
+garden.water	Water	Arroser	اسقي
+garden.waterAll	Water all	Tout arroser	اسقي الكل
+garden.remove	Remove flower	Retirer la fleur	نحّي الوردة
+garden.removeConfirm	Remove the flower you planted?	Retirer la fleur que vous avez plantée ?	نحّيو الوردة اللي غرستها؟
+garden.limit	Up to 24 flowers per person. Each watering is saved on the server.	Jusqu’à 24 fleurs par personne. Chaque arrosage est enregistré sur le serveur.	حتى 24 وردة للشخص. كل سقيا تتسجّل في السيرفر.
+garden.count	Shared flowers: {{count}}	Fleurs partagées : {{count}}	الوردات المشتركة: {{count}}
+garden.care	{{count}} waterings · {{name}}	{{count}} arrosages · {{name}}	{{count}} سقيات · {{name}}
+garden.waterLabel	Water {{flower}}; waterings: {{count}}	Arroser {{flower}} ; arrosages : {{count}}	اسقي {{flower}}؛ السقيات: {{count}}
+garden.full	You have planted 24 flowers. You can still water them.	Vous avez planté 24 fleurs. Vous pouvez continuer à les arroser.	غرست 24 وردة. مازلت تنجم تسقيهم.
+garden.plantFirst	Plant a flower first.	Plantez d’abord une fleur.	اغرس وردة الأول.
+garden.watered	Watering saved.	Arrosage enregistré.	تسجّلت السقيا.
+flowers.jasmine	Jasmine	Jasmin	ياسمين
+flowers.lilium	Lily	Lys	زنبق
+flowers.orchid	Orchid	Orchidée	أوركيد
+music.summary	Music · starts in silence	Musique · démarre en silence	موسيقى · تبدأ ساكتة
+music.title	A little background music, if you like	Un fond musical, si vous en avez envie	شوية موسيقى في الخلفية، كان تحب
+music.hint	Never starts on its own. Recording, playing a note or leaving the tab pauses it. You choose when to play again.	Ne démarre jamais seule. Elle se met en pause pendant un enregistrement, l’écoute d’une note ou en quittant l’onglet. Vous choisissez quand la relancer.	ما تبدأش وحدها. توقف كي تسجّل ولا تسمع ملاحظة ولا تخرج من التاب. إنت تختار وقتاش ترجع تسمع.
+music.previous	Previous track	Piste précédente	الموسيقى اللي قبل
+music.next	Next track	Piste suivante	الموسيقى اللي بعد
+music.play	Play	Lire	شغّل
+music.pause	Pause	Pause	وقّف شوية
+music.volume	Volume	Volume	الصوت
+music.seek	Playback position	Position de lecture	وين وصلت الموسيقى
+music.off	Off. Press Play to start.	Arrêtée. Appuyez sur Lire pour commencer.	ساكتة. اضغط شغّل باش تبدأ.
+music.paused	Paused. It will not resume on its own.	En pause. Elle ne reprend pas seule.	واقفة. ما ترجعش وحدها.
+music.loading	Preparing audio…	Préparation de l’audio…	قاعدين نحضّروا الصوت…
+music.playing	Playing on this device.	Lecture sur cet appareil.	قاعدة تخدم عالجهاز هذا.
+music.hiddenPause	Paused when you left the tab. Music will not resume by itself.	Mise en pause en quittant l’onglet. La musique ne reprend pas seule.	وقفت كي خرجت من التاب. ما ترجعش وحدها.
+music.notePause	Paused while you listen to a note.	En pause pendant l’écoute d’une note.	واقفة وإنت تسمع في ملاحظة.
+music.playError	Could not play this audio. Try another track or format.	Impossible de lire cet audio. Essayez une autre piste ou un autre format.	ما نجمناش نشغّلوا الصوت هذا. جرّب موسيقى ولا فورما أخرى.
+music.gestureRequired	Your browser needs a playback gesture.	Votre navigateur exige une action pour lancer la lecture.	المتصفّح يستنّى ضغطة منك باش يشغّل.
+music.finished	The track ended. You can listen again.	La piste est terminée. Vous pouvez la réécouter.	وفات الموسيقى. تنجم تعاود تسمعها.
+music.add	Add audio from your device · up to 25 MiB per file	Ajouter un audio de votre appareil · jusqu’à 25 Mio par fichier	زيد صوت من جهازك · حتى 25 ميبيبايت للملف
+music.newVisibility	Visibility of new tracks	Visibilité des nouvelles pistes	شكون يشوف الموسيقى الجديدة
+music.audioOnly	The playlist accepts audio files only.	La liste n’accepte que des fichiers audio.	الليستة تقبل كان ملفات صوت.
+music.shareConfirm	Share the selected tracks with your partner?	Partager les pistes sélectionnées avec votre partenaire ?	نشاركوا الموسيقى اللي اخترتها مع الشخص الآخر؟
+music.saved	Tracks saved on the server.	Pistes enregistrées sur le serveur.	تسجّلت الموسيقى في السيرفر.
+music.pending	This track has no finalized audio yet. Check pending files.	Cette piste n’a pas encore d’audio finalisé. Vérifiez les fichiers en attente.	الموسيقى هاذي مازال صوتها ما كملش. شوف الملفات اللي تستنّى.
+music.select	Select {{title}}, then press Play	Sélectionner {{title}}, puis appuyer sur Lire	اختار {{title}} وبعد اضغط شغّل
+music.empty	No tracks. Add an audio file.	Aucune piste. Ajoutez un fichier audio.	ما فماش موسيقى. زيد ملف صوت.
+music.credits	Included recording credits	Crédits de l’enregistrement inclus	أصحاب التسجيل الموجود
+music.creditNotice	Keep the included recording’s original credits, license and notices unchanged. Translation does not grant new music rights.	Conservez les crédits, la licence et les mentions d’origine de l’enregistrement. La traduction n’accorde aucun nouveau droit musical.	خلّي أسماء أصحاب التسجيل والرخصة والتنبيهات الأصلية كيف ما هم. الترجمة ما تعطيش حقوق موسيقى جديدة.
+dedication.title	A song dedicated to you	Une chanson pour toi	غناية ليك
+dedication.hint	Save a link without loading or playing it here. It opens only when you choose.	Enregistrez un lien sans le charger ni le lire ici. Il ne s’ouvre que si vous le choisissez.	سجّل رابط من غير ما يتحلّ ولا يخدم لهنا. ما يتحلّ كان كي تختار إنت.
+dedication.name	A title for this dedication	Un titre pour cette dédicace	عنوان للإهداء هذا
+dedication.placeholder	A title you would like to give it	Le titre que vous souhaitez lui donner	عنوان تحب تسمّيه بيه
+dedication.url	Full HTTP(S) link	Lien HTTP(S) complet	رابط HTTP(S) كامل
+dedication.urlPlaceholder	https://…	https://…	https://…
+dedication.save	Save link	Enregistrer le lien	سجّل الرابط
+dedication.open	Open dedication	Ouvrir la dédicace	حلّ الإهداء
+dedication.defaultTitle	A song for you	Une chanson pour toi	غناية ليك
+dedication.invalidURL	Use a valid HTTP(S) link without a username, password or spaces.	Utilisez un lien HTTP(S) valide, sans nom d’utilisateur, mot de passe ni espaces.	استعمل رابط HTTP(S) صحيح من غير اسم مستخدم ولا كلمة سر ولا فراغات.
+recovery.title	Pending files and cleanup	Fichiers en attente et nettoyage	ملفات تستنّى وتنظيف
+recovery.hint	Interrupted reservations are kept. Select the original file again to retry without overwriting, or discard the reservation. Interrupted deletion can be resumed.	Les réservations interrompues sont conservées. Sélectionnez le fichier original pour réessayer sans écraser, ou abandonnez la réservation. Une suppression interrompue peut être reprise.	الحجوزات اللي تقطعت ما تضيعش. اختار الملف الأصلي من جديد باش تعاود من غير تعويض، ولا نحّي الحجز. الفسخ اللي وقف تنجم تكمّلو.
+recovery.finalize	Check upload and finalize	Vérifier le transfert et finaliser	ثبّت في الرفع وكمّل
+recovery.originalFile	Retry with the original file: {{filename}}	Réessayer avec le fichier original : {{filename}}	عاود بالملف الأصلي: {{filename}}
+recovery.sameFile	Select the original file with the same name and format.	Sélectionnez le fichier original avec le même nom et le même format.	اختار الملف الأصلي بنفس الاسم والفورما.
+recovery.continueDelete	Continue deletion	Poursuivre la suppression	كمّل الفسخ
+recovery.discard	Discard reservation	Abandonner la réservation	نحّي الحجز
+recovery.deleteConfirm	Remove this reservation and any associated file?	Supprimer cette réservation et tout fichier associé ?	نحّيو الحجز هذا وأي ملف مربوط بيه؟
+recovery.empty	No pending reservations or deletions.	Aucune réservation ni suppression en attente.	ما فماش حجوزات ولا فسخ يستنّى.
+quota.usage	Storage: {{used}} of {{limit}} MiB	Stockage : {{used}} sur {{limit}} Mio	التخزين: {{used}} من {{limit}} ميبيبايت
+quota.reservation	Each pending upload reserves 25 MiB. Finalize files one at a time; reservations also count toward your limit.	Chaque transfert en attente réserve 25 Mio. Finalisez les fichiers un par un ; les réservations comptent aussi dans votre limite.	كل رفع يستنّى يحجز 25 ميبيبايت. كمّل الملفات واحد بواحد؛ الحجوزات زادة تتحسب في الحدّ.
+quota.reservationHeadroom	Less than 25 MiB is available for a new reservation, even if the file itself would fit.	Moins de 25 Mio sont disponibles pour une nouvelle réservation, même si le fichier lui-même pourrait tenir.	فما أقل من 25 ميبيبايت لحجز جديد، حتى كان الملف وحدو ينجم يدخل.
+backup.title	Your downloadable copy	Votre copie téléchargeable	النسخة اللي تنجم تهبّطها
+backup.hint	Export only records and files currently authorized for your session. The download is not encrypted: keep it private. Local prototype backups are not imported or migrated.	Exportez uniquement les éléments et fichiers actuellement autorisés pour votre session. Le téléchargement n’est pas chiffré : gardez-le privé. Les copies du prototype local ne sont ni importées ni migrées.	هبّط كان الداتا والملفات المسموحين لحسابك توّا. النسخة موش مشفّرة: حطّها في بلاصة خاصة. نسخ النموذج المحلي ما تتوردش وما تتنقلش.
+backup.export	Export authorized data with files	Exporter les données autorisées avec les fichiers	هبّط الداتا المسموح بيها مع الملفات
+backup.confirm	Download your currently authorized data and files without encryption?	Télécharger vos données et fichiers actuellement autorisés sans chiffrement ?	نهبّطوا الداتا والملفات المسموحين توّا من غير تشفير؟
+backup.progress	Preparing your copy…	Préparation de votre copie…	قاعدين نحضّروا نسختك…
+backup.complete	Copy generated with authorized records and files only. Check your download; it is not encrypted.	Copie générée uniquement avec les données et fichiers autorisés. Vérifiez le téléchargement ; il n’est pas chiffré.	تحضّرت النسخة كان بالداتا والملفات المسموحين. ثبّت في التهبّيط؛ النسخة موش مشفّرة.
+backup.changed	Permissions or data changed during export. No copy was downloaded. Try again.	Les autorisations ou les données ont changé pendant l’export. Aucune copie n’a été téléchargée. Réessayez.	الصلاحيات ولا الداتا تبدّلت وإحنا نحضّروا النسخة. ما تهبّطت حتى نسخة. عاود جرّب.
+backup.failed	A complete copy could not be exported. Nothing was replaced.	Impossible d’exporter une copie complète. Rien n’a été remplacé.	ما نجمناش نهبّطوا نسخة كاملة. ما تعوّض شي.
+backup.importUnavailable	Import is not available. Existing local data has not been uploaded.	L’import n’est pas disponible. Les données locales existantes n’ont pas été envoyées.	التوريد موش متوفّر. الداتا المحلية الموجودة ما ترفعتش.
+profile.title	Your profile	Votre profil	بروفيلك
+profile.open	Open profile and account settings	Ouvrir le profil et les paramètres du compte	حلّ البروفيل وإعدادات الحساب
+profile.photo	Profile photo	Photo de profil	تصويرة البروفيل
+profile.photoAlt	Profile photo of {{name}}	Photo de profil de {{name}}	تصويرة بروفيل {{name}}
+profile.changePhoto	Change photo	Changer la photo	بدّل التصويرة
+profile.removePhoto	Remove photo	Retirer la photo	نحّي التصويرة
+profile.displayName	Your name	Votre nom	اسمك
+profile.nickname	Nickname	Surnom	اسم دلع
+profile.nicknameHint	Optional nickname. Whether “apodos” means nicknames still needs confirmation.	Surnom facultatif. Le sens d’« apodos » reste à confirmer.	اسم دلع كان تحب. مازلنا نستناو تأكيد كان «apodos» معناها أسماء دلع.
+profile.nameRequired	Enter a name between 1 and 80 characters.	Saisissez un nom de 1 à 80 caractères.	اكتب اسم بين حرف و80 حرف.
+profile.photoPending	Profile photo storage is not connected yet. No photo has been uploaded.	Le stockage des photos de profil n’est pas encore relié. Aucune photo n’a été envoyée.	تخزين تصاور البروفيل مازال موش مربوط. ما ترفعت حتى تصويرة.
+profile.save	Save profile preferences	Enregistrer les préférences du profil	سجّل اختيارات البروفيل
+profile.saved	Preferences saved through the configured adapter.	Préférences enregistrées via l’adaptateur configuré.	تسجّلت الاختيارات بالربط المهيّأ.
+profile.pending	Profile updates are not connected to shared storage yet.	Les modifications du profil ne sont pas encore reliées au stockage partagé.	تبديلات البروفيل مازالت موش مربوطة بالتخزين المشترك.
+account.title	Account settings	Paramètres du compte	إعدادات الحساب
+account.language	Language	Langue	اللغة
+account.theme	Theme	Thème visuel	الألوان
+account.reduceMotion	Reduce motion	Réduire les animations	نقص الحركة
+account.privacy	Privacy and sharing	Confidentialité et partage	الخصوصية والمشاركة
+account.privacyHint	Names, photos and local preferences never grant access to another account.	Les noms, photos et préférences locales ne donnent jamais accès à un autre compte.	الأسامي والتصاور والاختيارات المحلية ما يعطيوكش دخول لحساب آخر.
+account.delete	Request account deletion	Demander la suppression du compte	اطلب فسخ الحساب
+account.deletePending	Account deletion needs a reviewed owner-admin process. Nothing has been deleted.	La suppression du compte nécessite une procédure vérifiée par le propriétaire administrateur. Rien n’a été supprimé.	فسخ الحساب يلزمو إجراء يراجعو المالك المسؤول. ما تفسّخ شي.
+language.title	Choose your language	Choisir votre langue	اختار لغتك
+language.en	English	English	English
+language.fr	Français	Français	Français
+language.aeb-TN	تونسي	تونسي	تونسي
+language.draftNotice	Tunisian Arabic is an AI-written draft and needs review by a Tunisian speaker. Native quality has not been validated.	Le tunisien est un brouillon rédigé par IA qui doit être relu par une personne tunisienne. La qualité native n’a pas été validée.	التونسي هذا مسوّدة كتبها ذكاء اصطناعي ويلزم شكون تونسي يراجعها. ما تأكّدناش اللي لغتها طبيعية بالحق.
+themes.dark	Dark	Sombre	غامق
+themes.light	Light	Clair	فاتح
+themes.pastel	Pastel	Pastel	ألوان هادئة
+themes.barcelona	Barcelona · blue and burgundy	Barcelone · bleu et bordeaux	برشلونة · أزرق وخمري
+themes.tunisia	Tunisia · red and white	Tunisie · rouge et blanc	تونس · أحمر وأبيض
+themes.italy	Italy · green, white and red	Italie · vert, blanc et rouge	إيطاليا · أخضر وأبيض وأحمر
+themes.lavender	Lavender	Lavande	لافندر
+themes.ocean	Ocean	Océan	البحر
+themes.forest	Forest	Forêt	الغابة
+themes.rose	Rose	Rose	وردي
+notifications.title	Notifications	Notifications	التنبيهات
+notifications.enable	Enable notifications	Activer les notifications	فعّل التنبيهات
+notifications.permission	Allow notifications in your browser when you choose to enable them.	Autorisez les notifications dans votre navigateur lorsque vous décidez de les activer.	اسمح بالتنبيهات في المتصفّح كي تختار تفعّلهم.
+notifications.denied	Notifications are blocked. You can change this in your browser settings.	Les notifications sont bloquées. Vous pouvez modifier ce choix dans les paramètres du navigateur.	التنبيهات مسكّرة. تنجم تبدّل هذا في إعدادات المتصفّح.
+notifications.unsupported	Push notifications are not supported in this browser or context.	Les notifications push ne sont pas prises en charge dans ce navigateur ou contexte.	تنبيهات البوش ما تخدمش في المتصفّح ولا السياق هذا.
+notifications.notConfigured	Partner notifications are not connected yet. Nothing has been sent.	Les notifications au partenaire ne sont pas encore reliées. Rien n’a été envoyé.	تنبيهات الشخص الآخر مازالت موش مربوطة. ما تبعث شي.
+notifications.intentReady	Your thought is ready for the notification adapter; it has not been sent.	Votre pensée est prête pour l’adaptateur de notification ; elle n’a pas été envoyée.	فكرتك حاضرة للربط متاع التنبيهات؛ ما تبعثتش.
+notifications.queued	Notification request queued by the adapter. Delivery is not confirmed.	Demande de notification mise en attente par l’adaptateur. La réception n’est pas confirmée.	طلب التنبيه تحطّ في الانتظار من الربط. الوصول موش متأكّد.
+notifications.failed	The notification request failed. Retry the same request without creating another.	La demande de notification a échoué. Réessayez la même demande sans en créer une autre.	طلب التنبيه ما نجحش. عاود نفس الطلب من غير ما تعمل واحد آخر.
+notifications.privacy	Notification previews may appear on a locked screen. Choose what you want to share.	Les aperçus de notification peuvent apparaître sur l’écran verrouillé. Choisissez ce que vous souhaitez partager.	التنبيهات تنجم تظهر في شاشة مسكّرة. اختار شنوّة تحب تشارك.
+affection.button	A thought for you	Une pensée pour toi	خمّمت فيك
+affection.tapLabel	A thought for your partner. Tap ten times to prepare one request.	Une pensée pour votre partenaire. Appuyez dix fois pour préparer une seule demande.	فكرة للشخص الآخر. اضغط عشرة مرّات باش تحضّر طلب واحد.
+affection.progress	{{count}} of 10 taps	{{count}} appuis sur 10	{{count}} ضغطات من 10
+affection.reset	Start another thought	Commencer une autre pensée	ابدأ فكرة أخرى
+affection.flower	A flower opens for this thought	Une fleur s’ouvre pour cette pensée	وردة تتحلّ للفكرة هاذي
+affection.phrase01	{{sender}} is sending a little warmth your way.	{{sender}} t’envoie un peu de douceur.	{{sender}} يبعثلك شوية حنان.
+affection.phrase02	A small hello from {{sender}}, just for you.	Un petit coucou de {{sender}}, rien que pour toi.	سلام صغير من {{sender}}، ليك إنت برك.
+affection.phrase03	{{sender}} has a gentle thought for you.	{{sender}} a une pensée tendre pour toi.	{{sender}} خمّم فيك بكل حنان.
+affection.phrase04	A little flower from {{sender}} for your day.	Une petite fleur de {{sender}} pour ta journée.	وردة صغيرة من {{sender}} لنهارك.
+affection.phrase05	{{sender}} is cheering you on from here.	{{sender}} t’encourage d’ici.	{{sender}} يشجّع فيك من لهنا.
+affection.phrase06	{{sender}} is keeping a little light on for you.	{{sender}} garde une petite lumière pour toi.	{{sender}} مخلّيلك ضو صغير.
+affection.phrase07	A quiet wave from {{sender}}, whenever you see this.	Un petit signe de {{sender}}, quand tu verras ce message.	إشارة صغيرة من {{sender}}، وقت اللي تشوفها.
+affection.phrase08	{{sender}} hopes a little softness finds you today.	{{sender}} te souhaite un peu de douceur aujourd’hui.	{{sender}} يتمنّالك شوية راحة اليوم.
+affection.phrase09	{{sender}} is sending a smile, no reply needed.	{{sender}} t’envoie un sourire, sans attendre de réponse.	{{sender}} يبعثلك ضحكة، موش لازم تجاوب.
+affection.phrase10	A small pause, a warm thought: from {{sender}} to you.	Une petite pause, une pensée chaleureuse : de {{sender}} pour toi.	وقفة صغيرة وفكرة دافية، من {{sender}} ليك.
+ui.zeroFlowers	No flowers yet	Aucune fleur pour le moment	ما فماش ورد مازال
+ui.authorizedAccount	Authorized account	Compte autorisé	حساب مسموح بيه
+ui.sharedScope	Shared with your partner	Partagé avec votre partenaire	مشارك مع الشخص الآخر
+ui.answerUnconfirmed	The server has not confirmed your answer. Your draft is kept.	Le serveur n’a pas confirmé votre réponse. Votre brouillon est conservé.	السيرفر ما أكّدش جوابك. اللي كتبتو ما ضاعش.
+ui.trackMismatch	The server track does not match this operation. Nothing was overwritten. Review the record.	La piste du serveur ne correspond pas à cette opération. Rien n’a été écrasé. Vérifiez l’élément.	موسيقى السيرفر موش مطابقة للعملية هاذي. ما تعوّض شي. ثبّت في التسجيل.
+ui.trackUnavailable	The confirmed track is unavailable. It will not be recreated automatically.	La piste confirmée est indisponible. Elle ne sera pas recréée automatiquement.	الموسيقى اللي تأكّدت موش موجودة توّا. ما نعاودوش نعملوها وحدنا.
+ui.trackUnconfirmed	The server did not confirm the expected track owned by you.	Le serveur n’a pas confirmé la piste attendue qui vous appartient.	السيرفر ما أكّدش الموسيقى المنتظرة اللي تملكها إنت.
+ui.audioUnconfirmed	The server did not confirm finalized audio.	Le serveur n’a pas confirmé la finalisation de l’audio.	السيرفر ما أكّدش اللي الصوت كمل.
+ui.retryTracks	Retry pending tracks	Réessayer les pistes en attente	عاود جرّب الموسيقى اللي تستنّى
+ui.trackAudioPending	 · track created; audio pending	 · piste créée ; audio en attente	 · الموسيقى تعملت؛ الصوت مازال
+ui.trackConfirmPending	 · awaiting confirmation	 · confirmation en attente	 · يستنّى التأكيد
+ui.pendingTracks	{{count}} tracks pending on this device. Files are kept until the save is confirmed or you sign out.	{{count}} pistes en attente sur cet appareil. Les fichiers sont conservés jusqu’à la confirmation ou la déconnexion.	{{count}} موسيقى تستنّى عالجهاز هذا. الملفات ما تضيعش لين يتأكّد التسجيل ولا تخرج من الحساب.
+ui.recordActive	Recording. Up to 2 minutes; stop to preview.	Enregistrement. Jusqu’à 2 minutes ; arrêtez pour prévisualiser.	قاعدين نسجّلوا. حتى دقيقتين؛ وقّف باش تسمع ولا تشوف.
+b1.bio	About you · up to 280 characters	À propos de vous · 280 caractères maximum	عليك إنت · حتى 280 حرف
+b1.animal	Your chosen mood animal	Votre animal d’humeur choisi	الحيوان اللي تختارو للمزاج متاعك
+b1.profileHint	Your name, bio and decorative animal are shared with your partner. This does not change your private mood entry.	Votre nom, votre bio et votre animal décoratif sont visibles par votre partenaire. Votre humeur privée ne change pas.	اسمك والتعريف بيك والحيوان الزينة يشوفهم شريكك. هذا ما يبدّلش المزاج الخاص متاعك.
+b1.saveProfile	Save my profile	Enregistrer mon profil	سجّل البروفيل متاعي
+b1.savePreferences	Save my theme and language	Enregistrer mon thème et ma langue	سجّل الثيم واللغة متاعي
+b1.separateSaves	Profile and preferences save separately. Saving one does not save the other.	Le profil et les préférences sont enregistrés séparément. Enregistrer l’un n’enregistre pas l’autre.	البروفيل والاختيارات يتسجّلوا كل واحد وحدو. كي تسجّل واحد ما يتسجّلش الآخر.
+b1.emailHelp	To move a technical login to your real email, ask the account owner for assistance. This screen cannot perform an administrator email change.	Pour remplacer un identifiant technique par votre véritable e-mail, demandez l’aide du propriétaire. Cet écran ne peut pas effectuer un changement d’e-mail administrateur.	باش تبدّل الدخول التقني بإيميلك الحقيقي، اطلب مساعدة مالك الحساب. الشاشة هاذي ما تنجّمش تبدّل الإيميل بصلاحيات المالك.
+b1.unsaved	Unsaved changes · preview only until server confirmation.	Modifications non enregistrées · aperçu jusqu’à confirmation du serveur.	تبديلات ما تسجّلتش · معاينة برك لين يأكّد السيرفر.
+b1.saved	Saved · verified from your account on the server.	Enregistré · vérifié sur votre compte sur le serveur.	تسجّل · تثبّتنا من حسابك في السيرفر.
+b1.saving	Saving · awaiting authoritative account confirmation.	Enregistrement · attente de confirmation du compte sur le serveur.	قاعدين نسجّلوا · نستنّاو تأكيد حسابك من السيرفر.
+b1.conflict	Conflict: another version exists. Your changes are kept. Review the latest version before saving again.	Conflit : une autre version existe. Vos modifications sont conservées. Vérifiez la dernière version avant de réenregistrer.	تعارض: فما نسخة أخرى. تبديلاتك ما ضاعتش. ثبّت في آخر نسخة قبل ما تعاود تسجّل.
+b1.reconcile	Keep my draft and use the latest server version for my next save	Garder mon brouillon et utiliser la dernière version serveur au prochain enregistrement	خلّي اللي كتبتو واستعمل آخر نسخة من السيرفر في التسجيل الجاي
+b1.unconfirmed	The server has not confirmed all intended fields and their version. Your changes are kept.	Le serveur n’a pas confirmé tous les champs prévus et leur version. Vos modifications sont conservées.	السيرفر ما أكّدش الحقول الكل والنسخة متاعهم. تبديلاتك ما ضاعتش.
+b1.thoughtHint	Ten separate taps create one private in-app thought. No native notification delivery is claimed.	Dix appuis distincts créent une pensée privée dans l’application. Aucune livraison de notification native n’est annoncée.	عشرة ضغطات منفصلين يعملوا فكرة خاصة داخل التطبيق. ما نقولوش اللي إشعار وصل للتلفون.
+b1.thoughtSending	Confirming this thought with the server. One request is pending.	Confirmation de cette pensée auprès du serveur. Une seule demande est en attente.	نثبّتوا في الفكرة هاذي مع السيرفر. طلب واحد يستنّى.
+b1.thoughtUncertain	Receipt unconfirmed. Retry this same thought; do not start another.	Confirmation incertaine. Réessayez cette même pensée ; n’en commencez pas une autre.	التأكيد مازال موش واضح. عاود نفس الفكرة؛ ما تبدأش وحدة أخرى.
+b1.thoughtStored	Thought stored by the server for your partner’s in-app inbox. This is not proof of viewing or native push delivery.	Pensée enregistrée par le serveur dans la boîte privée de votre partenaire. Cela ne prouve ni sa lecture ni la livraison d’une notification native.	السيرفر سجّل الفكرة لصندوق شريكك داخل التطبيق. هذا موش دليل اللي قراها ولا اللي إشعار وصل لتلفونو.
+b1.cooldown	Wait {{seconds}} seconds before starting another thought.	Attendez {{seconds}} secondes avant une autre pensée.	استنّى {{seconds}} ثواني قبل فكرة أخرى.
+b1.retryThought	Retry the same thought	Réessayer la même pensée	عاود نفس الفكرة
+b1.inbox	Your private thought inbox	Votre boîte privée de pensées	صندوق الأفكار الخاص بيك
+b1.inboxEmpty	No thoughts received yet.	Aucune pensée reçue pour le moment.	ما وصلك حتى فكرة لتوّا.
+b1.markRead	Mark as read	Marquer comme lu	علّم عليها مقروءة
+b1.read	Read in this account	Lu dans ce compte	مقروءة في الحساب هذا
+b1.unread	Unread	Non lu	ما تقراتش
+ui.previewOnly	Device preview only, in memory. Account synchronization is pending; preferences are not cloud-saved.	Aperçu sur cet appareil, en mémoire uniquement. La synchronisation du compte est en attente ; les préférences ne sont pas enregistrées dans le cloud.	معاينة عالجهاز هذا في الذاكرة برك. تزامن الحساب مازال؛ الاختيارات ما تسجّلتش في السحابة.
+ui.authNotice	Private access with a configured username or email. No public sign-up. Technical users need owner activation; hosted acceptance is not yet validated. If your account is moved to your real email, use that email instead of the old technical username. Technical-user recovery is owner-assisted, not by email.	Accès privé avec un nom d’utilisateur configuré ou un e-mail. Pas d’inscription publique. Les accès techniques nécessitent l’activation du propriétaire ; leur acceptation hébergée reste à valider. Si votre compte passe à votre véritable e-mail, utilisez-le au lieu de l’ancien nom technique. La récupération technique est assistée par le propriétaire, sans e-mail.	دخول خاص باسم مستخدم مهيّأ ولا إيميل. ما فماش تسجيل للعموم. المستخدمين التقنيين يلزمهم تفعيل من المالك؛ القبول في الخدمة المستضافة مازال موش متثبّت منّو. كان الحساب يتنقل لإيميلك الحقيقي، ادخل بيه في عوض الاسم التقني القديم. استرجاع الدخول التقني بمساعدة المالك، موش بالإيميل.
+avatar.title	Your private photo	Votre photo privée	تصويرتك الخاصة
+avatar.hint	JPEG, PNG, WebP or GIF, up to 1 MiB. Selection stays on this device until you consent and upload.	JPEG, PNG, WebP ou GIF, jusqu’à 1 Mio. La sélection reste sur cet appareil avant votre accord et l’envoi.	JPEG، PNG، WebP ولا GIF، حتى 1 MiB. التصويرة تبقى في الجهاز لين توافق وتبعثها.
+avatar.choose	Choose a photo	Choisir une photo	اختار تصويرة
+avatar.previewAlt	Local photo preview, not uploaded	Aperçu local, photo non envoyée	معاينة محلية، التصويرة ما تبعثتش
+avatar.ownAlt	Your verified profile photo	Votre photo de profil vérifiée	تصويرة بروفيلك المتثبّت منها
+avatar.consent	I agree to upload the original bytes and share this photo with my partner. EXIF and other metadata, including location, are NOT removed.	J’accepte d’envoyer le fichier original et de partager cette photo avec mon partenaire. Les métadonnées EXIF, dont la localisation, ne sont PAS supprimées.	نوافق نبعث الملف الأصلي ونشارك التصويرة مع شريكي. EXIF والميتا داتا، حتى البلاصة، ما يتنحّاوش.
+avatar.upload	Upload with my consent	Envoyer avec mon accord	ابعث بموافقتي
+avatar.retry	Retry the same photo operation	Réessayer la même opération	عاود نفس عملية التصويرة
+avatar.discard	Discard / continue cleanup	Abandonner / poursuivre le nettoyage	فسّخ / كمّل التنظيف
+avatar.refresh	Check my pending photos	Vérifier mes photos en attente	تثبّت في تصاوري المستنّية
+avatar.recoveryHint	Pending photos require an explicit action. After reload, only bytes already uploaded can be finalized. Otherwise discard, then choose a photo for a new operation. Nothing is deleted automatically.	Les photos en attente nécessitent une action explicite. Après rechargement, seul un fichier déjà envoyé peut être finalisé. Sinon, abandonnez puis choisissez une photo pour une nouvelle opération. Aucune suppression automatique.	التصاور المستنّية تستحق اختيار منك. بعد إعادة التحميل، كان الملف اللي تبعث ينجم يتكمّل. وإلا فسّخ العملية واختار تصويرة لعملية جديدة. حتى شي ما يتفسّخ وحدو.
+avatar.empty	No photo selected.	Aucune photo sélectionnée.	ما اخترتش تصويرة.
+avatar.selected	Validated local preview. Not uploaded. Give your consent before uploading.	Aperçu local validé. Rien n’est envoyé. Donnez votre accord avant l’envoi.	المعاينة المحلية صالحة. ما تبعث شي. وافق قبل ما تبعث.
+avatar.working	Checking the current account and photo operation…	Vérification du compte actuel et de l’opération…	نتثبّتوا في الحساب وعملية التصويرة…
+avatar.saved	Photo confirmed ready and active by the server.	Photo confirmée prête et active par le serveur.	السيرفر أكّد التصويرة واجدة ومفعّلة.
+avatar.deleted	Cleanup confirmed. Downloaded copies cannot be revoked.	Nettoyage confirmé. Les copies déjà téléchargées ne peuvent pas être révoquées.	التنظيف تأكّد. النسخ اللي تهبطت ما نجموش نسحبوها.
+avatar.pending	Pending photo: finalize uploaded bytes or discard.	Photo en attente : finaliser le fichier envoyé ou abandonner.	تصويرة تستنّى: كمّل الملف المبعوث ولا فسّخ.
+avatar.deleting	Deletion interrupted: continue cleanup.	Suppression interrompue : poursuivre le nettoyage.	التفسيخ تقصّ: كمّل التنظيف.
+avatar.invalidated	Superseded photo: cleanup only.	Photo remplacée : nettoyage uniquement.	تصويرة تبدّلت: كان التنظيف مسموح.
+avatar.recover	Finalize this already uploaded photo	Finaliser cette photo déjà envoyée	كمّل التصويرة اللي تبعثت
+avatar.deleteConfirm	Discard this photo operation and remove its private server file? This does not delete previously downloaded copies.	Abandonner cette opération et supprimer son fichier privé du serveur ? Les copies déjà téléchargées ne sont pas supprimées.	تفسّخ العملية وملفّها الخاص من السيرفر؟ النسخ اللي تهبطت قبل ما تتفسّخش.
+avatar.error.generic	Photo not confirmed. Check the account and pending operations; no automatic retry.	Photo non confirmée. Vérifiez le compte et les opérations en attente ; aucun réessai automatique.	التصويرة موش مؤكّدة. تثبّت في الحساب والعمليات المستنّية؛ ما نعاودوش وحدنا.
+avatar.error.AVATAR.CONSENT.REQUIRED	Explicit original-file upload consent is required.	Votre accord explicite pour le fichier original est requis.	يلزم موافقتك الصريحة على بعث الملف الأصلي.
+avatar.error.AVATAR.HEIC.UNSUPPORTED	HEIC/HEIF is not supported. Choose a JPEG, PNG, WebP or GIF copy.	HEIC/HEIF non pris en charge. Choisissez une copie JPEG, PNG, WebP ou GIF.	HEIC/HEIF موش مدعوم. اختار نسخة JPEG، PNG، WebP ولا GIF.
+avatar.error.AVATAR.TYPE.UNSUPPORTED	Unsupported image type. Choose JPEG, PNG, WebP or GIF.	Type non pris en charge. Choisissez JPEG, PNG, WebP ou GIF.	نوع موش مدعوم. اختار JPEG، PNG، WebP ولا GIF.
+avatar.error.AVATAR.SIZE.INVALID	Choose a nonempty image no larger than 1 MiB.	Choisissez une image non vide de 1 Mio maximum.	اختار تصويرة موش فارغة وما تفوتش 1 MiB.
+avatar.error.AVATAR.RESELECTION.REQUIRED	Original bytes are unavailable. Discard this operation, then deliberately choose a photo for a new operation.	Le fichier original est indisponible. Abandonnez cette opération puis choisissez une photo pour une nouvelle opération.	الملف الأصلي موش موجود. فسّخ العملية وبعد اختار تصويرة لعملية جديدة.
+avatar.error.AVATAR.PUBLICATION.CONFLICT	A newer photo won. This operation can only be cleaned up.	Une photo plus récente a été retenue. Cette opération peut uniquement être nettoyée.	تصويرة أحدث تعمدت. العملية هاذي تنجم كان تنظّفها.
+avatar.error.AVATAR.REQUEST.FAILED	Verification or request unavailable. Nothing is confirmed; explicitly retry with the same operation when connected.	Vérification ou requête indisponible. Rien n’est confirmé ; réessayez explicitement la même opération une fois connecté.	التثبّت ولا الطلب موش متاح. حتى شي موش مؤكّد؛ عاود نفس العملية كي يرجع الاتصال.
+avatar.error.AVATAR.SESSION.CHANGED	Account verification changed. No old photo operation was resumed.	La vérification du compte a changé. Aucune ancienne opération photo n’a été reprise.	تثبّت الحساب تبدّل. حتى عملية قديمة ما تكمّلتش.
+avatar.error.AVATAR.SIGNATURE.MISMATCH	The image cannot be validated or decoded safely. Choose another supported image.	L’image ne peut pas être validée ou décodée correctement. Choisissez une autre image compatible.	ما نجموش نتثبّتوا في التصويرة ولا نحلّوها بأمان. اختار تصويرة أخرى مدعومة.
+avatar.error.AVATAR.DECODE.FAILED	The image cannot be validated or decoded safely. Choose another supported image.	L’image ne peut pas être validée ou décodée correctement. Choisissez une autre image compatible.	ما نجموش نتثبّتوا في التصويرة ولا نحلّوها بأمان. اختار تصويرة أخرى مدعومة.
+avatar.error.AVATAR.DIMENSIONS.INVALID	The image cannot be validated or decoded safely. Choose another supported image.	L’image ne peut pas être validée ou décodée correctement. Choisissez une autre image compatible.	ما نجموش نتثبّتوا في التصويرة ولا نحلّوها بأمان. اختار تصويرة أخرى مدعومة.
+avatar.error.AVATAR.DECODE.UNAVAILABLE	The image cannot be validated or decoded safely. Choose another supported image.	L’image ne peut pas être validée ou décodée correctement. Choisissez une autre image compatible.	ما نجموش نتثبّتوا في التصويرة ولا نحلّوها بأمان. اختار تصويرة أخرى مدعومة.
+avatar.error.AVATAR.PUBLICATION.INVALIDATED	A newer photo won. This operation can only be cleaned up.	Une photo plus récente a été retenue. Cette opération peut uniquement être nettoyée.	تصويرة أحدث تعمدت. العملية هاذي تنجم كان تنظّفها.
+avatar.error.AVATAR.CLEANUP.REQUIRED	A newer photo won. This operation can only be cleaned up.	Une photo plus récente a été retenue. Cette opération peut uniquement être nettoyée.	تصويرة أحدث تعمدت. العملية هاذي تنجم كان تنظّفها.
+avatar.error.AVATAR.UPLOAD.UNCONFIRMED	Verification or request unavailable. Nothing is confirmed; explicitly retry with the same operation when connected.	Vérification ou requête indisponible. Rien n’est confirmé ; réessayez explicitement la même opération une fois connecté.	التثبّت ولا الطلب موش متاح. حتى شي موش مؤكّد؛ عاود نفس العملية كي يرجع الاتصال.
+avatar.error.AVATAR.CLEANUP.RETRY.REQUIRED	Deletion is not confirmed. Explicitly continue cleanup of this same operation.	La suppression n’est pas confirmée. Poursuivez explicitement le nettoyage de cette même opération.	التفسيخ موش مؤكّد. كمّل تنظيف نفس العملية باختيار منك.
+avatar.error.AVATAR.DELETE.UNCONFIRMED	Deletion is not confirmed. Explicitly continue cleanup of this same operation.	La suppression n’est pas confirmée. Poursuivez explicitement le nettoyage de cette même opération.	التفسيخ موش مؤكّد. كمّل تنظيف نفس العملية باختيار منك.
+avatar.error.AVATAR.INTENT.EXISTS	Finish or discard the pending operation before choosing a different photo.	Terminez ou abandonnez l’opération en attente avant de choisir une autre photo.	كمّل ولا فسّخ العملية المستنّية قبل ما تختار تصويرة أخرى.
+native.title	Device notifications	Notifications sur cet appareil	إشعارات الجهاز
+native.intro	Optional. Prepare first, then choose Enable. Preview is off unless you explicitly select it.	Facultatif. Préparez, puis choisissez Activer. L’aperçu reste désactivé sans votre accord.	اختياري. حضّر وبعد اختار تفعيل. المعاينة مطفّية كان ما تختارهاش.
+native.platform	Web Push, not a native widget. On iPhone/iPad, add this app to the Home Screen and open it there. Browser/OS settings may delay or suppress display.	Web Push, pas un widget natif. Sur iPhone/iPad, ajoutez cette app à l’écran d’accueil puis ouvrez-la là. Le navigateur ou le système peut retarder ou bloquer l’affichage.	Web Push موش widget أصلي. في iPhone/iPad زيد التطبيق للشاشة الرئيسية وافتحو من غادي. إعدادات الجهاز تنجّم تأخّر ولا تمنع الإظهار.
+native.preview	Show sender and affection text on the lock screen (explicit consent)	Afficher le nom et le message affectueux sur l’écran verrouillé (accord explicite)	ورّي الاسم وكلام المحبّة في شاشة القفل (بموافقتك)
+native.enable	Enable on this device	Activer sur cet appareil	فعّل في الجهاز هذا
+native.prepare	Prepare / refresh status	Préparer / actualiser l’état	حضّر / جدّد الحالة
+native.disable	Disable this device / reconcile binding	Désactiver cet appareil / réconcilier la liaison	عطّل الجهاز هذا / صلّح الربط
+native.savePreferences	Go to Save preferences	Aller à Enregistrer les préférences	امشي لتسجيل الاختيارات
+native.blocked	Sign-out blocked: device opt-out is not confirmed. This account and its recovery identities are retained. Retry while this account is still signed in. Already accepted notifications cannot be recalled.	Déconnexion bloquée : la désactivation n’est pas confirmée. Ce compte et ses identités de récupération sont conservés. Réessayez sans changer de compte. Les notifications déjà acceptées ne peuvent pas être rappelées.	الخروج موقوف: تعطيل الإشعارات موش مؤكّد. الحساب ومعرّفات الاسترجاع محفوظين. عاود والحساب مازال محلول. الإشعارات المقبولة قبل ما تنجّمش ترجعها.
+native.retryLogout	Retry safe sign-out	Réessayer la déconnexion sûre	عاود الخروج الآمن
+native.preparing	Preparing without requesting permission…	Préparation sans demander la permission…	نحضّروا من غير طلب إذن…
+native.ready	Ready for your explicit opt-in. Browser permission is not server registration.	Prêt pour votre accord explicite. La permission du navigateur ne vaut pas inscription serveur.	حاضر لاختيارك. إذن المتصفّح موش تسجيل في السيرفر.
+native.enabled	Enabled and verified by server readback. Device display remains unknown.	Activé et vérifié par relecture du serveur. L’affichage reste inconnu.	مفعّل ومؤكّد بقراءة السيرفر. الإظهار في الجهاز يبقى موش معروف.
+native.disabled	Server opt-out verified; browser subscription removed and local notifications closed.	Désactivation serveur vérifiée ; abonnement du navigateur supprimé et notifications locales fermées.	التعطيل مؤكّد في السيرفر؛ اشتراك المتصفّح تنحّى والإشعارات المحلية تسكّرت.
+native.unknown	An unmapped browser subscription needs recovery in its original account. It is not adopted or removed here. Use the original account or browser site settings; other devices are not reset.	Un abonnement sans identité locale exige une récupération dans son compte d’origine. Il n’est ni adopté ni supprimé ici. Utilisez ce compte ou les paramètres du site ; les autres appareils ne sont pas réinitialisés.	اشتراك المتصفّح ما عندوش معرّف محلّي. يلزمو حسابو الأصلي للاسترجاع. ما نتبنّاوهش وما نفسخوهش هنا. استعمل الحساب الأصلي ولا إعدادات الموقع؛ الأجهزة الأخرى ما تتبدّلش.
+native.reconcile	The browser VAPID binding differs. Explicitly disable/reconcile this mapped device, then prepare and opt in again. No new identity is created automatically.	La clé VAPID du navigateur diffère. Désactivez/réconciliez explicitement cet appareil identifié, puis préparez et activez à nouveau. Aucune nouvelle identité automatique.	مفتاح VAPID مختلف. عطّل/صلّح ربط الجهاز المعروف هذا، وبعد حضّر وفعّل من جديد. ما نخلقوش معرّف جديد وحدنا.
+native.unsupported	Push is unavailable in this browser/context. Core in-app events still work. On iOS use a supported Home Screen web app.	Push indisponible dans ce navigateur/contexte. Les événements dans l’app fonctionnent toujours. Sur iOS, utilisez une app d’écran d’accueil compatible.	Push موش متاح في المتصفّح/السياق هذا. الأحداث داخل التطبيق تخدم. في iOS استعمل تطبيق شاشة رئيسية متوافق.
+native.unavailable	Native notifications are not configured for this exact HTTPS app path. In-app events remain available.	Les notifications ne sont pas configurées pour ce chemin HTTPS exact. Les événements dans l’app restent disponibles.	الإشعارات موش مهيّأة لمسار HTTPS هذا بالضبط. الأحداث داخل التطبيق تبقى متاحة.
+native.locale	Save your chosen language with Save preferences before enabling. This does not save your other drafts.	Enregistrez la langue choisie via Enregistrer les préférences avant d’activer. Cela n’enregistre pas vos autres brouillons.	سجّل اللغة المختارة بزرّ تسجيل الاختيارات قبل التفعيل. هذا ما يسجّلش المسوّدات الأخرى.
+native.storage	Local durable storage failed. Native registration/dispatch is not confirmed; no in-memory success is assumed.	Le stockage local durable a échoué. L’inscription/envoi natif n’est pas confirmé ; aucun succès en mémoire n’est supposé.	التخزين المحلّي الدائم فشل. التسجيل/الإرسال موش مؤكّد؛ ما نعتبروش الذاكرة وحدها نجاح.
+native.denied	Permission denied. Change browser/OS notification settings, then prepare again.	Permission refusée. Modifiez les paramètres de notification du navigateur/système, puis préparez à nouveau.	الإذن مرفوض. بدّل إعدادات إشعارات المتصفّح/الجهاز وبعد عاود حضّر.
+native.uncertain	Operation unconfirmed. Keep this account and the same identity; refresh or retry explicitly.	Opération non confirmée. Gardez ce compte et la même identité ; actualisez ou réessayez explicitement.	العملية موش مؤكّدة. خلّي نفس الحساب ونفس المعرّف؛ جدّد ولا عاود باختيارك.
+native.refresh	Authentication changed. Native operations cancelled; prepare again without changing profile drafts.	Authentification modifiée. Opérations natives annulées ; préparez à nouveau sans changer vos brouillons.	المصادقة تبدّلت. العمليات توقّفت؛ عاود حضّر من غير تبديل مسوّداتك.
+native.queueFull	Native retry queue full. Earlier uncertain IDs are retained; resolve them before adding more.	File native pleine. Les identifiants incertains précédents sont conservés ; résolvez-les avant d’en ajouter.	قائمة إعادة المحاولة معبّية. المعرّفات القديمة محفوظة؛ كمّل استرجاعها قبل ما تزيد.
+native.serverEnabled	This mapped device: server enabled. Preview: {{preview}}.	Cet appareil identifié : activé sur le serveur. Aperçu : {{preview}}.	الجهاز المعروف هذا: مفعّل في السيرفر. المعاينة: {{preview}}.
+native.serverDisabled	This mapped device: server disabled. Preview: {{preview}}.	Cet appareil identifié : désactivé sur le serveur. Aperçu : {{preview}}.	الجهاز المعروف هذا: معطّل في السيرفر. المعاينة: {{preview}}.
+native.on	on	activé	مفعّلة
+native.off	off	désactivé	مطفّية
+native.eventStored	In-app event stored.	Événement enregistré dans l’app.	الحدث تسجّل داخل التطبيق.
+native.eventUnknown	In-app persistence unconfirmed; retry only this same event ID.	Enregistrement non confirmé ; réessayez uniquement ce même identifiant.	التسجيل موش مؤكّد؛ عاود كان بنفس معرّف الحدث.
+native.provider	Provider accepted: {{accepted}} / {{targets}}. Retryable: {{retriable}}. Terminal: {{terminal}}.	Acceptés par le fournisseur : {{accepted}} / {{targets}}. À réessayer : {{retriable}}. Terminés : {{terminal}}.	المزوّد قبل: {{accepted}} / {{targets}}. لإعادة المحاولة: {{retriable}}. نهائية: {{terminal}}.
+native.providerUnknown	Provider acceptance unconfirmed.	Acceptation du fournisseur non confirmée.	قبول المزوّد موش مؤكّد.
+native.displayUnknown	Device display: unknown. Provider acceptance is not delivery or a read receipt.	Affichage sur l’appareil : inconnu. L’acceptation ne prouve ni livraison ni lecture.	الإظهار في الجهاز: موش معروف. القبول موش دليل وصول ولا قراءة.
+native.retryEvent	Retry native dispatch with the same event ID	Réessayer l’envoi natif avec le même identifiant	عاود الإرسال بنفس معرّف الحدث
