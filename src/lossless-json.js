@@ -13,7 +13,21 @@ export function losslessFetch(projectURL,fetcher=(...args)=>globalThis.fetch(...
  const origin=new URL(projectURL).origin;
  return async(input,init)=>{const response=await fetcher(input,init),url=new URL(typeof input==='string'||input instanceof URL?input:input.url);
   if(url.origin!==origin||!url.pathname.startsWith('/rest/v1/')||!response.headers.get('content-type')?.includes('json')||[204,205,304].includes(response.status))return response;
-  const text=losslessJSONText(await response.text()),headers=new Headers(response.headers);headers.delete('content-length');headers.delete('content-encoding');
+  let text=losslessJSONText(await response.text());
+  // PT409 is the server's non-retrying business conflict; keep the legacy client code.
+  // Only parse failures are ignored: malformed JSON still reaches the SDK unchanged.
+  if(response.status===409&&/^application\/(?:[\w!#$&^_.+-]+\+)?json(?:\s*;|$)/i.test(response.headers.get('content-type')||'')){let error;try{error=JSON.parse(text)}catch{}
+   if(error&&typeof error==='object'&&!Array.isArray(error)&&error.code==='PT409'){
+    // Splice only the last root code value; reserialization would change other numeric tokens.
+    let depth=0,code;
+    for(const match of text.matchAll(/("(?:\\.|[^"\\])*")(\s*:\s*)("(?:\\.|[^"\\])*")|"(?:\\.|[^"\\])*"|[{}\[\]]/g)){
+     if(match[0]==='{'||match[0]==='[')depth++;else if(match[0]==='}'||match[0]===']')depth--;
+     else if(depth===1&&match[1]&&JSON.parse(match[1])==='code'&&JSON.parse(match[3])==='PT409')code={start:match.index+match[1].length+match[2].length,end:match.index+match[0].length};
+    }
+    if(code)text=text.slice(0,code.start)+'"40001"'+text.slice(code.end);
+   }
+  }
+  const headers=new Headers(response.headers);headers.delete('content-length');headers.delete('content-encoding');
   return new Response(text,{status:response.status,statusText:response.statusText,headers});
  };
 }

@@ -1,5 +1,9 @@
 # Shared connection backend — exact v1 contract
 
+## Managed HTTP activation compatibility
+
+The production apply order is **001 -> 002 -> 003 -> 004_http_business_conflicts.sql**. Always run004 last, including full-chain reapplication. Managed PostgREST14.18 retries SQLSTATE40001 indefinitely; deliberate version/active-avatar business conflicts therefore use **PT409 / HTTP409** after004. The narrow frontend losslessFetch error boundary maps only HTTP409+codePT409 back to the existing internal40001 conflict model. Legacy40001 references below describe the original001/002 SQL baseline, not the final managed wire code. Genuine database serialization failures are not reclassified. Migration004 accepts only SHA256-verified original or exactly patched function bodies, preserves signatures/ACLs/locks/data and is idempotent. See execution/step-65-live-conflict-http.json for actual hosted HTTP409 proof; local baseline-only tests do not establish managed retry behavior.
+
 **Status: implemented and executed offline; NOT applied to Supabase; live integration tests NOT RUN.** Dedicated fresh Supabase project only. No Saikan project/schema/env conventions are used. No real identities, credentials or local IndexedDB records are included. iPhone/widget delivery is explicitly outside this backend deliverable.
 
 ## 1. Decisions / trust boundary
