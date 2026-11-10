@@ -32,7 +32,7 @@ begin
   end if;
   select p.* into f from pg_proc p join pg_namespace n on n.oid=p.pronamespace
    where n.nspname='public' and p.proname=expected.name;
-  if not f.prosecdef or not ('search_path=""'=any(f.proconfig)) then
+  if f.prosecdef is not true or ('search_path=""'=any(f.proconfig)) is not true then
    raise exception 'Unsafe reviewed conflict function configuration: %',expected.name;
   end if;
   current_hash:=encode(sha256(convert_to(f.prosrc,'UTF8')),'hex');
