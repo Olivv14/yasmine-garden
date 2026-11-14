@@ -95,6 +95,11 @@ today.title	A little light. A place for us.	Une petite lumière. Un endroit à n
 today.intro	Leave what you would like to remember today. A sentence, a voice, something that does not fit in a quick message.	Déposez ici ce que vous aimeriez retenir d’aujourd’hui. Une phrase, une voix, quelque chose qui ne tient pas dans un message rapide.	خلّي لهنا اللي تحب تتفكّرو من نهارك. جملة، صوت، حاجة ما تتقالش في ميساج مستعجل.
 today.write	Write something	Écrire quelque chose	اكتب حاجة
 today.openQuestion	Open a question	Ouvrir une question	حلّ سؤال
+quick.write	Write	Écrire	اكتب
+quick.note	Note	Note	ملاحظة
+quick.poem	Poem	Poème	قصيدة
+quick.photo	Photo	Photo	تصويرة
+quick.voice	Voice	Voix	صوت
 today.scene	A moon, stars and candles lighting up	Une lune, des étoiles et des bougies qui s’allument	قمر ونجوم وشمع يضوي
 today.littleLight	A little light	Un peu de lumière	شوية ضو
 today.threadEyebrow	What you leave here	Ce que vous déposez ici	اللي تخلّيه لهنا
@@ -265,6 +270,10 @@ mood.reconcileConfirm	Use the latest mood as a base and keep your sentence for a
 garden.eyebrow	Something small to care for	Une petite chose dont prendre soin	حاجة صغيرة نهتمّوا بيها
 garden.title	Your midnight corner	Votre coin de minuit	ركنك وقت الليل
 garden.intro	Plant a flower. Come back to water it. A shared garden for the activated pair.	Plantez une fleur. Revenez l’arroser. Un jardin partagé pour le couple activé.	اغرس وردة وارجع اسقيها. جنينة مشتركة للثنائي المفعّل.
+garden.quickActions	Quick ways to leave something	Quelques façons de déposer un souvenir	طرق سريعة باش تخلّي حاجة
+garden.questionsDoor	Questions	Questions	أسئلة
+garden.moodDoor	Mood	Humeur	إحساس
+garden.musicDoor	Music	Musique	موسيقى
 garden.empty	The soil is waiting for your first flower.	La terre attend votre première fleur.	التراب يستنّى أول وردة منك.
 garden.calmSoil	Quiet soil	Terre paisible	تراب هاني
 garden.nextFlower	Your next flower	Votre prochaine fleur	الوردة الجاية متاعك
@@ -352,7 +361,6 @@ profile.displayName	Your name	Votre nom	اسمك
 profile.nickname	Nickname	Surnom	اسم دلع
 profile.nicknameHint	Optional nickname. Whether “apodos” means nicknames still needs confirmation.	Surnom facultatif. Le sens d’« apodos » reste à confirmer.	اسم دلع كان تحب. مازلنا نستناو تأكيد كان «apodos» معناها أسماء دلع.
 profile.nameRequired	Enter a name between 1 and 80 characters.	Saisissez un nom de 1 à 80 caractères.	اكتب اسم بين حرف و80 حرف.
-profile.photoPending	Profile photo storage is not connected yet. No photo has been uploaded.	Le stockage des photos de profil n’est pas encore relié. Aucune photo n’a été envoyée.	تخزين تصاور البروفيل مازال موش مربوط. ما ترفعت حتى تصويرة.
 profile.save	Save profile preferences	Enregistrer les préférences du profil	سجّل اختيارات البروفيل
 profile.saved	Preferences saved through the configured adapter.	Préférences enregistrées via l’adaptateur configuré.	تسجّلت الاختيارات بالربط المهيّأ.
 profile.pending	Profile updates are not connected to shared storage yet.	Les modifications du profil ne sont pas encore reliées au stockage partagé.	تبديلات البروفيل مازالت موش مربوطة بالتخزين المشترك.
@@ -390,6 +398,7 @@ notifications.queued	Notification request queued by the adapter. Delivery is not
 notifications.failed	The notification request failed. Retry the same request without creating another.	La demande de notification a échoué. Réessayez la même demande sans en créer une autre.	طلب التنبيه ما نجحش. عاود نفس الطلب من غير ما تعمل واحد آخر.
 notifications.privacy	Notification previews may appear on a locked screen. Choose what you want to share.	Les aperçus de notification peuvent apparaître sur l’écran verrouillé. Choisissez ce que vous souhaitez partager.	التنبيهات تنجم تظهر في شاشة مسكّرة. اختار شنوّة تحب تشارك.
 affection.button	A thought for you	Une pensée pour toi	خمّمت فيك
+affection.dockLabel	Affection gesture	Geste affectueux	حركة محبّة
 affection.tapLabel	A thought for your partner. Tap ten times to prepare one request.	Une pensée pour votre partenaire. Appuyez dix fois pour préparer une seule demande.	فكرة للشخص الآخر. اضغط عشرة مرّات باش تحضّر طلب واحد.
 affection.progress	{{count}} of 10 taps	{{count}} appuis sur 10	{{count}} ضغطات من 10
 affection.reset	Start another thought	Commencer une autre pensée	ابدأ فكرة أخرى
@@ -438,6 +447,12 @@ b1.cooldown	Wait {{seconds}} seconds before starting another thought.	Attendez {
 b1.retryThought	Retry the same thought	Réessayer la même pensée	عاود نفس الفكرة
 b1.inbox	Your private thought inbox	Votre boîte privée de pensées	صندوق الأفكار الخاص بيك
 b1.inboxEmpty	No thoughts received yet.	Aucune pensée reçue pour le moment.	ما وصلك حتى فكرة لتوّا.
+reception.title	Messages and thoughts	Messages et pensées	ميساجات وأفكار
+reception.open	Open inbox	Ouvrir la boîte	حلّ الصندوق
+reception.close	Close inbox	Fermer la boîte	سكّر الصندوق
+reception.newIncoming	A new thought or shared note has arrived. Open your inbox.	Une nouvelle pensée ou une note partagée est arrivée. Ouvrez votre boîte.	وصلتك فكرة جديدة ولا ملاحظة مشاركة. حلّ صندوقك.
+reception.messagesTitle	Shared notes	Notes partagées	ملاحظات مشاركة
+reception.messagesEmpty	No shared notes yet.	Pas encore de notes partagées.	ما فماش ملاحظات مشاركة توّا.
 b1.markRead	Mark as read	Marquer comme lu	علّم عليها مقروءة
 b1.read	Read in this account	Lu dans ce compte	مقروءة في الحساب هذا
 b1.unread	Unread	Non lu	ما تقراتش
@@ -485,6 +500,8 @@ avatar.error.AVATAR.DELETE.UNCONFIRMED	Deletion is not confirmed. Explicitly con
 avatar.error.AVATAR.INTENT.EXISTS	Finish or discard the pending operation before choosing a different photo.	Terminez ou abandonnez l’opération en attente avant de choisir une autre photo.	كمّل ولا فسّخ العملية المستنّية قبل ما تختار تصويرة أخرى.
 native.title	Device notifications	Notifications sur cet appareil	إشعارات الجهاز
 native.intro	Optional. Prepare first, then choose Enable. Preview is off unless you explicitly select it.	Facultatif. Préparez, puis choisissez Activer. L’aperçu reste désactivé sans votre accord.	اختياري. حضّر وبعد اختار تفعيل. المعاينة مطفّية كان ما تختارهاش.
+native.contextTitle	Receive a quiet notification	Recevoir une notification discrète	استقبل تنبيه هادي
+native.contextHint	Prepare this device, then explicitly choose Enable. Permission is never requested automatically.	Préparez cet appareil, puis choisissez Activer explicitement. L’autorisation n’est jamais demandée automatiquement.	حضّر الجهاز هذا وبعد اختار تفعيل وحدك. ما نطلبوش الإذن وحدنا.
 native.platform	Web Push, not a native widget. On iPhone/iPad, add this app to the Home Screen and open it there. Browser/OS settings may delay or suppress display.	Web Push, pas un widget natif. Sur iPhone/iPad, ajoutez cette app à l’écran d’accueil puis ouvrez-la là. Le navigateur ou le système peut retarder ou bloquer l’affichage.	Web Push موش widget أصلي. في iPhone/iPad زيد التطبيق للشاشة الرئيسية وافتحو من غادي. إعدادات الجهاز تنجّم تأخّر ولا تمنع الإظهار.
 native.preview	Show sender and affection text on the lock screen (explicit consent)	Afficher le nom et le message affectueux sur l’écran verrouillé (accord explicite)	ورّي الاسم وكلام المحبّة في شاشة القفل (بموافقتك)
 native.enable	Enable on this device	Activer sur cet appareil	فعّل في الجهاز هذا

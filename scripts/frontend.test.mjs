@@ -26,7 +26,7 @@ test('source contains no signup/admin/signed-URL/import or old profile identity 
 const appSource=await readFile(new URL('../src/app.js',import.meta.url),'utf8');
 const section=(start,end)=>appSource.slice(appSource.indexOf(start),appSource.indexOf(end,appSource.indexOf(start)));
 function handlerHarness(overrides={}){
- const nodes={musicFiles:{files:[],value:'',disabled:false},trackVisibility:{value:'private'},dedicationName:{value:'submitted'},dedicationUrl:{value:'https://example.org/first'},dedicationVisibility:{value:'private'},dedicationForm:{resetCount:0,querySelector(){return {disabled:false}},reset(){this.resetCount++}}};
+ const nodes={musicFiles:{files:[],value:'',disabled:false},trackVisibility:{value:'private'},dedicationName:{value:'submitted'},dedicationUrl:{value:'https://example.org/first'},dedicationVisibility:{value:'private'},dedicationForm:{resetCount:0,querySelector(){return {disabled:false}},reset(){this.resetCount++}},receptionPanel:{hidden:true},receptionToggle:{setAttribute(){}},incomingToast:{hidden:true},messageInbox:{replaceChildren(){}}};
  const messages=[],ledger=new Map(),ops={id:k=>{if(!ledger.has(k))ledger.set(k,crypto.randomUUID());return ledger.get(k)},done:k=>ledger.delete(k)};
  const api={context:{me:{id:'owner'},user:{id:'auth-owner'},pairId:'pair'},refresh:async()=>{},schedule(){}};
  const env={t,copy,uiError,resetExperience(){},$:id=>nodes[id],epoch:0,activeMutations:0,api,client:{},state:{profile:'owner'},snapshot:{},operations:ops,checkReady:()=>true,showError(){},notify:s=>{while(typeof s==='function')s=s();messages.push(s)},failure:e=>e.message,renderPending(){},action:fn=>fn,ensureFiles(){},ensureFile:()=> 'audio/mpeg',safeURL,fullData:x=>x,checked,sameContent,confirm:()=>true,...overrides};
@@ -105,6 +105,15 @@ test('FR-04 session change while exact parent read is pending prevents upload an
  await assert.rejects(saving,/sync.changedSession/);assert.equal(mutations,0);assert.equal(h.ledger.size,2);assert.ok(!h.messages.some(x=>x===t('music.saved')));
 });
 
+test('incoming reception alerts only for new authorized thoughts or shared notes',()=>{
+ const toast={hidden:true,textContent:''},env={receptionInitialized:false,seenThoughtIds:new Set(),seenMessageIds:new Set(),$:()=>toast,copy(node,value){while(typeof value==='function')value=value();node.textContent=value;},t:key=>key};
+ runInNewContext(section('function announceIncoming(','function renderAll(')+';globalThis.notifyIncoming=announceIncoming;',env);
+ const me={id:'recipient'},thought={id:'thought-1',recipient_id:'recipient',phrase_key:'affection.phrase01'},message={id:'message-1',owner_id:'partner',visibility:'shared',item_type:'journal'},privateMessage={id:'private-1',owner_id:'partner',visibility:'private',item_type:'journal'};
+ env.notifyIncoming({me,thoughts:[thought],content:[message,privateMessage]});assert.equal(toast.hidden,true);
+ env.notifyIncoming({me,thoughts:[thought,{...thought,id:'thought-2'}],content:[message,privateMessage,{...message,id:'message-2'}]});assert.equal(toast.hidden,false);assert.equal(toast.textContent,'reception.newIncoming');
+ toast.hidden=true;env.notifyIncoming({me,thoughts:[thought,{...thought,id:'thought-2'}],content:[message,privateMessage,{...message,id:'message-2'}]});assert.equal(toast.hidden,true);
+});
+
 test('FR-02/04 logout cleanup drops retained Files and operation UUIDs, then rejects stale continuation',async()=>{
  const h=handlerHarness({task:fn=>fn()});h.nodes.musicFiles.files=[{name:'fixed.mp3',size:5,lastModified:12345}];let release,mutations=0,cleared=false;
  const pending=new Promise(r=>release=r);h.env.client.from=()=>({select(){return this},eq(){return this},maybeSingle:async()=>{await pending;return{data:null,error:null}}});
@@ -113,7 +122,7 @@ test('FR-02/04 logout cleanup drops retained Files and operation UUIDs, then rej
  for(const id of ['roundForm','roundBody','dedicationForm','musicFiles','passwordForm'])h.env.$(id);
  for(const n of Object.values(h.nodes)){n.replaceChildren??=()=>{};n.reset??=()=>{};n.querySelector??=()=>({disabled:false});}
  const original$=h.env.$;h.env.$=id=>{const n=original$(id);n.querySelector??=()=>({remove(){},disabled:false});n.replaceChildren??=()=>{};n.reset??=()=>{};n.querySelector??=()=>({disabled:false});return n};
- Object.assign(h.env,{profileUI:{clear(){}},avatarUI:null,revokeViews(){},composers:{},moodForm:{reset(){}},moodVersion:0,moodDirty:false,plantId:null,roundId:null});
+ Object.assign(h.env,{profileUI:{clear(){}},avatarUI:null,revokeViews(){},composers:{},moodForm:{reset(){}},moodVersion:0,moodDirty:false,plantId:null,roundId:null,receptionInitialized:false,seenThoughtIds:new Set(),seenMessageIds:new Set()});
  runInNewContext(section('function clearPrivate(', 'async function activate('),h.env);h.env.clearPrivate();release();
  await assert.rejects(saving,/sync.changedSession/);assert.equal(cleared,true);assert.equal(h.ledger.size,0);assert.equal(h.env.getBatch(),null);assert.equal(h.nodes.musicFiles.value,'');assert.equal(mutations,0);
 });

@@ -1,20 +1,33 @@
-# Entre nosotros
+# Between us
 
-Primera versión de la aplicación personal de conexión de Oliver y Yasmine. `index.html` es autónomo y contiene el diseño, código y grabación musical acreditada en `MUSIC-CREDITS.md`.
+Private, two-account relationship app for Oliver and Yasmine. The production entry point is `src/template.html` plus `src/app.js`; the root `index.html` is a historical prototype and is not part of the build.
 
-## Estado
-Esta publicación aloja la interfaz. El guardado sigue siendo local en el navegador mediante IndexedDB: NO hay backend conectado, login seguro, sincronización entre teléfonos, juego remoto ni widget. Los perfiles locales no son protección de acceso y «Para compartir» no envía nada.
+## Architecture
 
-## Funciones
-Diario de notas/poemas y ánimo con fotos/audio/vídeo; preguntas por temas y respuestas propias; música inicialmente apagada, playlist de archivos locales y dedicatorias por enlace; jardín ASCII persistente; exportación/importación completa con archivos.
+- `src/` contains the accessible HTML shell, app orchestration, Auth/transport adapters, composer, profile/avatar UI, and push settings.
+- `experience/` contains language catalogs, question data, preferences, and the pure 10-tap affection controller.
+- `backend/001_*.sql` through `004_*.sql` are the database schema/RPC migrations and contracts/checks. They are kept separate from browser code.
+- `supabase/functions/` contains the push-dispatch Edge Function and shared transport.
+- `push/` contains the service worker and client-side push implementation.
+- `scripts/build.mjs` bundles the application into `dist/`; it does not replace the root prototype or invent runtime credentials.
 
-## Privacidad y copias
-Este repositorio contiene solo código/recursos públicos y documentación, no vuestros datos personales. IndexedDB pertenece a cada navegador y origen. Exportar incluye ambos perfiles y todos los medios SIN cifrado: no subir las copias a este repositorio ni compartirlas como si fueran el HTML vacío. El navegador puede borrar el almacenamiento; exportar es necesario para conservar una copia.
+The browser uses Supabase Auth and the authenticated `Transport` to read/write only authorized records. Private/shared visibility, media reservation/recovery, identity checks, and push state are enforced by the existing RPC/RLS and client-side generation guards. The app does not create accounts or pair users. Push activation requires a user gesture and explicit browser permission; provider acceptance is not proof of device display.
 
-Límites locales: 25 MB por archivo, 100 MB totales y JSON de importación hasta 150 MB. Evitar edición concurrente en varias pestañas.
+## Local development and checks
 
-## Verificación del artefacto
-12 pruebas funcionales y seis regresiones de integridad pasadas en Chromium, revisión independiente aprobada. Probada respuesta visual a 320/390/1024 px; no se afirma prueba en Safari/iPhone físico.
+Use Node.js 24 and install dependencies with `npm ci`. Configure runtime `public-config.json` and, if using push, `push-config.json` from their example files. These are client-visible files: keep service-role/database credentials and the VAPID private key out of them. Review `loginAliases` before publishing because alias-to-email mappings are visible in a public repository.
 
-## Música
-Ver `MUSIC-CREDITS.md`. No incluye canciones comerciales nuevas ni un servicio de streaming. No reproduce automáticamente.
+```powershell
+npm test
+npm run test:edge
+npm run check
+npm run build
+```
+
+`npm run test:edge` requires Deno 2. These checks use offline fixtures and mocked providers; they do not prove a Supabase deployment or send a real push. The build requires the approved music recording under `vendor/` (or the documented sibling asset) and verifies its SHA-256 before producing `dist/`.
+
+## Deployment status
+
+GitHub Pages deployment is a manual, explicitly confirmed workflow from `connection-live`; it builds `dist/` and runs the test suite before publishing. It does not deploy SQL or Edge Functions. Do not trigger it until the reviewed pull request is merged and Pages is configured to use GitHub Actions. Supabase changes remain a separate owner-approved operation; repository migrations do not prove a live deployment. Follow the [staging runbook](backend/STAGING_RUNBOOK.md) before applying SQL or deploying functions. Never paste service-role keys, push private keys, or user data into GitHub or chat.
+
+`public-config.json` contains browser-facing configuration; it is not a substitute for Auth/RLS. The push private key belongs only in the trusted Edge Function environment.
