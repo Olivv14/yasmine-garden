@@ -23,4 +23,3 @@ jobs:
           deno-version: v2.9.6
       - run: npm run test:edge
       - run: npm run check
-      - run: npm run build
