@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import en from '../experience/locales/en.json' with {type:'json'};
 import fr from '../experience/locales/fr.json' with {type:'json'};
+import it from '../experience/locales/it.json' with {type:'json'};
 import aeb from '../experience/locales/aeb-TN.json' with {type:'json'};
 import {createTranslator} from '../experience/i18n.mjs';
 import {t,errorText,uiError} from '../src/experience.js';
-const catalogs={en,fr,'aeb-TN':aeb};
+const catalogs={en,fr,it,'aeb-TN':aeb};
 test('integrated default is English, error codes never expose provider prose',()=>{
  assert.equal(t('nav.today'),en['nav.today']);
  for(const [code,key] of [['40001','errors.conflict'],['invalid_credentials','auth.invalidCredentials'],['23505','errors.duplicate']])assert.equal(errorText({code,message:'UNTRANSLATED SECRET PROVIDER PROSE'}),en[key]);

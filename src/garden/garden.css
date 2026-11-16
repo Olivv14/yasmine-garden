@@ -1,0 +1,70 @@
+/* The garden illustration. All colour comes from --garden-* tokens, so themes recolour it live. */
+.garden{position:relative;--soil:color-mix(in srgb,var(--garden-terracotta) 38%,#24170f);--trunk:color-mix(in srgb,var(--garden-terracotta) 45%,#2a1d18)}
+.garden-viewport{position:relative;overflow:hidden;height:clamp(300px,55dvh,560px);border-radius:var(--radius-lg);background:var(--bg);touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;outline-offset:-3px;isolation:isolate}
+.garden-viewport.dragging{cursor:grabbing}
+.garden-layer{position:absolute;inset-block-start:0;inset-inline-start:0;display:block;will-change:transform;direction:ltr}
+html[dir=rtl] .garden-layer{inset-inline-start:auto;left:0}
+.garden-particles,.garden-grain,.garden-wave{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.garden-grain{opacity:.55;mix-blend-mode:overlay;background-size:128px}
+.garden-wave{opacity:0;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--garden-lantern) 55%,transparent),transparent)}
+.garden-keys{list-style:none;margin:var(--space-2) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-2);position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.garden-keys:focus-within{position:static;width:auto;height:auto;overflow:visible;clip-path:none}
+.garden-keys button{min-height:var(--tap-min);font-size:13px}
+/* Fills */
+.c-wall{fill:var(--garden-wall)}.c-wall-l{fill:color-mix(in srgb,var(--garden-wall) 82%,white)}.c-wall-d{fill:color-mix(in srgb,var(--garden-wall) 70%,#20202c)}
+.c-leaf{fill:var(--garden-leaf)}.c-leaf-l{fill:color-mix(in srgb,var(--garden-leaf) 78%,var(--garden-lilium))}.c-leaf-d{fill:color-mix(in srgb,var(--garden-leaf) 70%,#0b120c)}
+.c-olive{fill:var(--garden-olive)}.c-olive-l{fill:color-mix(in srgb,var(--garden-olive) 70%,var(--garden-wall))}
+.c-terra{fill:var(--garden-terracotta)}.c-terra-d{fill:color-mix(in srgb,var(--garden-terracotta) 65%,#2a120a)}
+.c-rose{fill:var(--garden-rose)}.c-rose-l{fill:color-mix(in srgb,var(--garden-rose) 70%,white)}.c-rose-d{fill:color-mix(in srgb,var(--garden-rose) 70%,#3a0f1c)}
+.c-mari{fill:var(--garden-marigold)}.c-mari-l{fill:color-mix(in srgb,var(--garden-marigold) 70%,#ffe2a0)}.c-mari-d{fill:color-mix(in srgb,var(--garden-marigold) 70%,#7a2a08)}
+.c-lav{fill:var(--garden-lavender)}.c-lav-l{fill:color-mix(in srgb,var(--garden-lavender) 70%,white)}.c-lav-d{fill:color-mix(in srgb,var(--garden-lavender) 70%,#1e1240)}
+.c-lil{fill:var(--garden-lilium)}.c-lil-d{fill:color-mix(in srgb,var(--garden-lilium) 50%,var(--garden-rose))}
+.c-orch{fill:var(--garden-orchid)}.c-orch-l{fill:color-mix(in srgb,var(--garden-orchid) 65%,white)}.c-orch-d{fill:color-mix(in srgb,var(--garden-orchid) 60%,#2e0b2b)}
+.c-jas{fill:var(--garden-jasmine)}.c-lant{fill:var(--garden-lantern)}.c-sea{fill:var(--garden-sea)}
+.c-lemon{fill:color-mix(in srgb,var(--garden-marigold) 45%,#f3e27a)}
+.c-trunk{fill:var(--trunk)}.c-soil-l{fill:color-mix(in srgb,var(--soil) 75%,var(--garden-terracotta))}.c-seed{fill:color-mix(in srgb,var(--trunk) 60%,var(--garden-lilium))}
+.c-hill{fill:color-mix(in srgb,var(--garden-leaf) 45%,var(--garden-sky))}.c-hill-near{fill:color-mix(in srgb,var(--garden-olive) 55%,var(--garden-sky))}
+.c-house{fill:color-mix(in srgb,var(--garden-wall) 85%,var(--garden-sky))}.c-dome{fill:color-mix(in srgb,var(--garden-sea) 70%,white)}
+.c-gate{fill:color-mix(in srgb,var(--garden-sea) 80%,#9cc4e8)}.c-stone{fill:color-mix(in srgb,var(--garden-wall) 72%,var(--soil))}.c-stone-d{fill:color-mix(in srgb,var(--garden-wall) 52%,var(--soil))}
+.c-stone-path{fill:color-mix(in srgb,var(--garden-wall) 45%,var(--soil))}
+.c-lant-glass{fill:color-mix(in srgb,var(--garden-lantern) 30%,#3a3328)}
+.lantern.lit .c-lant-glass{fill:var(--garden-lantern)}
+/* Gradient stops */
+.s-bg{stop-color:var(--bg)}.s-sky{stop-color:var(--garden-sky)}.s-sky-low{stop-color:color-mix(in srgb,var(--garden-sky) 70%,var(--garden-lantern))}
+.s-sea{stop-color:var(--garden-sea)}.s-sea-l{stop-color:color-mix(in srgb,var(--garden-sea) 75%,var(--garden-jasmine))}
+.s-wall{stop-color:var(--garden-wall)}.s-wall-d{stop-color:color-mix(in srgb,var(--garden-wall) 72%,#1b1b28)}
+.s-soil{stop-color:var(--soil)}.s-soil-d{stop-color:color-mix(in srgb,var(--soil) 75%,#0d0805)}
+.s-lant{stop-color:var(--garden-lantern)}.s-jas{stop-color:var(--garden-jasmine)}
+/* Strokes */
+.stem,.vine,.stick,.filament,.swirl,.stripe,.gate-line,.spray,.edging,.cypress-light{fill:none;stroke-linecap:round}
+.stem{stroke:var(--garden-leaf)}.vine{stroke:var(--garden-leaf);stroke-width:2}.stick{stroke:var(--trunk);stroke-width:1.4}
+.filament{stroke:var(--garden-terracotta);stroke-width:.8}.swirl{stroke:color-mix(in srgb,var(--garden-rose) 60%,#3a0f1c);stroke-width:1}
+.stripe{stroke:color-mix(in srgb,var(--garden-rose) 70%,transparent);stroke-width:1}.gate-line{stroke:color-mix(in srgb,var(--garden-sea) 60%,#0a1420);stroke-width:1.5}
+.spray{stroke:color-mix(in srgb,var(--garden-sea) 55%,white);stroke-width:2;opacity:.7}.edging{stroke:var(--garden-terracotta);stroke-width:4;stroke-dasharray:14 4}
+.cypress-light{stroke:color-mix(in srgb,var(--garden-leaf) 70%,var(--garden-wall));stroke-width:3;opacity:.4}
+/* Authorship ring: Oliver dusty rose, Yasmine plum */
+.tone{fill:none;stroke-width:2.2;opacity:.9}.tone-oliver{stroke:var(--oliver)}.tone-yasmine{stroke:var(--yasmine)}
+.flower{cursor:pointer}.flower .hit{fill:transparent}
+.plant{transform-box:fill-box;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite alternate}
+.flower.droop .plant-parts{transform-box:fill-box;transform-origin:50% 100%;transform:rotate(9deg) scaleY(.94);opacity:.85}
+.flower.focus .tone,.flower:hover .tone{stroke-width:3.4;opacity:1}
+.flower-art.st-seed .tag rect,.flower-art.st-sprout .tag rect,.flower-art.st-bud .tag rect{opacity:.95}
+@keyframes sway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+.sway,.sway-slow{transform-box:fill-box;transform-origin:50% 0;animation:sway 7s ease-in-out infinite alternate}.sway-slow{animation-duration:8s;transform-origin:50% 100%}
+/* Lighting per theme */
+.sun,.dusk-sun,.cloud{display:none}
+html[data-garden-theme=day] .sun,html[data-garden-theme=day] .cloud{display:inline}
+html[data-garden-theme=day] .moon,html[data-garden-theme=day] .stars,html[data-garden-theme=day] .window,html[data-garden-theme=day] .lantern-glow,html[data-garden-theme=day] .pergola-lights{display:none}
+html[data-garden-theme=harissa] .moon{display:none}html[data-garden-theme=harissa] .dusk-sun{display:inline;opacity:.85}
+.cloud{opacity:.55}
+.lantern-glow{opacity:0;transition:opacity .6s var(--ease)}.lantern.lit .lantern-glow{opacity:1;animation:flicker 3.4s ease-in-out infinite}
+.pergola-lights{opacity:.18}.pergola.lit .pergola-lights{opacity:1;animation:flicker 4.2s ease-in-out infinite}
+.window{opacity:.85;animation:flicker 5s ease-in-out infinite}
+.twinkle{animation:twinkle 4s ease-in-out infinite}.t1{animation-delay:-1s}.t2{animation-delay:-2s}.t3{animation-delay:-3s}
+.glitter{opacity:.35;animation:twinkle 3s ease-in-out infinite}
+html[data-garden-theme=day] .glitter{opacity:.7}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:.95}}
+@keyframes flicker{0%,100%{opacity:1}45%{opacity:.82}55%{opacity:.95}70%{opacity:.78}}
+.moon,.sun,.dusk-sun{cursor:default}
+@media (prefers-reduced-motion:reduce){.plant,.sway,.sway-slow,.twinkle,.glitter,.window,.lantern.lit .lantern-glow,.pergola.lit .pergola-lights{animation:none}.garden-layer{will-change:auto}}
+.garden-layer{pointer-events:none}.flower,[data-bed],.moon,.sun,.dusk-sun{pointer-events:auto}

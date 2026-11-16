@@ -14,6 +14,18 @@ export const PHRASES = Object.freeze({
  'Un petit signe de {{sender}}, quand tu verras ce message.', '{{sender}} te souhaite un peu de douceur aujourd’hui.',
  '{{sender}} t’envoie un sourire, sans attendre de réponse.', 'Une petite pause, une pensée chaleureuse : de {{sender}} pour toi.'
  ],
+ it:[
+ "{{sender}} ti manda un po’ di calore.",
+ "Un piccolo ciao da {{sender}}, solo per te.",
+ "{{sender}} ha un pensiero dolce per te.",
+ "Un piccolo fiore da {{sender}} per la tua giornata.",
+ "{{sender}} fa il tifo per te da qui.",
+ "{{sender}} tiene accesa una piccola luce per te.",
+ "Un saluto silenzioso da {{sender}}, quando lo vedrai.",
+ "{{sender}} spera che oggi ti raggiunga un po’ di dolcezza.",
+ "{{sender}} ti manda un sorriso, non serve rispondere.",
+ "Una piccola pausa, un pensiero caldo: da {{sender}} a te."
+ ],
  'aeb-TN':[
  '{{sender}} يبعثلك شوية حنان.', 'سلام صغير من {{sender}}، ليك إنت برك.', '{{sender}} خمّم فيك بكل حنان.',
  'وردة صغيرة من {{sender}} لنهارك.', '{{sender}} يشجّع فيك من لهنا.', '{{sender}} مخلّيلك ضو صغير.',
@@ -22,4 +34,4 @@ export const PHRASES = Object.freeze({
  ]
 });
 // Generic lock-screen preview is the default. Personal phrase requires recipient opt-in.
-export const COPY = Object.freeze({en:{title:'Notifications',generic:'You have a new notification.'},fr:{title:'Notifications',generic:'Vous avez une nouvelle notification.'},'aeb-TN':{title:'التنبيهات',generic:'عندك تنبيه جديد.'}});
+export const COPY = Object.freeze({en:{title:'Notifications',generic:'You have a new notification.'},fr:{title:'Notifications',generic:'Vous avez une nouvelle notification.'},it:{title:'Notifiche',generic:'Hai una nuova notifica.'},'aeb-TN':{title:'التنبيهات',generic:'عندك تنبيه جديد.'}});

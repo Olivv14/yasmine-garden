@@ -15,13 +15,14 @@ Use a new, dedicated staging project with synthetic accounts and no production d
 
 ## SQL application and verification
 
-The current documented order is **001 -> 002 -> 003 -> 004**. These files are currently maintained under `backend/`, not in a Supabase CLI migrations directory. The contracts specify privileged Dashboard SQL Editor application on a dedicated fresh project.
+The current documented order is **001 -> 002 -> 003 -> 004 -> 005**. These files are currently maintained under `backend/`, not in a Supabase CLI migrations directory. The contracts specify privileged Dashboard SQL Editor application on a dedicated fresh project.
 
 1. Read the full contracts and inspect each SQL file before execution. Apply `001_shared_app.sql` as one transaction, then run `verify.sql` unchanged.
 2. Apply `002_profile_thoughts.sql`; follow its contract for the profile catalog verifier and avatar/storage checks.
 3. Apply `003_web_push.sql`; run `push-check.mjs` offline using the separate PGlite test dependency and `CONNECTION_TEST_PACKAGE_JSON` setup described in `PUSH_CONTRACT.md`. Then complete the hosted push ACL/RLS/trigger checks from that contract.
 4. Apply `004_http_business_conflicts.sql` last. Its contract requires hosted HTTP 409 verification; the repository's offline tests are not a substitute. The hosted proof artifact referenced by the contract was not present in this checkout, so obtain fresh authorized verification rather than treating that claim as current evidence.
-5. Record which exact files were applied, when, by whom, and the verifier results in private operator evidence. Do not record credentials, user content, or Auth identifiers.
+5. Apply `005_garden_games.sql` (six flowers, Italian locale, `game_events`, private `hockey:<pair>` Realtime policies). It verifies itself and rolls back on any unsafe state. Its behaviour was checked only on a local stack with `games-check.sql`; that file is local-only and must never run on a shared project. Redeploy `dispatch-thought` from this branch so Italian push payloads are accepted.
+6. Record which exact files were applied, when, by whom, and the verifier results in private operator evidence. Do not record credentials, user content, or Auth identifiers.
 
 Do **not** run `supabase db push`, `supabase migration repair`, or move/copy these SQL files into a CLI migrations directory as a shortcut. First establish a reviewed baseline and prove the target's actual schema and migration history; SQL Editor application does not itself establish a CLI migration-history baseline. If the project is not fresh or any step fails, stop and have the owner review actual schema/history before making further changes. Do not reapply migrations to reconcile unexpected drift.
 

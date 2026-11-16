@@ -3,12 +3,12 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {validateCatalogs} from './i18n.mjs';
 const lines=(await readFile(new URL('./catalog.tsv',import.meta.url),'utf8')).trimEnd().split(/\r?\n/);
-if(lines.shift()!=='key\ten\tfr\taeb-TN')throw new Error('Unexpected catalog header');
-const catalogs={en:{},fr:{},'aeb-TN':{}};
+if(lines.shift()!=='key\ten\tfr\tit\taeb-TN')throw new Error('Unexpected catalog header');
+const catalogs={en:{},fr:{},it:{},'aeb-TN':{}};
 const seen=new Set();
 for(const [i,line] of lines.entries()){
   const cells=line.split('\t');
-  if(cells.length!==4||cells.some(x=>!x.trim()))throw new Error(`Invalid catalog row ${i+2}`);
+  if(cells.length!==5||cells.some(x=>!x.trim()))throw new Error(`Invalid catalog row ${i+2}`);
   const [key,...values]=cells;
   if(!/^[a-z][A-Za-z0-9.-]+$/.test(key)||seen.has(key)||['__proto__','constructor','prototype'].includes(key))throw new Error(`Invalid/duplicate catalog key ${key}`);
   seen.add(key);Object.keys(catalogs).forEach((locale,j)=>{catalogs[locale][key]=values[j];});

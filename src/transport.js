@@ -50,9 +50,11 @@ export class Transport{
       pages(()=>this.client.from('profile_details').select('*').eq('pair_id',pairId).order('profile_id')),
       this.client.from('profile_preferences').select('*').eq('profile_id',me.id).maybeSingle().then(checked),
       pages(()=>this.client.from('thought_events').select('*').eq('recipient_id',me.id).order('created_at',{ascending:false}).order('id')),all('profile_avatars',q=>q.eq('pair_id',pairId))]);
+    // Games arrive with backend/005; before it is applied the table is simply absent.
+    let gameEvents=[];try{gameEvents=await all('game_events',q=>q.eq('pair_id',pairId));}catch(e){if(!['42P01','PGRST205','PGRST200'].includes(e?.code))throw e;}
     const answers=[];for(const r of rounds)answers.push(...await pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').eq('round_id',r.id).order('owner_id')));
     const currentMe=profiles.find(p=>p.id===me.id);if(!currentMe||currentMe.auth_user_id!==me.auth_user_id)throw uiError('sync.changedSession');
-    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,me:currentMe,pairId};
+    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,me:currentMe,pairId};
   }
   schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh().catch(this.onFailure),120);}
   refresh(){if(this.inflight){this.again=true;return this.inflight;}const g=this.generation;this.inflight=(async()=>{try{let attempts=0;do{this.again=false;this.guard(g);const r0=await this.revision();const data=await this.snapshot();const r1=await this.revision();this.guard(g);if(r0!==r1||this.again){if(++attempts>=6)throw uiError('errors.changedDuringRead');continue;}this.context.members=data.members;this.onSnapshot({...data,revision:r1});this.onStatus(()=>t('sync.revision',{revision:r1}));return;}while(true)}finally{if(g===this.generation){this.inflight=null;if(this.again)this.schedule();}}})();return this.inflight;}

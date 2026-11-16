@@ -24,7 +24,7 @@ export function dispatchBody(value) {
   return value.event_id;
 }
 export function validatePayload(p) {
-  if (!p || p.version!==1 || !UUID.test(p.event_id) || !['en','fr','aeb-TN'].includes(p.locale) || typeof p.title!=='string' || !p.title || p.title.length>160 || typeof p.body!=='string' || !p.body || p.body.length>500 || typeof p.preview!=='boolean') throw new Error('Invalid push payload');
+  if (!p || p.version!==1 || !UUID.test(p.event_id) || !['en','fr','it','aeb-TN'].includes(p.locale) || typeof p.title!=='string' || !p.title || p.title.length>160 || typeof p.body!=='string' || !p.body || p.body.length>500 || typeof p.preview!=='boolean') throw new Error('Invalid push payload');
   return p;
 }
 export function notificationOptions(payload, scope) {
