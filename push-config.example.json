@@ -1,0 +1,5 @@
+{
+  "appBaseUrl": "https://YOUR-APP.invalid/APP-PATH/",
+  "workerUrl": "https://YOUR-APP.invalid/APP-PATH/sw.js",
+  "vapidPublicKey": "REPLACE_WITH_APPROVED_PUBLIC_VAPID_KEY"
+}

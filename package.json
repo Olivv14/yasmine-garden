@@ -1,0 +1,14 @@
+{
+  "name": "entre-nosotros-shared",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test \"scripts/*.test.mjs\" && node experience/test.mjs && node push/test.mjs",
+    "test:edge": "deno test --frozen --allow-read=experience/locales --config supabase/functions/dispatch-thought/deno.json supabase/functions/dispatch-thought/push_test.ts",
+    "check": "node --check src/app.js && node --check src/transport.js && node --check src/composer.js && node --check scripts/build.mjs"
+  },
+  "dependencies": { "@supabase/supabase-js": "2.119.0" },
+  "devDependencies": { "esbuild": "0.28.2" }
+}

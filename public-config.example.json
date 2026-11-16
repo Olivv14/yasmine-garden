@@ -1,0 +1,7 @@
+{
+  "supabaseUrl": "REPLACE_WITH_REAL_HTTPS_SUPABASE_PROJECT_URL",
+  "publishableKey": "REPLACE_WITH_REAL_PUBLISHABLE_KEY_ONLY",
+  "loginAliases": {
+    "example-user": "account-placeholder@access.invalid"
+  }
+}
