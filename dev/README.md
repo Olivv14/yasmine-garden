@@ -10,3 +10,8 @@
 - `backend/games-check.sql` is a rollback-only behavioural check for `005` on the local stack.
 
 Never point these scripts at a shared or production project.
+
+## Try the app in a browser (local stack)
+1. Local stack running with 001 to 005 and the synthetic pair (above).
+2. `npm run build && dev/prepare-local-site.sh /tmp/garden-live` copies dist/ and relaxes the project-URL check in that copy only.
+3. `SUPABASE_PUBLISHABLE_KEY=<local key> node dev/serve-local.mjs /tmp/garden-live 8766`, then open http://localhost:8766 and sign in with a synthetic local account. Supabase paths are proxied on the same origin, so the shipped CSP is unchanged.
