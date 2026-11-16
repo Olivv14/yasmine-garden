@@ -122,7 +122,7 @@ test('FR-02/04 logout cleanup drops retained Files and operation UUIDs, then rej
  for(const id of ['roundForm','roundBody','dedicationForm','musicFiles','passwordForm'])h.env.$(id);
  for(const n of Object.values(h.nodes)){n.replaceChildren??=()=>{};n.reset??=()=>{};n.querySelector??=()=>({disabled:false});}
  const original$=h.env.$;h.env.$=id=>{const n=original$(id);n.querySelector??=()=>({remove(){},disabled:false});n.replaceChildren??=()=>{};n.reset??=()=>{};n.querySelector??=()=>({disabled:false});return n};
- Object.assign(h.env,{profileUI:{clear(){}},avatarUI:null,revokeViews(){},composers:{},moodForm:{reset(){}},moodVersion:0,moodDirty:false,plantId:null,roundId:null,receptionInitialized:false,seenThoughtIds:new Set(),seenMessageIds:new Set()});
+ const privateCleared=new Set();Object.assign(h.env,{home:{clear(){privateCleared.add('garden')}},play:{clear(){privateCleared.add('games')}},profileUI:{clear(){}},avatarUI:null,revokeViews(){},composers:{},moodForm:{reset(){}},moodVersion:0,moodDirty:false,plantId:null,roundId:null,receptionInitialized:false,seenThoughtIds:new Set(),seenMessageIds:new Set()});
  runInNewContext(section('function clearPrivate(', 'async function activate('),h.env);h.env.clearPrivate();release();
- await assert.rejects(saving,/sync.changedSession/);assert.equal(cleared,true);assert.equal(h.ledger.size,0);assert.equal(h.env.getBatch(),null);assert.equal(h.nodes.musicFiles.value,'');assert.equal(mutations,0);
+ await assert.rejects(saving,/sync.changedSession/);assert.equal(cleared,true);assert.deepEqual([...privateCleared].sort(),['games','garden'],'garden and games are wiped on sign-out');assert.equal(h.ledger.size,0);assert.equal(h.env.getBatch(),null);assert.equal(h.nodes.musicFiles.value,'');assert.equal(mutations,0);
 });

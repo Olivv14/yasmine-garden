@@ -1,13 +1,15 @@
 // Static catalogs only. No translation service, account write or runtime fallback.
 import en from '../experience/locales/en.json' with {type:'json'};
 import fr from '../experience/locales/fr.json' with {type:'json'};
+import it from '../experience/locales/it.json' with {type:'json'};
 import aeb from '../experience/locales/aeb-TN.json' with {type:'json'};
 import {createTranslator, LANGUAGE_CHOICES} from '../experience/i18n.mjs';
 import {THEME_IDS, applyTheme} from '../experience/themes.mjs';
 import {errorKey,AUTH_ERROR_KEYS} from '../experience/errors.mjs';
 import {flagIcon} from './flags.js';
+import {applyGardenTheme} from './design/theme.js';
 export {THEME_IDS, LANGUAGE_CHOICES};
-const catalogs={en,fr,'aeb-TN':aeb};
+const catalogs={en,fr,it,'aeb-TN':aeb};
 let translator=createTranslator('en',catalogs), theme='dark';
 const bindings=new Map();
 export const t=(key,params)=>translator.t(key,params);
@@ -26,7 +28,7 @@ export function copy(node,value,attribute='textContent'){
 export function initializeCopy(){
   for(const n of document.querySelectorAll('[data-i18n]')){const key=n.dataset.i18n;copy(n,()=>t(key));}
   for(const attr of ['placeholder','aria-label','title','alt'])for(const n of document.querySelectorAll('[data-i18n-'+attr+']')){const key=n.getAttribute('data-i18n-'+attr);copy(n,()=>t(key),attr);}
-  translator.applyLanguage(document.documentElement);applyTheme(document.documentElement,theme);
+  translator.applyLanguage(document.documentElement);applyTheme(document.documentElement,theme);applyGardenTheme(document.documentElement,theme);
   document.getElementById('languageFlag')?.replaceChildren(flagIcon(translator.locale));
   // Drop detached render bindings promptly so old private snapshots/blobs are not
   // retained until the next language switch. New nodes are attached synchronously.
@@ -46,6 +48,8 @@ export function setExperience(next={}){
   const themes=document.getElementById('themeSelect');if(themes)themes.value=theme;
   const scheme=document.querySelector('meta[name=color-scheme]');if(scheme)scheme.content=document.documentElement.style.getPropertyValue('color-scheme');
   const color=document.querySelector('meta[name=theme-color]');if(color)color.content=document.documentElement.style.getPropertyValue('--night');
+  // Night / Day / Harissa paint last: it owns color-scheme and theme-color.
+  applyGardenTheme(document.documentElement,theme);
 }
 // Preference drafts and independent DB versions live in profile-state.js.
 export function resetExperience(){setExperience({language:'en',theme:'dark'});}

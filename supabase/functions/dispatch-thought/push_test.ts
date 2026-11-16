@@ -11,7 +11,7 @@ async function rejects(fn:()=>unknown|Promise<unknown>){let failed=false;try{awa
 const eventId=crypto.randomUUID();
 const target={subscription_id:crypto.randomUUID(),lease_token:crypto.randomUUID(),locale:'fr',phrase_key:'affection.phrase02',sender:'Synthetic A',preview:true};
 Deno.test('30 exact static phrase translations match experience keys, no fallback',async()=>{
- for(const locale of ['en','fr','aeb-TN'] as const){
+ for(const locale of ['en','fr','it','aeb-TN'] as const){
   const catalog=JSON.parse(await Deno.readTextFile(new URL(`../../../experience/locales/${locale}.json`,import.meta.url)));
   for(let i=1;i<=10;i++){
    const key='affection.phrase'+String(i).padStart(2,'0');

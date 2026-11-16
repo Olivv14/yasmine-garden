@@ -13,10 +13,15 @@ if(createHash('sha256').update(audio).digest('hex')!==expected)throw Error('Incl
 await writeFile(path.join(dist,'assets/love-frequency-adeline-yeo.mp3'),audio);
 await copyFile(path.join(root,'vendor/MUSIC-CREDITS.md'),path.join(dist,'MUSIC-CREDITS.md'));
 await copyFile(path.join(root,'node_modules/@supabase/supabase-js/LICENSE'),path.join(dist,'SUPABASE-LICENSE.txt'));
-await build({entryPoints:[path.join(root,'src/app.js')],outfile:path.join(dist,'assets/app.js'),bundle:true,minify:true,format:'esm',target:['es2022'],legalComments:'eof',metafile:true}).then(async r=>{await writeFile(path.join(dist,'build-meta.json'),JSON.stringify(r.metafile,null,2));});
+await build({entryPoints:[path.join(root,'src/app.js')],outfile:path.join(dist,'assets/app.js'),bundle:true,minify:true,format:'esm',target:['es2022'],legalComments:'eof',loader:{'.svg':'text'},metafile:true}).then(async r=>{await writeFile(path.join(dist,'build-meta.json'),JSON.stringify(r.metafile,null,2));});
 const {THEME_BRIDGE_CSS}=await import('../experience/themes.mjs');
-await writeFile(path.join(dist,'assets/app.css'),await readFile(path.join(root,'src/styles.css'),'utf8')+'\n'+THEME_BRIDGE_CSS+'\n'+await readFile(path.join(root,'src/experience.css'),'utf8')+'\n'+await readFile(path.join(root,'src/native.css'),'utf8'));
-let csp="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob: data: https://*.supabase.co; media-src 'self' blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'";
+const {FONT_FILES,fontFaceCSS}=await import('../src/design/fonts.mjs');
+await mkdir(path.join(dist,'assets/fonts'),{recursive:true});
+for(const f of FONT_FILES)await copyFile(path.join(root,'node_modules/@fontsource',f.pkg,'files',f.file),path.join(dist,'assets/fonts',f.file));
+const css=async f=>await readFile(path.join(root,f),'utf8');
+// Order matters: legacy CSS, then design tokens (which remap legacy variables), then the design layer.
+await writeFile(path.join(dist,'assets/app.css'),[fontFaceCSS('./fonts/'),await css('src/styles.css'),THEME_BRIDGE_CSS,await css('src/experience.css'),await css('src/native.css'),await css('src/design/tokens.css'),await css('src/design/app.css'),await css('src/garden/garden.css'),await css('src/games/games.css')].join('\n'));
+let csp="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' blob: data: https://*.supabase.co; media-src 'self' blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'";
 const template=await readFile(path.join(root,'src/template.html'),'utf8');if(!template.includes('__CSP__'))throw Error('CSP marker missing.');
 await writeFile(path.join(dist,'index.html'),template.replace('__CSP__',`<meta http-equiv="Content-Security-Policy" content="${csp}">`));
 await copyFile(path.join(root,'public-config.example.json'),path.join(dist,'public-config.example.json'));

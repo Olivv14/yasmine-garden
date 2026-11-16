@@ -1,0 +1,51 @@
+/* Oliver & Yasmine design tokens (design system v1). Three themes share every component.
+   html[data-garden-theme] is set by src/design/theme.js. Night is the default. */
+:root,html[data-garden-theme=night]{
+  --bg:#0F1424;--surface:#1A2033;--surface-2:#242B40;--line:#343B52;--ink:#F3EADB;--ink-soft:#B9B2A6;
+  --accent:#E2B25C;--on-accent:#1B1622;--oliver:#D58C9B;--yasmine:#B994BA;--danger:#EC8590;--success:#A9BF8E;--info:#8FB0D6;--heart:#E8A0A8;
+  --glass:rgba(26,32,51,.72);--scrim:rgba(8,10,20,.55);
+  --garden-sky:#1B2440;--garden-wall:#8A8697;--garden-leaf:#5F7556;--garden-olive:#7E8B5E;--garden-terracotta:#B5704F;
+  --garden-rose:#C9798A;--garden-marigold:#E09A3E;--garden-lavender:#8C78B4;--garden-lilium:#EADCCB;--garden-orchid:#B27AAE;--garden-jasmine:#F2ECDD;
+  --garden-lantern:#F0C98A;--garden-sea:#3E5B7E;
+  --shadow-card:0 12px 24px rgba(0,0,0,.30);--shadow-float:0 16px 40px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+html[data-garden-theme=day]{
+  --bg:#F6EFE3;--surface:#FFFAF2;--surface-2:#EFE5D5;--line:#DDD0BC;--ink:#2B2633;--ink-soft:#665D6B;
+  --accent:#A4532F;--on-accent:#FFF8EE;--oliver:#A3445C;--yasmine:#74507A;--danger:#A8384C;--success:#55613A;--info:#3E5B7E;--heart:#C2566B;
+  --glass:rgba(255,250,242,.78);--scrim:rgba(43,38,51,.32);
+  --garden-sky:#BFD6E6;--garden-wall:#EDE5D6;--garden-leaf:#6E8C5A;--garden-olive:#8C9A66;--garden-terracotta:#C27A5A;
+  --garden-rose:#D28394;--garden-marigold:#E8A43E;--garden-lavender:#9A86C0;--garden-lilium:#F4E6D6;--garden-orchid:#C08BBC;--garden-jasmine:#FFFFFF;
+  --garden-lantern:#F6D79C;--garden-sea:#5B86A8;
+  --shadow-card:0 10px 24px rgba(60,40,20,.10);--shadow-float:0 16px 40px rgba(60,40,20,.18);
+  color-scheme:light;
+}
+html[data-garden-theme=harissa]{
+  --bg:#1C0A08;--surface:#2A100C;--surface-2:#3A1712;--line:#5A2620;--ink:#F8E6D6;--ink-soft:#D2B09C;
+  --accent:#F2B84B;--on-accent:#2A0E08;--oliver:#EE9A88;--yasmine:#D3A3CF;--danger:#FF8F7A;--success:#CDB86E;--info:#E8BC8E;--heart:#FF7A5C;
+  --glass:rgba(42,16,12,.74);--scrim:rgba(10,3,2,.6);
+  --garden-sky:#5A1A14;--garden-wall:#B0705C;--garden-leaf:#7A6A34;--garden-olive:#8E7B3E;--garden-terracotta:#D4693E;
+  --garden-rose:#E0566A;--garden-marigold:#F2A03A;--garden-lavender:#A77AA8;--garden-lilium:#F6D2BC;--garden-orchid:#D08AB8;--garden-jasmine:#FFE3C6;
+  --garden-lantern:#FFB25A;--garden-sea:#7A2C24;
+  --shadow-card:0 12px 24px rgba(0,0,0,.40);--shadow-float:0 16px 40px rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+:root{
+  --font-serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --font-arabic:"Noto Naskh Arabic","Geeza Pro",serif;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;
+  --radius-sm:12px;--radius-md:20px;--radius-lg:28px;--radius-full:999px;
+  --tap-min:44px;--heart-size:64px;--nav-height:72px;--avatar-sm:24px;--avatar-md:40px;--avatar-lg:72px;
+  --ease:cubic-bezier(.2,.8,.2,1);--dur-ui:240ms;--dur-sheet:280ms;
+}
+/* Legacy variables (src/styles.css, experience.css, themes.mjs inline values) follow the design tokens.
+   !important is needed because experience/themes.mjs writes the legacy values as inline styles. */
+html[data-garden-theme]{
+  --night:var(--bg)!important;--panel:var(--surface)!important;--paper:var(--ink)!important;--muted:var(--ink-soft)!important;
+  --warm:var(--accent)!important;--sage:var(--success)!important;--error:var(--danger)!important;
+  --control-bg:var(--surface-2)!important;--control-hover:var(--surface)!important;--control-border:var(--line)!important;
+  --active-bg:var(--surface-2)!important;--secondary-accent:var(--yasmine)!important;--on-secondary:var(--bg)!important;
+  --focus:var(--accent)!important;--garden-bg:var(--bg)!important;--toast-bg:var(--surface)!important;
+}

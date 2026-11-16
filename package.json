@@ -9,6 +9,16 @@
     "test:edge": "deno test --frozen --allow-read=experience/locales --config supabase/functions/dispatch-thought/deno.json supabase/functions/dispatch-thought/push_test.ts",
     "check": "node --check src/app.js && node --check src/transport.js && node --check src/composer.js && node --check scripts/build.mjs"
   },
-  "dependencies": { "@supabase/supabase-js": "2.119.0" },
-  "devDependencies": { "esbuild": "0.28.2" }
+  "dependencies": {
+    "@fontsource/fraunces": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@fontsource/noto-naskh-arabic": "5.3.0",
+    "@supabase/supabase-js": "2.119.0",
+    "lucide": "1.66.0",
+    "motion": "14.9.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
 }

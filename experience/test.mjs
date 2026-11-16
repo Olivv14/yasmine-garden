@@ -12,9 +12,9 @@ const rejects=async fn=>{await assert.rejects(fn);checks++;};
 const catalogs=Object.fromEntries(await Promise.all(Object.keys(LOCALES).map(async l=>[l,JSON.parse(await readFile(new URL(`./locales/${l}.json`,import.meta.url),'utf8'))])));
 const catalogInfo=validateCatalogs(catalogs);
 const source=(await readFile(new URL('./catalog.tsv',import.meta.url),'utf8')).trimEnd().split(/\r?\n/);
-check(()=>assert.equal(source.shift(),'key\ten\tfr\taeb-TN'));
-const authored={en:{},fr:{},'aeb-TN':{}};
-for(const line of source){const [key,...values]=line.split('\t');check(()=>assert.equal(values.length,3));for(const [i,l]of Object.keys(LOCALES).entries()){check(()=>assert.ok(!Object.hasOwn(authored[l],key)));authored[l][key]=values[i];}}
+check(()=>assert.equal(source.shift(),'key\ten\tfr\tit\taeb-TN'));
+const authored={en:{},fr:{},it:{},'aeb-TN':{}};
+for(const line of source){const [key,...values]=line.split('\t');check(()=>assert.equal(values.length,4));for(const [i,l]of Object.keys(LOCALES).entries()){check(()=>assert.ok(!Object.hasOwn(authored[l],key)));authored[l][key]=values[i];}}
 check(()=>assert.deepEqual(catalogs,authored));
 for(const key of [...Object.values(DATABASE_ERROR_KEYS),...Object.values(AUTH_ERROR_KEYS)])check(()=>assert.ok(Object.hasOwn(catalogs.en,key)));
 check(()=>assert.equal(errorKey({code:'40001'}),'errors.conflict'));
@@ -22,7 +22,7 @@ check(()=>assert.equal(errorKey({code:'invalid_credentials'},{domain:'auth'}),'a
 check(()=>assert.equal(errorKey({code:'unknown',message:'Do not display untranslated prose'}),'common.unknownError'));
 check(()=>assert.equal(errorKey({code:'toString'}),'common.unknownError'));
 check(()=>assert.throws(()=>errorKey({}, {domain:'bad'}),/Unknown error domain/));
-check(()=>assert.equal(catalogInfo.locales,3));
+check(()=>assert.equal(catalogInfo.locales,4));
 let placeholderContracts=0;
 for(const key of Object.keys(catalogs.en)) {
   for(const locale of Object.keys(LOCALES)) {
@@ -56,9 +56,9 @@ check(()=>assert.equal(tn.meta.numberLocale,'ar-TN'));
 check(()=>assert.equal(formatNumber('aeb-TN',1234.5),new Intl.NumberFormat('ar-TN').format(1234.5)));
 check(()=>assert.throws(()=>formatNumber('aeb-TN',1,{style:'unit',unit:'meter'}),/Numeric-only/));
 check(()=>assert.throws(()=>formatNumber('aeb-TN',1000,{notation:'compact'}),/Numeric-only/));
-check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.flag),['🇬🇧','🇫🇷','🇹🇳']));
-check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.accessibleName),['English','Français','تونسي']));
-check(()=>assert.ok(!LANGUAGE_CHOICES.some(x=>/^(EN|FR|ES|TN)$/.test(x.label))));
+check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.flag),['🇬🇧','🇫🇷','🇮🇹','🇹🇳']));
+check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.accessibleName),['English','Français','Italiano','تونسي']));
+check(()=>assert.ok(!LANGUAGE_CHOICES.some(x=>/^(EN|FR|ES|IT|TN)$/.test(x.label))));
 check(()=>assert.deepEqual(QUESTION_IDS,['q1','q2','q3','q4','q5','q6','q7','q8']));
 for(const locale of Object.keys(LOCALES)) {
   const t=createTranslator(locale,catalogs).t,bank=localizedQuestions(t);

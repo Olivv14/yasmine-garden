@@ -1,0 +1,138 @@
+/* Design layer: calm cards over the garden. Loaded after the legacy CSS and tokens.css. */
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font:400 16px/24px var(--font-sans);-webkit-font-smoothing:antialiased}
+html[lang=aeb-TN] body{font-family:var(--font-arabic),var(--font-sans);font-size:17px;line-height:28px}
+h1,h2,h3,.display,.title,.brand{font-family:var(--font-serif);font-weight:600;color:var(--ink);letter-spacing:-.01em}
+html[lang=aeb-TN] :is(h1,h2,h3,.display,.title,.brand){font-family:var(--font-arabic)}
+h1,.display{font-size:32px;line-height:38px;margin:0}
+h2,.title{font-size:22px;line-height:28px}
+h3{font-size:18px;line-height:24px}
+.small,.hint{font-size:13px;line-height:18px;color:var(--ink-soft)}
+.body-strong{font-weight:600}
+.eyebrow{font:600 12px/16px var(--font-sans);letter-spacing:.02em;text-transform:none;color:var(--ink-soft)}
+.muted{color:var(--ink-soft)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.shell{max-width:1120px;padding:0 var(--space-5) calc(var(--nav-height) + var(--heart-size) + 40px + env(safe-area-inset-bottom))}
+@media (min-width:900px){.shell{padding-inline:var(--space-6)}}
+/* Buttons: accent is the only button colour */
+button{font:600 15px/20px var(--font-sans);border-radius:var(--radius-md);border:1px solid var(--line);background:var(--surface-2);color:var(--ink);padding:10px 16px;min-height:var(--tap-min);transition:background var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease),transform 120ms var(--ease);display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2)}
+button:hover{background:var(--surface);border-color:var(--accent)}
+button:active{transform:scale(.98)}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+button.primary:hover{background:var(--accent);filter:brightness(1.06)}
+button.quiet{background:transparent;border-color:transparent;color:var(--ink)}
+button.quiet:hover{border-color:var(--line)}
+button.danger,button.quiet.danger{color:var(--danger)}
+button .icon{flex:none}
+input,textarea,select{font:400 16px/24px var(--font-sans);background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius-sm);min-height:var(--tap-min)}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:3px solid color-mix(in srgb,var(--accent) 35%,transparent);outline-offset:0}
+label{color:var(--ink-soft);font-size:13px}
+label.check{display:flex;gap:var(--space-2);align-items:center;margin-top:var(--space-3)}
+/* Cards */
+.note,.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:var(--space-4)}
+.pill{font:600 12px/16px var(--font-sans);letter-spacing:.02em;border:1px solid var(--line);border-radius:var(--radius-full);padding:6px 12px;color:var(--ink-soft);background:var(--surface-2);margin:0}
+.statusbar{background:var(--surface);border-radius:var(--radius-sm);color:var(--ink-soft);margin-block:var(--space-2)}
+.grid{gap:var(--space-4)}
+/* Top bar */
+.top{position:sticky;top:0;z-index:8;background:var(--glass);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);margin-inline:calc(-1 * var(--space-5));padding:var(--space-3) var(--space-5);border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
+.brand{font-size:20px;color:var(--accent)}
+.top .hint{display:none}
+@media (min-width:900px){.top{margin-inline:calc(-1 * var(--space-6));padding-inline:var(--space-6)}.top .hint{display:block}}
+.top-actions{display:flex;gap:var(--space-2);justify-content:flex-end;flex-wrap:wrap;margin:var(--space-3) 0}
+.pill-button{border-radius:var(--radius-full);font-size:13px;padding:8px 14px;background:var(--surface)}
+/* Bottom nav: four tabs, icon + label, frosted glass */
+.nav.bottom-nav{position:fixed;inset-inline:0;bottom:0;z-index:9;display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:6px max(8px,env(safe-area-inset-left)) calc(6px + env(safe-area-inset-bottom));min-height:var(--nav-height);background:var(--glass);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:1px solid var(--line);border-radius:var(--radius-lg) var(--radius-lg) 0 0;flex-wrap:nowrap}
+.bottom-nav button{flex-direction:column;gap:2px;background:transparent;border:0;border-radius:var(--radius-sm);color:var(--ink-soft);font:600 12px/16px var(--font-sans);letter-spacing:.02em;padding:6px 4px;min-height:56px}
+.bottom-nav button:hover{background:color-mix(in srgb,var(--surface-2) 60%,transparent)}
+.bottom-nav button[aria-current=page]{color:var(--accent);background:transparent}
+@media (min-width:900px){.nav.bottom-nav{inset-inline:auto;left:50%;transform:translateX(-50%);width:min(560px,calc(100vw - 48px));bottom:16px;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-float)}}
+/* Heart: floats bottom-right above the nav on every screen */
+#affectionDock{inset-block-end:calc(var(--nav-height) + 16px + env(safe-area-inset-bottom));inset-inline-end:max(16px,env(safe-area-inset-right))}
+#affectionDock>*{pointer-events:auto}
+#affectionButton{--taps:0;inline-size:var(--heart-size);block-size:var(--heart-size);min-inline-size:var(--heart-size);border-radius:var(--radius-full);padding:0;border:0;color:var(--heart);box-shadow:var(--shadow-float);background:radial-gradient(circle,var(--surface) 0 26px,transparent 27px),conic-gradient(var(--heart) calc(var(--taps) * 36deg),var(--surface-2) 0)}
+#affectionButton .icon{fill:color-mix(in srgb,var(--heart) 30%,transparent)}
+#affectionButton:disabled{opacity:1;border-style:none;color:color-mix(in srgb,var(--heart) 55%,var(--ink-soft))}
+#affectionDock p{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:6px 10px;font-size:13px;line-height:18px;margin:0;max-inline-size:260px;box-shadow:var(--shadow-card)}
+#affectionDock p:empty{display:none}
+@media (min-width:900px){#affectionDock{inset-block-end:32px}}
+/* Toast: one at a time, above the nav */
+#toast{bottom:calc(var(--nav-height) + 24px + env(safe-area-inset-bottom));background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-float);color:var(--ink);font-size:14px}
+/* Garden home */
+.home .greeting{margin:var(--space-5) 0 var(--space-4)}
+.partner-line{margin:var(--space-1) 0 0}
+[data-tone=oliver]{color:var(--oliver)}[data-tone=yasmine]{color:var(--yasmine)}
+.partner-line[data-tone]::before{content:'';display:inline-block;inline-size:8px;block-size:8px;border-radius:50%;background:currentColor;margin-inline-end:6px;vertical-align:1px}
+#gardenMount{margin-inline:calc(-1 * var(--space-5))}
+#gardenMount .garden-viewport{border-radius:0}
+@media (min-width:700px){#gardenMount{margin-inline:0}#gardenMount .garden-viewport{border-radius:var(--radius-lg);border:1px solid var(--line)}}
+.garden-hint{margin:var(--space-2) 0 var(--space-4)}
+.garden-tools{display:flex;gap:var(--space-2);align-items:center;flex-wrap:wrap;margin-bottom:var(--space-3)}
+.garden-tools .pill{margin-inline-end:auto}
+.today-card{display:grid;gap:var(--space-3);margin-block:var(--space-4)}
+.today-card .eyebrow,.today-card p{margin:0}
+.today-card>button{justify-self:start}
+.today-note{display:grid;gap:var(--space-1);border-top:1px solid var(--line);padding-top:var(--space-3)}
+.today-note:empty{display:none}
+.today-note button{justify-self:start;padding-inline:0}
+.lantern-row{display:flex;gap:6px}
+.mini-lantern .c-lant-glass{fill:color-mix(in srgb,var(--garden-lantern) 22%,var(--surface-2))}
+.mini-lantern.lit .c-lant-glass{fill:var(--garden-lantern)}
+.mini-lantern .c-trunk{fill:var(--ink-soft)}
+.quick-actions,.garden-doors{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-block:var(--space-3)}
+.quick-actions button,.garden-doors button{border-radius:var(--radius-full);font-size:13px;padding:8px 14px}
+.night-scene{padding:0}
+.today-scene{inline-size:100%;max-inline-size:320px;block-size:auto;display:block;margin:auto}
+html[data-garden-theme=day] .today-scene .moon-disc,html:not([data-garden-theme=day]) .today-scene .sun-disc{display:none}
+html[data-garden-theme=day] .today-scene .twinkle{display:none}
+.page{animation:arrive .32s var(--ease) both}
+@keyframes arrive{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Sheets */
+dialog.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;inline-size:min(640px,100%);max-inline-size:100%;max-block-size:min(88dvh,820px);border:1px solid var(--line);border-bottom:0;border-radius:var(--radius-lg) var(--radius-lg) 0 0;background:var(--surface);color:var(--ink);padding:0 var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom));box-shadow:var(--shadow-float);overflow:auto}
+dialog.sheet::backdrop{background:var(--scrim)}
+dialog.sheet-full{block-size:min(88dvh,820px)}
+.sheet-handle{inline-size:44px;block-size:5px;border-radius:var(--radius-full);background:var(--line);margin:10px auto 4px;cursor:grab;touch-action:none;padding-block:8px;background-clip:content-box}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);position:sticky;top:0;background:var(--surface);padding-block:var(--space-2);z-index:1}
+.sheet-head h2{margin:0}
+.icon-button{inline-size:var(--tap-min);block-size:var(--tap-min);padding:0;border-radius:var(--radius-full);background:var(--surface-2)}
+.sheet-body{display:grid;gap:var(--space-3);padding-top:var(--space-2)}
+.sheet-body p{margin:0}
+.sheet-actions{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.flower-sheet-art{display:grid;place-items:center;background:color-mix(in srgb,var(--surface-2) 70%,transparent);border-radius:var(--radius-md);padding:var(--space-3)}
+.drops{display:flex;gap:2px;color:var(--info)}
+.drops .icon{opacity:.35}.drops .icon.filled{opacity:1;fill:color-mix(in srgb,var(--info) 45%,transparent)}
+.flower-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2)}
+.flower-option{flex-direction:column;border-radius:var(--radius-md);padding:var(--space-2);font-size:13px;background:var(--surface-2)}
+.flower-option[aria-checked=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface-2))}
+.specimen{display:block}
+/* Terminal (easter egg): the only place for JetBrains Mono */
+.terminal{background:#0B0E18;color:#E8DFC8}
+.terminal .sheet-head{background:#0B0E18}
+.terminal-log{font:14px/20px var(--font-mono);min-block-size:240px;max-block-size:52dvh;overflow:auto;white-space:pre-wrap}
+.terminal-log p{margin:0 0 4px}.terminal-log .cmd{color:var(--accent)}
+.terminal-form{display:flex;align-items:center;gap:var(--space-2);font:14px/20px var(--font-mono)}
+.terminal-form label{margin:0;color:var(--accent);font:inherit}
+.terminal-form input{font:inherit;background:transparent;border:0;border-bottom:1px solid #343B52;border-radius:0;color:#E8DFC8;caret-color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.page{animation:none}button{transition:none}}
+.mt-12{margin-top:12px}.mt-22{margin-top:22px}.mt-24{margin-top:24px}
+/* Heart dock: the hint and an empty count stay available to screen readers but do not cover the garden. */
+#affectionDock p[data-idle=true]{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;padding:0;border:0;box-shadow:none}
+/* Compact top on phones so the garden starts high on the screen. */
+#connectionStatus{background:none;border:0;border-radius:0;padding:2px 0;margin:6px 0 0;font-size:12px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-actions{margin:var(--space-2) 0 0}
+.home .greeting{margin:var(--space-2) 0 var(--space-3)}
+@media (max-width:699px){
+  .top{padding-block:var(--space-2)}
+  .session-row{flex-wrap:nowrap;gap:6px}
+  .session-row #identity{display:none}
+  #languageSelect{inline-size:118px}
+  #logout{padding:6px 12px;font-size:13px;border-radius:var(--radius-full)}
+  h1,.display{font-size:28px;line-height:34px}
+}
+@media (max-width:420px){.top .brand{display:none}.top>div:first-child{display:none}}
+.session-row>*{flex:none}
+#logout{white-space:nowrap}
+/* Keyboard focus on the garden (or its flower list) keeps it clear of the sticky top bar. */
+.garden-viewport,.garden-keys button{scroll-margin-block:96px 120px}
+.session-row{flex-wrap:nowrap}
+.session-row #identity{inline-size:auto;max-inline-size:16ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
