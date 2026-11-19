@@ -40,7 +40,7 @@ const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,
 // Music: playlists, dedications and lyric cards. Void RPCs (delete, remove) pass voidResult=true.
 const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad()});
 // Talk: the chat. It reads and writes its own way (live room, pages, outbox), never through a full refresh.
-const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=>api,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),onUnread:n=>shell.unread(n),playlistSongs:()=>(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at)});
+const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=>api,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),onUnread:n=>shell?.unread(n),playlistSongs:()=>(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at)});
 const shell=createShell({$,el,button,t,copy,navigate:next=>navigate(next),getSnapshot:()=>snapshot,me:()=>state.profile,person,home,player,music,chat,markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true))});
 const play=createPlay({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x)});
 const profileUI=createProfileUI({$,el,button,getApi:()=>api,ready:checkReady,onIdentity:me=>{api.context.me=me;renderProfile();copy($('identity'),me.display_name);},showError:e=>api?.onFailure(e),getNative:()=>nativeUI});
