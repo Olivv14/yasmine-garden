@@ -88,11 +88,13 @@ test('every string key used by the garden, design and games modules exists in al
   const used=new Set();
   for(const dir of ['src/garden/','src/games/','src/design/'])for(const f of await readdir(new URL(dir,root))){
     if(!f.endsWith('.js'))continue;const text=await readFile(new URL(dir+f,root),'utf8');
-    for(const m of text.matchAll(/\bt\('([a-zA-Z][\w.-]+)'/g))if(!m[1].endsWith('.'))used.add(m[1]);
+    // a key followed by '+' is a family (game.td.level+1); its members are listed below
+    for(const m of text.matchAll(/\bt\('([a-zA-Z][\w.-]+)'(?!\s*\+)/g))if(!m[1].endsWith('.'))used.add(m[1]);
   }
   for(const prefix of ['flowers.','garden.stage.'])for(const k of Object.keys(en))if(k.startsWith(prefix))used.add(k);
   for(const k of ['game.td.truth','game.td.dare',...Array.from({length:10},(_,i)=>'game.truth.t'+String(i+1).padStart(2,'0')),...Array.from({length:10},(_,i)=>'game.dare.d'+String(i+1).padStart(2,'0'))])used.add(k);
   for(const type of FLOWER_TYPES)used.add('flowers.'+type);
+  for(const k of ['game.td.level1','game.td.level2','game.td.level3','duel.deck.it','duel.deck.ve','duel.deck.tn','duel.won','duel.lost','duel.tieYou','duel.tieThem','duel.finish','duel.next'])used.add(k);
   for(const [name,cat] of Object.entries({en,es,fr,it,aeb}))for(const k of used)assert.ok(Object.hasOwn(cat,k),`${name} is missing ${k}`);
   assert.ok(used.size>60);
 });

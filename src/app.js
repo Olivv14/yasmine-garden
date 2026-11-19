@@ -17,6 +17,7 @@ import {createGate} from './gate.js';
 import {createChat} from './talk/chat.js';
 import {FLOWER_TYPES} from './garden/model.js';
 import {createPlay} from './games/play.js';
+import {seeds as seedsFor} from './games/score.js';
 initializeCopy();
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined&&!(typeof text==='function'&&text()===''))copy(n,text);if(['p','h3','a','bdi'].includes(tag))n.dir='auto';if(cls)n.className=cls;return n;};
@@ -36,13 +37,17 @@ new MutationObserver(()=>{const v=document.documentElement.dataset.theme;if(v&&!
 // The way in: black screen, beating phrase, secret word, your own log lines. Shown on every opening.
 // The heavy 3D garden waits until the gate has left, so the log lines run smoothly while data loads.
 const gate=createGate({$,signInWithWord:word=>signInWithWord(word),reducedMotion:()=>matchMedia('(prefers-reduced-motion: reduce)').matches,onHidden:()=>{if(snapshot)home.render();}});gate.show();
-const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),plant:type=>plantFlower(type),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>shell.openMusic(),onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
+const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),seeds:()=>seedsFor(snapshot,state.profile),plant:type=>plantFlower(type),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>shell.openMusic(),onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
 // Music: playlists, dedications and lyric cards. Void RPCs (delete, remove) pass voidResult=true.
 const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad()});
 // Talk: the chat. It reads and writes its own way (live room, pages, outbox), never through a full refresh.
 const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=>api,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),onUnread:n=>shell?.unread(n),playlistSongs:()=>(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at)});
-const shell=createShell({$,el,button,t,copy,navigate:next=>navigate(next),getSnapshot:()=>snapshot,me:()=>state.profile,person,home,player,music,chat,markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true))});
-const play=createPlay({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x)});
+const shell=createShell({$,el,button,t,copy,navigate:next=>navigate(next),getSnapshot:()=>snapshot,me:()=>state.profile,person,home,player,music,chat,openRound:id=>play?.openRound(id),markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true))});
+const play=createPlay({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x),
+  navigate:next=>navigate(next),openPlant:()=>home.openPlant(),onWaiting:n=>shell?.playWaiting(n),onRound:id=>markRoundSeen(id)});
+// Opening a round from Play marks its bell rows (your turn, the result) as read.
+function markRoundSeen(roundId){const ids=(snapshot?.notifications??[]).filter(n=>n.ref_id===roundId&&!n.read_at&&n.recipient_id===state.profile&&['game_turn','game_result'].includes(n.kind)).map(n=>n.id);
+  if(ids.length)task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true)).catch(()=>{});}
 const profileUI=createProfileUI({$,el,button,getApi:()=>api,ready:checkReady,onIdentity:me=>{api.context.me=me;renderProfile();copy($('identity'),me.display_name);},showError:e=>api?.onFailure(e),getNative:()=>nativeUI});
 $('receptionPanel').append($('affectionPanel'));$('page-garden').append($('moodPanel'));const affectionDock=$('affectionDock');for(const id of ['affectionButton','thoughtProgress','thoughtStatus','thoughtReceipt','thoughtRetry','thoughtReset'])affectionDock.append($(id));$('affectionButton').prepend(icon('heart',28));for(const n of document.querySelectorAll('[data-icon]'))n.replaceWith(icon(n.dataset.icon,n.closest('.bottom-nav')?22:20));
 $('languageSelect').onchange=()=>{profileUI.preview({language:$('languageSelect').value});nativeUI?.preferencesChanged();};
