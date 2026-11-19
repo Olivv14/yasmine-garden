@@ -787,5 +787,19 @@
   "inbox.songs": "Canciones para ti",
   "together.listening": "{{name}} está escuchando: {{title}}",
   "together.join": "Escuchar juntos",
-  "together.joined": "Escuchando juntos"
+  "together.joined": "Escuchando juntos",
+  "gate.phrase": "¿Sabes cómo son tus ojos?",
+  "gate.word": "Palabra secreta",
+  "gate.enter": "Entrar",
+  "gate.wrong": "Esa no es la palabra.",
+  "gate.log.oliver.1": "Compilando el jardín en rojo…",
+  "gate.log.oliver.2": "Afinando la guitarra del sapo…",
+  "gate.log.oliver.3": "Atrapando un relámpago del Catatumbo en un frasco…",
+  "gate.log.oliver.4": "Buscando su último pensamiento…",
+  "gate.log.oliver.5": "Listo, habibi.",
+  "gate.log.yasmine.1": "Regando el jazmín…",
+  "gate.log.yasmine.2": "Calentando la harissa…",
+  "gate.log.yasmine.3": "Poniendo tu K-pop en la cola…",
+  "gate.log.yasmine.4": "Lamine Yamal está calentando…",
+  "gate.log.yasmine.5": "Lista, mi amor."
 }
