@@ -787,5 +787,19 @@
   "inbox.songs": "Songs for you",
   "together.listening": "{{name}} is listening: {{title}}",
   "together.join": "Listen together",
-  "together.joined": "Listening together"
+  "together.joined": "Listening together",
+  "gate.phrase": "Do you know what your eyes look like?",
+  "gate.word": "Secret word",
+  "gate.enter": "Enter",
+  "gate.wrong": "That’s not the word.",
+  "gate.log.oliver.1": "Compiling the garden in red…",
+  "gate.log.oliver.2": "Tuning the toad’s guitar…",
+  "gate.log.oliver.3": "Catching Catatumbo lightning in a jar…",
+  "gate.log.oliver.4": "Looking for her last thought…",
+  "gate.log.oliver.5": "Ready, habibi.",
+  "gate.log.yasmine.1": "Watering the jasmine…",
+  "gate.log.yasmine.2": "Warming up the harissa…",
+  "gate.log.yasmine.3": "Queueing your K-pop…",
+  "gate.log.yasmine.4": "Lamine Yamal is warming up…",
+  "gate.log.yasmine.5": "Ready, mi amor."
 }

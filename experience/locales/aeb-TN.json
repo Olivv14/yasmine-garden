@@ -787,5 +787,19 @@
   "inbox.songs": "غناوي ليك",
   "together.listening": "{{name}} يسمع في: {{title}}",
   "together.join": "اسمعو مع بعضكم",
-  "together.joined": "قاعدين تسمعو مع بعضكم"
+  "together.joined": "قاعدين تسمعو مع بعضكم",
+  "gate.phrase": "تعرف كيفاش عينيك؟",
+  "gate.word": "الكلمة السرّية",
+  "gate.enter": "ادخل",
+  "gate.wrong": "موش هي الكلمة.",
+  "gate.log.oliver.1": "قاعد نكومبيلي الجنينة بالأحمر…",
+  "gate.log.oliver.2": "نعدّل في قيتارة الجرانة…",
+  "gate.log.oliver.3": "نشدّ برق الكاتاتومبو في بوكال…",
+  "gate.log.oliver.4": "نلوّج على آخر فكرة منها…",
+  "gate.log.oliver.5": "حاضر، حبيبي.",
+  "gate.log.yasmine.1": "نسقي في الياسمين…",
+  "gate.log.yasmine.2": "نسخّن في الهريسة…",
+  "gate.log.yasmine.3": "نحضّر الكي-بوب متاعك…",
+  "gate.log.yasmine.4": "لامين يامال قاعد يسخّن…",
+  "gate.log.yasmine.5": "حاضرة، mi amor."
 }

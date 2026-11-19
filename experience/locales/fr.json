@@ -787,5 +787,19 @@
   "inbox.songs": "Des chansons pour vous",
   "together.listening": "{{name}} écoute : {{title}}",
   "together.join": "Écouter ensemble",
-  "together.joined": "Vous écoutez ensemble"
+  "together.joined": "Vous écoutez ensemble",
+  "gate.phrase": "Tu sais à quoi ressemblent tes yeux ?",
+  "gate.word": "Mot secret",
+  "gate.enter": "Entrer",
+  "gate.wrong": "Ce n’est pas le mot.",
+  "gate.log.oliver.1": "Compilation du jardin en rouge…",
+  "gate.log.oliver.2": "J’accorde la guitare du crapaud…",
+  "gate.log.oliver.3": "J’attrape un éclair du Catatumbo dans un bocal…",
+  "gate.log.oliver.4": "Je cherche sa dernière pensée…",
+  "gate.log.oliver.5": "Prêt, habibi.",
+  "gate.log.yasmine.1": "J’arrose le jasmin…",
+  "gate.log.yasmine.2": "Je réchauffe la harissa…",
+  "gate.log.yasmine.3": "Je mets ta K-pop dans la file…",
+  "gate.log.yasmine.4": "Lamine Yamal s’échauffe…",
+  "gate.log.yasmine.5": "Prête, mi amor."
 }

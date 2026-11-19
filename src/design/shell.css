@@ -219,3 +219,35 @@ dialog.music-form .sheet-body{gap:10px}
 .inbox-row{display:block;inline-size:100%;text-align:start;border:2px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:600 13.5px/1.35 var(--font-sans);padding:8px 10px}
 .inbox-row.unread{border-color:var(--edge);box-shadow:2px 2px 0 var(--edge)}
 .inbox-row.unread::before{content:'';display:inline-block;inline-size:8px;block-size:8px;border-radius:50%;background:var(--fill);margin-inline-end:6px;vertical-align:1px}
+
+/* The gate: pure black, one beating phrase, then only the secret word, then your own log lines */
+.gate{position:fixed;inset:0;z-index:200;background:#000;color:#F4F0FF;display:grid;place-items:center;padding:24px;transition:opacity .6s ease;color-scheme:dark}
+.gate[hidden]{display:none}
+.gate.leaving{opacity:0;pointer-events:none}
+body:has(#gate:not([hidden])) .skip{display:none}
+.gate-step{display:grid;place-items:center}
+.gate-step[hidden]{display:none}
+.gate-phrase{background:none;border:0;box-shadow:none;color:#F4F0FF;font:800 clamp(28px,7.4vw,46px)/1.15 var(--font-display);text-align:center;max-inline-size:13ch;padding:24px;cursor:pointer;
+  animation:gate-beat 1.4s ease-in-out infinite;text-shadow:0 0 28px rgba(255,107,107,.35);border-radius:24px;min-height:0}
+.gate-phrase:hover{background:none}
+.gate-phrase:focus-visible{outline:2px solid rgba(244,240,255,.5);outline-offset:6px}
+html[lang=aeb-TN] .gate-phrase{font:700 clamp(26px,7vw,42px)/1.5 var(--font-arabic)}
+@keyframes gate-beat{0%,100%{transform:scale(1)}12%{transform:scale(1.07)}24%{transform:scale(1)}36%{transform:scale(1.045)}60%{transform:scale(1)}}
+.gate-form{display:flex;align-items:center;gap:14px;inline-size:min(340px,86vw);flex-wrap:wrap;justify-content:center}
+#gateWord{flex:1;min-inline-size:0;background:transparent;border:0;border-bottom:2px solid rgba(244,240,255,.45);border-radius:0;color:#fff;font:600 22px/1 var(--font-sans);letter-spacing:.18em;text-align:center;padding:10px 4px;min-height:52px;caret-color:#FF6B6B;box-shadow:none}
+#gateWord:focus{outline:none;border-bottom-color:#FF6B6B}
+.gate-go{inline-size:52px;block-size:52px;min-height:52px;border-radius:50%;background:#C9302F;color:#fff;border:0;display:grid;place-items:center;padding:0;flex:none}
+.gate-go:hover{background:#C9302F;filter:brightness(1.08)}
+.gate-go .icon{fill:currentColor}
+.gate-form.wrong{animation:gate-shake .42s}
+@keyframes gate-shake{20%{transform:translateX(-10px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+/* a wrong word only shakes; the words stay for screen readers. Real problems (offline) show. */
+.gate-status{flex-basis:100%;margin:0;text-align:center;font:500 13px/1.4 var(--font-sans);color:#B9B0DA;position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.gate-status.visible{position:static;inline-size:auto;block-size:auto;clip-path:none;white-space:normal}
+.gate-log{list-style:none;margin:0;padding:0;display:grid;gap:6px;justify-items:start;font:500 15px/1.55 var(--font-mono);color:#FF8A8A;inline-size:min(360px,88vw)}
+.gate-log[data-who=yasmine]{color:#9CF2B8}
+.gate-log li{animation:gate-line .32s ease both}
+.gate-log li::before{content:'› ';opacity:.6}
+html[lang=aeb-TN] .gate-log{font:500 16px/1.7 var(--font-arabic);justify-items:end}
+@keyframes gate-line{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.gate-phrase,.gate-log li,.gate-form.wrong{animation:none}.gate{transition:none}}

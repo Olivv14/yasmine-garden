@@ -13,7 +13,7 @@ import {currentGardenTheme,onGardenTheme,setHarissa,harissaOn} from '../design/t
 
 const specimen=(type,stage,size=96)=>s('svg',{viewBox:'-40 -84 80 92',width:size,height:size,cls:'specimen','aria-hidden':'true',focusable:'false'},[flowerArt(type,stage)]);
 
-export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,person,navigate,plant,water,remove,notify,onToad,onDiscover}){
+export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,person,navigate,plant,water,remove,notify,onToad,onDiscover,canStart3D=()=>true}){
   let flowerSheet=null,flowerSheetId=null,lastBloomCount=0;
   const garden=createGarden({onFlower:id=>openFlower(id),onSoil:()=>openPlant(),onMoon:()=>openTerminal()});
   $('gardenMount').append(garden.element);
@@ -63,7 +63,7 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
   function render(){
     const snap=getSnapshot();if(!snap)return;
     // the 3D garden loads once someone is signed in, not behind the sign-in screen
-    if(g3&&!g3.started){g3.started=true;g3.start();}
+    if(g3&&!g3.started&&canStart3D()){g3.started=true;g3.start();}
     greeting();partnerLine(snap);todayCard(snap);
     const live=snap.flowers.filter(f=>!f.deleted_at),placed=placeFlowers(live),sum=summary(live),theme=currentGardenTheme();
     const finished=(snap.gameEvents??[]);

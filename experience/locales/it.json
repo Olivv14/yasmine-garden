@@ -787,5 +787,19 @@
   "inbox.songs": "Canzoni per te",
   "together.listening": "{{name}} sta ascoltando: {{title}}",
   "together.join": "Ascolta insieme",
-  "together.joined": "State ascoltando insieme"
+  "together.joined": "State ascoltando insieme",
+  "gate.phrase": "Sai come sono i tuoi occhi?",
+  "gate.word": "Parola segreta",
+  "gate.enter": "Entra",
+  "gate.wrong": "Non è la parola.",
+  "gate.log.oliver.1": "Compilo il giardino in rosso…",
+  "gate.log.oliver.2": "Accordo la chitarra del rospo…",
+  "gate.log.oliver.3": "Catturo un lampo del Catatumbo in un barattolo…",
+  "gate.log.oliver.4": "Cerco il suo ultimo pensiero…",
+  "gate.log.oliver.5": "Pronto, habibi.",
+  "gate.log.yasmine.1": "Innaffio il gelsomino…",
+  "gate.log.yasmine.2": "Scaldo l’harissa…",
+  "gate.log.yasmine.3": "Metto in coda il tuo K-pop…",
+  "gate.log.yasmine.4": "Lamine Yamal si sta scaldando…",
+  "gate.log.yasmine.5": "Pronta, mi amor."
 }
