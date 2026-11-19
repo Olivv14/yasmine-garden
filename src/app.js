@@ -205,8 +205,10 @@ function authEvent(event,session){if(event==='SIGNED_OUT'||!session){authUser=nu
 async function signInWithWord(word){
   if(!client)throw Object.assign(new Error('config'),{gateKey:'errors.config'});
   const mine=authUser?.email?.toLowerCase()??'',aliases=Object.entries(client.connectionPublicConfig.loginAliases??{}).sort(([,a],[,b])=>(b===mine)-(a===mine));
-  for(const [who,email] of aliases){
-    const r=await auth.signIn(who,word);
+  // Forgiving about how the word was typed: spaces around it, and any capitals (phones often start lowercase).
+  const typed=String(word).trim(),forms=[...new Set([typed,typed.charAt(0).toUpperCase()+typed.slice(1).toLowerCase()])].filter(Boolean);
+  for(const [who,email] of aliases)for(const form of forms){
+    const r=await auth.signIn(who,form);
     if(!r.error)return /yasm/i.test(who)?'yasmine':'oliver';
     if(r.error.status===429||r.error.code==='over_request_rate_limit')throw Object.assign(r.error,{gateKey:'auth.rateLimited'});
     if(r.error.code!=='invalid_credentials'&&r.error.status!==400)throw Object.assign(r.error,{gateKey:'errors.network'});
