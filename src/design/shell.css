@@ -1,0 +1,171 @@
+/* Night Duet: the 3D garden on top of Home, sticker cards below, the tab bar and the heart floating.
+   Loaded last. Colours come from tokens.css; html[data-garden-theme] switches night, day and harissa. */
+html{background:var(--page)}
+body{background:var(--page)}
+.shell{position:relative;background:var(--bg);min-block-size:100dvh;box-sizing:border-box;max-inline-size:760px;margin-inline:auto;padding:0 16px calc(176px + env(safe-area-inset-bottom))}
+@media (min-width:900px){.shell{padding-inline:24px}}
+h1,h2,h3,.title,.display,.brand{font-family:var(--font-display);font-weight:800;letter-spacing:-.01em}
+.eyebrow{font:700 11px/16px var(--font-sans);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+html[lang=aeb-TN] .eyebrow{text-transform:none;letter-spacing:0;font-size:13px}
+.hand{font:700 19px/1.1 var(--font-hand);color:var(--note);margin:4px 0 0}
+html[lang=aeb-TN] .hand{font:600 15px/1.4 var(--font-arabic)}
+
+/* Sticker cards and buttons */
+.note,.card{background:var(--surface);color:var(--ink);border:2px solid var(--edge);border-radius:18px;box-shadow:3px 3px 0 var(--edge)}
+button{border:2px solid var(--line);border-radius:14px}
+button.primary{border:2px solid var(--edge);box-shadow:2px 2px 0 var(--edge);font-family:var(--font-display);font-weight:800}
+button.primary:active,.chip-button:active,.bell-button:active,.profile-bubble:active,.round-button:active,#affectionButton:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--edge)}
+button.link{border:0;background:none;padding:0;min-height:36px;color:var(--accent);text-decoration:underline;font:600 13px var(--font-sans);justify-self:start}
+.pill{border:2px solid var(--line)}
+
+/* Header: brand sticker, time of day, bell, language, profile */
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;position:sticky;top:0;z-index:12;margin-inline:-16px;padding:12px 16px;background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:0}
+.top .brand-block{min-inline-size:0}
+.top .brand{display:inline-block;margin:0;background:var(--surface);color:var(--ink);border:2px solid var(--edge);border-radius:999px;box-shadow:2px 2px 0 var(--edge);font-size:15px;line-height:20px;padding:6px 13px;white-space:nowrap}
+.top .hint{display:none}
+.session-row{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
+.chip-button,.bell-button,.profile-bubble{min-block-size:42px;border:2px solid var(--edge);box-shadow:2px 2px 0 var(--edge);background:var(--surface);color:var(--ink);border-radius:999px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font:800 13px var(--font-display);white-space:nowrap}
+.bell-button,.profile-bubble{inline-size:42px;padding:0;justify-content:center;position:relative}
+.bell-button[aria-expanded=true]{background:var(--sun);color:#1B1530}
+.bell-count{position:absolute;top:-6px;inset-inline-end:-6px;min-inline-size:20px;block-size:20px;box-sizing:border-box;padding:0 4px;border-radius:99px;background:var(--fill);color:var(--on-fill);font:800 11px/16px var(--font-sans);text-align:center;border:2px solid var(--edge)}
+.language-control{position:relative;display:inline-grid;place-items:center;inline-size:42px;block-size:42px;border:2px solid var(--edge);border-radius:50%;box-shadow:2px 2px 0 var(--edge);background:var(--surface);overflow:hidden}
+.language-control #languageFlag{display:grid;place-items:center;pointer-events:none}
+.language-control #languageFlag svg{inline-size:24px;block-size:16px;border-radius:3px}
+.language-control select{position:absolute;inset:0;opacity:0;inline-size:100%;block-size:100%;min-height:0;cursor:pointer}
+.shell:has(#privateSpace[hidden]) .signed-only{display:none}
+.shell:has(#privateSpace[hidden]) .top .hint{display:block;font-size:12px;margin:4px 0 0}
+#connectionStatus{font-size:11px;line-height:15px;margin:2px 0 0;padding:0;background:none;border:0;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the brand stays on every screen; on narrow phones the time chip shows only its icon */
+.top .brand,.top>div:first-child{display:inline-block!important}
+@media (max-width:400px){.chip-button #timeText{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.chip-button{inline-size:42px;padding:0;justify-content:center}}
+#main:focus,#main:focus-visible{outline:none}
+
+/* Home: the garden fills the top, the header floats on it, cards overlap its fade */
+#page-garden{display:flex;flex-direction:column}
+#page-garden>#gardenMount{order:-1}
+.shell:has(#page-garden:not([hidden]) #gardenMount.is-3d) .top{position:absolute;inset-inline:0;margin:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+/* on Home the routine sync line stays for screen readers only; errors still show in #appError */
+.shell:has(#page-garden:not([hidden]) #gardenMount.is-3d) #connectionStatus{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0}
+#gardenMount.is-3d{margin-inline:-16px;position:relative}
+.garden3d{position:relative;block-size:clamp(340px,56vh,480px);background:#141A3A;overflow:hidden}
+html[data-garden-theme=day] .garden3d{background:#9CCBEE}
+.garden3d-stage{position:absolute;inset:0}
+.garden3d-stage canvas{display:block;touch-action:none}
+.garden3d-loading{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:#fff;font:700 14px var(--font-sans);text-shadow:0 1px 4px rgba(0,0,0,.45);pointer-events:none;transition:opacity .5s;z-index:1}
+.garden3d.loaded .garden3d-loading{opacity:0}
+.garden3d::after{content:'';position:absolute;inset:auto 0 0 0;block-size:110px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:2}
+.garden3d-pins{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.garden3d-pins .pin{position:absolute;left:0;top:0;will-change:transform;visibility:hidden}
+.pin.score{display:grid;justify-items:center}
+.pin.score b{display:flex;align-items:center;gap:6px;color:#fff;border-radius:99px;padding:3px 10px 3px 3px;font:800 17px/1 var(--font-display);white-space:nowrap;border:2px solid #0B0816}
+.pin.score em{font-style:normal;inline-size:21px;block-size:21px;border-radius:50%;background:#F4F0FF;display:grid;place-items:center;font:800 10.5px var(--font-sans)}
+.pin.score small{font:800 8.5px var(--font-sans);letter-spacing:.07em;text-transform:uppercase;opacity:.9}
+.pin.score.oliver b{background:linear-gradient(160deg,#C9302F,#8C1C24)}.pin.score.oliver em{color:#A3222A}
+.pin.score.yasmine b{background:linear-gradient(160deg,#159A55,#0B6A3A)}.pin.score.yasmine em{color:#0E7A41}
+.pin i{display:block;inline-size:2px;block-size:10px;background:rgba(244,240,255,.75)}
+.pin.score.oliver{justify-items:start}.pin.score.oliver i{margin-inline-start:9px}
+html[data-garden-theme=day] .pin.score b{box-shadow:2px 2px 0 #1B1530}html[data-garden-theme=day] .pin i{background:#1B1530}
+.pin.song{display:grid;justify-items:center}
+.pin.song b{border-radius:99px;padding:4px 9px;font:800 11px var(--font-sans);white-space:nowrap;background:#F4F0FF;color:#14102B;border:2px solid #0B0816;max-inline-size:180px;overflow:hidden;text-overflow:ellipsis}
+.pin.song i{background:#F4F0FF}
+.pin.landmark{font:700 20px/1 var(--font-hand);white-space:nowrap;rotate:-6deg;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.65)}
+html[data-garden-theme=day] .pin.landmark.falls{color:#1B1530;background:rgba(255,255,255,.82);padding:1px 7px;border-radius:8px;text-shadow:none}
+html[lang=aeb-TN] .pin.landmark{font:600 15px/1.2 var(--font-arabic);rotate:0deg}
+
+.home .greeting{position:relative;z-index:3;margin:-52px 0 8px}
+.home .greeting h2{font-size:24px;line-height:30px}
+#gardenMount:not(.is-3d)+.greeting,.home:not(:has(.is-3d)) .greeting{margin-top:12px}
+.garden-hint{display:none}
+#gardenMount:not(.is-3d)~.garden-hint{display:block}
+.home-cards{display:grid;gap:12px;margin-block:12px}
+@media (min-width:600px){.home-cards{grid-template-columns:3fr 2fr}}
+.toad-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:12px}
+.toad-art{inline-size:62px;block-size:62px;border-radius:14px;border:2px solid var(--edge);display:grid;place-items:center;background:color-mix(in srgb,var(--fill) 22%,var(--surface-2));color:var(--ink);padding:0}
+.toad-card.on .toad-art{background:var(--sun);color:#1B1530}
+.toad-body{min-inline-size:0}
+.toad-body p{margin:0}
+#toadSong{font-size:16px;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-block-size:20px}
+.toad-controls{display:flex;gap:6px;margin-top:6px}
+.round-button{inline-size:38px;block-size:38px;min-height:38px;border-radius:50%;border:2px solid var(--edge);display:grid;place-items:center;background:var(--surface);color:var(--ink);padding:0}
+.round-button.primary-round{background:var(--sun);color:#1B1530}
+.combo-card{padding:12px}
+.combo-card p{margin:0}
+.combo-row{display:flex;align-items:center;gap:6px;margin-top:4px!important;color:var(--flame)}
+.combo-days{font:800 16px/1.2 var(--font-display);color:var(--ink)}
+
+/* Tab bar: five tabs, floating */
+.nav.bottom-nav{position:fixed;inset-inline:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));z-index:10;display:grid;grid-template-columns:repeat(5,1fr);min-block-size:66px;padding:0;border-radius:24px;background:var(--surface);border:2px solid var(--edge);box-shadow:3px 3px 0 var(--edge);-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (min-width:600px){.nav.bottom-nav{inset-inline:auto;left:50%;transform:translateX(-50%);inline-size:min(480px,calc(100vw - 32px))}}
+.bottom-nav button{display:grid;justify-items:center;align-content:center;gap:3px;border:0;background:none;color:var(--ink-soft);font:600 11px/14px var(--font-sans);padding:6px 2px;border-radius:18px;min-height:56px}
+.bottom-nav button[aria-current=page]{color:var(--accent)}
+html[lang=aeb-TN] .bottom-nav button{font:600 12px/16px var(--font-arabic)}
+
+/* Heart: the thought for your partner, above the tab bar */
+#affectionDock{position:fixed;z-index:11;inset-block-end:calc(max(12px,env(safe-area-inset-bottom)) + 82px);inset-inline-end:max(18px,env(safe-area-inset-right));display:grid;justify-items:end;gap:6px;pointer-events:none}
+#affectionButton{inline-size:60px;block-size:60px;min-inline-size:60px;border-radius:50%;border:2px solid var(--edge);box-shadow:3px 3px 0 var(--edge);background:var(--fill);color:var(--on-fill);display:grid;place-items:center;padding:0}
+#affectionButton .icon{fill:currentColor}
+@media (min-width:600px){#affectionDock{inset-inline-end:calc(50% - 240px - 76px)}}
+
+/* Inbox: drops down under the header */
+#receptionPanel.inbox-panel{position:fixed;top:64px;inset-inline:max(12px,env(safe-area-inset-left));z-index:21;max-block-size:calc(100dvh - 190px);overflow-y:auto;border-radius:20px;box-shadow:0 0 0 100vmax var(--scrim),4px 4px 0 var(--edge);margin:0}
+@media (min-width:600px){#receptionPanel.inbox-panel{inset-inline:auto;left:50%;transform:translateX(-50%);inline-size:min(520px,calc(100vw - 32px))}}
+#receptionPanel h2{font-size:18px;margin:0}
+#receptionPanel>.row:first-child{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#receptionClose{min-height:34px;padding:0 12px;border-radius:999px;font-size:12.5px}
+
+/* Talk: notes and questions */
+.segmented{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--edge);border-radius:14px;overflow:hidden;box-shadow:2px 2px 0 var(--edge);margin-block:4px 16px}
+.segmented button{border:0;border-radius:0;background:var(--surface);color:var(--ink);font:800 14px var(--font-display);min-height:44px}
+.segmented button+button{border-inline-start:2px solid var(--edge)}
+.segmented button[aria-selected=true]{background:var(--sun);color:#1B1530}
+.talk-pane{display:block}
+
+/* Us: appearance */
+.us-appearance,.us-account{display:grid;gap:10px;margin-block:12px;padding:14px}
+.us-appearance h3,.us-account h3{margin:0;font-size:18px}
+.us-appearance p,.us-account p{margin:0}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;inline-size:100%;padding:10px;border:2px solid var(--line);border-radius:16px;background:none;text-align:start;color:var(--ink)}
+.opt[aria-checked=true]{border-color:var(--edge);box-shadow:2px 2px 0 var(--edge);background:color-mix(in srgb,var(--sun) 20%,transparent)}
+.opt b{display:block;font:800 14.5px var(--font-display)}
+.opt small{display:block;font:500 12px/1.35 var(--font-sans);color:var(--ink-soft);margin-top:2px}
+.rd{inline-size:20px;block-size:20px;box-sizing:border-box;border-radius:50%;border:2px solid var(--edge);display:grid;place-items:center}
+.opt[aria-checked=true] .rd::after{content:'';inline-size:10px;block-size:10px;border-radius:50%;background:var(--fill)}
+.sw{inline-size:46px;block-size:46px;border-radius:12px;border:2px solid var(--edge);overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.sw i{display:block}
+.sw.auto i:first-child{background:linear-gradient(#9CCBEE 0 45%,#F5F2FF 45%)}.sw.auto i:last-child{background:linear-gradient(#1E2A5E 0 45%,#14102B 45%)}
+.sw.dark i:first-child{background:linear-gradient(#9CCBEE 0 45%,#14102B 45%)}.sw.dark i:last-child{background:linear-gradient(#1E2A5E 0 45%,#14102B 45%)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--edge);border-radius:12px;overflow:hidden;box-shadow:2px 2px 0 var(--edge)}
+.seg button{border:0;border-radius:0;background:var(--surface);color:var(--ink);font:800 13px var(--font-display);min-height:44px;display:flex;align-items:center;justify-content:center;gap:5px;padding:0 4px}
+.seg button+button{border-inline-start:2px solid var(--edge)}
+.seg button[aria-pressed=true]{background:var(--sun);color:#1B1530}
+.us-identity{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#page-us details{margin-block:12px}
+
+/* Discoveries: the culture card and Learn */
+.culture-chip{justify-self:start;margin:0;font:800 10.5px var(--font-sans);letter-spacing:.07em;text-transform:uppercase;border:2px solid var(--edge);border-radius:99px;padding:2px 9px;background:#FDE4E2;color:#8C1C24}
+.culture-chip[data-from=ve]{background:#FFF1A8;color:#1B1530}
+.culture-chip[data-from=both]{background:#E8DDFF;color:#3A2470}
+html[lang=aeb-TN] .culture-chip{text-transform:none;letter-spacing:0;font:600 12px var(--font-arabic)}
+.culture-label{font:700 11px var(--font-sans);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft)}
+.culture-word{font:800 26px/1.1 var(--font-display);color:var(--accent);margin:0}
+.culture-meaning{font:700 21px/1.15 var(--font-hand);color:var(--ink-soft)}
+.culture-meaning::before{content:'= '}
+html[lang=aeb-TN] .culture-meaning{font:600 16px/1.5 var(--font-arabic)}
+.culture-text{font:500 14px/1.45 var(--font-sans)}
+.culture-text.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.culture-count{font:600 12px var(--font-sans);color:var(--ink-soft)}
+dialog.culture-sheet{border:2px solid var(--edge);box-shadow:4px -4px 0 var(--edge)}
+.learn-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:12px}
+.learn-card{display:grid;gap:6px;align-content:start;padding:12px}
+.learn-card p{margin:0}
+.learn-card.hidden-word{border-style:dashed;box-shadow:none;background:color-mix(in srgb,var(--surface) 60%,transparent)}
+.learn-card .culture-word{font-size:20px}
+.learn-card .culture-meaning{font-size:18px}
+#learnCount{display:inline-block}
+
+/* Sheets in the sticker style */
+dialog.sheet{border:2px solid var(--edge);border-bottom:0;background:var(--surface);color:var(--ink)}
+.sheet-head{background:var(--surface)}
+#toast{border:2px solid var(--edge);box-shadow:3px 3px 0 var(--edge);border-radius:999px;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 160px)}
+@media (prefers-reduced-motion:reduce){.garden3d-loading{transition:none}}

@@ -3,17 +3,28 @@
 import {createGarden} from './panorama.js';
 import {flowerArt} from './flowers.js';
 import {s} from './svg.js';
-import {FLOWER_TYPES,STAGES,stageFor,placeFlowers,authorTone,isDrooping,lanterns,visitors,summary} from './model.js';
+import {FLOWER_TYPES,STAGES,stageFor,placeFlowers,authorTone,isDrooping,lanterns,visitors,summary,hockeyWins} from './model.js';
+import {webglAvailable,createGarden3D} from '../garden3d/garden3d.js';
+import {CULTURE,cultureById} from '../garden3d/culture.js';
+import {addDiscovery} from '../garden3d/discoveries.js';
 import {openSheet} from '../design/sheet.js';
 import {icon} from '../design/icons.js';
 import {currentGardenTheme,onGardenTheme,setHarissa,harissaOn} from '../design/theme.js';
 
 const specimen=(type,stage,size=96)=>s('svg',{viewBox:'-40 -84 80 92',width:size,height:size,cls:'specimen','aria-hidden':'true',focusable:'false'},[flowerArt(type,stage)]);
 
-export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,person,navigate,plant,water,remove,notify}){
+export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,person,navigate,plant,water,remove,notify,onToad,onDiscover}){
   let flowerSheet=null,flowerSheetId=null,lastBloomCount=0;
   const garden=createGarden({onFlower:id=>openFlower(id),onSoil:()=>openPlant(),onMoon:()=>openTerminal()});
   $('gardenMount').append(garden.element);
+  // The 3D garden replaces the flat one when this phone can draw it; the flat one comes back if it fails.
+  let g3=null;
+  if(webglAvailable()){
+    garden.element.hidden=true;$('gardenMount').classList.add('is-3d');
+    g3=createGarden3D({t,copy,onFlower:id=>openFlower(id),onMoon:()=>openTerminal(),onSpot:id=>openCulture(id),onToad:()=>onToad?.(),
+      onFail:()=>{g3?.destroy();g3=null;garden.element.hidden=false;$('gardenMount').classList.remove('is-3d');render();}});
+    $('gardenMount').append(g3.element);
+  }
   onGardenTheme(()=>render());
 
   const rel=ms=>{const diff=(ms-Date.now())/1000,abs=Math.abs(diff),f=new Intl.RelativeTimeFormat(locale(),{numeric:'auto'});
@@ -51,6 +62,8 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
 
   function render(){
     const snap=getSnapshot();if(!snap)return;
+    // the 3D garden loads once someone is signed in, not behind the sign-in screen
+    if(g3&&!g3.started){g3.started=true;g3.start();}
     greeting();partnerLine(snap);todayCard(snap);
     const live=snap.flowers.filter(f=>!f.deleted_at),placed=placeFlowers(live),sum=summary(live),theme=currentGardenTheme();
     const finished=(snap.gameEvents??[]);
@@ -59,6 +72,10 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
     garden.update({flowers:placed,tones:tones(snap),droop:new Set(live.filter(f=>isDrooping(f)).map(f=>f.id)),...(()=>{const l=lanterns(snap.rounds,snap.answers);return {lanternsLit:l.lit,pergola:l.pergola};})(),
       visitors:visitors(finished),mode:theme,summary:text,
       items:placed.map(p=>({id:p.flower.id,label:t('garden.flowerItem',{flower:t('flowers.'+p.flower.flower_type),stage:t('garden.stage.'+STAGES[stageFor(p.flower.water)]),count:p.flower.water,name:person(p.flower.planted_by)})}))});
+    if(g3){g3.update({flowers:live,mode:theme});
+      const wins=hockeyWins(snap.gameEvents??[],snap.members),houses={};
+      for(const m of snap.members){const who=authorTone(m.profile_id,snap.members,snap.profiles);if(!houses[who])houses[who]={name:person(m.profile_id),isMe:m.profile_id===me(),count:wins[m.profile_id]??0};}
+      g3.setScores(snap.members.length===2?houses:null);}
     copy($('gardenCount'),()=>t('garden.count',{count:sum.count}));$('gardenEmpty').hidden=!!sum.count;
     if(flowerSheet?.open)paintFlower();
   }
@@ -91,6 +108,21 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
     sheet.body.append(group,el('p',()=>t('garden.limit'),'small'),status,go);
   }
 
+  // Something from Tunisia or Venezuela, found in the 3D garden: a small card with a word to learn.
+  function openCulture(id){
+    const c=cultureById(id);if(!c)return;
+    const {seen,fresh}=addDiscovery(id);onDiscover?.(seen);
+    const sheet=openSheet({title:h=>copy(h,()=>t(`culture.${id}.title`)),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'culture-sheet'});
+    const chip=el('p',()=>t('culture.from.'+c.from),'culture-chip');chip.dataset.from=c.from;
+    const word=el('p',undefined,'culture-word');word.textContent=c.word;if(c.lang)word.lang=c.lang;word.dir='ltr';
+    const label=el('p',()=>t('culture.wordLabel'),'culture-label');
+    const meaning=el('p',()=>t(`culture.${id}.meaning`),'culture-meaning');
+    const text=el('p',()=>t(`culture.${id}.text`),'culture-text clamp');
+    const more=button(()=>text.classList.contains('clamp')?t('culture.more'):t('culture.less'),()=>{text.classList.toggle('clamp');copy(more,()=>text.classList.contains('clamp')?t('culture.more'):t('culture.less'));},'link');
+    const count=el('p',()=>t('culture.found',{count:seen.size,total:CULTURE.length})+(fresh?' · '+t('culture.new'):''),'culture-count');
+    sheet.body.append(chip,label,word,meaning,text,more,count);
+  }
+
   // Hidden terminal (long-press the moon or sun). Local commands only.
   function openTerminal(){
     const sheet=openSheet({title:h=>copy(h,()=>t('terminal.title')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),size:'full',className:'terminal'});
@@ -111,8 +143,8 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
   window.addEventListener('garden:bloom',()=>{lastBloomCount++;garden.bloomAll();});
   // Sign-out: nothing private may stay on screen (flowers, names, notes, the open sheet).
   function clear(){flowerSheet?.close();for(const d of document.querySelectorAll('dialog.sheet[open]'))d.close();for(const d of document.querySelectorAll('dialog.sheet'))d.remove();
-    garden.update({flowers:[],summary:'',items:[],mode:currentGardenTheme()});$('todayCard').replaceChildren();copy($('partnerLine'),'');copy($('gardenTitle'),()=>t('garden.title'));}
-  return {render,clear,openPlant,openFlower,openTerminal,garden};
+    garden.update({flowers:[],summary:'',items:[],mode:currentGardenTheme()});g3?.update({flowers:[]});g3?.setScores(null);g3?.setSong(null);$('todayCard').replaceChildren();copy($('partnerLine'),'');copy($('gardenTitle'),()=>t('garden.title'));}
+  return {render,clear,openPlant,openFlower,openTerminal,openCulture,garden,get garden3d(){return g3;}};
 }
 
 // Small painted night scene for the Today page (replaces the old character art).

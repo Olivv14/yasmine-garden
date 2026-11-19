@@ -81,7 +81,7 @@ test('no ASCII art and no <pre> anywhere in the app shell or garden code',async(
 test('fonts are self-hosted, allowed by the CSP and present after the build',async()=>{
   const build=await readFile(new URL('scripts/build.mjs',root),'utf8');assert.match(build,/font-src 'self'/);
   const css=fontFaceCSS('./fonts/');for(const f of FONT_FILES){assert.ok(css.includes(f.file));await access(new URL('node_modules/@fontsource/'+f.pkg+'/files/'+f.file,root));}
-  for(const fam of ['Fraunces','Inter','JetBrains Mono','Noto Naskh Arabic'])assert.ok(FONT_FILES.some(f=>f.family===fam));
+  for(const fam of ['Bricolage Grotesque','Caveat','Inter','JetBrains Mono','Noto Naskh Arabic'])assert.ok(FONT_FILES.some(f=>f.family===fam));
   assert.ok(!/fonts\.googleapis|fonts\.gstatic/.test(css));
 });
 test('every string key used by the garden, design and games modules exists in all four catalogs',async()=>{

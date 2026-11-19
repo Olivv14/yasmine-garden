@@ -62,3 +62,33 @@ export function summary(flowers,now=Date.now()){
   const today=live.filter(f=>localDay(time(f.created_at))===localDay(now)).sort((a,b)=>time(b.created_at)-time(a.created_at))[0]??null;
   return Object.freeze({count:live.length,thirsty:live.filter(f=>needsWater(f,now)).length,blooming:live.filter(f=>stageFor(f.water)===3).length,plantedToday:today});
 }
+
+// Air hockey wins per person, from finished games. Each finish row is stored by one player with
+// that player's score first; the higher score wins, a draw counts for nobody.
+export function hockeyWins(gameEvents=[],members=[]){
+  const wins=Object.fromEntries(members.map(m=>[m.profile_id,0]));
+  for(const e of gameEvents){
+    if(e.game!=='hockey'||e.kind!=='finish'||e.score_me===e.score_partner)continue;
+    const other=members.find(m=>m.profile_id!==e.profile_id)?.profile_id;
+    const winner=e.score_me>e.score_partner?e.profile_id:other;
+    if(winner&&Object.hasOwn(wins,winner))wins[winner]++;
+  }
+  return wins;
+}
+// Combo: days in a row when both of you did something (a note, an answer, a game turn, a flower,
+// a thought or a mood). Today still counts as pending until both have done something.
+export function combo(snap,now=Date.now()){
+  const ids=(snap?.members??[]).map(m=>m.profile_id);if(ids.length<2)return {days:0,today:false};
+  const days=new Map(ids.map(id=>[id,new Set()]));
+  const mark=(id,at)=>{const d=days.get(id),ms=time(at);if(d&&ms)d.add(localDay(ms));};
+  for(const c of snap.content??[])mark(c.owner_id,c.created_at);
+  for(const a of snap.answers??[])if(a.submitted_at)mark(a.owner_id,a.submitted_at);
+  for(const e of snap.gameEvents??[])mark(e.profile_id,e.created_at);
+  for(const f of snap.flowers??[])mark(f.planted_by,f.created_at);
+  for(const x of snap.thoughts??[])mark(x.sender_id,x.created_at);
+  for(const m of snap.moods??[])mark(m.profile_id,m.updated_at??m.created_at);
+  const both=day=>ids.every(id=>days.get(id).has(day));
+  const today=both(localDay(now));let count=0;
+  for(let i=today?0:1;i<3660&&both(localDay(now-i*DAY));i++)count++;
+  return {days:count,today};
+}
