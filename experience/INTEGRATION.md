@@ -18,7 +18,11 @@ node experience/test.mjs
 | `affection.mjs` | `AFFECTION_PHRASE_KEYS`, `createAffectionController` |
 | `errors.mjs` | `DATABASE_ERROR_KEYS`, `AUTH_ERROR_KEYS`, `errorKey` |
 
-`locales/en.json`, `locales/fr.json`, `locales/aeb-TN.json` have exactly identical flat semantic keys. `catalog.tsv` is the UTF-8, tab-separated build-authoring source (header `key`, `en`, `fr`, `aeb-TN`). It is not fetched at runtime. Keep source and JSON in sync during reviewed edits; tests compare them. Copy existing copyright/license links intact when using the translated recording-credit strings; these strings translate the supplied app metadata, **not an independent music-rights audit**.
+The app has five languages: English (`en`), Spanish (`es`), French (`fr`), Italian (`it`) and Tunisian Derja (`aeb-TN`). `locales/<language>.json` all have exactly identical flat semantic keys. `catalog.tsv` is the UTF-8, tab-separated authoring source; its header is `key` followed by the `LOCALES` keys in order (`en`, `es`, `fr`, `it`, `aeb-TN`). It is not fetched at runtime. Edit `catalog.tsv`, then run `node experience/build-catalogs.mjs`; tests compare the two.
+
+**Adding a language:** add it to `LOCALES` in `i18n.mjs`, add its column to `catalog.tsv` with every key filled, rebuild, import the new JSON in `src/experience.js`, draw its flag in `src/flags.js`, add it to the push copy (`push/catalogs.mjs`, `push/protocol.mjs`, `push/service-worker.js`, then `node scripts/bundle-functions.mjs`) and to the database `profile_preferences_locale_check`. The tests fail until every key exists in every language.
+
+**Nothing hardcoded:** `scripts/hardcoded-text.mjs` (run by `npm test`) fails the build when words a person reads are written straight into `src/` instead of coming from the catalog. People's own words (notes, messages, song titles, names) are data and are never translated. Copy existing copyright/license links intact when using the translated recording-credit strings; these strings translate the supplied app metadata, **not an independent music-rights audit**.
 
 ## Fixed translations, not runtime AI
 
@@ -26,14 +30,16 @@ node experience/test.mjs
 // Example from an entry module at repository root, on browsers supporting JSON
 // import attributes (or bundle the same static JSON at build time).
 import en from './experience/locales/en.json' with { type: 'json' };
+import es from './experience/locales/es.json' with { type: 'json' };
 import fr from './experience/locales/fr.json' with { type: 'json' };
+import it from './experience/locales/it.json' with { type: 'json' };
 import tunisian from './experience/locales/aeb-TN.json' with { type: 'json' };
 import { createTranslator, LANGUAGE_CHOICES, formatNumber } from './experience/i18n.mjs';
 import { applyTheme, THEME_BRIDGE_CSS } from './experience/themes.mjs';
 import { assertQuestionBank, localizedQuestions } from './experience/questions.mjs';
 import { errorKey } from './experience/errors.mjs';
 
-const catalogs = { en, fr, 'aeb-TN': tunisian };
+const catalogs = { en, es, fr, it, 'aeb-TN': tunisian };
 const i18n = createTranslator('aeb-TN', catalogs);
 i18n.applyLanguage(document.documentElement); // lang=aeb-TN, dir=rtl
 // Explicit DOM text contract. This renders literal < and &, not markup.
@@ -59,13 +65,13 @@ const questions = localizedQuestions(i18n.t); // render prompt/theme from catalo
 const message = i18n.t(errorKey(providerError, { domain: 'database' }));
 ```
 
-`createTranslator(locale, catalogs)` validates all three catalogs and snapshots the selected catalog. It returns `{locale, meta, t, setText, escapedText, applyLanguage}`. Missing keys, unsupported languages, non-string/empty values, malformed placeholders, missing/extra parameters and placeholder mismatches throw. **No fallback to English, Spanish or MSA.** Unknown structured provider errors map to a reviewed generic localized error, not untranslated provider prose. Preserve structured diagnostic codes separately without passwords/tokens/private content. Internal programming-error messages intentionally remain developer diagnostics, not user-facing translations.
+`createTranslator(locale, catalogs)` validates all five catalogs and snapshots the selected catalog. It returns `{locale, meta, t, setText, escapedText, applyLanguage}`. Missing keys, unsupported languages, non-string/empty values, malformed placeholders, missing/extra parameters and placeholder mismatches throw. **No fallback to English, Spanish or MSA.** Unknown structured provider errors map to a reviewed generic localized error, not untranslated provider prose. Preserve structured diagnostic codes separately without passwords/tokens/private content. Internal programming-error messages intentionally remain developer diagnostics, not user-facing translations.
 
 The catalog covers current navigation, static screen copy, journal/question composers, recording/media, real sign-in/recovery errors, conflict/quota/recovery/stale/synced statuses, profiles/account settings, themes, notifications and garden/music/backup. This is a copy resource, not a claim that existing hardcoded Spanish DOM strings or provider `.message` output have been replaced. The parent must wire labels, placeholders, button text, document title, alt text, aria-labels, option labels, toasts, confirmations, empty states and dynamic status/error output. New frontend strings added concurrently need the same review/key additions.
 
 ### Questions, language and RTL
 
-- Canonical IDs stay `q1`–`q8`. Their original Spanish text/theme is provenance in `QUESTION_BANK`, matching the original template and actual backend SQL seed. It is never a user-facing fallback. Localized questions use fixed `questions.q1`–`questions.q8`; theme filter values use `everyday`, `memories`, `future`, `care`, not translated labels. Do not send translated prompts as RPC identities or edit the server bank.
+- Canonical IDs stay `q1`–`q8`. Their original Spanish text/theme is provenance in `QUESTION_BANK`, matching the original template and actual backend SQL seed. The Spanish catalog shows exactly these originals; it is never a fallback for other languages. Localized questions use fixed `questions.q1`–`questions.q8`; theme filter values use `everyday`, `memories`, `future`, `care`, not translated labels. Do not send translated prompts as RPC identities or edit the server bank.
 - Tunisian copy uses Arabic script and Tunisian forms, with `lang="aeb-TN"` and `dir="rtl"`. It is **AI-authored draft, not native-quality validated**, and needs a Tunisian speaker to review meaning, register, gender, affection tone, security/error clarity and all eight question translations before release. French/English also need editorial QA. Do not relabel MSA as Tunisian to hide a fallback.
 - `formatNumber` deliberately uses `ar-TN` only for numeric presentation; it does not replace lexical Tunisian text. Compact notation, units and currency are rejected. No automatic date/month/day-name fallback is implemented; use reviewed catalog date words or explicitly numeric dates. Missing Intl numeric support throws.
 - Parent RTL work remains: logical CSS properties, mixed-script names/URLs, form `dir="auto"`, `<bdi>` around separate user-name nodes, keyboard/focus and assistive-technology tests. Semantic `lang` and `dir` are independent. The current bridge contains a URL/email input direction rule; it does not claim to mirror the entire UI.

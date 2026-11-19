@@ -4,7 +4,7 @@
 self.addEventListener('push',event=>{
  event.waitUntil((async()=>{
   let p;try{if(!event.data||event.data.text().length>4096)return;p=event.data.json();}catch{return;}
-  if(!p||p.version!==1||!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(p.event_id)||!['en','fr','aeb-TN'].includes(p.locale)||typeof p.title!=='string'||!p.title||p.title.length>160||typeof p.body!=='string'||!p.body||p.body.length>500||typeof p.preview!=='boolean')return;
+  if(!p||p.version!==1||!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(p.event_id)||!['en','es','fr','it','aeb-TN'].includes(p.locale)||typeof p.title!=='string'||!p.title||p.title.length>160||typeof p.body!=='string'||!p.body||p.body.length>500||typeof p.preview!=='boolean')return;
   const app=new URL(self.registration.scope);
   if(app.origin!==self.location.origin||app.protocol!=='https:')return;
   // Never consume a URL supplied by the network payload.

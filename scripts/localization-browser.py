@@ -10,7 +10,7 @@ from playwright.async_api import async_playwright
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('integrity',ROOT/'scripts/frontend-integrity-regressions.py');mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 OUT=ROOT.parent/'execution/localization-browser';OUT.mkdir(exist_ok=True)
-CAT={lang:json.loads((ROOT/f'experience/locales/{lang}.json').read_text(encoding='utf8')) for lang in ['en','fr','aeb-TN']}
+CAT={lang:json.loads((ROOT/f'experience/locales/{lang}.json').read_text(encoding='utf8')) for lang in ['en','es','fr','it','aeb-TN']}
 THEMES=['dark','light','pastel','barcelona','tunisia','italy','lavender','ocean','forest','rose']
 class Handler(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
@@ -55,7 +55,7 @@ async def main():
     await page.locator('#profileBubble').click()
     check(await page.locator('#profileName').inner_text()=='Yasmine ياسمين','Profile displays resolved profile, no alias')
     check(await page.locator('#profileName').evaluate('(n)=>n.tagName')=='BDI','Mixed-script profile name isolated with bdi')
-    check(await page.locator('#languageSelect option').all_text_contents()==['English','Français','تونسي'],'Full language names, SVG flag instead of regional-letter fallback')
+    check(await page.locator('#languageSelect option').all_text_contents()==['English','Español','Français','Italiano','تونسي'],'Full language names, SVG flag instead of regional-letter fallback')
     # All existing composers remain the same nodes throughout every switch.
     await page.locator('#nav-journal').click();await page.locator('#journal-text').fill('Never translate <script>كلام Yasmine</script>')
     await page.locator('#journal-kind').select_option('poem');await page.locator('#journal-mood').select_option('hopeful')

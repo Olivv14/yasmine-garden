@@ -5,6 +5,7 @@ import {stageFor,placeFlowers,authorTone,isDrooping,needsWater,lanterns,visitors
 import {resolveGardenTheme,themeChoices,isDaytime} from '../src/design/theme.js';
 import {FONT_FILES,fontFaceCSS} from '../src/design/fonts.mjs';
 import en from '../experience/locales/en.json' with {type:'json'};
+import es from '../experience/locales/es.json' with {type:'json'};
 import fr from '../experience/locales/fr.json' with {type:'json'};
 import it from '../experience/locales/it.json' with {type:'json'};
 import aeb from '../experience/locales/aeb-TN.json' with {type:'json'};
@@ -80,7 +81,7 @@ test('no ASCII art and no <pre> anywhere in the app shell or garden code',async(
 test('fonts are self-hosted, allowed by the CSP and present after the build',async()=>{
   const build=await readFile(new URL('scripts/build.mjs',root),'utf8');assert.match(build,/font-src 'self'/);
   const css=fontFaceCSS('./fonts/');for(const f of FONT_FILES){assert.ok(css.includes(f.file));await access(new URL('node_modules/@fontsource/'+f.pkg+'/files/'+f.file,root));}
-  for(const fam of ['Fraunces','Inter','JetBrains Mono','Noto Naskh Arabic'])assert.ok(FONT_FILES.some(f=>f.family===fam));
+  for(const fam of ['Bricolage Grotesque','Caveat','Inter','JetBrains Mono','Noto Naskh Arabic'])assert.ok(FONT_FILES.some(f=>f.family===fam));
   assert.ok(!/fonts\.googleapis|fonts\.gstatic/.test(css));
 });
 test('every string key used by the garden, design and games modules exists in all four catalogs',async()=>{
@@ -92,6 +93,6 @@ test('every string key used by the garden, design and games modules exists in al
   for(const prefix of ['flowers.','garden.stage.'])for(const k of Object.keys(en))if(k.startsWith(prefix))used.add(k);
   for(const k of ['game.td.truth','game.td.dare',...Array.from({length:10},(_,i)=>'game.truth.t'+String(i+1).padStart(2,'0')),...Array.from({length:10},(_,i)=>'game.dare.d'+String(i+1).padStart(2,'0'))])used.add(k);
   for(const type of FLOWER_TYPES)used.add('flowers.'+type);
-  for(const [name,cat] of Object.entries({en,fr,it,aeb}))for(const k of used)assert.ok(Object.hasOwn(cat,k),`${name} is missing ${k}`);
+  for(const [name,cat] of Object.entries({en,es,fr,it,aeb}))for(const k of used)assert.ok(Object.hasOwn(cat,k),`${name} is missing ${k}`);
   assert.ok(used.size>60);
 });

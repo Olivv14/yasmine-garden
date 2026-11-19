@@ -1,5 +1,6 @@
 // Static catalogs only. No translation service, account write or runtime fallback.
 import en from '../experience/locales/en.json' with {type:'json'};
+import es from '../experience/locales/es.json' with {type:'json'};
 import fr from '../experience/locales/fr.json' with {type:'json'};
 import it from '../experience/locales/it.json' with {type:'json'};
 import aeb from '../experience/locales/aeb-TN.json' with {type:'json'};
@@ -9,7 +10,7 @@ import {errorKey,AUTH_ERROR_KEYS} from '../experience/errors.mjs';
 import {flagIcon} from './flags.js';
 import {applyGardenTheme} from './design/theme.js';
 export {THEME_IDS, LANGUAGE_CHOICES};
-const catalogs={en,fr,it,'aeb-TN':aeb};
+const catalogs={en,es,fr,it,'aeb-TN':aeb};
 let translator=createTranslator('en',catalogs), theme='dark';
 const bindings=new Map();
 export const t=(key,params)=>translator.t(key,params);

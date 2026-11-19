@@ -2,7 +2,7 @@
 html{background:var(--bg)}
 body{background:var(--bg);color:var(--ink);font:400 16px/24px var(--font-sans);-webkit-font-smoothing:antialiased}
 html[lang=aeb-TN] body{font-family:var(--font-arabic),var(--font-sans);font-size:17px;line-height:28px}
-h1,h2,h3,.display,.title,.brand{font-family:var(--font-serif);font-weight:600;color:var(--ink);letter-spacing:-.01em}
+h1,h2,h3,.display,.title,.brand{font-family:var(--font-display);font-weight:600;color:var(--ink);letter-spacing:-.01em}
 html[lang=aeb-TN] :is(h1,h2,h3,.display,.title,.brand){font-family:var(--font-arabic)}
 h1,.display{font-size:32px;line-height:38px;margin:0}
 h2,.title{font-size:22px;line-height:28px}
@@ -19,7 +19,7 @@ a{color:var(--accent)}
 button{font:600 15px/20px var(--font-sans);border-radius:var(--radius-md);border:1px solid var(--line);background:var(--surface-2);color:var(--ink);padding:10px 16px;min-height:var(--tap-min);transition:background var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease),transform 120ms var(--ease);display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2)}
 button:hover{background:var(--surface);border-color:var(--accent)}
 button:active{transform:scale(.98)}
-button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+button.primary{background:var(--fill);color:var(--on-fill);border-color:var(--edge)}
 button.primary:hover{background:var(--accent);filter:brightness(1.06)}
 button.quiet{background:transparent;border-color:transparent;color:var(--ink)}
 button.quiet:hover{border-color:var(--line)}

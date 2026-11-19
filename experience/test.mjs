@@ -12,9 +12,10 @@ const rejects=async fn=>{await assert.rejects(fn);checks++;};
 const catalogs=Object.fromEntries(await Promise.all(Object.keys(LOCALES).map(async l=>[l,JSON.parse(await readFile(new URL(`./locales/${l}.json`,import.meta.url),'utf8'))])));
 const catalogInfo=validateCatalogs(catalogs);
 const source=(await readFile(new URL('./catalog.tsv',import.meta.url),'utf8')).trimEnd().split(/\r?\n/);
-check(()=>assert.equal(source.shift(),'key\ten\tfr\tit\taeb-TN'));
-const authored={en:{},fr:{},it:{},'aeb-TN':{}};
-for(const line of source){const [key,...values]=line.split('\t');check(()=>assert.equal(values.length,4));for(const [i,l]of Object.keys(LOCALES).entries()){check(()=>assert.ok(!Object.hasOwn(authored[l],key)));authored[l][key]=values[i];}}
+check(()=>assert.equal(source.shift(),['key',...Object.keys(LOCALES)].join('\t')));
+check(()=>assert.deepEqual(Object.keys(LOCALES),['en','es','fr','it','aeb-TN']));
+const authored=Object.fromEntries(Object.keys(LOCALES).map(l=>[l,{}]));
+for(const line of source){const [key,...values]=line.split('\t');check(()=>assert.equal(values.length,Object.keys(LOCALES).length));for(const [i,l]of Object.keys(LOCALES).entries()){check(()=>assert.ok(!Object.hasOwn(authored[l],key)));authored[l][key]=values[i];}}
 check(()=>assert.deepEqual(catalogs,authored));
 for(const key of [...Object.values(DATABASE_ERROR_KEYS),...Object.values(AUTH_ERROR_KEYS)])check(()=>assert.ok(Object.hasOwn(catalogs.en,key)));
 check(()=>assert.equal(errorKey({code:'40001'}),'errors.conflict'));
@@ -22,7 +23,7 @@ check(()=>assert.equal(errorKey({code:'invalid_credentials'},{domain:'auth'}),'a
 check(()=>assert.equal(errorKey({code:'unknown',message:'Do not display untranslated prose'}),'common.unknownError'));
 check(()=>assert.equal(errorKey({code:'toString'}),'common.unknownError'));
 check(()=>assert.throws(()=>errorKey({}, {domain:'bad'}),/Unknown error domain/));
-check(()=>assert.equal(catalogInfo.locales,4));
+check(()=>assert.equal(catalogInfo.locales,5));
 let placeholderContracts=0;
 for(const key of Object.keys(catalogs.en)) {
   for(const locale of Object.keys(LOCALES)) {
@@ -36,7 +37,7 @@ for(const key of Object.keys(catalogs.en)) {
 }
 check(()=>assert.throws(()=>validateCatalogs({...catalogs,fr:{...catalogs.fr,extra:'x'}}),/key mismatch/));
 check(()=>assert.throws(()=>validateCatalogs({...catalogs,fr:{...catalogs.fr,'affection.phrase01':'No sender'}}),/Placeholder mismatch/));
-check(()=>assert.throws(()=>createTranslator('es',catalogs),/Unsupported/));
+check(()=>assert.throws(()=>createTranslator('de',catalogs),/Unsupported/));
 const en=createTranslator('en',catalogs),tn=createTranslator('aeb-TN',catalogs);
 check(()=>assert.throws(()=>en.t('does.not.exist'),/Missing translation/));
 check(()=>assert.throws(()=>en.t('toString'),/Missing translation/));
@@ -56,8 +57,8 @@ check(()=>assert.equal(tn.meta.numberLocale,'ar-TN'));
 check(()=>assert.equal(formatNumber('aeb-TN',1234.5),new Intl.NumberFormat('ar-TN').format(1234.5)));
 check(()=>assert.throws(()=>formatNumber('aeb-TN',1,{style:'unit',unit:'meter'}),/Numeric-only/));
 check(()=>assert.throws(()=>formatNumber('aeb-TN',1000,{notation:'compact'}),/Numeric-only/));
-check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.flag),['🇬🇧','🇫🇷','🇮🇹','🇹🇳']));
-check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.accessibleName),['English','Français','Italiano','تونسي']));
+check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.flag),['🇬🇧','🇪🇸','🇫🇷','🇮🇹','🇹🇳']));
+check(()=>assert.deepEqual(LANGUAGE_CHOICES.map(x=>x.accessibleName),['English','Español','Français','Italiano','تونسي']));
 check(()=>assert.ok(!LANGUAGE_CHOICES.some(x=>/^(EN|FR|ES|IT|TN)$/.test(x.label))));
 check(()=>assert.deepEqual(QUESTION_IDS,['q1','q2','q3','q4','q5','q6','q7','q8']));
 for(const locale of Object.keys(LOCALES)) {
@@ -68,7 +69,8 @@ for(const locale of Object.keys(LOCALES)) {
   for(const key of AFFECTION_PHRASE_KEYS)check(()=>assert.deepEqual(placeholders(catalogs[locale][key]),['sender']));
   check(()=>assert.equal(new Set(AFFECTION_PHRASE_KEYS.map(k=>catalogs[locale][k])).size,10));
   check(()=>assert.equal(Object.keys(catalogs[locale]).filter(k=>/^affection\.phrase\d+$/.test(k)).length,10));
-  for(const q of QUESTION_BANK)check(()=>assert.notEqual(t(q.promptKey),q.sourcePrompt));
+  // The original questions were written in Spanish: Spanish shows them exactly, every other language translates them.
+  for(const q of QUESTION_BANK)check(()=>locale==='es'?assert.equal(t(q.promptKey),q.sourcePrompt):assert.notEqual(t(q.promptKey),q.sourcePrompt));
 }
 check(()=>assert.ok(assertQuestionBank(QUESTION_BANK.map(q=>({id:q.id,prompt:q.sourcePrompt,theme:q.sourceTheme})).reverse())));
 check(()=>assert.throws(()=>assertQuestionBank(QUESTION_BANK.map(q=>({id:q.id,prompt:'changed',theme:q.sourceTheme}))),/source mismatch/));
@@ -109,6 +111,7 @@ const partial=createAffectionController({idFactory:()=>`partial`,onIntent:()=>{}
 check(()=>assert.deepEqual(Object.keys(MOOD_ANIMALS),['none','calm','hopeful','nostalgic','hug','difficult']));
 const prefs={version:1,language:'aeb-TN',theme:'tunisia',displayName:'Test name',nickname:'',photoRef:null,moodAnimal:'calm'};
 check(()=>assert.equal(validatePreferences(prefs).language,'aeb-TN'));
+check(()=>assert.equal(validatePreferences({...prefs,language:'es'}).language,'es'));
 check(()=>assert.throws(()=>validatePreferences({...prefs,photoRef:'https://bad.invalid/photo'}),/photo/));
 check(()=>assert.throws(()=>validatePreferences({...prefs,owner_id:'invented'}),/Unknown/));
 check(()=>assert.throws(()=>validatePreferences({...prefs,displayName:''}),/displayName/));

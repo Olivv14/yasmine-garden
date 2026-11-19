@@ -1,9 +1,11 @@
 // Self-hosted fonts (the CSP blocks remote fonts). Build copies these woff2 files from @fontsource.
 export const FONT_FILES=Object.freeze([
-  {family:'Fraunces',pkg:'fraunces',subset:'latin',weight:400},
-  {family:'Fraunces',pkg:'fraunces',subset:'latin',weight:600},
   {family:'Inter',pkg:'inter',subset:'latin',weight:400},
   {family:'Inter',pkg:'inter',subset:'latin',weight:600},
+  {family:'Bricolage Grotesque',pkg:'bricolage-grotesque',subset:'latin',weight:700},
+  {family:'Bricolage Grotesque',pkg:'bricolage-grotesque',subset:'latin',weight:800},
+  {family:'Caveat',pkg:'caveat',subset:'latin',weight:700},
+  {family:'Inter',pkg:'inter',subset:'latin',weight:700},
   {family:'JetBrains Mono',pkg:'jetbrains-mono',subset:'latin',weight:400},
   {family:'Noto Naskh Arabic',pkg:'noto-naskh-arabic',subset:'arabic',weight:400},
   {family:'Noto Naskh Arabic',pkg:'noto-naskh-arabic',subset:'arabic',weight:600},
