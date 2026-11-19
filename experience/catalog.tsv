@@ -802,3 +802,42 @@ gate.log.yasmine.2	Warming up the harissa…	Calentando la harissa…	Je réchau
 gate.log.yasmine.3	Queueing your K-pop…	Poniendo tu K-pop en la cola…	Je mets ta K-pop dans la file…	Metto in coda il tuo K-pop…	نحضّر الكي-بوب متاعك…
 gate.log.yasmine.4	Lamine Yamal is warming up…	Lamine Yamal está calentando…	Lamine Yamal s’échauffe…	Lamine Yamal si sta scaldando…	لامين يامال قاعد يسخّن…
 gate.log.yasmine.5	Ready, mi amor.	Lista, mi amor.	Prête, mi amor.	Pronta, mi amor.	حاضرة، mi amor.
+push.kind.message	{{sender}} sent you a message	{{sender}} te mandó un mensaje	{{sender}} vous a envoyé un message	{{sender}} ti ha mandato un messaggio	{{sender}} بعثلك ميساج
+push.kind.dedication	{{sender}} dedicated a song to you	{{sender}} te dedicó una canción	{{sender}} vous a dédié une chanson	{{sender}} ti ha dedicato una canzone	{{sender}} هداك أغنية
+push.kind.songAdded	{{sender}} added a song	{{sender}} agregó una canción	{{sender}} a ajouté une chanson	{{sender}} ha aggiunto una canzone	{{sender}} زاد أغنية
+push.kind.gameInvite	{{sender}} wants to play	{{sender}} quiere jugar	{{sender}} veut jouer	{{sender}} vuole giocare	{{sender}} يحب يلعب
+push.kind.gameTurn	Your turn against {{sender}}	Te toca contra {{sender}}	À vous de jouer contre {{sender}}	Tocca a te contro {{sender}}	دورك ضد {{sender}}
+push.kind.teachCard	{{sender}} taught you a word	{{sender}} te enseñó una palabra	{{sender}} vous a appris un mot	{{sender}} ti ha insegnato una parola	{{sender}} علّمك كلمة
+talk.chat	Chat	Chat	Discussion	Chat	دردشة
+talk.placeholder	Write a message…	Escribe un mensaje…	Écrivez un message…	Scrivi un messaggio…	اكتب ميساج…
+talk.send	Send	Enviar	Envoyer	Invia	ابعث
+talk.photo	Send a photo	Enviar una foto	Envoyer une photo	Invia una foto	ابعث تصويرة
+talk.voice	Record a voice note	Grabar una nota de voz	Enregistrer un message vocal	Registra una nota vocale	سجّل فوكال
+talk.stopVoice	Stop and send	Detener y enviar	Arrêter et envoyer	Ferma e invia	وقّف وابعث
+talk.recording	Recording… {{seconds}} s	Grabando… {{seconds}} s	Enregistrement… {{seconds}} s	Registrazione… {{seconds}} s	قاعد نسجّل… {{seconds}} ث
+talk.typing	{{name}} is typing…	{{name}} está escribiendo…	{{name}} écrit…	{{name}} sta scrivendo…	{{name}} قاعد يكتب…
+talk.online	{{name}} is here	{{name}} está aquí	{{name}} est là	{{name}} è qui	{{name}} هوني
+talk.seen	Seen	Visto	Vu	Visto	شافو
+talk.edited	edited	editado	modifié	modificato	مبدّل
+talk.deleted	Message deleted	Mensaje eliminado	Message supprimé	Messaggio eliminato	ميساج مفسوخ
+talk.reply	Reply	Responder	Répondre	Rispondi	جاوب
+talk.edit	Edit	Editar	Modifier	Modifica	بدّل
+talk.delete	Delete	Eliminar	Supprimer	Elimina	فسّخ
+talk.deleteConfirm	Delete this message for both of you?	¿Eliminar este mensaje para los dos?	Supprimer ce message pour vous deux ?	Eliminare questo messaggio per tutti e due?	تفسّخ الميساج هذا ليكم إنتوما الزوز؟
+talk.react	React	Reaccionar	Réagir	Reagisci	تفاعل
+talk.replyingTo	Replying to {{name}}	Respondiendo a {{name}}	Réponse à {{name}}	Rispondi a {{name}}	تجاوب على {{name}}
+talk.cancelReply	Cancel reply	Cancelar respuesta	Annuler la réponse	Annulla risposta	بطّل الجواب
+talk.earlier	Earlier messages	Mensajes anteriores	Messages précédents	Messaggi precedenti	ميساجات قبل
+talk.empty	Say hello. Your messages appear here for both of you.	Saluda. Sus mensajes aparecen aquí para los dos.	Dites bonjour. Vos messages apparaissent ici pour vous deux.	Saluta. I vostri messaggi compaiono qui per tutti e due.	قول عسلامة. الميساجات متاعكم تظهر هوني ليكم الزوز.
+talk.notSent	Not sent · tap to try again	No enviado · toca para reintentar	Non envoyé · touchez pour réessayer	Non inviato · tocca per riprovare	ما تبعثش · انقر باش تعاود
+talk.sending	Sending…	Enviando…	Envoi…	Invio…	قاعد يتبعث…
+talk.uploading	Uploading…	Subiendo…	Envoi du fichier…	Caricamento…	قاعد يطلع…
+talk.photoAlt	Photo from {{name}}	Foto de {{name}}	Photo de {{name}}	Foto di {{name}}	تصويرة من {{name}}
+talk.voiceFrom	Voice note from {{name}}	Nota de voz de {{name}}	Message vocal de {{name}}	Nota vocale di {{name}}	فوكال من {{name}}
+talk.gameInvite	{{name}} wants to play air hockey	{{name}} quiere jugar hockey de mesa	{{name}} veut jouer au air hockey	{{name}} vuole giocare ad air hockey	{{name}} يحب يلعب هوكي الطاولة
+talk.playNow	Play	Jugar	Jouer	Gioca	نلعبو
+talk.needsUpdate	Chat needs the latest update on the server.	El chat necesita la última actualización en el servidor.	La discussion a besoin de la dernière mise à jour du serveur.	La chat richiede l’ultimo aggiornamento sul server.	الدردشة تستنّى آخر تحديث في السيرفر.
+talk.inviteGame	Invite to play air hockey	Invitar a jugar hockey de mesa	Inviter à jouer au air hockey	Invita a giocare ad air hockey	استدعي باش تلعبو هوكي الطاولة
+talk.shareSong	Share a song	Compartir una canción	Partager une chanson	Condividi una canzone	شارك أغنية
+talk.more	More	Más	Plus	Altro	أكثر
+talk.unread	{{count}} new messages	{{count}} mensajes nuevos	{{count}} nouveaux messages	{{count}} nuovi messaggi	{{count}} ميساجات جداد

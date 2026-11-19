@@ -9,15 +9,20 @@ import {combo} from './garden/model.js';
 
 const TIME_ICON={day:'sun',dusk:'sunset',night:'moon'};
 
-export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,home,player,music,markRead}){
+export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,home,player,music,markRead,chat}){
   // ---- Talk: notes and questions, one tab with two panes
-  let pane='journal';
+  // ---- Talk: the chat first, then notes and questions
+  const PANES=[['talkChat','chat'],['talkNotes','journal'],['talkQuestions','questions']];
+  let pane='chat',talkOpen=false;
   function talkPane(which){
-    pane=which==='questions'?'questions':'journal';
-    for(const [tab,id] of [['talkNotes','journal'],['talkQuestions','questions']]){const on=id===pane;$(tab).setAttribute('aria-selected',String(on));$(tab).tabIndex=on?0:-1;$('page-'+id).hidden=!on;}
+    pane=PANES.some(([,id])=>id===which)?which:'chat';
+    for(const [tab,id] of PANES){const on=id===pane;$(tab).setAttribute('aria-selected',String(on));$(tab).tabIndex=on?0:-1;$('page-'+id).hidden=!on;}
+    chat?.shown(talkOpen&&pane==='chat');
   }
-  $('talkNotes').onclick=()=>talkPane('journal');$('talkQuestions').onclick=()=>talkPane('questions');
-  for(const id of ['talkNotes','talkQuestions'])$(id).onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=pane==='journal'?'questions':'journal';talkPane(next);$(next==='journal'?'talkNotes':'talkQuestions').focus();};
+  for(const [tab,id] of PANES){$(tab).onclick=()=>talkPane(id);
+    $(tab).onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();
+      const i=PANES.findIndex(([,x])=>x===pane),n=e.key==='Home'?0:e.key==='End'?PANES.length-1:(i+(e.key==='ArrowRight'?1:PANES.length-1))%PANES.length;
+      talkPane(PANES[n][1]);$(PANES[n][0]).focus();};}
 
   // ---- Appearance: follow the time of day, or always dark (this phone only); the garden's own time
   const garden3d=()=>home.garden3d;
@@ -102,9 +107,11 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
     }
   }
 
-  function tabChanged(tab){if(tab==='learn')renderLearn();if(tab==='garden')paintTime();}
-  function render(snap=getSnapshot()){paintBell(snap);paintCombo(snap);paintToad();music.render();}
-  function clear(){$('bellCount').hidden=true;copy($('receptionToggle'),()=>t('notifications.title'),'aria-label');copy($('comboDays'),'');copy($('comboHint'),'');$('toadSong').textContent='';$('toadLine').textContent='';$('songInbox')?.replaceChildren();$('learnList').replaceChildren();talkPane('journal');}
-  talkPane('journal');paintToad();
-  return {talkPane,render,clear,openMusic,tabChanged,renderLearn,paintTime,paintToad};
+  function tabChanged(tab){talkOpen=tab==='talk';chat?.shown(talkOpen&&pane==='chat');if(tab==='learn')renderLearn();if(tab==='garden')paintTime();}
+  // the Talk tab shows how many messages wait for you
+  function unread(count){const b=$('talkBadge');b.hidden=!count;b.textContent=count>9?'9+':String(count||'');copy($('nav-talk'),()=>count?t('talk.unread',{count}):t('nav.talk'),'aria-label');}
+  function render(snap=getSnapshot()){paintBell(snap);paintCombo(snap);paintToad();music.render();chat?.start();}
+  function clear(){$('bellCount').hidden=true;copy($('receptionToggle'),()=>t('notifications.title'),'aria-label');copy($('comboDays'),'');copy($('comboHint'),'');$('toadSong').textContent='';$('toadLine').textContent='';$('songInbox')?.replaceChildren();$('learnList').replaceChildren();chat?.clear();unread(0);talkPane('chat');}
+  talkPane('chat');paintToad();
+  return {talkPane,render,clear,openMusic,tabChanged,renderLearn,paintTime,paintToad,unread};
 }

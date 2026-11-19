@@ -196,7 +196,9 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
       if(!name.value.trim()){name.focus();return;}
       e.currentTarget.disabled=true;
       try{await rpc('add_playlist_item',{p_id:id,p_playlist_id:list.id,p_source:found.kind==='spotify'?'spotify':'link',p_ref:found.kind==='spotify'?found.uri:found.url,
-        p_title:name.value.trim(),p_artist:artist.value.trim()||null,p_cover_url:cover,p_duration_ms:null,p_note:note.value.trim()||null});s.close();}
+        p_title:name.value.trim(),p_artist:artist.value.trim()||null,p_cover_url:cover,p_duration_ms:null,p_note:note.value.trim()||null});s.close();
+        // a push for the partner when it went to a shared playlist (no bell row, no push otherwise)
+        if(list.visibility==='shared')getClient()?.functions.invoke('dispatch-notification',{body:{event_id:id}}).catch(()=>{});}
       catch{}finally{if(e.currentTarget?.isConnected)e.currentTarget.disabled=false;}},'primary');
     s.body.append(field('music.linkLabel',link),el('p',()=>t('music.linkHint'),'small'),status,field('music.songTitle',name),field('music.songArtist',artist),field('music.noteLabel',note));
     if(list.kind==='dedicated')s.body.append(el('p',()=>t('music.dedicateHint'),'small'));
