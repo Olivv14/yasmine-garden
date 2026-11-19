@@ -785,3 +785,6 @@ inbox.dedication	{{name}} dedicated a song to you: {{title}}	{{name}} te dedicó
 inbox.songAdded	{{name}} added a song: {{title}}	{{name}} agregó una canción: {{title}}	{{name}} a ajouté une chanson : {{title}}	{{name}} ha aggiunto una canzone: {{title}}	{{name}} زاد أغنية: {{title}}
 inbox.markAllRead	Mark all read	Marcar todo como leído	Tout marquer comme lu	Segna tutto come letto	علّم الكل مقري
 inbox.songs	Songs for you	Canciones para ti	Des chansons pour vous	Canzoni per te	غناوي ليك
+together.listening	{{name}} is listening: {{title}}	{{name}} está escuchando: {{title}}	{{name}} écoute : {{title}}	{{name}} sta ascoltando: {{title}}	{{name}} يسمع في: {{title}}
+together.join	Listen together	Escuchar juntos	Écouter ensemble	Ascolta insieme	اسمعو مع بعضكم
+together.joined	Listening together	Escuchando juntos	Vous écoutez ensemble	State ascoltando insieme	قاعدين تسمعو مع بعضكم

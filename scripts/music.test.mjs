@@ -50,3 +50,11 @@ test('lyrics lookup: exact match first, then the closest search result by length
   assert.equal(lyricsKey({title:'Bésame  Mucho',artist:'BOCELLI'}),'bocelli|besame mucho|');
   await assert.rejects(fetchLyrics({title:'Err',artist:'Or'},fake([[/api\/get/,json({},500)]])));
 });
+import {partnerPosition,needsSeek,DRIFT_S} from '../src/music/together.js';
+test('listen together: where the partner is now, and when to correct drift',()=>{
+  const at=1_000_000;
+  assert.equal(partnerPosition({item:{id:'x'},playing:true,position:10,at},at+2500),12.5);
+  assert.equal(partnerPosition({item:{id:'x'},playing:false,position:10,at},at+60000),10,'paused stays put');
+  assert.equal(partnerPosition(null),0);
+  assert.equal(DRIFT_S,1.5);assert.ok(!needsSeek(10,11.4));assert.ok(needsSeek(10,11.6));assert.ok(needsSeek(20,18));
+});

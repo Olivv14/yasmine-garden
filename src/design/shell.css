@@ -65,9 +65,9 @@ html[data-garden-theme=day] .garden3d{background:#9CCBEE}
 .pin i{display:block;inline-size:2px;block-size:10px;background:rgba(244,240,255,.75)}
 .pin.score.oliver{justify-items:start}.pin.score.oliver i{margin-inline-start:9px}
 html[data-garden-theme=day] .pin.score b{box-shadow:2px 2px 0 #1B1530}html[data-garden-theme=day] .pin i{background:#1B1530}
-.pin.song{display:grid;justify-items:center}
-.pin.song b{border-radius:99px;padding:4px 9px;font:800 11px var(--font-sans);white-space:nowrap;background:#F4F0FF;color:#14102B;border:2px solid #0B0816;max-inline-size:180px;overflow:hidden;text-overflow:ellipsis}
-.pin.song i{background:#F4F0FF}
+.pin.toad-song{display:grid;justify-items:center}
+.pin.toad-song b{border-radius:99px;padding:4px 9px;font:800 11px var(--font-sans);white-space:nowrap;background:#F4F0FF;color:#14102B;border:2px solid #0B0816;max-inline-size:180px;overflow:hidden;text-overflow:ellipsis}
+.pin.toad-song i{background:#F4F0FF}
 .pin.landmark{font:700 20px/1 var(--font-hand);white-space:nowrap;rotate:-6deg;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.65)}
 html[data-garden-theme=day] .pin.landmark.falls{color:#1B1530;background:rgba(255,255,255,.82);padding:1px 7px;border-radius:8px;text-shadow:none}
 html[lang=aeb-TN] .pin.landmark{font:600 15px/1.2 var(--font-arabic);rotate:0deg}

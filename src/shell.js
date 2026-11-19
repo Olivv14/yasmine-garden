@@ -61,11 +61,13 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
     }
   }
 
+  const partnerName=()=>{const snap=getSnapshot(),id=snap?.members?.find(m=>m.profile_id!==me())?.profile_id;return id?person(id):'';};
   // ---- The toad's card on Home drives the music player; the toad in the garden plays along
   const playIcon=()=>$('toadPlay').replaceChildren(icon(player.paused?'playTrack':'pause',18));
   function paintToad(){
     const playing=music.isPlaying()||(!player.paused&&!player.ended),title=music.nowTitle()||$('trackTitle')?.textContent?.trim()||'';
-    $('toadLine').textContent=music.currentLine();
+    const partnerSong=!playing?music.partnerListening():null;
+    if(partnerSong)copy($('toadLine'),()=>t('together.listening',{name:partnerName(),title:partnerSong.title}));else{copy($('toadLine'),'');$('toadLine').textContent=music.currentLine();}
     copy($('toadState'),()=>t(playing?'toad.playing':'toad.resting'));
     $('toadSong').textContent=title;
     copy($('toadPlay'),()=>t(playing?'music.pause':'music.play'),'aria-label');playIcon();

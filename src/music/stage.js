@@ -5,12 +5,14 @@ import {openSheet} from '../design/sheet.js';
 import {icon} from '../design/icons.js';
 import {parseSongLink,lookupLink,spotifyOpenUrl,isCoverUrl} from './links.js';
 import {fetchLyrics,lineAt,lyricsKey} from './lyrics.js';
+import {createTogether,partnerPosition,needsSeek} from './together.js';
 
 const uid=()=>crypto.randomUUID();
 const DEFAULT_LISTEN_MS=4*60*1000;
 
-export function createMusic({$,el,button,t,copy,getSnapshot,me,person,rpc,notify,playUpload,player,onNowPlaying}){
-  let sheet=null,selected=null,now=null,listen=null,lyrics=null,lyricsFor='',tick=null,ensuring=null;
+export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,rpc,notify,playUpload,player,onNowPlaying}){
+  let sheet=null,selected=null,now=null,listen=null,lyrics=null,lyricsFor='',tick=null,ensuring=null,following=false;
+  const together=createTogether({getClient,getPairId:()=>getSnapshot()?.pairId,me,onChange:()=>{paintTogether();onNowPlaying?.();}});
   const snap=()=>getSnapshot();
   const available=()=>Array.isArray(snap()?.playlists);
   const lists=()=>(snap()?.playlists??[]).filter(p=>!p.deleted_at).sort((a,b)=>(a.kind==='dedicated'?-1:b.kind==='dedicated'?1:0)||a.created_at.localeCompare(b.created_at));
@@ -32,10 +34,24 @@ export function createMusic({$,el,button,t,copy,getSnapshot,me,person,rpc,notify
     now=item;listen=null;
     if(item.source==='upload'){playUpload(item.ref);}
     else{const url=spotifyOpenUrl(item);if(url)window.open(url,'_blank','noopener,noreferrer');listen={started:Date.now(),length:item.duration_ms||DEFAULT_LISTEN_MS};}
+    if(item.source!=='upload')together.share({item,playing:true,position:0});
     loadLyrics(item);startTick();onNowPlaying?.();paint();
   }
-  function stopListening(){listen=null;onNowPlaying?.();paint();}
-  function startTick(){clearInterval(tick);tick=setInterval(()=>{if(!isPlaying()&&listen){listen=null;onNowPlaying?.();}paintLyric();if(!isPlaying()&&!sheet)clearInterval(tick);},400);}
+  // Join your partner: the same song from the same moment (your own uploads stay in sync to 1.5 s;
+  // a Spotify song opens in Spotify at the start, so it is close but not exact).
+  function join(){
+    const p=together.partner();if(!p)return;
+    const item=(getSnapshot()?.playlistItems??[]).find(i=>i.id===p.item.id)??p.item;
+    following=true;play(item);
+    if(item.source==='upload'){const seek=()=>{player.currentTime=partnerPosition(p);};if(player.readyState>=1)seek();else player.addEventListener('loadedmetadata',seek,{once:true});}
+    else if(listen)listen.started=Date.now()-partnerPosition(p)*1000;
+  }
+  function stopListening(){listen=null;following=false;together.share({playing:false});onNowPlaying?.();paint();}
+  function startTick(){clearInterval(tick);tick=setInterval(()=>{if(!isPlaying()&&listen){listen=null;together.share({playing:false});onNowPlaying?.();}
+    const p=together.partner();
+    if(following&&now?.source==='upload'&&p?.playing&&p.item.id===now.id&&!player.paused){const target=partnerPosition(p);if(needsSeek(player.currentTime,target))player.currentTime=target;}
+    paintLyric();if(!isPlaying()&&!sheet)clearInterval(tick);},400);}
+  for(const ev of ['play','pause','seeked','ended'])player.addEventListener(ev,()=>{if(now?.source==='upload')together.share({item:now,playing:!player.paused&&!player.ended,position:player.currentTime||0});});
   player.addEventListener('play',()=>{if(now?.source!=='upload'){now=null;lyrics=null;}onNowPlaying?.();});
 
   async function loadLyrics(item){
@@ -70,9 +86,20 @@ export function createMusic({$,el,button,t,copy,getSnapshot,me,person,rpc,notify
     sheet=openSheet({title:h=>copy(h,()=>t('garden.musicDoor')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),size:'full',className:'music-sheet',onClose:()=>{sheet=null;}});
     ensureDedicated();paint();startTick();
   }
+  function togetherCard(){
+    const box=el('div',undefined,'together-slot');const p=together.partner();
+    if(!p?.playing)return box;
+    const card=el('section',undefined,'card together-card');
+    card.append(el('p',()=>t('together.listening',{name:person(p.profile_id),title:p.item.title}),'title'));
+    const inSync=following&&now?.id===p.item.id&&isPlaying();
+    card.append(inSync?el('p',()=>t('together.joined'),'small'):button(()=>t('together.join'),()=>join(),'primary'));
+    box.append(card);return box;
+  }
+  function paintTogether(){const slot=sheet?.body.querySelector('.together-slot');if(slot)slot.replaceWith(togetherCard());}
   function paint(){
+    together.connect();
     if(!sheet)return;const body=sheet.body;body.replaceChildren();
-    body.append(nowCard());
+    body.append(togetherCard(),nowCard());
     if(!available()){body.append(el('p',()=>t('music.needsUpdate'),'small'));return;}
     const all=lists();if(!all.some(p=>p.id===selected))selected=all[0]?.id??null;
     const chips=el('div',undefined,'chip-row');chips.setAttribute('role','tablist');copy(chips,()=>t('music.playlists'),'aria-label');
@@ -186,5 +213,8 @@ export function createMusic({$,el,button,t,copy,getSnapshot,me,person,rpc,notify
     setTimeout(()=>link.focus(),50);
   }
 
-  return {open,render:paint,isPlaying,currentLine,nowTitle:()=>isPlaying()?now?.title??'':'',playing:()=>now,clear(){now=null;listen=null;lyrics=null;lyricsFor='';selected=null;sheet?.close();}};
+  // For the toad card on Home: what your partner is listening to, if anything.
+  const partnerListening=()=>{const p=together.partner();return p?.playing?{title:p.item.title}:null;};
+  return {open,render:paint,isPlaying,currentLine,partnerListening,nowTitle:()=>isPlaying()?now?.title??'':'',playing:()=>now,
+    clear(){together.disconnect();now=null;listen=null;following=false;lyrics=null;lyricsFor='';selected=null;sheet?.close();}};
 }

@@ -784,5 +784,8 @@
   "inbox.dedication": "{{name}} te dedicó una canción: {{title}}",
   "inbox.songAdded": "{{name}} agregó una canción: {{title}}",
   "inbox.markAllRead": "Marcar todo como leído",
-  "inbox.songs": "Canciones para ti"
+  "inbox.songs": "Canciones para ti",
+  "together.listening": "{{name}} está escuchando: {{title}}",
+  "together.join": "Escuchar juntos",
+  "together.joined": "Escuchando juntos"
 }

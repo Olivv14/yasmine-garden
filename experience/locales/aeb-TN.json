@@ -784,5 +784,8 @@
   "inbox.dedication": "{{name}} هداك أغنية: {{title}}",
   "inbox.songAdded": "{{name}} زاد أغنية: {{title}}",
   "inbox.markAllRead": "علّم الكل مقري",
-  "inbox.songs": "غناوي ليك"
+  "inbox.songs": "غناوي ليك",
+  "together.listening": "{{name}} يسمع في: {{title}}",
+  "together.join": "اسمعو مع بعضكم",
+  "together.joined": "قاعدين تسمعو مع بعضكم"
 }
