@@ -742,3 +742,49 @@ talk.title	Talk	Hablar	Parler	Parla	نحكيو
 us.eyebrow	Your corner and your settings	Tu rincón y tu configuración	Votre coin et vos réglages	Il tuo angolo e le tue impostazioni	ركنك وإعداداتك
 us.title	Us	Nosotros	Nous	Noi	إحنا
 us.files	Files and copies	Archivos y copias	Fichiers et copies	File e copie	الفيشيات والنسخ
+music.dedicatedTitle	Our dedicated songs	Nuestras canciones dedicadas	Nos chansons dédiées	Le nostre canzoni dedicate	الغناوي اللي هديناهم لبعضنا
+music.needsUpdate	Playlists need the latest music update on the server. Your uploaded songs still play.	Las listas necesitan la última actualización de música en el servidor. Tus canciones subidas siguen sonando.	Les playlists ont besoin de la dernière mise à jour musique sur le serveur. Vos chansons importées se lisent toujours.	Le playlist richiedono l’ultimo aggiornamento musicale sul server. Le canzoni caricate si possono ancora ascoltare.	القوائم تستنّى آخر تحديث متاع الموسيقى في السيرفر. الغناوي اللي طلّعتهم يخدمو عادي.
+music.playlists	Playlists	Listas	Playlists	Playlist	القوائم
+music.newPlaylist	New playlist	Nueva lista	Nouvelle playlist	Nuova playlist	قائمة جديدة
+music.renamePlaylist	Rename	Cambiar nombre	Renommer	Rinomina	بدّل الإسم
+music.deletePlaylist	Delete playlist	Eliminar lista	Supprimer la playlist	Elimina playlist	فسّخ القائمة
+music.deletePlaylistConfirm	Delete this playlist and take its songs out?	¿Eliminar esta lista y quitar sus canciones?	Supprimer cette playlist et retirer ses chansons ?	Eliminare questa playlist e togliere le sue canzoni?	تفسّخ القائمة هاذي وتنحّي الغناوي اللي فيها؟
+music.dedicateHint	Add a note and the song becomes a dedication: your partner is told.	Agrega una nota y la canción se vuelve una dedicatoria: tu pareja recibe un aviso.	Ajoutez un mot et la chanson devient une dédicace : votre partenaire est prévenu·e.	Aggiungi una nota e la canzone diventa una dedica: il tuo partner riceve un avviso.	زيد كلمة والأغنية تولّي إهداء: شريكك يوصلو تنبيه.
+music.playlistShared	Shared with your partner	Compartida con tu pareja	Partagée avec votre partenaire	Condivisa con il tuo partner	مشاركة مع شريكك
+music.playlistPrivate	Only you	Solo tú	Vous seul·e	Solo tu	إنت برك
+music.playlistName	Playlist name	Nombre de la lista	Nom de la playlist	Nome della playlist	إسم القائمة
+music.createPlaylist	Create playlist	Crear lista	Créer la playlist	Crea playlist	اعمل القائمة
+music.emptyPlaylist	No songs yet. Add the first one.	Todavía no hay canciones. Agrega la primera.	Pas encore de chansons. Ajoutez la première.	Ancora nessuna canzone. Aggiungi la prima.	حتى أغنية مازالت. زيد الأولى.
+music.addSong	Add a song	Agregar una canción	Ajouter une chanson	Aggiungi una canzone	زيد أغنية
+music.openSpotify	Play in Spotify	Escuchar en Spotify	Écouter sur Spotify	Ascolta su Spotify	اسمع في سبوتيفاي
+music.stopFollowing	Stop the lyrics	Detener la letra	Arrêter les paroles	Ferma il testo	وقّف الكلمات
+music.lyricsLoading	Finding the lyrics…	Buscando la letra…	Recherche des paroles…	Cerco il testo…	قاعد نلوّج على الكلمات…
+music.lyricsNone	No lyrics found for this song.	No se encontró la letra de esta canción.	Aucune parole trouvée pour cette chanson.	Nessun testo trovato per questa canzone.	ما لقيتش الكلمات متاع الأغنية هاذي.
+music.lyricsInstrumental	This song has no words.	Esta canción no tiene letra.	Cette chanson n’a pas de paroles.	Questa canzone non ha parole.	الأغنية هاذي ما فيهاش كلام.
+music.lyricsPlain	Lyrics without timing	Letra sin sincronizar	Paroles sans synchronisation	Testo non sincronizzato	كلمات من غير توقيت
+music.listeningTimer	Following a timer from when you tapped play	Siguiendo un temporizador desde que tocaste reproducir	Suit un minuteur depuis que vous avez appuyé sur lecture	Segue un timer da quando hai premuto play	تتبّع في وقت من كي نقرت على اسمع
+music.lyricsSource	Lyrics from LRCLIB	Letras de LRCLIB	Paroles de LRCLIB	Testi da LRCLIB	الكلمات من LRCLIB
+music.dedicatedBy	Dedicated by {{name}}	Dedicada por {{name}}	Dédiée par {{name}}	Dedicata da {{name}}	هداها {{name}}
+music.addedBy	Added by {{name}}	Agregada por {{name}}	Ajoutée par {{name}}	Aggiunta da {{name}}	زادها {{name}}
+music.moveUp	Move up	Subir	Monter	Sposta su	طلّعها
+music.moveDown	Move down	Bajar	Descendre	Sposta giù	هبّطها
+music.editNote	Edit note	Editar nota	Modifier le mot	Modifica nota	بدّل الكلمة
+music.removeSong	Remove	Quitar	Retirer	Togli	نحّي
+music.removeSongConfirm	Take this song out of the playlist?	¿Quitar esta canción de la lista?	Retirer cette chanson de la playlist ?	Togliere questa canzone dalla playlist?	تنحّي الأغنية هاذي من القائمة؟
+music.linkLabel	Spotify or YouTube link	Enlace de Spotify o YouTube	Lien Spotify ou YouTube	Link di Spotify o YouTube	رابط سبوتيفاي ولا يوتيوب
+music.linkHint	Paste a song link. From YouTube only the song’s name is read: it plays in Spotify as sound, never as a video.	Pega el enlace de una canción. De YouTube solo se lee el nombre: suena en Spotify, nunca como video.	Collez le lien d’une chanson. De YouTube, seul le nom est lu : elle se joue en son sur Spotify, jamais en vidéo.	Incolla il link di una canzone. Da YouTube si legge solo il nome: suona su Spotify, mai come video.	حطّ رابط أغنية. من يوتيوب ناخذو كان الإسم: تخدم صوت في سبوتيفاي، عمرها ما تولّي فيديو.
+music.lookingUp	Looking up the song…	Buscando la canción…	Recherche de la chanson…	Cerco la canzone…	قاعد نلوّج على الأغنية…
+music.lookupFailed	Couldn’t read the song’s name. Type it below.	No se pudo leer el nombre de la canción. Escríbelo abajo.	Impossible de lire le nom de la chanson. Tapez-le ci-dessous.	Non riesco a leggere il nome della canzone. Scrivilo qui sotto.	ما نجمتش نقرا إسم الأغنية. اكتبو لوطة.
+music.songTitle	Song title	Título de la canción	Titre de la chanson	Titolo della canzone	إسم الأغنية
+music.songArtist	Artist	Artista	Artiste	Artista	الفنّان
+music.noteLabel	A note: why this song (optional)	Una nota: por qué esta canción (opcional)	Un mot : pourquoi cette chanson (facultatif)	Una nota: perché questa canzone (facoltativa)	كلمة: علاش الأغنية هاذي (اختياري)
+music.notePlaceholder	This one reminds me of…	Esta me recuerda a…	Celle-ci me rappelle…	Questa mi ricorda…	هاذي تفكّرني في…
+music.saveSong	Add to the playlist	Agregar a la lista	Ajouter à la playlist	Aggiungi alla playlist	زيدها للقائمة
+music.fromUploads	Or one of your uploaded songs	O una de tus canciones subidas	Ou une de vos chansons importées	Oppure una delle tue canzoni caricate	ولا وحدة من الغناوي اللي طلّعتهم
+inbox.dedication	{{name}} dedicated a song to you: {{title}}	{{name}} te dedicó una canción: {{title}}	{{name}} vous a dédié une chanson : {{title}}	{{name}} ti ha dedicato una canzone: {{title}}	{{name}} هداك أغنية: {{title}}
+inbox.songAdded	{{name}} added a song: {{title}}	{{name}} agregó una canción: {{title}}	{{name}} a ajouté une chanson : {{title}}	{{name}} ha aggiunto una canzone: {{title}}	{{name}} زاد أغنية: {{title}}
+inbox.markAllRead	Mark all read	Marcar todo como leído	Tout marquer comme lu	Segna tutto come letto	علّم الكل مقري
+inbox.songs	Songs for you	Canciones para ti	Des chansons pour vous	Canzoni per te	غناوي ليك
+together.listening	{{name}} is listening: {{title}}	{{name}} está escuchando: {{title}}	{{name}} écoute : {{title}}	{{name}} sta ascoltando: {{title}}	{{name}} يسمع في: {{title}}
+together.join	Listen together	Escuchar juntos	Écouter ensemble	Ascolta insieme	اسمعو مع بعضكم
+together.joined	Listening together	Escuchando juntos	Vous écoutez ensemble	State ascoltando insieme	قاعدين تسمعو مع بعضكم

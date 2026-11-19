@@ -21,7 +21,7 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onReady,onF
   const pin=(cls,at,{side=false,only=null,dx=0,dy=0}={})=>{const n=document.createElement('div');n.className='pin '+cls;pins.append(n);return {n,at,side,only,dx,dy};};
   const score=who=>{const p=pin('score '+who,AT[who],{side:who==='oliver'});const b=document.createElement('b'),initial=document.createElement('em'),name=document.createElement('small'),count=document.createElement('span');b.append(initial,name,count);p.n.append(b,document.createElement('i'));p.parts={initial,name,count};p.n.hidden=true;return p;};
   const scores={yasmine:score('yasmine'),oliver:score('oliver')};
-  const song=pin('song',AT.toad);{const b=document.createElement('b');song.label=document.createElement('span');b.append(song.label);song.n.append(b,document.createElement('i'));song.n.hidden=true;}
+  const song=pin('toad-song',AT.toad);{const b=document.createElement('b');song.label=document.createElement('span');b.append(song.label);song.n.append(b,document.createElement('i'));song.n.hidden=true;}
   const storm=pin('landmark storm',AT.catatumbo,{only:['night'],dx:-64,dy:46});copy(storm.n,()=>t('culture.catatumbo.title'));
   const falls=pin('landmark falls',AT.angel,{only:['day','dusk']});copy(falls.n,()=>t('culture.angel.title'));
   const all=[scores.yasmine,scores.oliver,song,storm,falls];

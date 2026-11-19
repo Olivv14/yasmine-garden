@@ -143,6 +143,37 @@ Error handling: `42501` forbidden/unenrolled; `40001` optimistic conflict (refet
 
 Idempotency: stable client UUIDs dedupe create operations; start/plant/reserve/identical submit/finalize/delete-finish have explicit retry behavior above. `save_content`, `save_mood`, watering and edits are version-guarded, not silently replayable. If the response is lost, read the target ID/version and compare the full intended data before deciding whether to retry. Never turn `40001` into “saved”.
 
+### Inbox RPC (backend/006)
+
+### `mark_notifications_read(p_ids uuid[]) -> integer`
+The recipient marks their own bell rows read: the given ids, or all unread rows when the array is empty (0 to 500 ids). Returns how many rows changed. Rows are created only by feature RPCs through the internal `app_private.notify_partner(p_id, p_kind, p_ref)`, never by the browser. Reads: `notifications` (RLS: recipient only).
+
+### Music RPCs (backend/007)
+Reads: `playlists` and `playlist_items` (RLS: same pair; private playlists and their songs only for their owner). Every write is `SECURITY DEFINER`, uses a client UUID for safe retries, and the edits take the row's `version`.
+
+### `ensure_dedicated_playlist(p_id uuid) -> playlists`
+Returns the pair's "Our dedicated songs", creating it with `p_id` if neither phone has yet. It has no stored title: each phone shows it in its own language.
+
+### `save_playlist(p_id uuid, p_expected_version bigint, p_title text, p_visibility text) -> playlists`
+Create (`p_expected_version` 0) or rename/change visibility of your own custom playlist. `p_visibility` is `shared` or `private`.
+
+### `delete_playlist(p_id uuid, p_expected_version bigint) -> void`
+Owner only, custom playlists only; its songs are tombstoned with it.
+
+### `add_playlist_item(p_id uuid, p_playlist_id uuid, p_source text, p_ref text, p_title text, p_artist text, p_cover_url text, p_duration_ms integer, p_note text) -> playlist_items`
+Appends a song. `p_source`: `spotify` (`p_ref` = `spotify:track:<22 chars>`), `upload` (`p_ref` = one of the pair's track content ids) or `link` (`p_ref` = https URL). `p_cover_url` only from Spotify image hosts. Same id + same song returns the stored row. In a shared playlist it notifies the partner: `dedication` (a note in "Our dedicated songs") or `song_added`.
+
+### `update_playlist_item(p_id uuid, p_expected_version bigint, p_note text) -> playlist_items`
+Edit the note on a song you added.
+
+### `move_playlist_item(p_id uuid, p_expected_version bigint, p_after_id uuid) -> playlist_items`
+Move a song after another (null: to the top). Both members can reorder a shared playlist.
+
+### `remove_playlist_item(p_id uuid, p_expected_version bigint) -> void`
+Whoever added the song, or the owner of a custom playlist. In "Our dedicated songs" only the person who dedicated it.
+
+The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and read only by the music helper Edge Function with the service role; the browser has no access.
+
 ## 4. Private Storage lifecycle / permissions
 
 Bucket: **`connection-private`**, `public=false`, per-object 25 MiB. Object key is exactly `<pair_id>/<owner_profile_id>/<media_id>` returned by RPC; no extension, names, Auth UUIDs, URLs or credentials needed in paths. Metadata row links the object to the owned parent and pair. Path alone grants NOTHING.
