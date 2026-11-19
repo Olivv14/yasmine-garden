@@ -1,5 +1,6 @@
 export const LOCALES = Object.freeze({
   en: Object.freeze({lang:'en',dir:'ltr',flag:'🇬🇧',name:'English',numberLocale:'en-GB',status:'AI draft; review required'}),
+  es: Object.freeze({lang:'es',dir:'ltr',flag:'🇪🇸',name:'Español',numberLocale:'es-ES',status:'AI draft; review required'}),
   fr: Object.freeze({lang:'fr',dir:'ltr',flag:'🇫🇷',name:'Français',numberLocale:'fr-FR',status:'AI draft; review required'}),
   it: Object.freeze({lang:'it',dir:'ltr',flag:'🇮🇹',name:'Italiano',numberLocale:'it-IT',status:'AI draft; review required'}),
   'aeb-TN': Object.freeze({lang:'aeb-TN',dir:'rtl',flag:'🇹🇳',name:'تونسي',numberLocale:'ar-TN',status:'AI draft; Tunisian speaker QA required; not native-validated'}),

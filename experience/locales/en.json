@@ -637,5 +637,6 @@
   "game.hockey.again": "Play again",
   "game.hockey.keys": "Keyboard: arrow keys move your mallet.",
   "home.partnerPlayed": "{{name}} played truth or dare",
-  "home.partnerHockey": "{{name}} played air hockey with you"
+  "home.partnerHockey": "{{name}} played air hockey with you",
+  "language.es": "Español"
 }

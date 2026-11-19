@@ -29,7 +29,7 @@ function dispatchBody(value) {
   return value.event_id;
 }
 function validatePayload(p) {
-  if (!p || p.version !== 1 || !UUID.test(p.event_id) || !["en", "fr", "it", "aeb-TN"].includes(p.locale) || typeof p.title !== "string" || !p.title || p.title.length > 160 || typeof p.body !== "string" || !p.body || p.body.length > 500 || typeof p.preview !== "boolean") throw new Error("Invalid push payload");
+  if (!p || p.version !== 1 || !UUID.test(p.event_id) || !["en", "es", "fr", "it", "aeb-TN"].includes(p.locale) || typeof p.title !== "string" || !p.title || p.title.length > 160 || typeof p.body !== "string" || !p.body || p.body.length > 500 || typeof p.preview !== "boolean") throw new Error("Invalid push payload");
   return p;
 }
 
@@ -46,6 +46,18 @@ var PHRASES = Object.freeze({
     "{{sender}} hopes a little softness finds you today.",
     "{{sender}} is sending a smile, no reply needed.",
     "A small pause, a warm thought: from {{sender}} to you."
+  ],
+  es: [
+    "{{sender}} te manda un poquito de cari\xF1o.",
+    "Un saludito de {{sender}}, solo para ti.",
+    "{{sender}} tiene un pensamiento tierno para ti.",
+    "Una florecita de {{sender}} para tu d\xEDa.",
+    "{{sender}} te da \xE1nimos desde aqu\xED.",
+    "{{sender}} te guarda una lucecita encendida.",
+    "Un saludo tranquilo de {{sender}}, para cuando lo veas.",
+    "{{sender}} espera que hoy te llegue un poco de ternura.",
+    "{{sender}} te manda una sonrisa, no hace falta responder.",
+    "Una pausa peque\xF1a, un pensamiento c\xE1lido: de {{sender}} para ti."
   ],
   fr: [
     "{{sender}} t\u2019envoie un peu de douceur.",
@@ -84,7 +96,7 @@ var PHRASES = Object.freeze({
     "\u0648\u0642\u0641\u0629 \u0635\u063A\u064A\u0631\u0629 \u0648\u0641\u0643\u0631\u0629 \u062F\u0627\u0641\u064A\u0629\u060C \u0645\u0646 {{sender}} \u0644\u064A\u0643."
   ]
 });
-var COPY = Object.freeze({ en: { title: "Notifications", generic: "You have a new notification." }, fr: { title: "Notifications", generic: "Vous avez une nouvelle notification." }, it: { title: "Notifiche", generic: "Hai una nuova notifica." }, "aeb-TN": { title: "\u0627\u0644\u062A\u0646\u0628\u064A\u0647\u0627\u062A", generic: "\u0639\u0646\u062F\u0643 \u062A\u0646\u0628\u064A\u0647 \u062C\u062F\u064A\u062F." } });
+var COPY = Object.freeze({ en: { title: "Notifications", generic: "You have a new notification." }, es: { title: "Notificaciones", generic: "Tienes una notificaci\xF3n nueva." }, fr: { title: "Notifications", generic: "Vous avez une nouvelle notification." }, it: { title: "Notifiche", generic: "Hai una nuova notifica." }, "aeb-TN": { title: "\u0627\u0644\u062A\u0646\u0628\u064A\u0647\u0627\u062A", generic: "\u0639\u0646\u062F\u0643 \u062A\u0646\u0628\u064A\u0647 \u062C\u062F\u064A\u062F." } });
 
 // push/payload.mjs
 function buildPayload(eventId, target) {

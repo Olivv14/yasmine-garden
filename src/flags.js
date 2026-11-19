@@ -8,6 +8,8 @@ export function flagIcon(locale){
   shape('rect',{width:60,height:40,fill:'#fff'});shape('rect',{width:20,height:40,fill:'#002395'});shape('rect',{x:40,width:20,height:40,fill:'#ed2939'});
  }else if(locale==='en'){
   shape('rect',{width:60,height:40,fill:'#012169'});shape('path',{d:'M0 0L60 40M60 0L0 40',stroke:'#fff','stroke-width':9});shape('path',{d:'M0 0L60 40M60 0L0 40',stroke:'#c8102e','stroke-width':3});shape('path',{d:'M30 0V40M0 20H60',stroke:'#fff','stroke-width':14});shape('path',{d:'M30 0V40M0 20H60',stroke:'#c8102e','stroke-width':8});
+ }else if(locale==='es'){
+  shape('rect',{width:60,height:40,fill:'#aa151b'});shape('rect',{y:10,width:60,height:20,fill:'#f1bf00'});
  }else if(locale==='it'){
   shape('rect',{width:60,height:40,fill:'#fff'});shape('rect',{width:20,height:40,fill:'#009246'});shape('rect',{x:40,width:20,height:40,fill:'#ce2b37'});
  }else if(locale==='aeb-TN'){

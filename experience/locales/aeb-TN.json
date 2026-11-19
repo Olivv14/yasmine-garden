@@ -637,5 +637,6 @@
   "game.hockey.again": "عاود العب",
   "game.hockey.keys": "الكلافيي: الفلاش يحرّكو المضرب.",
   "home.partnerPlayed": "{{name}} لعب صراحة ولا تحدّي",
-  "home.partnerHockey": "{{name}} لعب معاك هوكي هوائي"
+  "home.partnerHockey": "{{name}} لعب معاك هوكي هوائي",
+  "language.es": "Español"
 }

@@ -1,6 +1,6 @@
 import {preparePush,dispatchThought} from '../push/client.mjs';
 import {nativeConfig,NativeStore,NativeTransition,pushReceipt,pushRecords} from './native-state.js';
-import {t,copy,locale} from './experience.js';
+import {t,copy,locale,LANGUAGE_CHOICES} from './experience.js';
 export function createNativeUI({$,el,button,client,getOwner,getPreferences}){
  const gate=new NativeTransition(),store=new NativeStore(document.baseURI),dispatching=new Set();let owner=null,controller=null,config=null,opened=false,busy=false,blocked=false,unknown=false,records=[],message='intro',activeOperation=null;
  const section=el('details');section.id='nativeSettings';const summary=el('summary',()=>t('native.title'));const status=el('p');status.id='nativeStatus';status.setAttribute('role','status');
@@ -16,7 +16,7 @@ export function createNativeUI({$,el,button,client,getOwner,getPreferences}){
  const recovery=el('div',undefined,'statusbar error');recovery.id='nativeRecovery';recovery.hidden=true;recovery.setAttribute('role','alert');const recoveryText=el('p',()=>t('native.blocked'));const retryLogout=button(()=>t('native.retryLogout'),()=>$('logout').click());recovery.append(recoveryText,retryLogout);$('connectionStatus').after(recovery);
  function context(){const c=gate.context(owner),assert=c.assertCurrent;c.assertCurrent=()=>{assert();if(owner!==c.userId||getOwner()!==c.userId)throw Error('stale');};return c;}
  function current(c){try{c.assertCurrent();return true;}catch{return false;}}
- function hasLocale(){const p=getPreferences();return p&&p.locale===locale()&&['en','fr','it','aeb-TN'].includes(p.locale);}
+ function hasLocale(){const p=getPreferences();return p&&p.locale===locale()&&LANGUAGE_CHOICES.some(c=>c.value===p.locale);}
  function supported(){return isSecureContext&&'serviceWorker'in navigator&&'PushManager'in globalThis&&'Notification'in globalThis&&!(/iPad|iPhone|iPod/.test(navigator.userAgent)&&!matchMedia('(display-mode: standalone)').matches&&!navigator.standalone);}
  function paint(){copy(status,()=>t('native.'+message));preview.disabled=busy||gate.frozen;prepare.disabled=busy||gate.frozen;enable.disabled=busy||gate.frozen||!controller||unknown||!hasLocale()||globalThis.Notification?.permission==='denied';disable.disabled=busy||gate.frozen||!controller||unknown;prefs.hidden=hasLocale();devices.replaceChildren();for(const row of records){let own=false;try{own=store.device(owner)===row.id;}catch{message='storage';}if(own)devices.append(el('p',()=>t(row.enabled?'native.serverEnabled':'native.serverDisabled',{preview:t(row.preview?'native.on':'native.off')}),'hint'));}recovery.hidden=!blocked;paintEvents();}
  const paintWithReception=paint;

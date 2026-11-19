@@ -637,5 +637,6 @@
   "game.hockey.again": "Gioca ancora",
   "game.hockey.keys": "Tastiera: le frecce muovono la tua mazza.",
   "home.partnerPlayed": "{{name}} ha giocato a obbligo o verità",
-  "home.partnerHockey": "{{name}} ha giocato ad air hockey con te"
+  "home.partnerHockey": "{{name}} ha giocato ad air hockey con te",
+  "language.es": "Español"
 }

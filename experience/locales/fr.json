@@ -637,5 +637,6 @@
   "game.hockey.again": "Rejouer",
   "game.hockey.keys": "Clavier : les flèches déplacent votre maillet.",
   "home.partnerPlayed": "{{name}} a joué à action ou vérité",
-  "home.partnerHockey": "{{name}} a joué à l’air hockey avec vous"
+  "home.partnerHockey": "{{name}} a joué à l’air hockey avec vous",
+  "language.es": "Español"
 }
