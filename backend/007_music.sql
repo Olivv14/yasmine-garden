@@ -33,7 +33,8 @@ create table if not exists public.playlist_items (
   ref text not null check (char_length(ref) between 1 and 2048),
   title text not null check (char_length(btrim(title)) between 1 and 200),
   artist text check (artist is null or char_length(artist)<=200),
-  cover_url text check (cover_url is null or cover_url ~ '^https://i\.scdn\.co/image/[A-Za-z0-9]+$'),
+  -- Spotify album art only (Web API and oEmbed hosts); other images are never stored
+  cover_url text check (cover_url is null or cover_url ~ '^https://(i\.scdn\.co|image-cdn-(fa|ak)\.spotifycdn\.com)/image/[A-Za-z0-9]+$'),
   duration_ms integer check (duration_ms is null or duration_ms between 1 and 7200000),
   note text check (note is null or char_length(note) between 1 and 500),
   position bigint not null,

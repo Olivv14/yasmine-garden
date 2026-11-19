@@ -9,7 +9,7 @@ import {combo} from './garden/model.js';
 
 const TIME_ICON={day:'sun',dusk:'sunset',night:'moon'};
 
-export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,home,player}){
+export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,home,player,music,markRead}){
   // ---- Talk: notes and questions, one tab with two panes
   let pane='journal';
   function talkPane(which){
@@ -37,17 +37,35 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,home,pla
 
   // ---- Bell: unread thoughts for me
   function paintBell(snap){
-    const id=me(),unread=(snap?.thoughts??[]).filter(x=>x.recipient_id===id&&!x.read_at).length;
+    const id=me(),songs=(snap?.notifications??[]).filter(n=>n.recipient_id===id&&['dedication','song_added'].includes(n.kind));
+    const unread=(snap?.thoughts??[]).filter(x=>x.recipient_id===id&&!x.read_at).length+songs.filter(n=>!n.read_at).length;
+    paintSongInbox(snap,songs);
     $('bellCount').hidden=!unread;$('bellCount').textContent=unread>9?'9+':String(unread);
     copy($('receptionToggle'),()=>unread?t('shell.bellUnread',{count:unread}):t('notifications.title'),'aria-label');
     if(!unread&&!(snap?.thoughts??[]).length&&!$('shellInboxEmpty'))$('messageInbox').before(Object.assign(el('p',()=>t('shell.inboxEmpty'),'small'),{id:'shellInboxEmpty'}));
     if((snap?.thoughts??[]).length)$('shellInboxEmpty')?.remove();
   }
 
+  // Songs your partner dedicated or added, in the bell's panel. Tapping one opens Music.
+  function paintSongInbox(snap,songs){
+    let box=$('songInbox');
+    if(!box){box=el('section',undefined,'song-inbox');box.id='songInbox';$('receptionPushPrompt').after(box);}
+    box.replaceChildren();if(!songs.length)return;
+    const head=el('div',undefined,'row between');head.append(el('h3',()=>t('inbox.songs')));
+    if(songs.some(n=>!n.read_at))head.append(button(()=>t('inbox.markAllRead'),()=>markRead([]).catch(()=>{}),'link'));
+    box.append(head);
+    for(const n of songs.slice(0,20)){
+      const item=(snap.playlistItems??[]).find(i=>i.id===n.ref_id),title=item?.title??'♪';
+      const row=button(()=>t(n.kind==='dedication'?'inbox.dedication':'inbox.songAdded',{name:person(n.sender_id),title}),()=>{if(!n.read_at)markRead([n.id]).catch(()=>{});$('receptionClose').click();music.open();},'inbox-row'+(n.read_at?'':' unread'));
+      row.dir='auto';box.append(row);
+    }
+  }
+
   // ---- The toad's card on Home drives the music player; the toad in the garden plays along
   const playIcon=()=>$('toadPlay').replaceChildren(icon(player.paused?'playTrack':'pause',18));
   function paintToad(){
-    const playing=!player.paused&&!player.ended,title=$('trackTitle')?.textContent?.trim()||'';
+    const playing=music.isPlaying()||(!player.paused&&!player.ended),title=music.nowTitle()||$('trackTitle')?.textContent?.trim()||'';
+    $('toadLine').textContent=music.currentLine();
     copy($('toadState'),()=>t(playing?'toad.playing':'toad.resting'));
     $('toadSong').textContent=title;
     copy($('toadPlay'),()=>t(playing?'music.pause':'music.play'),'aria-label');playIcon();
@@ -57,7 +75,8 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,home,pla
   for(const ev of ['play','playing','pause','ended','emptied'])player.addEventListener(ev,paintToad);
   $('toadPrev').onclick=()=>$('musicPrev').click();$('toadPlay').onclick=()=>$('musicPlay').click();$('toadNext').onclick=()=>$('musicNext').click();
   $('toadArt').onclick=()=>openMusic();
-  function openMusic(){navigate('us');const d=$('musicPanel');d.open=true;d.scrollIntoView({block:'start'});d.querySelector('summary').focus({preventScroll:true});}
+  // The stage: playlists, dedications and lyric cards (the old player stays in Us for uploads).
+  function openMusic(){music.open();}
 
   // ---- Combo: days in a row you both did something
   function paintCombo(snap){
@@ -82,8 +101,8 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,home,pla
   }
 
   function tabChanged(tab){if(tab==='learn')renderLearn();if(tab==='garden')paintTime();}
-  function render(snap=getSnapshot()){paintBell(snap);paintCombo(snap);paintToad();}
-  function clear(){$('bellCount').hidden=true;copy($('receptionToggle'),()=>t('notifications.title'),'aria-label');copy($('comboDays'),'');copy($('comboHint'),'');$('toadSong').textContent='';$('learnList').replaceChildren();talkPane('journal');}
+  function render(snap=getSnapshot()){paintBell(snap);paintCombo(snap);paintToad();music.render();}
+  function clear(){$('bellCount').hidden=true;copy($('receptionToggle'),()=>t('notifications.title'),'aria-label');copy($('comboDays'),'');copy($('comboHint'),'');$('toadSong').textContent='';$('toadLine').textContent='';$('songInbox')?.replaceChildren();$('learnList').replaceChildren();talkPane('journal');}
   talkPane('journal');paintToad();
-  return {talkPane,render,clear,openMusic,tabChanged,renderLearn,paintTime};
+  return {talkPane,render,clear,openMusic,tabChanged,renderLearn,paintTime,paintToad};
 }

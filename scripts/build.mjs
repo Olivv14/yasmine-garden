@@ -22,7 +22,8 @@ for(const f of FONT_FILES)await copyFile(path.join(root,'node_modules/@fontsourc
 const css=async f=>await readFile(path.join(root,f),'utf8');
 // Order matters: legacy CSS, then design tokens (which remap legacy variables), then the design layer.
 await writeFile(path.join(dist,'assets/app.css'),[fontFaceCSS('./fonts/'),await css('src/styles.css'),THEME_BRIDGE_CSS,await css('src/experience.css'),await css('src/native.css'),await css('src/design/tokens.css'),await css('src/design/app.css'),await css('src/garden/garden.css'),await css('src/games/games.css'),await css('src/design/shell.css')].join('\n'));
-let csp="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' blob: data: https://*.supabase.co; media-src 'self' blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'";
+// Music adds exact hosts only: Spotify covers (img), LRCLIB lyrics and Spotify/YouTube song-name lookups (connect).
+let csp="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' blob: data: https://*.supabase.co https://i.scdn.co https://image-cdn-fa.spotifycdn.com https://image-cdn-ak.spotifycdn.com; media-src 'self' blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://lrclib.net https://open.spotify.com https://www.youtube.com; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'";
 const template=await readFile(path.join(root,'src/template.html'),'utf8');if(!template.includes('__CSP__'))throw Error('CSP marker missing.');
 await writeFile(path.join(dist,'index.html'),template.replace('__CSP__',`<meta http-equiv="Content-Security-Policy" content="${csp}">`));
 await copyFile(path.join(root,'public-config.example.json'),path.join(dist,'public-config.example.json'));
