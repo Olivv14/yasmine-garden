@@ -37,7 +37,8 @@ Deno.test('each claimed device gets its own language, and the outcome is recorde
  eq(calls.filter(c=>c.name==='push_complete_notification').map(c=>c.args.p_outcome),['accepted','accepted']);
 });
 Deno.test('push lines match the app catalog in every language',async()=>{
- const keys:Record<string,string>={message:'message',dedication:'dedication',song_added:'songAdded',game_invite:'gameInvite',game_turn:'gameTurn',teach_card:'teachCard'};
+ const keys:Record<string,string>={message:'message',dedication:'dedication',song_added:'songAdded',game_invite:'gameInvite',game_turn:'gameTurn',game_result:'gameResult',teach_card:'teachCard'};
+ eq(Object.values(KINDS).every(l=>Object.keys(l).length===Object.keys(keys).length),true,'every push kind is checked');
  for(const [locale,lines] of Object.entries(KINDS)){
   const catalog=JSON.parse(await Deno.readTextFile(new URL(`../../../experience/locales/${locale}.json`,import.meta.url)));
   for(const [kind,key] of Object.entries(keys))eq((lines as Record<string,string>)[kind],catalog['push.kind.'+key],locale+' '+kind);

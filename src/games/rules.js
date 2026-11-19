@@ -1,7 +1,12 @@
 // Pure game rules (no DOM), unit-tested in scripts/games.test.mjs.
-export const TRUTHS=Object.freeze(Array.from({length:10},(_,i)=>'t'+String(i+1).padStart(2,'0')));
-export const DARES=Object.freeze(Array.from({length:10},(_,i)=>'d'+String(i+1).padStart(2,'0')));
+// Three spice levels of ten cards each: 1 mild (t01-t10), 2 hot (t11-t20), 3 Harissa (t21-t30); dares alike.
+const ids=(p,from,n)=>Object.freeze(Array.from({length:n},(_,i)=>p+String(from+i).padStart(2,'0')));
+export const LEVELS=Object.freeze([1,2,3]);
+export const CARDS=Object.freeze({truth:Object.freeze({1:ids('t',1,10),2:ids('t',11,10),3:ids('t',21,10)}),dare:Object.freeze({1:ids('d',1,10),2:ids('d',11,10),3:ids('d',21,10)})});
+export const TRUTHS=Object.freeze(LEVELS.flatMap(l=>CARDS.truth[l]));
+export const DARES=Object.freeze(LEVELS.flatMap(l=>CARDS.dare[l]));
 export const cardKey=id=>(id[0]==='t'?'game.truth.':'game.dare.')+id;
+export const levelOf=id=>{const n=Number(String(id).slice(1));return n>20?3:n>10?2:1;};
 const byTime=(a,b)=>String(a.created_at).localeCompare(String(b.created_at))||String(a.id).localeCompare(String(b.id));
 
 // The current truth-or-dare game is every turn after the last finish.
@@ -13,8 +18,8 @@ export function currentTruthDare(events=[]){
 // Anyone may start; afterwards turns alternate.
 export function whoseTurn(turns,me){if(!turns.length)return 'anyone';return turns[turns.length-1].profile_id===me?'partner':'me';}
 // Draw a card not yet used in this game (all used: start over), with an injectable random source.
-export function drawCard(kind,turns,random=Math.random){
-  const deck=kind==='truth'?TRUTHS:DARES,used=new Set(turns.map(t=>t.card_id));
+export function drawCard(kind,turns,random=Math.random,level=1){
+  const deck=CARDS[kind==='truth'?'truth':'dare'][LEVELS.includes(level)?level:1],used=new Set(turns.map(t=>t.card_id));
   const left=deck.filter(id=>!used.has(id)),pool=left.length?left:deck;
   return pool[Math.floor(random()*pool.length)%pool.length];
 }

@@ -27,7 +27,7 @@ insert into results select 'photo message sent',(public.send_message('e0000000-0
 insert into results select 'photo upload reserved',(public.reserve_message_media('f0000000-0000-4000-8000-000000000001','e0000000-0000-4000-8000-000000000003','a.jpg','image/jpeg')).message_id='e0000000-0000-4000-8000-000000000003';
 insert into results select 'one upload per message',pg_temp.fails($q$select public.reserve_message_media('f0000000-0000-4000-8000-000000000002','e0000000-0000-4000-8000-000000000003','b.jpg','image/jpeg')$q$,'54000');
 insert into results select 'audio is not a photo',pg_temp.fails($q$select public.reserve_message_media('f0000000-0000-4000-8000-000000000003','e0000000-0000-4000-8000-000000000002','c.m4a','audio/mp4')$q$,'22023');
-insert into results select 'sender sees no message bell rows',count(*)=0 from public.notifications;
+insert into results select 'sender sees no message bell rows',count(*)=0 from public.notifications where id::text like 'e0000000-%';
 insert into results select 'his pending upload is readable to him',app_private.can_media((select object_key from public.media_files where id='f0000000-0000-4000-8000-000000000001'),'read');
 
 -- the push dispatch as the Edge Function would run it: service role, with the verified sender
@@ -43,13 +43,13 @@ insert into results select 'a photo has no words to preview',(select (public.pus
 reset role;
 
 select pg_temp.as_user(:'yasmine');
-insert into results select 'she reads the three messages',count(*)=3 from public.messages;
-insert into results select 'she has three message bell rows',count(*)=3 from public.notifications where kind='message' and read_at is null;
+insert into results select 'she reads the three messages',count(*)=3 from public.messages where id::text like 'e0000000-%';
+insert into results select 'she has three message bell rows',count(*)=3 from public.notifications where kind='message' and read_at is null and id::text like 'e0000000-%';
 insert into results select 'his pending photo is not readable to her yet',not app_private.can_media((select object_key from public.media_files where id='f0000000-0000-4000-8000-000000000001'),'read');
 insert into results select 'she reacts',public.react_message('e0000000-0000-4000-8000-000000000001','❤️')=1;
 insert into results select 'reaction changed',public.react_message('e0000000-0000-4000-8000-000000000001','😂')=1;
 -- a statement sees the data as it was when it started: count in the next one
-insert into results select 'changing the reaction keeps one',(select count(*)=1 and min(emoji)='😂' from public.message_reactions);
+insert into results select 'changing the reaction keeps one',(select count(*)=1 and min(emoji)='😂' from public.message_reactions where message_id::text like 'e0000000-%');
 insert into results select 'unknown emoji rejected',pg_temp.fails($q$select public.react_message('e0000000-0000-4000-8000-000000000001','💩')$q$,'23514');
 insert into results select 'she cannot edit his message',pg_temp.fails($q$select public.edit_message('e0000000-0000-4000-8000-000000000001','mine now')$q$,'42501');
 insert into results select 'she cannot delete his message',pg_temp.fails($q$select public.delete_message('e0000000-0000-4000-8000-000000000001')$q$,'42501');

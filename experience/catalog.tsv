@@ -586,11 +586,11 @@ play.eyebrow	Something to do together	Algo para hacer juntos	Quelque chose à fa
 play.title	Play	Jugar	Jouer	Gioca	نلعبو
 game.needsUpdate	Games need the latest garden update on the server. Nothing was saved.	Los juegos necesitan la última actualización del jardín en el servidor. No se guardó nada.	Les jeux demandent la dernière mise à jour du jardin sur le serveur. Rien n’a été enregistré.	I giochi richiedono l’ultimo aggiornamento del giardino sul server. Non è stato salvato nulla.	اللعب يستحق آخر تحديث للجنينة في السيرفر. حتى شي ما تسجّل.
 game.history	Recent games	Partidas recientes	Parties récentes	Partite recenti	آخر اللعبات
-game.historyEmpty	No games yet. A finished game brings a visitor to the garden for a day.	Todavía no hay partidas. Una partida terminada trae una visita al jardín por un día.	Aucune partie pour l’instant. Une partie terminée amène un visiteur au jardin pour un jour.	Ancora nessuna partita. Una partita finita porta un visitatore nel giardino per un giorno.	ما لعبتوش مازال. كل لعبة تكمل تجيب زائر للجنينة نهار كامل.
+game.historyEmpty	No games yet. Every game you play earns points and seeds for the garden.	Todavía no hay juegos. Cada juego suma puntos y semillas para el jardín.	Pas encore de partie. Chaque partie rapporte des points et des graines pour le jardin.	Ancora nessuna partita. Ogni partita fa guadagnare punti e semi per il giardino.	ما فمّا حتى لعبة لتوّا. كل لعبة تربّحكم نقاط وزريعة للجنينة.
 game.finishedTd	Truth or dare · turns: {{count}} · {{date}}	Verdad o reto · turnos: {{count}} · {{date}}	Action ou vérité · tours : {{count}} · {{date}}	Obbligo o verità · turni: {{count}} · {{date}}	صراحة ولا تحدّي · الأدوار: {{count}} · {{date}}
 game.finishedHockey	Air hockey · {{a}} to {{b}} · {{date}}	Hockey de mesa · {{a}} a {{b}} · {{date}}	Air hockey · {{a}} à {{b}} · {{date}}	Air hockey · {{a}} a {{b}} · {{date}}	هوكي هوائي · {{a}} مقابل {{b}} · {{date}}
 game.td.title	Truth or dare	Verdad o reto	Action ou vérité	Obbligo o verità	صراحة ولا تحدّي
-game.td.intro	Take turns, any time. Gentle cards only.	Por turnos, cuando quieran. Solo cartas suaves.	Chacun son tour, quand vous voulez. Seulement des cartes douces.	A turno, quando volete. Solo carte gentili.	كل واحد بدورو، وقت اللي تحبّو. كان كروت لطاف.
+game.td.intro	Take turns, any time. You choose how spicy.	Por turnos, cuando quieran. Ustedes eligen qué tan picante.	Chacun son tour, quand vous voulez. Vous choisissez le niveau d’épices.	A turno, quando volete. Scegliete voi quanto piccante.	كل واحد بدورو، وقت اللي تحبّو. إنتوما تختارو قدّاش حارّ.
 game.td.firstTurn	Anyone can start.	Cualquiera puede empezar.	N’importe qui peut commencer.	Chiunque può iniziare.	أي واحد ينجم يبدا.
 game.td.yourTurn	Your turn.	Te toca.	À vous.	Tocca a te.	دورك.
 game.td.partnerTurn	{{name}}’s turn.	Le toca a {{name}}.	Au tour de {{name}}.	Tocca a {{name}}.	دور {{name}}.
@@ -624,7 +624,7 @@ game.dare.d08	Send me ten heart taps, slowly.	Mándame diez toques de corazón, 
 game.dare.d09	Write the first line of a story about us.	Escribe la primera línea de una historia sobre nosotros.	Écris la première phrase d’une histoire sur nous.	Scrivi la prima frase di una storia su di noi.	اكتب أول سطر من حكاية علينا.
 game.dare.d10	Share the last photo you took that made you smile.	Comparte la última foto que tomaste que te hizo sonreír.	Partage la dernière photo prise qui t’a fait sourire.	Condividi l’ultima foto scattata che ti ha fatto sorridere.	شارك آخر تصويرة صوّرتها وضحّكتك.
 game.hockey.title	Air hockey	Hockey de mesa	Air hockey	Air hockey	هوكي هوائي
-game.hockey.intro	Live, when you are both here. First to 5.	En vivo, cuando estén los dos. Gana quien llegue a 5.	En direct, quand vous êtes là tous les deux. Le premier à 5.	Dal vivo, quando ci siete entrambi. Vince chi arriva a 5.	مباشر، كي تكونو الزوز هوني. اللي يوصل 5 الأول.
+game.hockey.intro	Live when you are both here, or practise against the toad. First to 5.	En vivo cuando estén los dos, o practica contra el sapo. Gana quien llegue a 5.	En direct quand vous êtes là tous les deux, ou entraîne-toi contre le crapaud. Le premier à 5.	Dal vivo quando ci siete entrambi, o allenati contro il rospo. Vince chi arriva a 5.	مباشر كي تكونو الزوز هوني، ولّا اتمرّن ضد الجرانة. اللي يوصل لـ5 الأوّل يربح.
 game.hockey.join	Join the table	Unirme a la mesa	Rejoindre la table	Unisciti al tavolo	ادخل للطاولة
 game.hockey.leave	Leave the table	Salir de la mesa	Quitter la table	Lascia il tavolo	اخرج من الطاولة
 game.hockey.waiting	Waiting for {{name}} to join the table…	Esperando a que {{name}} se una a la mesa…	En attente de {{name}} à la table…	In attesa che {{name}} arrivi al tavolo…	نستنّاو {{name}} يدخل للطاولة…
@@ -841,3 +841,236 @@ talk.inviteGame	Invite to play air hockey	Invitar a jugar hockey de mesa	Inviter
 talk.shareSong	Share a song	Compartir una canción	Partager une chanson	Condividi una canzone	شارك أغنية
 talk.more	More	Más	Plus	Altro	أكثر
 talk.unread	{{count}} new messages	{{count}} mensajes nuevos	{{count}} nouveaux messages	{{count}} nuovi messaggi	{{count}} ميساجات جداد
+game.truth.t11	What did you think the first time you saw me?	¿Qué pensaste la primera vez que me viste?	Qu’as-tu pensé la première fois que tu as posé les yeux sur moi ?	Cosa hai pensato la prima volta che mi hai visto?	شنوّة خمّمت أوّل مرّة شفتني فيها؟
+game.truth.t12	What is the most romantic thing you would like us to do one day?	¿Qué es lo más romántico que te gustaría que hiciéramos algún día?	Quelle est la chose la plus romantique que tu aimerais qu’on fasse un jour ?	Qual è la cosa più romantica che vorresti fare con me un giorno?	شنوّة أكثر حاجة رومانسية تحب نعملوها نهار؟
+game.truth.t13	Which photo of me do you look at the most?	¿Qué foto mía miras más?	Quelle photo de moi regardes-tu le plus ?	Quale mia foto guardi più spesso?	أما تصويرة متاعي تتفرّج فيها أكثر؟
+game.truth.t14	When did you first realise you had feelings for me?	¿Cuándo te diste cuenta por primera vez de que sentías algo por mí?	Quand as-tu compris pour la première fois que tu ressentais quelque chose pour moi ?	Quando hai capito per la prima volta di provare qualcosa per me?	وقتاش فهمت أوّل مرّة اللي عندك مشاعر ليّا؟
+game.truth.t15	What is something you have never dared to ask me?	¿Qué es algo que nunca te has atrevido a preguntarme?	Qu’est-ce que tu n’as jamais osé me demander ?	Cosa non hai mai osato chiedermi?	شنوّة الحاجة اللي عمرك ما تجرّأت تسألني عليها؟
+game.truth.t16	What is your favourite memory of us so far?	¿Cuál es tu recuerdo favorito de nosotros hasta ahora?	Quel est ton souvenir préféré de nous jusqu’ici ?	Qual è il tuo ricordo preferito di noi finora?	شنوّة أحلى ذكرى عندك متاعنا لتوّا؟
+game.truth.t17	Which of my messages made you smile the most?	¿Cuál de mis mensajes te hizo sonreír más?	Lequel de mes messages t’a fait le plus sourire ?	Quale dei miei messaggi ti ha fatto sorridere di più?	أما ميساج متاعي ضحّكك أكثر؟
+game.truth.t18	What would our perfect day together look like, hour by hour?	¿Cómo sería nuestro día perfecto juntos, hora por hora?	À quoi ressemblerait notre journée parfaite ensemble, heure par heure ?	Come sarebbe la nostra giornata perfetta insieme, ora per ora?	كيفاش يكون نهارنا المثالي مع بعضنا، ساعة بساعة؟
+game.truth.t19	What is something small I do that makes you feel loved?	¿Qué cosa pequeña hago que te hace sentir que te quiero?	Quel petit geste de ma part te fait sentir que je t’aime ?	Quale piccola cosa che faccio ti fa sentire che ti amo?	شنوّة الحاجة الصغيرة اللي نعملها وتحسّسك اللي نحبّك؟
+game.truth.t20	If we could teleport anywhere right now, where would you take me?	Si pudiéramos teletransportarnos a cualquier lugar ahora mismo, ¿adónde me llevarías?	Si on pouvait se téléporter n’importe où maintenant, où m’emmènerais-tu ?	Se potessimo teletrasportarci ovunque adesso, dove mi porteresti?	كان نجّمو نطيرو لأي بلاصة توّا، وين تهزّني؟
+game.dare.d11	Send me a voice note saying “I love you” in three different languages.	Mándame una nota de voz diciendo “te quiero” en tres idiomas distintos.	Envoie-moi une note vocale où tu dis « je t’aime » en trois langues différentes.	Mandami una nota vocale in cui dici “ti amo” in tre lingue diverse.	ابعثلي نوطة صوتية تقول فيها «نحبّك» بثلاث لغات مختلفين.
+game.dare.d12	Write me a four-line poem right now.	Escríbeme un poema de cuatro versos ahora mismo.	Écris-moi un poème de quatre vers tout de suite.	Scrivimi una poesia di quattro versi adesso.	اكتبلي قصيدة بأربعة سطور توّا.
+game.dare.d13	Send me the last photo you took, no explanations.	Mándame la última foto que tomaste, sin explicaciones.	Envoie-moi la dernière photo que tu as prise, sans explication.	Mandami l’ultima foto che hai scattato, senza spiegazioni.	ابعثلي آخر تصويرة صوّرتها، بلاش شرح.
+game.dare.d14	Record yourself saying what you like most about me, in under 20 seconds.	Grábate diciendo lo que más te gusta de mí, en menos de 20 segundos.	Enregistre-toi en disant ce que tu préfères chez moi, en moins de 20 secondes.	Registrati mentre dici cosa ti piace di più di me, in meno di 20 secondi.	سجّل روحك وانت تقول شنوّة أكثر حاجة تعجبك فيّا، في أقل من 20 ثانية.
+game.dare.d15	Send me a song that reminds you of us and tell me why.	Mándame una canción que te recuerde a nosotros y dime por qué.	Envoie-moi une chanson qui te fait penser à nous et dis-moi pourquoi.	Mandami una canzone che ti ricorda noi e dimmi perché.	ابعثلي أغنية تفكّرك فينا وقلّي علاش.
+game.dare.d16	Describe our first kiss, or the one you imagine, in one sentence.	Describe nuestro primer beso, o el que imaginas, en una sola frase.	Décris notre premier baiser, ou celui que tu imagines, en une seule phrase.	Descrivi il nostro primo bacio, o quello che immagini, in una sola frase.	وصف أوّل بوسة متاعنا، ولّا اللي تتخيّلها، في جملة وحدة.
+game.dare.d17	Write my name with something you find around you and send me a photo.	Escribe mi nombre con algo que encuentres a tu alrededor y mándame una foto.	Écris mon prénom avec quelque chose autour de toi et envoie-moi une photo.	Scrivi il mio nome con qualcosa che trovi intorno a te e mandami una foto.	اكتب اسمي بحاجة تلقاها قدّامك وابعثلي تصويرة.
+game.dare.d18	Send me a voice note as a radio host dedicating a song to me.	Mándame una nota de voz como locutor de radio dedicándome una canción.	Envoie-moi une note vocale comme un animateur radio qui me dédie une chanson.	Mandami una nota vocale da speaker radiofonico che mi dedica una canzone.	ابعثلي نوطة صوتية كيف مذيع راديو يهديلي أغنية.
+game.dare.d19	Tell me a secret nickname you have for me in your head.	Dime un apodo secreto que tengas para mí en tu cabeza.	Dis-moi un surnom secret que tu me donnes dans ta tête.	Dimmi un soprannome segreto che hai per me nella tua testa.	قلّي اسم دلع سرّي تسمّيني بيه في راسك.
+game.dare.d20	Plan our next date in five messages, right now.	Planea nuestra próxima cita en cinco mensajes, ahora mismo.	Organise notre prochain rendez-vous en cinq messages, tout de suite.	Organizza il nostro prossimo appuntamento in cinque messaggi, adesso.	خطّط الموعد الجاي متاعنا في خمسة ميساجات، توّا.
+game.truth.t21	What is the first thing you want to do when we see each other again?	¿Qué es lo primero que quieres hacer cuando nos volvamos a ver?	Quelle est la première chose que tu veux faire quand on se reverra ?	Qual è la prima cosa che vuoi fare quando ci rivedremo?	شنوّة أوّل حاجة تحب تعملها كي نتلاقاو مرّة أخرى؟
+game.truth.t22	Where do you most want me to kiss you?	¿Dónde es donde más quieres que te bese?	Où as-tu le plus envie que je t’embrasse ?	Dove vorresti di più che ti baciassi?	وين تحبّني نبوسك أكثر؟
+game.truth.t23	Which of my outfits drives you crazy?	¿Con qué ropa mía pierdes la cabeza?	Laquelle de mes tenues te fait perdre la tête ?	Quale mio outfit ti fa perdere la testa?	أما لبسة متاعي تهبّلك؟
+game.truth.t24	What is the most daring dream you have had about me?	¿Cuál es el sueño más atrevido que has tenido conmigo?	Quel est le rêve le plus audacieux que tu as fait sur moi ?	Qual è il sogno più audace che hai fatto su di me?	شنوّة أجرأ منام حلمتو بيّا؟
+game.truth.t25	What do you find most attractive about me that I don’t know about?	¿Qué es lo que más te atrae de mí y que yo no sé?	Qu’est-ce qui t’attire le plus chez moi sans que je le sache ?	Cosa ti attrae di più di me che io non so?	شنوّة أكثر حاجة تجذبك فيّا وأنا ما نعرفهاش؟
+game.truth.t26	Describe the perfect kiss with me.	Describe el beso perfecto conmigo.	Décris le baiser parfait avec moi.	Descrivi il bacio perfetto con me.	وصفلي البوسة المثالية معايا.
+game.truth.t27	When was the last time you thought about me and blushed?	¿Cuándo fue la última vez que pensaste en mí y te sonrojaste?	Quand as-tu pensé à moi en rougissant pour la dernière fois ?	Quand’è stata l’ultima volta che pensare a me ti ha fatto arrossire?	وقتاش آخر مرّة خمّمت فيّا وحمرّو خدودك؟
+game.truth.t28	What do you want me to whisper in your ear?	¿Qué quieres que te susurre al oído?	Qu’aimerais-tu que je te murmure à l’oreille ?	Cosa vorresti che ti sussurrassi all’orecchio?	شنوّة تحبّني نوشوشلك في وذنك؟
+game.truth.t29	What do you imagine most about a slow evening together?	¿Qué es lo que más imaginas de una noche tranquila juntos?	Qu’imagines-tu le plus d’une longue soirée ensemble ?	Cosa immagini di più di una serata lenta insieme?	شنوّة تتخيّل أكثر في سهرية هادية مع بعضنا؟
+game.truth.t30	What would you do if I were next to you right now?	¿Qué harías si estuviera a tu lado ahora mismo?	Que ferais-tu si j’étais à côté de toi maintenant ?	Cosa faresti se fossi accanto a te adesso?	شنوّة تعمل كان نكون حذاك توّا؟
+game.dare.d21	Send me a voice note whispering what you would do if I were next to you.	Mándame una nota de voz susurrando lo que harías si estuviera a tu lado.	Envoie-moi une note vocale où tu murmures ce que tu ferais si j’étais à côté de toi.	Mandami una nota vocale sussurrando cosa faresti se fossi accanto a te.	ابعثلي نوطة صوتية توشوش فيها شنوّة تعمل كان نكون حذاك.
+game.dare.d22	Tell me in three words how you want me to hold you.	Dime en tres palabras cómo quieres que te abrace.	Dis-moi en trois mots comment tu veux que je te serre dans mes bras.	Dimmi in tre parole come vuoi che ti stringa.	قلّي في ثلاث كلمات كيفاش تحبّني نحضنك.
+game.dare.d23	Send me a selfie with your most charming look.	Mándame un selfie con tu mirada más seductora.	Envoie-moi un selfie avec ton regard le plus charmeur.	Mandami un selfie con il tuo sguardo più seducente.	ابعثلي سيلفي بأحلى نظرة عندك.
+game.dare.d24	Tell me slowly, in a voice note, what you love about the way I look.	Dime despacio, en una nota de voz, qué te encanta de cómo me veo.	Dis-moi lentement, dans une note vocale, ce que tu aimes dans mon apparence.	Dimmi lentamente, in una nota vocale, cosa ami del mio aspetto.	قلّي بالشويّة، في نوطة صوتية، شنوّة تحب في شكلي.
+game.dare.d25	Write me the message you would leave on my pillow.	Escríbeme el mensaje que dejarías en mi almohada.	Écris-moi le message que tu laisserais sur mon oreiller.	Scrivimi il messaggio che lasceresti sul mio cuscino.	اكتبلي الميساج اللي تخلّيهولي على المخدّة.
+game.dare.d26	Send me a voice note saying goodnight in the sweetest way you can.	Mándame una nota de voz dándome las buenas noches de la forma más dulce posible.	Envoie-moi une note vocale pour me souhaiter bonne nuit le plus tendrement possible.	Mandami una nota vocale per darmi la buonanotte nel modo più dolce possibile.	ابعثلي نوطة صوتية تقلّي فيها تصبح على خير بأحنّ طريقة.
+game.dare.d27	Describe our next kiss in a voice note of no more than 15 seconds.	Describe nuestro próximo beso en una nota de voz de máximo 15 segundos.	Décris notre prochain baiser dans une note vocale de 15 secondes maximum.	Descrivi il nostro prossimo bacio in una nota vocale di massimo 15 secondi.	وصف البوسة الجاية متاعنا في نوطة صوتية ما تفوتش 15 ثانية.
+game.dare.d28	Choose the song for our slow dance and send it to me.	Elige la canción para nuestro baile lento y mándamela.	Choisis la chanson de notre slow et envoie-la-moi.	Scegli la canzone per il nostro lento e mandamela.	اختار الأغنية متاع الشطيح الهادي متاعنا وابعثهالي.
+game.dare.d29	Tell me something you have never said to me out loud.	Dime algo que nunca me hayas dicho en voz alta.	Dis-moi quelque chose que tu ne m’as jamais dit à voix haute.	Dimmi qualcosa che non mi hai mai detto ad alta voce.	قلّي حاجة عمرك ما قلتهالي بصوت عالي.
+game.dare.d30	Send me a photo of you blowing me a kiss.	Mándame una foto tuya lanzándome un beso.	Envoie-moi une photo de toi en train de m’envoyer un baiser.	Mandami una foto in cui mi mandi un bacio.	ابعثلي تصويرة وانت تبعثلي بوسة في الهواء.
+knowme.q01	A perfect Sunday morning	Un domingo por la mañana perfecto	Un dimanche matin parfait	Una domenica mattina perfetta	صباح أحد مثالي
+knowme.q01.a	Sleeping in	Dormir hasta tarde	Faire la grasse matinée	Dormire fino a tardi	نرقد للضحى
+knowme.q01.b	A walk by the sea	Un paseo junto al mar	Une balade au bord de la mer	Una passeggiata in riva al mare	دورة على البحر
+knowme.q01.c	A big breakfast	Un gran desayuno	Un grand petit-déjeuner	Una colazione abbondante	فطور صباح كبير
+knowme.q01.d	Sport	Hacer deporte	Faire du sport	Fare sport	سبور
+knowme.q02	First thing after waking up	Lo primero al despertar	La première chose au réveil	La prima cosa al risveglio	أوّل حاجة كي نفيق
+knowme.q02.a	Checking my phone	Mirar el teléfono	Regarder mon téléphone	Guardare il telefono	نشوف التليفون
+knowme.q02.b	Coffee	Un café	Un café	Un caffè	قهوة
+knowme.q02.c	Five more minutes	Cinco minutos más	Encore cinq minutes	Altri cinque minuti	خمسة دقايق زادة
+knowme.q02.d	A message to you	Escribirte un mensaje	T’envoyer un message	Mandarti un messaggio	نبعثلك ميساج
+knowme.q03	Comfort food	Comida reconfortante	Le plat réconfort	Il cibo che consola	الماكلة اللي تريّحني
+knowme.q03.a	Pasta	Pasta	Des pâtes	La pasta	مقرونة
+knowme.q03.b	Couscous	Cuscús	Du couscous	Il cuscus	كسكسي
+knowme.q03.c	Arepas	Arepas	Des arepas	Le arepas	أريباس
+knowme.q03.d	Chocolate	Chocolate	Du chocolat	La cioccolata	شوكولا
+knowme.q04	Dream trip together	El viaje soñado juntos	Le voyage rêvé à deux	Il viaggio dei sogni insieme	السفرة اللي نحلم بيها مع بعضنا
+knowme.q04.a	Rome and Florence	Roma y Florencia	Rome et Florence	Roma e Firenze	روما وفلورنسا
+knowme.q04.b	Djerba	Djerba	Djerba	Djerba	جربة
+knowme.q04.c	Los Roques	Los Roques	Los Roques	Los Roques	لوس روكس
+knowme.q04.d	Somewhere new for both of us	Un lugar nuevo para los dos	Un endroit nouveau pour nous deux	Un posto nuovo per tutti e due	بلاصة جديدة علينا الزوز
+knowme.q05	At a party	En una fiesta	En soirée	A una festa	في سهرية
+knowme.q05.a	On the dance floor	En la pista de baile	Sur la piste de danse	In pista a ballare	في وسط الشطيح
+knowme.q05.b	In the kitchen	En la cocina	Dans la cuisine	In cucina	في الكوجينة
+knowme.q05.c	Deep talk in a corner	Charlando a fondo en un rincón	Grande discussion dans un coin	A chiacchierare in un angolo	نحكي حديث عميق في ركن
+knowme.q05.d	First to leave	El primero en irme	Le premier à partir	Il primo ad andarsene	أوّل واحد يروّح
+knowme.q06	How I show love most	Cómo demuestro más el amor	Comment je montre le plus mon amour	Come dimostro di più l’amore	كيفاش نوري الحب أكثر
+knowme.q06.a	Words	Con palabras	Avec des mots	Con le parole	بالكلام
+knowme.q06.b	Touch	Con caricias	Avec des câlins	Con le carezze	بالحنان واللمس
+knowme.q06.c	Small gifts	Con regalitos	Avec des petits cadeaux	Con piccoli regali	بهدايا صغار
+knowme.q06.d	Doing things for you	Haciendo cosas por ti	En faisant des choses pour toi	Facendo cose per te	نعمل حوايج عليك
+knowme.q07	What I miss most when we’re apart	Lo que más extraño cuando estamos lejos	Ce qui me manque le plus quand on est loin	Cosa mi manca di più quando siamo lontani	شنوّة نتوحّش أكثر كي نكونو بعاد
+knowme.q07.a	Your voice	Tu voz	Ta voix	La tua voce	صوتك
+knowme.q07.b	Your laugh	Tu risa	Ton rire	La tua risata	ضحكتك
+knowme.q07.c	Your hugs	Tus abrazos	Tes câlins	I tuoi abbracci	تعنيقاتك
+knowme.q07.d	Just sitting next to you	Solo estar a tu lado	Juste être assis près de toi	Stare semplicemente accanto a te	كان نقعد حذاك
+knowme.q08	A rainy day	Un día de lluvia	Un jour de pluie	Una giornata di pioggia	نهار فيه المطر
+knowme.q08.a	A series marathon	Maratón de series	Un marathon de séries	Una maratona di serie	ماراطون مسلسلات
+knowme.q08.b	Cooking something	Cocinar algo	Cuisiner quelque chose	Cucinare qualcosa	نطيّب حاجة
+knowme.q08.c	A book	Un libro	Un livre	Un libro	كتاب
+knowme.q08.d	Sleeping	Dormir	Dormir	Dormire	نرقد
+knowme.q09	Ideal date night	La cita ideal	Le rendez-vous idéal	L’appuntamento ideale	السهرية المثالية مع بعضنا
+knowme.q09.a	Dinner out	Cenar fuera	Un dîner au restaurant	Una cena fuori	عشاء في ريستورون
+knowme.q09.b	A film at home	Una película en casa	Un film à la maison	Un film a casa	فيلم في الدار
+knowme.q09.c	Dancing	Bailar	Danser	Ballare	نشطحو
+knowme.q09.d	A walk under the stars	Un paseo bajo las estrellas	Une balade sous les étoiles	Una passeggiata sotto le stelle	دورة تحت النجوم
+knowme.q10	What I notice first in someone	Lo primero que noto en alguien	Ce que je remarque d’abord chez quelqu’un	La prima cosa che noto in qualcuno	أوّل حاجة نلاحظها في واحد
+knowme.q10.a	The eyes	Los ojos	Les yeux	Gli occhi	العينين
+knowme.q10.b	The smile	La sonrisa	Le sourire	Il sorriso	الضحكة
+knowme.q10.c	The voice	La voz	La voix	La voce	الصوت
+knowme.q10.d	The hands	Las manos	Les mains	Le mani	اليدين
+knowme.q11	Spicy food	La comida picante	La cuisine épicée	Il cibo piccante	الماكلة الحارّة
+knowme.q11.a	No, thank you	No, gracias	Non merci	No, grazie	لا يعيشك
+knowme.q11.b	A little	Un poquito	Un peu	Un pochino	شويّة
+knowme.q11.c	A lot	Mucho	Beaucoup	Tanto	برشا
+knowme.q11.d	Harissa on everything	Harissa en todo	De la harissa partout	Harissa su tutto	هريسة في كل شي
+knowme.q12	Morning mood	Humor por la mañana	Humeur du matin	Umore del mattino	المود متاعي الصباح
+knowme.q12.a	Sunshine	Puro sol	Un rayon de soleil	Un raggio di sole	شمس
+knowme.q12.b	Don’t talk to me	No me hables	Ne me parle pas	Non parlarmi	ما تكلّمنيش
+knowme.q12.c	Slow but sweet	Lento pero dulce	Lent mais doux	Lento ma dolce	بالشويّة أما لطيف
+knowme.q12.d	Depends on the coffee	Depende del café	Ça dépend du café	Dipende dal caffè	حسب القهوة
+knowme.q13	When I’m stressed	Cuando estoy estresado o estresada	Quand je suis stressé ou stressée	Quando sono sotto stress	كي نكون ستريسي
+knowme.q13.a	I clean	Limpio	Je fais le ménage	Faccio le pulizie	ننظّف
+knowme.q13.b	I eat	Como	Je mange	Mangio	ناكل
+knowme.q13.c	I call someone	Llamo a alguien	J’appelle quelqu’un	Chiamo qualcuno	نكلّم واحد
+knowme.q13.d	I go for a walk	Salgo a caminar	Je vais marcher	Vado a fare una passeggiata	نخرج نتمشّى
+knowme.q14	Favourite season	Estación favorita	Saison préférée	Stagione preferita	الفصل المفضّل
+knowme.q14.a	Spring	Primavera	Le printemps	La primavera	الربيع
+knowme.q14.b	Summer	Verano	L’été	L’estate	الصيف
+knowme.q14.c	Autumn	Otoño	L’automne	L’autunno	الخريف
+knowme.q14.d	Winter	Invierno	L’hiver	L’inverno	الشتاء
+knowme.q15	The gift that would make me happiest	El regalo que más me haría feliz	Le cadeau qui me ferait le plus plaisir	Il regalo che mi renderebbe più felice	الهدية اللي تفرّحني أكثر
+knowme.q15.a	A letter	Una carta	Une lettre	Una lettera	جواب
+knowme.q15.b	A trip	Un viaje	Un voyage	Un viaggio	سفرة
+knowme.q15.c	Flowers	Flores	Des fleurs	Dei fiori	ورد
+knowme.q15.d	Something handmade	Algo hecho a mano	Quelque chose fait main	Qualcosa fatto a mano	حاجة مصنوعة باليدّ
+knowme.q16	Falling asleep	Para dormirme	Pour m’endormir	Per addormentarmi	باش نرقد
+knowme.q16.a	With music	Con música	Avec de la musique	Con la musica	بالمزيكة
+knowme.q16.b	With a series	Con una serie	Avec une série	Con una serie	بمسلسل
+knowme.q16.c	Talking to you	Hablando contigo	En te parlant	Parlando con te	نحكي معاك
+knowme.q16.d	In two minutes, anywhere	En dos minutos, donde sea	En deux minutes, n’importe où	In due minuti, ovunque	في دقيقتين، في أي بلاصة
+knowme.q17	Dream job as a kid	El trabajo soñado en la infancia	Le métier rêvé quand j’étais enfant	Il lavoro dei sogni nell’infanzia	الخدمة اللي كنت نحلم بيها في صغري
+knowme.q17.a	Astronaut	Astronauta	Astronaute	Astronauta	رائد فضاء
+knowme.q17.b	Doctor	Médico	Médecin	Medico	طبيب
+knowme.q17.c	Singer	Cantante	Chanteur ou chanteuse	Cantante	مغنّي
+knowme.q17.d	Footballer	Futbolista	Footballeur ou footballeuse	Calciatore o calciatrice	لاعب كورة
+knowme.q18	Secret music pleasure	Placer musical secreto	Plaisir musical secret	Piacere musicale segreto	المزيكة اللي نحبّها في السرّ
+knowme.q18.a	Reggaeton	Reguetón	Le reggaeton	Il reggaeton	ريغيتون
+knowme.q18.b	Mezoued	Mezoued	Le mezoued	Il mezoued	مزود
+knowme.q18.c	Old Italian songs	Canciones italianas antiguas	Les vieilles chansons italiennes	Le vecchie canzoni italiane	أغاني طليانية قديمة
+knowme.q18.d	K-pop	K-pop	La K-pop	Il K-pop	كي بوب
+knowme.q19	The superpower I’d pick	El superpoder que elegiría	Le superpouvoir que je choisirais	Il superpotere che sceglierei	القوّة الخارقة اللي نختارها
+knowme.q19.a	Flying	Volar	Voler	Volare	نطير
+knowme.q19.b	Teleporting	Teletransportarme	Me téléporter	Teletrasportarmi	نتنقّل في لحظة
+knowme.q19.c	Reading minds	Leer mentes	Lire dans les pensées	Leggere nel pensiero	نقرا الأفكار
+knowme.q19.d	Stopping time	Detener el tiempo	Arrêter le temps	Fermare il tempo	نوقّف الوقت
+knowme.q20	In an argument I usually	En una discusión, normalmente	Pendant une dispute, en général	Durante una discussione, di solito	كي نتعاركو، عادةً
+knowme.q20.a	Stay calm	Mantengo la calma	Je reste calme	Mantengo la calma	نبقى هادي
+knowme.q20.b	Go quiet	Me quedo callado o callada	Je me tais	Sto in silenzio	نسكت
+knowme.q20.c	Make a joke	Hago una broma	Je fais une blague	Faccio una battuta	نعمل نكتة
+knowme.q20.d	Hug it out	Lo arreglo con un abrazo	Je règle ça avec un câlin	Risolvo con un abbraccio	نصلّحها بتعنيقة
+knowme.q21	Best way to spend money	La mejor forma de gastar dinero	La meilleure façon de dépenser de l’argent	Il modo migliore di spendere soldi	أحسن طريقة نصرف بيها الفلوس
+knowme.q21.a	Travel	Viajar	Voyager	Viaggiare	السفر
+knowme.q21.b	Food	Comida	La nourriture	Il cibo	الماكلة
+knowme.q21.c	Clothes	Ropa	Les vêtements	I vestiti	الحوايج واللبس
+knowme.q21.d	Saving it	Ahorrarlo	L’économiser	Risparmiarli	نلمّهم
+knowme.q22	The pet I’d love to have	La mascota que me encantaría tener	L’animal que j’adorerais avoir	L’animale che vorrei avere	الحيوان اللي نحب يكون عندي
+knowme.q22.a	A dog	Un perro	Un chien	Un cane	كلب
+knowme.q22.b	A cat	Un gato	Un chat	Un gatto	قطّوس
+knowme.q22.c	A bird	Un pájaro	Un oiseau	Un uccellino	عصفور
+knowme.q22.d	A toad that plays guitar	Un sapo que toca la guitarra	Un crapaud qui joue de la guitare	Un rospo che suona la chitarra	جرانة تعزف على القيتارة
+knowme.q23	My biggest fear	Mi mayor miedo	Ma plus grande peur	La mia paura più grande	أكبر حاجة نخاف منها
+knowme.q23.a	Heights	Las alturas	Le vide	L’altezza	العلوّ
+knowme.q23.b	The sea at night	El mar de noche	La mer la nuit	Il mare di notte	البحر في الليل
+knowme.q23.c	Losing people I love	Perder a quien quiero	Perdre les gens que j’aime	Perdere le persone che amo	نخسر الناس اللي نحبّهم
+knowme.q23.d	Insects	Los insectos	Les insectes	Gli insetti	الحشرات
+knowme.q24	Holiday style	Estilo de vacaciones	Style de vacances	Stile di vacanza	كيفاش نحب العطلة
+knowme.q24.a	Beach and sun	Playa y sol	Plage et soleil	Mare e sole	بحر وشمس
+knowme.q24.b	Mountains	Montaña	La montagne	La montagna	الجبل
+knowme.q24.c	A big city	Una gran ciudad	Une grande ville	Una grande città	مدينة كبيرة
+knowme.q24.d	A road trip	Un viaje por carretera	Un road trip	Un viaggio on the road	سفرة بالكرهبة
+play.week	Points this week	Puntos de esta semana	Points de la semaine	Punti di questa settimana	النقاط متاع الجمعة هاذي
+play.seeds	Seeds to plant: {{count}}	Semillas para plantar: {{count}}	Graines à planter : {{count}}	Semi da piantare: {{count}}	زريعة تتزرع: {{count}}
+play.seedsHint	Every 10 points gives you a seed for the garden.	Cada 10 puntos te dan una semilla para el jardín.	Tous les 10 points, tu gagnes une graine pour le jardin.	Ogni 10 punti ricevi un seme per il giardino.	كل 10 نقاط تربح حبّة زريعة للجنينة.
+play.plantNow	Plant in the garden	Plantar en el jardín	Planter dans le jardin	Pianta nel giardino	ازرع في الجنينة
+play.turnTitle	Your turn	Te toca	À toi de jouer	Tocca a te	دورك
+play.gamesTitle	Games	Juegos	Jeux	Giochi	الألعاب
+play.back	All games	Todos los juegos	Tous les jeux	Tutti i giochi	الألعاب الكل
+play.badge	Games waiting for you: {{count}}	Juegos esperándote: {{count}}	Jeux qui t’attendent : {{count}}	Giochi che ti aspettano: {{count}}	ألعاب تستنّى فيك: {{count}}
+play.td.hint	Mild, hot or Harissa	Suave, picante o Harissa	Doux, épicé ou Harissa	Dolce, piccante o Harissa	لطيف، حارّ ولّا هريسة
+play.hockey.hint	Together live, or against the toad	Juntos en vivo, o contra el sapo	Ensemble en direct, ou contre le crapaud	Insieme dal vivo, o contro il rospo	مع بعضكم مباشر، ولّا ضد الجرانة
+play.duel.hint	Same words for both. Who knows more?	Las mismas palabras para los dos. ¿Quién sabe más?	Les mêmes mots pour vous deux. Qui en sait le plus ?	Le stesse parole per tutti e due. Chi ne sa di più?	نفس الكلمات للزوز. شكون يعرف أكثر؟
+play.knowme.hint	Answer about you, then the other guesses	Respondes sobre ti y el otro adivina	Tu réponds sur toi, puis l’autre devine	Rispondi su di te, poi l’altro indovina	تجاوب على روحك، والآخر يخمّن
+game.td.spice	How spicy?	¿Qué tan picante?	Quel niveau d’épices ?	Quanto piccante?	قدّاش حارّ؟
+game.td.level1	Mild	Suave	Doux	Dolce	لطيف
+game.td.level2	Hot	Picante	Épicé	Piccante	حارّ
+game.td.level3	Harissa	Harissa	Harissa	Harissa	هريسة
+game.hockey.bot	Play against the toad	Jugar contra el sapo	Jouer contre le crapaud	Gioca contro il rospo	العب ضد الجرانة
+game.hockey.botScore	You {{me}} · Toad {{them}}	Tú {{me}} · Sapo {{them}}	Toi {{me}} · Crapaud {{them}}	Tu {{me}} · Rospo {{them}}	إنت {{me}} · الجرانة {{them}}
+game.hockey.botWon	You beat the toad, {{me}} to {{them}}!	¡Le ganaste al sapo, {{me}} a {{them}}!	Tu as battu le crapaud, {{me}} à {{them}} !	Hai battuto il rospo, {{me}} a {{them}}!	غلبت الجرانة، {{me}} مقابل {{them}}!
+game.hockey.botLost	The toad wins, {{them}} to {{me}}. Again?	Gana el sapo, {{them}} a {{me}}. ¿Otra?	Le crapaud gagne, {{them}} à {{me}}. On recommence ?	Vince il rospo, {{them}} a {{me}}. Un’altra?	الجرانة ربحت، {{them}} مقابل {{me}}. نعاودو؟
+game.hockey.botLive	You against the toad. Drag your mallet in your half.	Tú contra el sapo. Arrastra tu mazo en tu mitad.	Toi contre le crapaud. Fais glisser ton maillet dans ta moitié.	Tu contro il rospo. Trascina la tua mazza nella tua metà.	إنت ضد الجرانة. حرّك المضرب متاعك في النص متاعك.
+game.finishedBot	Air hockey against the toad · {{a}} to {{b}} · {{date}}	Hockey de mesa contra el sapo · {{a}} a {{b}} · {{date}}	Air hockey contre le crapaud · {{a}} à {{b}} · {{date}}	Air hockey contro il rospo · {{a}} a {{b}} · {{date}}	هوكي ضد الجرانة · {{a}} مقابل {{b}} · {{date}}
+game.finishedDuel	Word duel · {{a}} to {{b}} · {{date}}	Duelo de palabras · {{a}} a {{b}} · {{date}}	Duel de mots · {{a}} à {{b}} · {{date}}	Duello di parole · {{a}} a {{b}} · {{date}}	مبارزة كلمات · {{a}} مقابل {{b}} · {{date}}
+game.finishedKnowMe	How well do you know me · {{score}} of {{total}} · {{date}}	¿Cuánto me conoces? · {{score}} de {{total}} · {{date}}	Tu me connais bien ? · {{score}} sur {{total}} · {{date}}	Quanto mi conosci? · {{score}} su {{total}} · {{date}}	قدّاش تعرفني؟ · {{score}} من {{total}} · {{date}}
+duel.title	Word duel	Duelo de palabras	Duel de mots	Duello di parole	مبارزة الكلمات
+duel.intro	Seven words, ten seconds each. Then {{name}} plays the same words.	Siete palabras, diez segundos cada una. Luego {{name}} juega con las mismas.	Sept mots, dix secondes chacun. Ensuite {{name}} joue avec les mêmes mots.	Sette parole, dieci secondi ciascuna. Poi {{name}} gioca con le stesse.	سبعة كلمات، عشرة ثواني لكل وحدة. من بعد {{name}} يلعب بنفس الكلمات.
+duel.deckLabel	Words in	Palabras en	Mots en	Parole in	كلمات بـ
+duel.deck.it	Italian	Italiano	Italien	Italiano	الطلياني
+duel.deck.ve	Venezuelan Spanish	Español venezolano	Espagnol du Venezuela	Spagnolo venezuelano	الإسباني متاع فنزويلا
+duel.deck.tn	Tunisian Derja	Derja tunecino	Derja tunisien	Derja tunisino	الدارجة التونسية
+duel.start	Start a duel	Empezar un duelo	Lancer un duel	Inizia un duello	ابدا مبارزة
+duel.question	What does it mean?	¿Qué significa?	Qu’est-ce que ça veut dire ?	Cosa significa?	شنوّة معناها؟
+duel.progress	Word {{n}} of {{total}}	Palabra {{n}} de {{total}}	Mot {{n}} sur {{total}}	Parola {{n}} di {{total}}	كلمة {{n}} من {{total}}
+duel.right	Right!	¡Correcto!	Bonne réponse !	Giusto!	صحيح!
+duel.wrong	It means: {{meaning}}	Significa: {{meaning}}	Ça veut dire : {{meaning}}	Significa: {{meaning}}	معناها: {{meaning}}
+duel.late	Time’s up. It means: {{meaning}}	Se acabó el tiempo. Significa: {{meaning}}	Temps écoulé. Ça veut dire : {{meaning}}	Tempo scaduto. Significa: {{meaning}}	وفى الوقت. معناها: {{meaning}}
+duel.next	Next word	Siguiente palabra	Mot suivant	Parola successiva	الكلمة الجاية
+duel.finish	See my score	Ver mi puntaje	Voir mon score	Vedi il punteggio	شوف النتيجة متاعي
+duel.score	You got {{score}} out of {{total}}	Acertaste {{score}} de {{total}}	Tu as trouvé {{score}} sur {{total}}	Ne hai indovinate {{score}} su {{total}}	جبت {{score}} من {{total}}
+duel.sent	Sent! Now {{name}} plays the same words.	¡Enviado! Ahora {{name}} juega con las mismas palabras.	Envoyé ! Maintenant {{name}} joue avec les mêmes mots.	Inviato! Ora {{name}} gioca con le stesse parole.	تبعثت! توّا {{name}} يلعب بنفس الكلمات.
+duel.challenge	{{name}} challenged you in {{deck}} and got {{score}} out of {{total}}.	{{name}} te retó en {{deck}} y acertó {{score}} de {{total}}.	{{name}} t’a lancé un défi en {{deck}} et a trouvé {{score}} sur {{total}}.	{{name}} ti ha sfidato in {{deck}} e ne ha indovinate {{score}} su {{total}}.	{{name}} تحدّاك في {{deck}} وجاب {{score}} من {{total}}.
+duel.play	Play your turn	Juega tu turno	Joue ton tour	Gioca il tuo turno	العب دورك
+duel.won	You win, {{me}} to {{them}}!	¡Ganaste, {{me}} a {{them}}!	Tu gagnes, {{me}} à {{them}} !	Hai vinto, {{me}} a {{them}}!	ربحت، {{me}} مقابل {{them}}!
+duel.lost	{{name}} wins, {{them}} to {{me}}.	Gana {{name}}, {{them}} a {{me}}.	{{name}} gagne, {{them}} à {{me}}.	Vince {{name}}, {{them}} a {{me}}.	{{name}} ربح، {{them}} مقابل {{me}}.
+duel.tieYou	{{me}} to {{them}}: a tie, but you were faster!	{{me}} a {{them}}: empate, ¡pero tú respondiste antes!	{{me}} à {{them}} : égalité, mais tu as été plus rapide !	{{me}} a {{them}}: pareggio, ma hai risposto prima tu!	{{me}} مقابل {{them}}: تعادل، أما إنت كنت أسرع!
+duel.tieThem	{{me}} to {{them}}: a tie, but {{name}} was faster.	{{me}} a {{them}}: empate, pero {{name}} respondió antes.	{{me}} à {{them}} : égalité, mais {{name}} a été plus rapide.	{{me}} a {{them}}: pareggio, ma {{name}} ha risposto prima.	{{me}} مقابل {{them}}: تعادل، أما {{name}} كان أسرع.
+duel.waiting	Waiting for {{name}} to play.	Esperando a que {{name}} juegue.	En attente du tour de {{name}}.	In attesa che {{name}} giochi.	نستنّاو {{name}} يلعب.
+duel.timeLeft	Seconds left: {{seconds}}	Segundos restantes: {{seconds}}	Secondes restantes : {{seconds}}	Secondi rimasti: {{seconds}}	الثواني اللي بقات: {{seconds}}
+duel.again	New duel	Nuevo duelo	Nouveau duel	Nuovo duello	مبارزة جديدة
+knowme.title	How well do you know me?	¿Cuánto me conoces?	Tu me connais bien ?	Quanto mi conosci?	قدّاش تعرفني؟
+knowme.intro	Answer five questions about yourself. Then {{name}} guesses your answers.	Responde cinco preguntas sobre ti. Luego {{name}} adivina tus respuestas.	Réponds à cinq questions sur toi. Ensuite {{name}} devine tes réponses.	Rispondi a cinque domande su di te. Poi {{name}} indovina le tue risposte.	جاوب على خمسة أسئلة على روحك. من بعد {{name}} يخمّن الأجوبة متاعك.
+knowme.start	Answer about me	Responder sobre mí	Répondre sur moi	Rispondi su di me	نجاوب على روحي
+knowme.aboutYou	Your answer, about you	Tu respuesta, sobre ti	Ta réponse, sur toi	La tua risposta, su di te	الجواب متاعك، على روحك
+knowme.guessFor	What would {{name}} answer?	¿Qué respondería {{name}}?	Que répondrait {{name}} ?	Cosa risponderebbe {{name}}?	شنوّة يجاوب {{name}}؟
+knowme.progress	Question {{n}} of {{total}}	Pregunta {{n}} de {{total}}	Question {{n}} sur {{total}}	Domanda {{n}} di {{total}}	سؤال {{n}} من {{total}}
+knowme.sent	Sent! Now {{name}} guesses your answers.	¡Enviado! Ahora {{name}} adivina tus respuestas.	Envoyé ! Maintenant {{name}} devine tes réponses.	Inviato! Ora {{name}} indovina le tue risposte.	تبعثت! توّا {{name}} يخمّن الأجوبة متاعك.
+knowme.challenge	Your turn! Guess the answers of {{name}} to five questions.	¡Te toca! Adivina las respuestas de {{name}} a cinco preguntas.	À toi ! Devine les réponses de {{name}} à cinq questions.	Tocca a te! Indovina le risposte di {{name}} a cinque domande.	دورك! خمّن أجوبة {{name}} على خمسة أسئلة.
+knowme.guess	Guess the answers	Adivinar las respuestas	Deviner les réponses	Indovina le risposte	خمّن الأجوبة
+knowme.youGot	You guessed {{score}} out of {{total}}	Adivinaste {{score}} de {{total}}	Tu as deviné {{score}} sur {{total}}	Ne hai indovinate {{score}} su {{total}}	خمّنت {{score}} من {{total}}
+knowme.theyGot	{{name}} guessed {{score}} out of {{total}}	{{name}} adivinó {{score}} de {{total}}	{{name}} a deviné {{score}} sur {{total}}	{{name}} ne ha indovinate {{score}} su {{total}}	{{name}} خمّن {{score}} من {{total}}
+knowme.answerOf	{{name}}: {{answer}}	{{name}}: {{answer}}	{{name}} : {{answer}}	{{name}}: {{answer}}	{{name}}: {{answer}}
+knowme.yourGuess	Your guess: {{answer}}	Tu respuesta: {{answer}}	Ta réponse : {{answer}}	La tua risposta: {{answer}}	التخمين متاعك: {{answer}}
+knowme.guessOf	Guess of {{name}}: {{answer}}	Lo que dijo {{name}}: {{answer}}	Réponse de {{name}} : {{answer}}	Risposta di {{name}}: {{answer}}	تخمين {{name}}: {{answer}}
+knowme.yourAnswer	You: {{answer}}	Tú: {{answer}}	Toi : {{answer}}	Tu: {{answer}}	إنت: {{answer}}
+knowme.waiting	Waiting for {{name}} to guess.	Esperando a que {{name}} adivine.	En attente des réponses de {{name}}.	In attesa che {{name}} indovini.	نستنّاو {{name}} يخمّن.
+knowme.again	Answer more about me	Responder más sobre mí	Répondre encore sur moi	Rispondi ancora su di me	نجاوب أكثر على روحي
+inbox.games	Games	Juegos	Jeux	Giochi	الألعاب
+inbox.gameTurn	{{name}} started a game. Your turn!	{{name}} empezó un juego. ¡Te toca!	{{name}} a lancé une partie. À toi !	{{name}} ha iniziato una partita. Tocca a te!	{{name}} بدا لعبة. دورك!
+inbox.gameResult	{{name}} played your game. See the result.	{{name}} jugó tu juego. Mira el resultado.	{{name}} a joué ta partie. Regarde le résultat.	{{name}} ha giocato la tua partita. Guarda il risultato.	{{name}} لعب اللعبة متاعك. شوف النتيجة.
+push.kind.gameResult	{{sender}} played your game	{{sender}} jugó tu juego	{{sender}} a joué votre partie	{{sender}} ha giocato la tua partita	{{sender}} لعب اللعبة متاعك
+garden.seeds	Seeds: {{count}}	Semillas: {{count}}	Graines : {{count}}	Semi: {{count}}	الزريعة: {{count}}
+garden.noSeeds	No seeds left. Play together to earn more.	No quedan semillas. Jueguen juntos para ganar más.	Plus de graines. Jouez ensemble pour en gagner.	Niente più semi. Giocate insieme per guadagnarne altri.	ما بقاتش زريعة. العبو مع بعضكم باش تربحو أكثر.
+garden.goPlay	Go to Play	Ir a Jugar	Aller jouer	Vai a Gioca	امشي للعب

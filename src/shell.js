@@ -9,7 +9,7 @@ import {combo} from './garden/model.js';
 
 const TIME_ICON={day:'sun',dusk:'sunset',night:'moon'};
 
-export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,home,player,music,markRead,chat}){
+export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,home,player,music,markRead,chat,openRound}){
   // ---- Talk: notes and questions, one tab with two panes
   // ---- Talk: the chat first, then notes and questions
   const PANES=[['talkChat','chat'],['talkNotes','journal'],['talkQuestions','questions']];
@@ -42,9 +42,10 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
 
   // ---- Bell: unread thoughts for me
   function paintBell(snap){
-    const id=me(),songs=(snap?.notifications??[]).filter(n=>n.recipient_id===id&&['dedication','song_added'].includes(n.kind));
-    const unread=(snap?.thoughts??[]).filter(x=>x.recipient_id===id&&!x.read_at).length+songs.filter(n=>!n.read_at).length;
-    paintSongInbox(snap,songs);
+    const id=me(),mineOf=kinds=>(snap?.notifications??[]).filter(n=>n.recipient_id===id&&kinds.includes(n.kind));
+    const songs=mineOf(['dedication','song_added']),games=mineOf(['game_turn','game_result']);
+    const unread=(snap?.thoughts??[]).filter(x=>x.recipient_id===id&&!x.read_at).length+songs.filter(n=>!n.read_at).length+games.filter(n=>!n.read_at).length;
+    paintSongInbox(snap,songs);paintGameInbox(games);
     $('bellCount').hidden=!unread;$('bellCount').textContent=unread>9?'9+':String(unread);
     copy($('receptionToggle'),()=>unread?t('shell.bellUnread',{count:unread}):t('notifications.title'),'aria-label');
     if(!unread&&!(snap?.thoughts??[]).length&&!$('shellInboxEmpty'))$('messageInbox').before(Object.assign(el('p',()=>t('shell.inboxEmpty'),'small'),{id:'shellInboxEmpty'}));
@@ -62,6 +63,18 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
     for(const n of songs.slice(0,20)){
       const item=(snap.playlistItems??[]).find(i=>i.id===n.ref_id),title=item?.title??'♪';
       const row=button(()=>t(n.kind==='dedication'?'inbox.dedication':'inbox.songAdded',{name:person(n.sender_id),title}),()=>{if(!n.read_at)markRead([n.id]).catch(()=>{});$('receptionClose').click();music.open();},'inbox-row'+(n.read_at?'':' unread'));
+      row.dir='auto';box.append(row);
+    }
+  }
+
+  // Games in the bell: your turn in a round your partner started, or the result of yours. Tapping opens it in Play.
+  function paintGameInbox(games){
+    let box=$('gameInbox');
+    if(!box){box=el('section',undefined,'song-inbox');box.id='gameInbox';$('receptionPushPrompt').after(box);}
+    box.replaceChildren();if(!games.length)return;
+    box.append(el('h3',()=>t('inbox.games')));
+    for(const n of games.slice(0,10)){
+      const row=button(()=>t(n.kind==='game_turn'?'inbox.gameTurn':'inbox.gameResult',{name:person(n.sender_id)}),()=>{if(!n.read_at)markRead([n.id]).catch(()=>{});$('receptionClose').click();navigate('play');openRound?.(n.ref_id);},'inbox-row'+(n.read_at?'':' unread'));
       row.dir='auto';box.append(row);
     }
   }
@@ -110,8 +123,10 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
   function tabChanged(tab){talkOpen=tab==='talk';chat?.shown(talkOpen&&pane==='chat');if(tab==='learn')renderLearn();if(tab==='garden')paintTime();}
   // the Talk tab shows how many messages wait for you
   function unread(count){const b=$('talkBadge');b.hidden=!count;b.textContent=count>9?'9+':String(count||'');copy($('nav-talk'),()=>count?t('talk.unread',{count}):t('nav.talk'),'aria-label');}
+  // the Play tab shows how many rounds wait for you
+  function playWaiting(count){const b=$('playBadge');if(!b)return;b.hidden=!count;b.textContent=count>9?'9+':String(count||'');copy($('nav-play'),()=>count?t('play.badge',{count}):t('nav.play'),'aria-label');}
   function render(snap=getSnapshot()){paintBell(snap);paintCombo(snap);paintToad();music.render();chat?.start();}
-  function clear(){$('bellCount').hidden=true;copy($('receptionToggle'),()=>t('notifications.title'),'aria-label');copy($('comboDays'),'');copy($('comboHint'),'');$('toadSong').textContent='';$('toadLine').textContent='';$('songInbox')?.replaceChildren();$('learnList').replaceChildren();chat?.clear();unread(0);talkPane('chat');}
+  function clear(){$('bellCount').hidden=true;copy($('receptionToggle'),()=>t('notifications.title'),'aria-label');copy($('comboDays'),'');copy($('comboHint'),'');$('toadSong').textContent='';$('toadLine').textContent='';$('songInbox')?.replaceChildren();$('gameInbox')?.replaceChildren();$('learnList').replaceChildren();chat?.clear();unread(0);playWaiting(0);talkPane('chat');}
   talkPane('chat');paintToad();
-  return {talkPane,render,clear,openMusic,tabChanged,renderLearn,paintTime,paintToad,unread};
+  return {talkPane,render,clear,openMusic,tabChanged,renderLearn,paintTime,paintToad,unread,playWaiting};
 }

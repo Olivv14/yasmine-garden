@@ -56,10 +56,13 @@ export class Transport{
     const gameEvents=(await optional(()=>all('game_events',q=>q.eq('pair_id',pairId))))??[];
     const playlists=await optional(()=>all('playlists',q=>q.eq('pair_id',pairId)));
     const playlistItems=playlists?(await optional(()=>all('playlist_items',q=>q.eq('pair_id',pairId).is('deleted_at',null))))??[]:null;
+    // 010 play: rounds in turns (word duel, know me), newest 200, with their answers.
+    const playRounds=await optional(()=>this.client.from('play_rounds').select('*').eq('pair_id',pairId).order('created_at',{ascending:false}).order('id').limit(200).then(checked));
+    const playAnswers=playRounds?.length?(await optional(()=>this.client.from('play_answers').select('*').in('round_id',playRounds.map(r=>r.id)).order('created_at').then(checked)))??[]:[];
     const notifications=await optional(()=>this.client.from('notifications').select('*').eq('recipient_id',me.id).order('created_at',{ascending:false}).order('id').limit(200).then(checked));
     const answers=[];for(const r of rounds)answers.push(...await pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').eq('round_id',r.id).order('owner_id')));
     const currentMe=profiles.find(p=>p.id===me.id);if(!currentMe||currentMe.auth_user_id!==me.auth_user_id)throw uiError('sync.changedSession');
-    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playlists,playlistItems,notifications,me:currentMe,pairId};
+    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,playlists,playlistItems,notifications,me:currentMe,pairId};
   }
   schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh().catch(this.onFailure),120);}
   refresh(){if(this.inflight){this.again=true;return this.inflight;}const g=this.generation;this.inflight=(async()=>{try{let attempts=0;do{this.again=false;this.guard(g);const r0=await this.revision();const data=await this.snapshot();const r1=await this.revision();this.guard(g);if(r0!==r1||this.again){if(++attempts>=6)throw uiError('errors.changedDuringRead');continue;}this.context.members=data.members;this.onSnapshot({...data,revision:r1});this.onStatus(()=>t('sync.revision',{revision:r1}));return;}while(true)}finally{if(g===this.generation){this.inflight=null;if(this.again)this.schedule();}}})();return this.inflight;}

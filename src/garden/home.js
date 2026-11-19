@@ -13,7 +13,7 @@ import {currentGardenTheme,onGardenTheme,setHarissa,harissaOn} from '../design/t
 
 const specimen=(type,stage,size=96)=>s('svg',{viewBox:'-40 -84 80 92',width:size,height:size,cls:'specimen','aria-hidden':'true',focusable:'false'},[flowerArt(type,stage)]);
 
-export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,person,navigate,plant,water,remove,notify,onToad,onDiscover,canStart3D=()=>true}){
+export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,person,navigate,plant,water,remove,notify,onToad,onDiscover,canStart3D=()=>true,seeds=()=>null}){
   let flowerSheet=null,flowerSheetId=null,lastBloomCount=0;
   const garden=createGarden({onFlower:id=>openFlower(id),onSoil:()=>openPlant(),onMoon:()=>openTerminal()});
   $('gardenMount').append(garden.element);
@@ -105,7 +105,11 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
     const status=el('p',undefined,'small');status.setAttribute('role','status');
     const go=button(()=>t('garden.plant'),async e=>{const b=e.currentTarget;b.disabled=true;try{const id=await plant(chosen);if(id){sheet.close();setTimeout(()=>garden.planted(id),350);}}catch(err){copy(status,()=>err?.gardenKey?t(err.gardenKey):String(err?.message??err));}finally{if(b.isConnected)b.disabled=false;}},'primary');
     go.prepend(icon('shovel'));
-    sheet.body.append(group,el('p',()=>t('garden.limit'),'small'),status,go);
+    // Planting uses a seed; seeds come from playing together (Play shows how).
+    const have=seeds(),count=el('p',undefined,'plant-seeds');count.append(icon('sprout',18),el('span',()=>t('garden.seeds',{count:have?.left??0})));
+    sheet.body.append(group,el('p',()=>t('garden.limit'),'small'));
+    if(have&&have.left<=0){go.disabled=true;sheet.body.append(count,el('p',()=>t('garden.noSeeds'),'small'),button(()=>t('garden.goPlay'),()=>{sheet.close();navigate('play');},'quiet'),status,go);}
+    else sheet.body.append(...(have?[count]:[]),status,go);
   }
 
   // Something from Tunisia or Venezuela, found in the 3D garden: a small card with a word to learn.
