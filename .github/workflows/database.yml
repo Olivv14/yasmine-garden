@@ -1,0 +1,67 @@
+name: Database
+
+# Runs a reviewed SQL file from this repository against the production database.
+# The connection string lives only in the SUPABASE_DB_URL repository secret.
+#   rehearse: runs the whole migration, then rolls it back (nothing is kept)
+#   apply:    runs the migration for real (it commits only if its own checks pass)
+#   check:    runs a read-only query file from backend/checks/
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: backend/NNN_name.sql for rehearse or apply, backend/checks/name.sql for check
+        type: string
+        required: true
+      mode:
+        description: rehearse, apply or check
+        type: choice
+        options: [rehearse, apply, check]
+        default: rehearse
+
+permissions:
+  contents: read
+
+concurrency:
+  group: database
+  cancel-in-progress: false
+
+jobs:
+  run:
+    if: github.ref == 'refs/heads/connection-live'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the request
+        env:
+          FILE: ${{ inputs.file }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -eu
+          case "$MODE" in
+            check) case "$FILE" in backend/checks/[a-z0-9_-]*.sql) ;; *) echo "check runs only backend/checks/*.sql"; exit 1;; esac ;;
+            rehearse|apply) case "$FILE" in backend/[0-9][0-9][0-9]_[a-z0-9_]*.sql) ;; *) echo "rehearse and apply run only backend/NNN_name.sql"; exit 1;; esac ;;
+            *) echo "unknown mode"; exit 1 ;;
+          esac
+          test -f "$FILE"
+          if [ "$MODE" != check ]; then
+            grep -qx 'begin;' "$FILE" || { echo "a migration must open with begin;"; exit 1; }
+            test "$(grep -cx 'commit;' "$FILE")" = 1 || { echo "a migration must end with exactly one commit;"; exit 1; }
+          fi
+      - name: Install psql
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client >/dev/null
+      - name: Run
+        env:
+          DB: ${{ secrets.SUPABASE_DB_URL }}
+          FILE: ${{ inputs.file }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -eu
+          test -n "$DB" || { echo "Add the SUPABASE_DB_URL repository secret first"; exit 1; }
+          case "$MODE" in
+            rehearse) sed 's/^commit;$/rollback;/' "$FILE" > /tmp/run.sql ;;
+            apply) cp "$FILE" /tmp/run.sql ;;
+            check) { echo 'begin read only;'; cat "$FILE"; echo; echo 'rollback;'; } > /tmp/run.sql ;;
+          esac
+          psql "$DB" -X -v ON_ERROR_STOP=1 -P pager=off -f /tmp/run.sql
+          echo "Finished: $MODE $FILE"
