@@ -1,12 +1,11 @@
-// Play tab: this week's points and your seeds, games waiting for you, the four games, and recent results.
+// Play tab: this week's points and your seeds, games waiting for you, and the four games.
 // Truth or dare and hockey results are game_events (backend/005, 010); word duels and know-me are rounds
 // played in turns (backend/010). Every label comes from the catalog.
 import {createTruthDare} from './truth-dare.js';
 import {createHockey} from './hockey.js';
 import {createDuel} from './duel-ui.js';
 import {createKnowMe} from './knowme-ui.js';
-import {finishedGames,turnsPerFinish} from './rules.js';
-import {pointsBy,weekStart,seeds,waitingForMe,finishedRounds,answersOf} from './score.js';
+import {pointsBy,weekStart,seeds,waitingForMe,answersOf} from './score.js';
 import {authorTone} from '../garden/model.js';
 import {icon} from '../design/icons.js';
 
@@ -43,8 +42,7 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   const turns=el('section',undefined,'play-turns');turns.id='playTurns';
   const tiles=el('section',undefined,'play-games');tiles.id='playGames';
   const stage=el('section',undefined,'play-stage');stage.id='playStage';stage.hidden=true;
-  const history=el('section',undefined,'card game-history');
-  mount.append(board,turns,tiles,stage,history);
+  mount.append(board,turns,tiles,stage);
   let open=null;
 
   tiles.append(el('h3',()=>t('play.gamesTitle'),'eyebrow play-games-title'));
@@ -100,32 +98,11 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
       turns.append(card);
     }
   }
-  function paintHistory(snap){
-    history.replaceChildren(el('h3',()=>t('game.history'),'title'));
-    const date=v=>new Intl.DateTimeFormat(locale()==='aeb-TN'?'ar-TN':locale(),{dateStyle:'medium'}).format(new Date(v));
-    const turnsBy=turnsPerFinish(snap.gameEvents);
-    const items=[
-      ...finishedGames(snap.gameEvents).filter(g=>g.game!=='hockey_bot'||g.profile_id===me()).map(g=>({at:Date.parse(g.created_at),line:()=>{
-        if(g.game==='hockey'){const [a,b]=g.profile_id===me()?[g.score_me,g.score_partner]:[g.score_partner,g.score_me];return t('game.finishedHockey',{a,b,date:date(g.created_at)});}
-        if(g.game==='hockey_bot')return t('game.finishedBot',{a:g.score_me,b:g.score_partner,date:date(g.created_at)});
-        return t('game.finishedTd',{count:turnsBy.get(g.id)??0,date:date(g.created_at)});}})),
-      ...finishedRounds(snap).map(({round:r,at})=>({at,round:r.id,line:()=>{
-        const a=answersOf(snap,r.id);
-        if(r.game==='word_duel'){const mine=a.find(x=>x.profile_id===me()),theirs=a.find(x=>x.profile_id!==me());return t('game.finishedDuel',{a:mine?.score??0,b:theirs?.score??0,date:date(at)});}
-        const g=a.find(x=>x.role==='guess');return t('game.finishedKnowMe',{score:g?.score??0,total:r.items.length,date:date(at)});}})),
-    ].sort((x,y)=>y.at-x.at).slice(0,8);
-    if(!items.length){history.append(el('p',()=>t('game.historyEmpty'),'small'));return;}
-    const ul=document.createElement('ul');ul.className='game-list';
-    for(const it of items){const li=document.createElement('li');
-      if(it.round){const b=button(it.line,()=>openRound(it.round),'link');li.append(b);}else copy(li,it.line);
-      ul.append(li);}
-    history.append(ul);
-  }
   function render(){
     const snap=getSnapshot();if(!snap)return;
-    paintBoard(snap);paintTurns(snap);paintHistory(snap);
+    paintBoard(snap);paintTurns(snap);
     if(open==='td')td.render(snap);else if(open==='duel')duel.render();else if(open==='knowme')knowme.render();
   }
-  function clear(){stopGames();td.clear();duel.clear();knowme.clear();board.replaceChildren();turns.replaceChildren();history.replaceChildren();show(null);onWaiting?.(0);}
+  function clear(){stopGames();td.clear();duel.clear();knowme.clear();board.replaceChildren();turns.replaceChildren();show(null);onWaiting?.(0);}
   return {render,clear,stop:()=>stopGames(),openRound,show};
 }
