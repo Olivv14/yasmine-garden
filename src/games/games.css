@@ -184,3 +184,14 @@ html.game-full #playStage .game-card::before{display:none}
 #playStage #pool .pool-shoot{min-inline-size:84px;min-block-size:48px;border-radius:14px;font:800 15px var(--font-display)}
 #playStage .game-card button.primary{background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;border-color:transparent}
 #pool .pool-controls,#airHockey .hk-match{-webkit-user-select:none;user-select:none}
+/* truth or dare: back to the spice levels, or another card */
+.td-nav{display:flex;justify-content:space-between;align-items:center;margin-block:6px}
+.play-stage .game-card button.td-back,.play-stage .game-card button.td-again{background:none;border:0;color:#FFD58A;font:700 15px var(--font-sans);min-block-size:44px;padding:0 4px;display:flex;align-items:center;gap:4px}
+/* everything in a game fits one phone screen: the word tile shrinks with the height, the answers stay compact */
+html.game-full #playStage .duel-tile{inline-size:min(240px,70%,26dvh)}
+html.game-full #playStage .duel-tile .duel-word{font-size:clamp(22px,4.2dvh,36px)}
+html.game-full #playStage .game-card button.duel-option{min-block-size:46px;padding-block:6px}
+html.game-full #playStage .duel-options,html.game-full #playStage .duel-choices{gap:8px}
+html.game-full #playStage .game-card{gap:8px}
+html.game-full #playStage .game-draw .title{font-size:clamp(20px,3.2dvh,26px)}
+html.game-full #playStage #tdResponse{min-block-size:60px;max-block-size:16dvh}

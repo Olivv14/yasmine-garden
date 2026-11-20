@@ -184,6 +184,9 @@ The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and rea
 - `learn_review(p_card_key text, p_state jsonb) -> learn_state`: the card's new FSRS state after one review. `p_card_key` is a deck card (`it.amore`) or a taught word (`w:<message id>` of a `word` message in this pair). `reps` must grow by exactly one; the same state again returns the stored row (safe retry); otherwise `PT409`. Each review adds to today's `learn_days`; every 10 reviews in a day is a point.
 - A `word` message may carry one `audio/*` recording (your voice saying the word).
 
+### Planting where you drop the seed (backend/016)
+- `plant_flower_at(p_id uuid, p_flower_type text, p_x real, p_z real) -> flowers`: like `plant_flower`, and the flower keeps that spot on the island (`px`, `pz`, within 7 of the centre). A retry returns the same flower.
+
 ### Garden discoveries (backend/015)
 - `discover(p_spot text) -> garden_discoveries`: saves a culture spot you found; finding it again changes nothing.
 

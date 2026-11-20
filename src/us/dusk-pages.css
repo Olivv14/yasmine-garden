@@ -3,7 +3,7 @@
 /* ---------- Us ---------- */
 #page-us{--dk-ink:#FFF4E6;--dk-soft:#FFE2C6;--dk-panel:rgba(18,10,20,.62);--dk-line:rgba(255,226,198,.16);
   position:relative;border-radius:26px;padding:70px 14px 18px;margin-inline:-6px;color:var(--dk-ink);
-  background:linear-gradient(180deg,#1F2148 0%,#5A3C66 10%,#C9765A 19%,#3A262C 30%,#1C1418 100%)}
+  background:linear-gradient(180deg,var(--dk-sky1,#1F2148) 0%,var(--dk-sky2,#5A3C66) 10%,var(--dk-sky3,#C9765A) 19%,var(--dk-sky4,#3A262C) 30%,var(--dk-base,#1C1418) 100%)}
 #page-us::before{content:"";position:absolute;left:0;right:0;top:0;block-size:96px;pointer-events:none;border-radius:26px 26px 0 0;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 96'%3E%3Cdefs%3E%3CradialGradient id='b'%3E%3Cstop offset='0' stop-color='%23FFE4A0' stop-opacity='.95'/%3E%3Cstop offset='.4' stop-color='%23FFB86A' stop-opacity='.35'/%3E%3Cstop offset='1' stop-color='%23FFB86A' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M-10 22 Q 90 58 190 58 T 400 26' fill='none' stroke='%231A1018' stroke-width='1.4'/%3E%3Cg fill='url(%23b)'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Ccircle cx='88' cy='47' r='8'/%3E%3Ccircle cx='150' cy='56' r='8'/%3E%3Ccircle cx='214' cy='57' r='8'/%3E%3Ccircle cx='276' cy='50' r='8'/%3E%3Ccircle cx='336' cy='37' r='8'/%3E%3C/g%3E%3Cg fill='%23FFF0C8'%3E%3Cellipse cx='30' cy='31' rx='2.2' ry='3.2'/%3E%3Cellipse cx='88' cy='48' rx='2.2' ry='3.2'/%3E%3Cellipse cx='150' cy='57' rx='2.2' ry='3.2'/%3E%3Cellipse cx='214' cy='58' rx='2.2' ry='3.2'/%3E%3Cellipse cx='276' cy='51' rx='2.2' ry='3.2'/%3E%3Cellipse cx='336' cy='38' rx='2.2' ry='3.2'/%3E%3C/g%3E%3C/svg%3E") top center/100% 96px no-repeat}
 #page-us>.section-head{position:absolute;top:14px;left:18px;right:18px;margin:0}
@@ -124,14 +124,31 @@ html.green-hour body::after{content:"";position:fixed;inset:0;z-index:140;pointe
 .egg-proverb-words{margin:0;font:700 26px/1.5 var(--font-arabic)}
 .egg-proverb-meaning{margin:0;font:600 18px/1.35 var(--font-hand)}
 .egg-proverb-close{margin:0;font:600 11px var(--font-sans);opacity:.6}
-/* Emmy asleep on the Talk tab when nothing is waiting */
-.bottom-nav #nav-talk{position:relative}
-.bottom-nav #nav-talk.talk-quiet::after{content:"";position:absolute;inset-block-start:-22px;inset-inline-start:calc(50% - 4px);inline-size:64px;block-size:66px;pointer-events:none;
-  background:url(./art/mascots/emmy.png) 0 -264px/256px 726px no-repeat;transform:scale(.42);transform-origin:0 100%;image-rendering:pixelated;animation:egg-emmy-sleep 2.4s steps(4) infinite}
-@keyframes egg-emmy-sleep{to{background-position:-256px -264px}}
 /* the secret dance step */
 .bottom-nav.nav-dance [data-page]{animation:egg-nav-dance .55s ease-in-out 7 alternate}
 .bottom-nav.nav-dance [data-page]:nth-child(2){animation-delay:.08s}.bottom-nav.nav-dance [data-page]:nth-child(3){animation-delay:.16s}
 .bottom-nav.nav-dance [data-page]:nth-child(4){animation-delay:.24s}.bottom-nav.nav-dance [data-page]:nth-child(5){animation-delay:.32s}
 @keyframes egg-nav-dance{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(-8deg)}100%{transform:translateY(0) rotate(8deg)}}
-@media (prefers-reduced-motion:reduce){.bottom-nav #nav-talk.talk-quiet::after{animation:none}.bottom-nav.nav-dance [data-page]{animation:none}}
+@media (prefers-reduced-motion:reduce){.bottom-nav.nav-dance [data-page]{animation:none}}
+/* the old username form never shows; only the password-setup link uses this panel */
+#authPanel:not(:has(#passwordForm:not([hidden]))){display:none!important}
+/* coming back signed in: a quiet dusk screen with one soft light, then the page you left */
+.gate.quiet .gate-fireflies{display:block}
+.gate.quiet::after{content:"";position:absolute;left:50%;top:50%;inline-size:14px;block-size:14px;margin:-7px;border-radius:50%;background:#FFE7A0;box-shadow:0 0 22px 8px rgba(255,214,120,.55);animation:gate-ff 1.6s ease-in-out infinite}
+
+/* a message is waiting: the mascot waits on the Talk tab with a "!" */
+.mascot-bang{position:absolute;left:40px;top:-26px;inline-size:22px;block-size:26px;border-radius:11px;background:#FFF4E6;color:#C2372E;font:800 17px/26px var(--font-sans);text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.4);animation:mascot-bang .9s ease-in-out infinite alternate}
+@keyframes mascot-bang{to{transform:translateY(-4px)}}
+/* notifications on iPhone: the guide card and its four steps */
+#page-us button.us-guide{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;inline-size:100%;text-align:start;padding:12px 14px;border-radius:18px;background:rgba(18,10,20,.62);border:1px solid var(--dk-accent,#FFD58A);color:#FFF4E6;box-shadow:none}
+#page-us button.us-guide>svg{grid-row:span 2;color:var(--dk-accent,#FFD58A)}
+.us-guide-title{font:800 15px var(--font-display)}
+#page-us .us-guide small{color:#9FE0B8;font:600 12px var(--font-sans)}
+.guide-steps{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+.guide-step{display:flex;gap:12px;align-items:center;padding:12px;border-radius:18px;background:rgba(18,10,20,.5);border:1px solid rgba(255,226,198,.16)}
+.guide-step.done{border-color:#9FE0B8}
+.guide-step.done .guide-num{background:#9FE0B8}
+.guide-num{inline-size:32px;block-size:32px;border-radius:50%;background:var(--dk-accent,#FFD58A);color:#2A1A10;display:grid;place-items:center;font:800 15px var(--font-display);flex:none}
+.guide-text{flex:1;font:600 14px/1.35 var(--font-sans)}
+.guide-art{inline-size:40px;block-size:40px;border-radius:12px;background:#2A2A30;color:#4FA3FF;display:grid;place-items:center;flex:none}
+.guide-status{margin:8px 0 0;font:600 12px var(--font-sans);color:#9FE0B8;text-align:center}

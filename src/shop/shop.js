@@ -107,5 +107,5 @@ export function createShop({el,button,t,copy,getSnapshot,me,partner,person,rpc,n
     const next={heart:i.kind==='heart'?i.id:c.heart,theme:i.kind==='theme'?i.id:c.theme,mascots:i.kind==='mascot'?(justBought&&c.mascots.includes(i.id)?c.mascots:toggleMascot([...c.mascots],i.id)):[...c.mascots]};
     try{await rpc('shop_choose',{p_heart:next.heart,p_theme:next.theme,p_mascots:next.mascots});}catch{notify(()=>t('common.unknownError'));}
   }
-  return {open,apply,clear(){mascots.show([]);delete document.documentElement.dataset.shopTheme;sheet?.close();}};
+  return {open,apply,messageWaiting(on){mascots.waiting(on);},clear(){mascots.show([]);delete document.documentElement.dataset.shopTheme;sheet?.close();}};
 }

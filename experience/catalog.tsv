@@ -1395,3 +1395,27 @@ eggs.proverb.6.text	الصبر مفتاح الفرج	الصبر مفتاح ال�
 eggs.proverb.6.meaning	Patience is the key to relief: the distance will end.	La paciencia es la llave del alivio: la distancia terminará.	La patience est la clé du soulagement : la distance finira.	La pazienza è la chiave del sollievo: la distanza finirà.	الصبر مفتاح الفرج: البعد باش يوفى.
 garden3d.full	See the garden full screen	Ver el jardín en pantalla completa	Voir le jardin en plein écran	Vedi il giardino a schermo intero	شوف الجنينة في الشاشة الكلّ
 garden3d.exitFull	Back to the app	Volver a la app	Retour à l’app	Torna all’app	ارجع للتطبيق
+game.td.backSpice	Spice	Picante	Piquant	Piccante	الحرارة
+game.td.another	Another card	Otra carta	Une autre carte	Un'altra carta	كرطة أخرى
+garden3d.hideScores	Hide the scores	Ocultar los puntos	Masquer les scores	Nascondi i punteggi	خبّي النقاط
+garden3d.showScores	Show the scores	Mostrar los puntos	Afficher les scores	Mostra i punteggi	ورّي النقاط
+garden3d.resetView	Back to the usual view	Volver a la vista de siempre	Revenir à la vue habituelle	Torna alla vista solita	ارجع للمنظر العادي
+garden3d.seedsDrag	Seeds: {{count}} · drag one onto your side	Semillas: {{count}} · arrastra una a tu lado	Graines : {{count}} · glisse-en une de ton côté	Semi: {{count}} · trascinane uno dalla tua parte	زريعة: {{count}} · اسحب وحدة لجيهتك
+garden3d.noSeeds	No seeds right now · play to earn more	Sin semillas por ahora · juega para ganar más	Pas de graines pour l'instant · joue pour en gagner	Niente semi per ora · gioca per guadagnarne	ما فمّاش زريعة توّا · العب باش تربح
+garden3d.ownSide	Planted on your side of the island	Plantada en tu lado de la isla	Plantée de ton côté de l'île	Piantato dalla tua parte dell'isola	تزرعت في جيهتك من الجزيرة
+garden3d.planted	A {{flower}} is planted	Plantaste una {{flower}}	Un·e {{flower}} est planté·e	Hai piantato: {{flower}}	زرعت {{flower}}
+garden3d.watered	Your {{flower}} is watered	Regaste tu {{flower}}	Ton {{flower}} est arrosé·e	Hai annaffiato: {{flower}}	سقيت {{flower}}
+guide.cardTitle	Get notifications on iPhone	Recibir notificaciones en iPhone	Recevoir les notifications sur iPhone	Ricevere notifiche su iPhone	خلّي الإشعارات توصل للآيفون
+guide.title	Notifications on iPhone	Notificaciones en iPhone	Notifications sur iPhone	Notifiche su iPhone	الإشعارات في الآيفون
+guide.intro	iPhone only sends notifications to the app on your Home Screen. Four steps, once per phone.	El iPhone solo envía notificaciones a la app en tu pantalla de inicio. Cuatro pasos, una vez por teléfono.	L'iPhone n'envoie les notifications qu'à l'app sur ton écran d'accueil. Quatre étapes, une fois par téléphone.	L'iPhone manda notifiche solo all'app nella schermata Home. Quattro passi, una volta per telefono.	الآيفون يبعث الإشعارات كان للتطبيق اللي في الشاشة الرئيسية. أربعة خطوات، مرّة في كل تلفون.
+guide.step1	Open Between us in Safari and tap the Share button	Abre Entre nosotros en Safari y toca el botón Compartir	Ouvre Entre nous dans Safari et touche le bouton Partager	Apri Tra noi in Safari e tocca il pulsante Condividi	حلّ بيناتنا في Safari وانقر على بوطون المشاركة
+guide.step2	Scroll down, tap Add to Home Screen, then Add	Baja, toca Añadir a pantalla de inicio y luego Añadir	Descends, touche Sur l'écran d'accueil, puis Ajouter	Scorri, tocca Aggiungi alla schermata Home, poi Aggiungi	انزل، انقر على إضافة للشاشة الرئيسية، ومبعد إضافة
+guide.step3	Close Safari. Open Between us from its new icon	Cierra Safari. Abre Entre nosotros desde su nuevo icono	Ferme Safari. Ouvre Entre nous depuis sa nouvelle icône	Chiudi Safari. Apri Tra noi dalla sua nuova icona	سكّر Safari. حلّ بيناتنا من الأيقونة الجديدة
+guide.step4	Come back here, tap Turn on notifications, then Allow	Vuelve aquí, toca Activar notificaciones y luego Permitir	Reviens ici, touche Activer les notifications, puis Autoriser	Torna qui, tocca Attiva le notifiche, poi Consenti	ارجع لهنا، انقر على شعّل الإشعارات، ومبعد اسمح
+guide.turnOn	Turn on notifications	Activar notificaciones	Activer les notifications	Attiva le notifiche	شعّل الإشعارات
+guide.statusSafari	This phone: still in Safari · start with step 1	Este teléfono: aún en Safari · empieza por el paso 1	Ce téléphone : encore dans Safari · commence par l'étape 1	Questo telefono: ancora in Safari · inizia dal passo 1	التلفون هذا: مازال في Safari · ابدا بالخطوة 1
+guide.statusReady	This phone: Home Screen app ✓ · notifications off	Este teléfono: app en pantalla de inicio ✓ · notificaciones apagadas	Ce téléphone : app sur l'écran d'accueil ✓ · notifications désactivées	Questo telefono: app nella Home ✓ · notifiche spente	التلفون هذا: التطبيق في الشاشة ✓ · الإشعارات مطفيّة
+guide.statusOn	This phone: notifications on ✓	Este teléfono: notificaciones activadas ✓	Ce téléphone : notifications activées ✓	Questo telefono: notifiche attive ✓	التلفون هذا: الإشعارات شاعلة ✓
+home.moodShort	Mood	Ánimo	Humeur	Umore	المزاج
+dress.sharedWith	For {{name}} too	También para {{name}}	Pour {{name}} aussi	Anche per {{name}}	لـ{{name}} زادة
+dress.onlyMe	Only for me	Solo para mí	Rien que pour moi	Solo per me	ليا أنا برك
