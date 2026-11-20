@@ -6,7 +6,7 @@ import {seeded,shuffle,meaningLang,pickItems,closeMeanings,choices,duelScore,due
 import {createTranslator} from '../experience/i18n.mjs';
 import {QUESTIONS,questionKey,optionKey,pickQuestions,matches} from '../src/games/knowme.js';
 import {weekStart,pointEvents,pointsBy,seeds,waitingForMe,waitingForThem,finishedRounds} from '../src/games/score.js';
-import {toadMove} from '../src/games/bot.js';
+import {toadMove,TOAD_LEVELS,crossing} from '../src/games/bot.js';
 import {parseDecks} from '../experience/build-decks.mjs';
 
 const at=i=>new Date(Date.UTC(2026,10,15,10,i)).toISOString();
@@ -147,6 +147,30 @@ test('the toad stays in its half, moves no faster than its speed, and blocks a s
   let state={puck:[.8,.75,-.35,-1.2]},toad=[.5,.16],blocked=false;
   for(let i=0;i<120&&!blocked;i++){toad=toadMove(state,toad,dt,()=>.5);const r=step(state.puck,[{x:toad[0],y:toad[1],vx:0,vy:0}],dt);if(r.scored==='host')break;state={puck:r.puck};if(r.puck[3]>0)blocked=true;}
   assert.ok(blocked,'the toad sent the puck back');
+});
+test('three toads: each stays in its half and under its own top speed; the Champion is the fastest',()=>{
+  const dt=1/60;
+  for(const level of ['easy','medium','hard']){let m=[.5,.16];const memo={};
+    for(let i=0;i<300;i++){const puck=[Math.random(),Math.random()*1.6,(Math.random()-.5)*4,(Math.random()-.5)*4];const n=toadMove({puck},m,dt,Math.random,level,memo,[.5,1.4]);
+      assert.ok(n[1]<=TABLE.h/2-TABLE.mallet+1e-9&&n[1]>=TABLE.mallet-1e-9,level+' stays in its half');
+      assert.ok(Math.hypot(n[0]-m[0],n[1]-m[1])<=TOAD_LEVELS[level].speed*dt+1e-6,level+' speed');m=n;}}
+  assert.ok(TOAD_LEVELS.hard.speed>TOAD_LEVELS.medium.speed&&TOAD_LEVELS.medium.speed>TOAD_LEVELS.easy.speed);
+  assert.equal(toadMove({puck:[.5,.5,0,0]},[.5,.16],dt,()=>.5,'nonsense').length,2,'unknown level falls back to medium');
+});
+test('a bounced shot is read correctly: the crossing point folds off the walls',()=>{
+  // straight down the middle, then off the left wall and back
+  assert.ok(Math.abs(crossing([.5,.8,0,-1],.2)-.5)<1e-9);
+  const x=crossing([.2,.8,-.5,-1],.2);assert.ok(x>TABLE.puck&&x<TABLE.w-TABLE.puck,'stays on the table');
+  assert.equal(crossing([.5,.8,0,1],.2),null,'not heading there');
+});
+test('the Champion blocks a banked shot that the Dreamer usually misses',()=>{
+  const dt=1/60;let seed=3;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const shots=[];while(shots.length<60){const p=[.1+rnd()*.8,.6,(rnd()<.5?-1:1)*(1.2+rnd()*.8),-1.9];const x=crossing(p,0);if(x!==null&&Math.abs(x-TABLE.w/2)<TABLE.goal/2-TABLE.puck&&Math.abs(p[0]+p[2]*.6/1.9-.5)>.5)shots.push(p);}
+  const stops=level=>{let blocked=0,k=0;for(const shot of shots){let state={puck:[...shot]},toad=[(k++%2)?.22:.78,.2],memo={clock:k},prev=[...toad];
+    for(let i=0;i<90;i++){toad=toadMove(state,toad,dt,rnd,level,memo,[.5,1.4]);const r=step(state.puck,[{x:toad[0],y:toad[1],vx:(toad[0]-prev[0])/dt,vy:(toad[1]-prev[1])/dt}],dt);prev=[...toad];
+      if(r.scored)break;state={puck:r.puck};if(r.puck[3]>0){blocked++;break;}}}return blocked;};
+  const hard=stops('hard'),easy=stops('easy');
+  assert.ok(hard>=57,'hard stops at least 95%: '+hard);assert.ok(easy<hard,'easy is worse: '+easy);
 });
 test('backend 010 is transactional, additive and scores on the server',async()=>{
   const sql=await readFile(new URL('../backend/010_play.sql',import.meta.url),'utf8');

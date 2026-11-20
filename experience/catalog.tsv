@@ -1078,3 +1078,16 @@ appearance.light	Always light	Siempre claro	Toujours clair	Sempre chiaro	ديم�
 appearance.lightHint	Light all day, even at night.	Claro todo el día, incluso de noche.	Clair toute la journée, même la nuit.	Chiaro tutto il giorno, anche di notte.	فاتح النهار الكل، حتى في الليل.
 gate.back.oliver	Welcome back, habibi.	Bienvenido de nuevo, habibi.	Bon retour, habibi.	Bentornato, habibi.	مرحبا بيك من جديد، حبيبي.
 gate.back.yasmine	Welcome back, mi amor.	Bienvenida de nuevo, mi amor.	Bon retour, mi amor.	Bentornata, mi amor.	مرحبا بيك من جديد، mi amor.
+game.hockey.pick	Pick your rival	Elige a tu rival	Choisis ton adversaire	Scegli il tuo rivale	اختار خصمك
+game.hockey.level.easy	Easy	Fácil	Facile	Facile	ساهل
+game.hockey.level.medium	Medium	Medio	Moyen	Medio	متوسط
+game.hockey.level.hard	Hard	Difícil	Difficile	Difficile	صعيب
+game.hockey.level.easy.name	The Dreamer	El Soñador	Le Rêveur	Il Sognatore	الحالم
+game.hockey.level.easy.desc	Slow and sleepy. Drifts off mid-game.	Lento y dormilón. Se distrae a mitad del partido.	Lent et endormi. Il rêvasse en plein match.	Lento e assonnato. Si distrae a metà partita.	بطيء وناعس. يسرح في وسط الماتش.
+game.hockey.level.medium.name	The Coach	El Entrenador	Le Coach	L’Allenatore	الكوتش
+game.hockey.level.medium.desc	Plays fair and reads the puck.	Juega limpio y lee el disco.	Joue franc jeu et lit le palet.	Gioca pulito e legge il disco.	يلعب نظيف ويفهم الكورة.
+game.hockey.level.hard.name	The Champion	El Campeón	Le Champion	Il Campione	البطل
+game.hockey.level.hard.desc	Fast, reads every bounce, aims for the corners.	Rápido, lee cada rebote y apunta a las esquinas.	Rapide, lit chaque rebond et vise les coins.	Veloce, legge ogni rimbalzo e mira agli angoli.	فيسع، يقرا كل ضربة ويصوّب على الزوايا.
+game.hockey.stat.speed	Speed	Velocidad	Vitesse	Velocità	السرعة
+game.hockey.stat.read	Reading	Lectura	Lecture	Lettura	القراية
+game.hockey.stat.attack	Attack	Ataque	Attaque	Attacco	الهجوم

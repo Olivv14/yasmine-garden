@@ -1077,5 +1077,18 @@
   "appearance.light": "Always light",
   "appearance.lightHint": "Light all day, even at night.",
   "gate.back.oliver": "Welcome back, habibi.",
-  "gate.back.yasmine": "Welcome back, mi amor."
+  "gate.back.yasmine": "Welcome back, mi amor.",
+  "game.hockey.pick": "Pick your rival",
+  "game.hockey.level.easy": "Easy",
+  "game.hockey.level.medium": "Medium",
+  "game.hockey.level.hard": "Hard",
+  "game.hockey.level.easy.name": "The Dreamer",
+  "game.hockey.level.easy.desc": "Slow and sleepy. Drifts off mid-game.",
+  "game.hockey.level.medium.name": "The Coach",
+  "game.hockey.level.medium.desc": "Plays fair and reads the puck.",
+  "game.hockey.level.hard.name": "The Champion",
+  "game.hockey.level.hard.desc": "Fast, reads every bounce, aims for the corners.",
+  "game.hockey.stat.speed": "Speed",
+  "game.hockey.stat.read": "Reading",
+  "game.hockey.stat.attack": "Attack"
 }

@@ -33,7 +33,7 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   }
   const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer};
   const td=createTruthDare({el,button,t,copy,me,person,partner,record,notify});
-  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify});
+  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:who=>who===me()?document.getElementById('profilePhoto')?.getAttribute('src')||null:null});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
   const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},
     duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme}};

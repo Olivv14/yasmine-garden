@@ -1077,5 +1077,18 @@
   "appearance.light": "Toujours clair",
   "appearance.lightHint": "Clair toute la journée, même la nuit.",
   "gate.back.oliver": "Bon retour, habibi.",
-  "gate.back.yasmine": "Bon retour, mi amor."
+  "gate.back.yasmine": "Bon retour, mi amor.",
+  "game.hockey.pick": "Choisis ton adversaire",
+  "game.hockey.level.easy": "Facile",
+  "game.hockey.level.medium": "Moyen",
+  "game.hockey.level.hard": "Difficile",
+  "game.hockey.level.easy.name": "Le Rêveur",
+  "game.hockey.level.easy.desc": "Lent et endormi. Il rêvasse en plein match.",
+  "game.hockey.level.medium.name": "Le Coach",
+  "game.hockey.level.medium.desc": "Joue franc jeu et lit le palet.",
+  "game.hockey.level.hard.name": "Le Champion",
+  "game.hockey.level.hard.desc": "Rapide, lit chaque rebond et vise les coins.",
+  "game.hockey.stat.speed": "Vitesse",
+  "game.hockey.stat.read": "Lecture",
+  "game.hockey.stat.attack": "Attaque"
 }

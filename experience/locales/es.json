@@ -1077,5 +1077,18 @@
   "appearance.light": "Siempre claro",
   "appearance.lightHint": "Claro todo el día, incluso de noche.",
   "gate.back.oliver": "Bienvenido de nuevo, habibi.",
-  "gate.back.yasmine": "Bienvenida de nuevo, mi amor."
+  "gate.back.yasmine": "Bienvenida de nuevo, mi amor.",
+  "game.hockey.pick": "Elige a tu rival",
+  "game.hockey.level.easy": "Fácil",
+  "game.hockey.level.medium": "Medio",
+  "game.hockey.level.hard": "Difícil",
+  "game.hockey.level.easy.name": "El Soñador",
+  "game.hockey.level.easy.desc": "Lento y dormilón. Se distrae a mitad del partido.",
+  "game.hockey.level.medium.name": "El Entrenador",
+  "game.hockey.level.medium.desc": "Juega limpio y lee el disco.",
+  "game.hockey.level.hard.name": "El Campeón",
+  "game.hockey.level.hard.desc": "Rápido, lee cada rebote y apunta a las esquinas.",
+  "game.hockey.stat.speed": "Velocidad",
+  "game.hockey.stat.read": "Lectura",
+  "game.hockey.stat.attack": "Ataque"
 }

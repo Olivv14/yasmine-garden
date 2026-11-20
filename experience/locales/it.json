@@ -1077,5 +1077,18 @@
   "appearance.light": "Sempre chiaro",
   "appearance.lightHint": "Chiaro tutto il giorno, anche di notte.",
   "gate.back.oliver": "Bentornato, habibi.",
-  "gate.back.yasmine": "Bentornata, mi amor."
+  "gate.back.yasmine": "Bentornata, mi amor.",
+  "game.hockey.pick": "Scegli il tuo rivale",
+  "game.hockey.level.easy": "Facile",
+  "game.hockey.level.medium": "Medio",
+  "game.hockey.level.hard": "Difficile",
+  "game.hockey.level.easy.name": "Il Sognatore",
+  "game.hockey.level.easy.desc": "Lento e assonnato. Si distrae a metà partita.",
+  "game.hockey.level.medium.name": "L’Allenatore",
+  "game.hockey.level.medium.desc": "Gioca pulito e legge il disco.",
+  "game.hockey.level.hard.name": "Il Campione",
+  "game.hockey.level.hard.desc": "Veloce, legge ogni rimbalzo e mira agli angoli.",
+  "game.hockey.stat.speed": "Velocità",
+  "game.hockey.stat.read": "Lettura",
+  "game.hockey.stat.attack": "Attacco"
 }

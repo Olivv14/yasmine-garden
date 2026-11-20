@@ -1077,5 +1077,18 @@
   "appearance.light": "ديما فاتح",
   "appearance.lightHint": "فاتح النهار الكل، حتى في الليل.",
   "gate.back.oliver": "مرحبا بيك من جديد، حبيبي.",
-  "gate.back.yasmine": "مرحبا بيك من جديد، mi amor."
+  "gate.back.yasmine": "مرحبا بيك من جديد، mi amor.",
+  "game.hockey.pick": "اختار خصمك",
+  "game.hockey.level.easy": "ساهل",
+  "game.hockey.level.medium": "متوسط",
+  "game.hockey.level.hard": "صعيب",
+  "game.hockey.level.easy.name": "الحالم",
+  "game.hockey.level.easy.desc": "بطيء وناعس. يسرح في وسط الماتش.",
+  "game.hockey.level.medium.name": "الكوتش",
+  "game.hockey.level.medium.desc": "يلعب نظيف ويفهم الكورة.",
+  "game.hockey.level.hard.name": "البطل",
+  "game.hockey.level.hard.desc": "فيسع، يقرا كل ضربة ويصوّب على الزوايا.",
+  "game.hockey.stat.speed": "السرعة",
+  "game.hockey.stat.read": "القراية",
+  "game.hockey.stat.attack": "الهجوم"
 }

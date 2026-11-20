@@ -16,3 +16,35 @@
 .hockey-table:focus-visible{outline:3px solid var(--accent)}
 .hockey-score{font:600 15px/20px var(--font-sans);color:var(--ink)}
 .game-history ul{margin:0;padding-inline-start:var(--space-5);display:grid;gap:var(--space-1);font-size:14px}
+
+/* air hockey at dusk: scoreboard with faces, and the three rival toads */
+.visually-hidden{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0}
+.hockey-board{display:flex;align-items:center;justify-content:center;gap:var(--space-3);padding:8px 14px;border-radius:999px;background:rgba(18,10,20,.62);border:1px solid rgba(255,213,138,.3);color:#FFF4E6;inline-size:max-content;margin-inline:auto;position:relative}
+.hb-side{display:flex;align-items:center;gap:8px}.hb-side:last-of-type{flex-direction:row-reverse}
+.hb-face{inline-size:34px;block-size:34px;border-radius:50%;display:grid;place-items:center;overflow:hidden;font:800 15px var(--font-display,inherit);color:#2A1A10;border:2px solid #FFD58A;background:#F2CDBA}
+.hb-face img{inline-size:100%;block-size:100%;object-fit:cover}.hb-face svg{inline-size:120%;block-size:120%}
+.hb-face.tone-oliver{border-color:var(--oliver)}.hb-face.tone-yasmine{border-color:var(--yasmine)}.hb-face.tone-success{background:#2A3A2A;border-color:#8DE8B0}
+.hb-score{font:800 26px/1 var(--font-display,inherit)}.hb-dot{opacity:.6}
+.hb-badge{position:absolute;inset-block-start:-9px;inset-inline-end:-6px;font:800 10px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:999px;background:#FFD58A;color:#2A1A10}
+.hb-badge.lvl-easy{background:#9ED67A}.hb-badge.lvl-medium{background:#7FB4FF}.hb-badge.lvl-hard{background:linear-gradient(90deg,#FFD24A,#FF9A4A)}
+.rival-picker{display:grid;gap:var(--space-2)}
+.rival-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#airHockey .rival-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;font:inherit;line-height:1.2;white-space:normal;inline-size:auto;min-inline-size:0;gap:4px;padding:10px 6px 12px;border-radius:16px;text-align:center;color:#FFF4E6;position:relative;overflow:hidden;min-block-size:0;
+  background:radial-gradient(90% 60% at 50% 30%,rgba(255,255,255,.12),rgba(255,255,255,0)),linear-gradient(180deg,#2A3A2C,#141C16);border:2px solid #8DE8B0;box-shadow:0 8px 18px rgba(0,0,0,.4)}
+#airHockey .rival-card.toad-medium{background:radial-gradient(90% 60% at 50% 30%,rgba(255,255,255,.14),rgba(255,255,255,0)),linear-gradient(180deg,#24305A,#121A34);border-color:#7FB4FF}
+#airHockey .rival-card.toad-hard{background:radial-gradient(90% 60% at 50% 30%,rgba(255,230,150,.28),rgba(255,255,255,0)),linear-gradient(180deg,#5A3A14,#24140A);border-color:#FFD24A;box-shadow:0 0 0 1px rgba(255,210,74,.4),0 0 22px rgba(255,180,60,.45),0 8px 18px rgba(0,0,0,.4)}
+.rival-card.toad-hard::after{content:"";position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);animation:rival-shine 3.2s ease-in-out infinite}
+@keyframes rival-shine{0%,60%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+@media (prefers-reduced-motion:reduce){.rival-card.toad-hard::after{animation:none}}
+.rival-art{inline-size:100%;max-inline-size:96px;aspect-ratio:12/11}.rival-art svg{inline-size:100%;block-size:100%}
+.rival-card b{font:800 14px/1.15 var(--font-display,inherit)}.rival-card small{font:500 11px/1.3 var(--font-sans);color:#FFE2C6}
+.rival-tag{font:800 10px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.12)}
+.rival-stats{display:grid;gap:3px;inline-size:100%;padding-inline:4px}
+.rival-stat{display:grid;grid-template-columns:auto 1fr;gap:5px;align-items:center;font:600 9px/1 var(--font-sans);color:#FFE2C6}.rival-stat i{font-style:normal;text-align:start}
+.rival-stat .bar{block-size:5px;border-radius:3px;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
+.rival-stat .bar::after{content:"";position:absolute;inset:0;inline-size:calc(var(--v)*100%);background:linear-gradient(90deg,#FFD58A,#FF9A4A);border-radius:3px}
+.rival-card:focus-visible{outline:3px solid #FFD58A;outline-offset:2px}
+
+#airHockey .rival-card:hover{filter:brightness(1.08);border-color:inherit}
+#airHockey .rival-card>*{max-inline-size:100%}
+.hockey-on #airHockey{-webkit-user-select:none;user-select:none}
