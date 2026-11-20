@@ -112,3 +112,26 @@ html[lang=aeb-TN] .gate.welcome .gate-phrase{font:700 clamp(26px,7vw,40px)/1.5 v
 @keyframes egg-fade{0%{opacity:0}10%,85%{opacity:1}100%{opacity:0}}
 html.green-hour body::after{content:"";position:fixed;inset:0;z-index:140;pointer-events:none;background:rgba(47,168,102,.55);mix-blend-mode:color}
 @media (prefers-reduced-motion:reduce){.egg-layer *{animation:none!important}.egg-layer{display:none}.egg-moon{display:grid}}
+
+/* Friday's proverb */
+.egg-proverb{display:grid;place-items:start center;padding-top:calc(env(safe-area-inset-top) + 70px);pointer-events:none;animation:egg-in .4s ease both}
+.egg-proverb-card{pointer-events:auto;cursor:pointer}
+@keyframes egg-in{from{opacity:0}to{opacity:1}}
+.egg-proverb-card{display:grid;gap:10px;max-inline-size:320px;margin:16px;padding:22px 20px;border-radius:22px;text-align:center;color:#3A2416;
+  background:linear-gradient(180deg,#FBF3E4,#EFDDBA);border:2px solid #E8C27A;box-shadow:0 20px 40px rgba(0,0,0,.45);
+  background-image:repeating-linear-gradient(45deg,rgba(194,55,46,.06) 0 6px,transparent 6px 14px),linear-gradient(180deg,#FBF3E4,#EFDDBA)}
+.egg-proverb-title{margin:0;font:800 11px var(--font-sans);letter-spacing:.12em;text-transform:uppercase;color:#B0201E}
+.egg-proverb-words{margin:0;font:700 26px/1.5 var(--font-arabic)}
+.egg-proverb-meaning{margin:0;font:600 18px/1.35 var(--font-hand)}
+.egg-proverb-close{margin:0;font:600 11px var(--font-sans);opacity:.6}
+/* Emmy asleep on the Talk tab when nothing is waiting */
+.bottom-nav #nav-talk{position:relative}
+.bottom-nav #nav-talk.talk-quiet::after{content:"";position:absolute;inset-block-start:-22px;inset-inline-start:calc(50% - 4px);inline-size:64px;block-size:66px;pointer-events:none;
+  background:url(./art/mascots/emmy.png) 0 -264px/256px 726px no-repeat;transform:scale(.42);transform-origin:0 100%;image-rendering:pixelated;animation:egg-emmy-sleep 2.4s steps(4) infinite}
+@keyframes egg-emmy-sleep{to{background-position:-256px -264px}}
+/* the secret dance step */
+.bottom-nav.nav-dance [data-page]{animation:egg-nav-dance .55s ease-in-out 7 alternate}
+.bottom-nav.nav-dance [data-page]:nth-child(2){animation-delay:.08s}.bottom-nav.nav-dance [data-page]:nth-child(3){animation-delay:.16s}
+.bottom-nav.nav-dance [data-page]:nth-child(4){animation-delay:.24s}.bottom-nav.nav-dance [data-page]:nth-child(5){animation-delay:.32s}
+@keyframes egg-nav-dance{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(-8deg)}100%{transform:translateY(0) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.bottom-nav #nav-talk.talk-quiet::after{animation:none}.bottom-nav.nav-dance [data-page]{animation:none}}

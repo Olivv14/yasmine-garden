@@ -1377,5 +1377,20 @@
   "talk.learnIt": "Aprenderla",
   "garden.shootingStar": "¡Una estrella fugaz! Pide un deseo ✦",
   "garden.fullMoon": "Luna llena esta noche, la misma sobre los dos.",
-  "learn.partnerFound": "{{name}} encontró {{count}} cosas en el jardín"
+  "learn.partnerFound": "{{name}} encontró {{count}} cosas en el jardín",
+  "eggs.proverbTitle": "Viernes · un refrán tunecino",
+  "eggs.tapToClose": "Toca para cerrar",
+  "eggs.navDance": "¡Encontraste el paso de baile secreto!",
+  "eggs.proverb.1.text": "اللي فات مات",
+  "eggs.proverb.1.meaning": "Lo pasado, pasado está: deja ir lo de antes.",
+  "eggs.proverb.2.text": "اليد الوحدة ما تصفّقش",
+  "eggs.proverb.2.meaning": "Una mano sola no aplaude: lo hacemos juntos.",
+  "eggs.proverb.3.text": "الجار قبل الدار",
+  "eggs.proverb.3.meaning": "El vecino antes que la casa: importa quién está a tu lado.",
+  "eggs.proverb.4.text": "حبيبك يبلعلك الزلط",
+  "eggs.proverb.4.meaning": "Quien te quiere se traga piedras por ti: el amor perdona lo difícil.",
+  "eggs.proverb.5.text": "القرد في عين أمّو غزال",
+  "eggs.proverb.5.meaning": "Para su madre, el mono es una gacela: el amor ve belleza en todo.",
+  "eggs.proverb.6.text": "الصبر مفتاح الفرج",
+  "eggs.proverb.6.meaning": "La paciencia es la llave del alivio: la distancia terminará."
 }

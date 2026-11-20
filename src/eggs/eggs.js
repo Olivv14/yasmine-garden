@@ -7,7 +7,12 @@
 // - letters that open on a date live in Talk (chat.js).
 // Pure helpers are tested in scripts/eggs.test.mjs.
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
-const KEY_MOON='eggs.moon';
+const KEY_MOON='eggs.moon',KEY_PROVERB='eggs.proverb',PROVERBS=6,NAV_STEPS=['garden','talk','play','learn','us'];
+// Friday's proverb: the same for both of you that Friday.
+export const proverbFor=(d=new Date())=>d.getDay()!==5?null:1+Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000/7)%PROVERBS;
+// The secret dance step: Home, Talk, Play, Learn, Us, quickly, in that order.
+export function navSequence(within=3500){let taps=[];return (page,now)=>{taps=[...taps.filter(x=>now-x.at<within),{page,at:now}].slice(-NAV_STEPS.length);
+  if(taps.length===NAV_STEPS.length&&taps.every((x,i)=>x.page===NAV_STEPS[i])){taps=[];return true;}return false;};}
 
 export const isGreenHour=(d=new Date())=>d.getMinutes()===11&&(d.getHours()===11||d.getHours()===23);
 export const isMoonTime=(d=new Date())=>d.getHours()>=0&&d.getHours()<4;
@@ -68,7 +73,19 @@ export function createEggs({el,t,copy,notify,me,person,partner,isMusicPlaying,pa
     const n=layer('egg-moon',7000);const card=el('div',undefined,'egg-moon-card');
     card.append(el('span',undefined,'egg-moon-disc'),el('p',()=>t('eggs.moon',{a:person(me()),b:person(partner())})));n.append(card);n.onclick=()=>n.remove();n.removeAttribute('aria-hidden');n.setAttribute('role','status');
   }
-  function start(){startMotion();clearInterval(greenTimer);checkGreen();greenTimer=setInterval(checkGreen,15000);setTimeout(moon,1500);}
+  // ---- Friday: a Tunisian proverb, once that day
+  function proverb(){
+    const n=proverbFor();if(!n||!me())return;const key=new Date().toDateString();let seen=null;try{seen=localStorage.getItem(KEY_PROVERB);}catch{}if(seen===key)return;try{localStorage.setItem(KEY_PROVERB,key);}catch{}
+    const box=el('div',undefined,'egg-layer egg-proverb');box.setAttribute('role','status');const card=el('div',undefined,'egg-proverb-card');
+    const words=el('p',undefined,'egg-proverb-words');words.textContent=t('eggs.proverb.'+n+'.text');words.lang='ar-TN';words.dir='rtl';
+    card.append(el('p',()=>t('eggs.proverbTitle'),'egg-proverb-title'),words,el('p',()=>t('eggs.proverb.'+n+'.meaning'),'egg-proverb-meaning'),el('p',()=>t('eggs.tapToClose'),'egg-proverb-close'));
+    box.append(card);card.onclick=()=>box.remove();document.body.append(box);setTimeout(()=>box.remove(),14000);
+  }
+  // ---- the secret dance step on the bottom bar
+  const navTaps=navSequence();
+  document.addEventListener('click',e=>{const b=e.target.closest?.('.bottom-nav [data-page]');if(!b)return;
+    if(navTaps(b.dataset.page,Date.now())){const nav=b.closest('.bottom-nav');nav.classList.remove('nav-dance');void nav.offsetWidth;nav.classList.add('nav-dance');setTimeout(()=>nav.classList.remove('nav-dance'),4200);notify(()=>t('eggs.navDance'));}},true);
+  function start(){startMotion();setTimeout(proverb,2500);clearInterval(greenTimer);checkGreen();greenTimer=setInterval(checkGreen,15000);setTimeout(moon,1500);}
   function stop(){clearInterval(greenTimer);greenTimer=null;document.documentElement.classList.remove('green-hour','toad-bachata');}
   return {start,stop,toadTapped,chatWords,stars,rainbow};
 }

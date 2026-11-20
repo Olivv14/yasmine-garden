@@ -170,7 +170,7 @@ export function createLearn({$,el,button,t,copy,locale,getSnapshot,getClient,get
     let rec=null,blob=null;const status=el('p',undefined,'small');
     const voice=button(()=>t('learn.recordWord'),async()=>{
       if(rec){blob=await rec.stop();rec=null;copy(voice,()=>t('learn.recordAgain'));copy(status,()=>t('learn.voiceReady'));return;}
-      try{rec=await record();rec.start();copy(voice,()=>t('learn.stopSay'));copy(status,()=>t('learn.recording'));}catch{copy(status,()=>t('record.denied'));}},'quiet');voice.prepend(icon('mic',16));
+      try{rec=await record();rec.start();copy(voice,()=>t('dance.stopRec'));copy(status,()=>t('learn.recording'));}catch{copy(status,()=>t('record.denied'));}},'quiet');voice.prepend(icon('mic',16));
     const send=button(()=>t('learn.teachSend'),null,'primary');send.type='submit';
     form.append(voice,status,send);
     form.onsubmit=async e=>{e.preventDefault();if(!word.value.trim()||!meaning.value.trim())return;send.disabled=true;

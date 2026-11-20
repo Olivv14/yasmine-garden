@@ -305,3 +305,153 @@ tn.sam7ni	tn	daily	سامحني	sam7ni	SAM · 7nee	forgive me	perdóname	pardonn
 tn.stanna	tn	daily	استنّى	stanna	STAN · na	wait	espera	attends	aspetta	استنّى
 tn.9amra	tn	daily	قمرة	9amra	GAM · ra	moon	luna	lune	luna	قمرة
 tn.7obbi	tn	love	حبّي	7obbi	HOB · bee	my love (the Tunisian way)	mi amor (a la tunecina)	mon amour (à la tunisienne)	amore mio (alla tunisina)	حبّي
+it.mi-piaci	it	love	mi piaci		mee · PYAH · chee	I like you	me gustas	tu me plais	mi piaci	تعجبني
+it.sei-bellissima	it	love	sei bellissima		SEH · eel · bel · LEES · see · mah	you are beautiful	eres bellísima	tu es magnifique	sei bellissima	انتِ مزيانة برشا
+it.penso-a-te	it	love	penso a te		PEN · soh · ah · TEH	I’m thinking of you	pienso en ti	je pense à toi	penso a te	نخمّم فيك
+it.coccole	it	love	le coccole		leh · KOK · koh · leh	cuddles	mimos	câlins	coccole	التحنين
+it.anello	it	love	l’anello		lah · NEL · loh	ring	anillo	bague	anello	الخاتم
+it.matrimonio	it	love	il matrimonio		eel · mah · tree · MOH · nyoh	marriage, wedding	matrimonio, boda	mariage	matrimonio	العرس
+it.mi-fai-ridere	it	love	mi fai ridere		mee · FAI · REE · deh · reh	you make me laugh	me haces reír	tu me fais rire	mi fai ridere	تضحّكني
+it.dolcezza	it	love	dolcezza		dol · CHET · tsah	sweetness, sweetheart	dulzura	douceur	dolcezza	الحلاوة
+it.la-frutta	it	food	la frutta		lah · FROOT · tah	fruit	fruta	fruits	frutta	الغلّة
+it.carne	it	food	la carne		lah · KAR · neh	meat	carne	viande	carne	اللحم
+it.pesce	it	food	il pesce		eel · PEH · sheh	fish	pescado	poisson	pesce	الحوت
+it.riso	it	food	il riso		eel · REE · zoh	rice	arroz	riz	riso	الروز
+it.verdure	it	food	le verdure		leh · ver · DOO · reh	vegetables	verduras	légumes	verdure	الخضرة
+it.uovo	it	food	l’uovo		LWOH · voh	egg	huevo	œuf	uovo	العظمة
+it.il-dolce	it	food	il dolce		eel · DOHL · cheh	dessert	postre	dessert	dolce	الحلو
+it.ho-fame	it	food	ho fame		oh · FAH · meh	I’m hungry	tengo hambre	j’ai faim	ho fame	جيعان
+it.ho-sete	it	food	ho sete		oh · SEH · teh	I’m thirsty	tengo sed	j’ai soif	ho sete	عطشان
+it.limone	it	food	il limone		eel · lee · MOH · neh	lemon	limón	citron	limone	القارص
+it.fragola	it	food	la fragola		lah · FRAH · goh · lah	strawberry	fresa	fraise	fragola	الفراولو
+it.forchetta	it	food	la forchetta		lah · for · KET · tah	fork	tenedor	fourchette	forchetta	الفرشيطة
+it.macchina	it	travel	la macchina		lah · MAHK · kee · nah	car	carro, coche	voiture	macchina	الكرهبة
+it.autobus	it	travel	l’autobus		LOW · toh · boos	bus	autobús	bus	autobus	الكار
+it.montagna	it	travel	la montagna		lah · mon · TAH · nyah	mountain	montaña	montagne	montagna	الجبل
+it.lago	it	travel	il lago		eel · LAH · goh	lake	lago	lac	lago	البحيرة
+it.isola	it	travel	l’isola		LEE · zoh · lah	island	isla	île	isola	الجزيرة
+it.piazza	it	travel	la piazza		lah · PYAHT · tsah	square (in town)	plaza	place	piazza	الساحة
+it.museo	it	travel	il museo		eel · moo · ZEH · oh	museum	museo	musée	museo	المتحف
+it.chiave	it	travel	la chiave		lah · KYAH · veh	key	llave	clé	chiave	المفتاح
+it.a-presto	it	travel	a presto!		ah · PRES · toh	see you soon!	¡hasta pronto!	à bientôt !	a presto!	نتلاقاو قريب!
+it.portiere	it	football	il portiere		eel · por · TYEH · reh	goalkeeper	portero	gardien de but	portiere	الحارس
+it.rigore	it	football	il rigore		eel · ree · GOH · reh	penalty	penal	penalty	rigore	بينالتي
+it.maglia	it	football	la maglia		lah · MAHL · lyah	jersey	camiseta	maillot	maglia	المريول
+it.allenatore	it	football	l’allenatore		lahl · leh · nah · TOH · reh	coach	entrenador	entraîneur	allenatore	المدرّب
+it.concerto	it	music	il concerto		eel · kon · CHEHR · toh	concert	concierto	concert	concerto	الكونسار
+it.pianoforte	it	music	il pianoforte		eel · pyah · noh · FOR · teh	piano	piano	piano	pianoforte	البيانو
+it.ascoltare	it	music	ascoltare		ahs · kol · TAH · reh	to listen	escuchar	écouter	ascoltare	يسمع
+it.batteria	it	music	la batteria		lah · baht · teh · REE · ah	drums	batería	batterie	batteria	الباتري
+it.lavoro	it	daily	il lavoro		eel · lah · VOH · roh	work	trabajo	travail	lavoro	الخدمة
+it.cane	it	daily	il cane		eel · KAH · neh	dog	perro	chien	cane	الكلب
+it.mattina	it	daily	la mattina		lah · maht · TEE · nah	morning	mañana (la)	matin	mattina	الصباح
+it.sera	it	daily	la sera		lah · SEH · rah	evening	tarde, noche	soir	sera	العشية
+it.settimana	it	daily	la settimana		lah · set · tee · MAH · nah	week	semana	semaine	settimana	الجمعة
+it.tardi	it	daily	tardi		TAR · dee	late	tarde	tard	tardi	معطّل
+it.bene	it	daily	bene		BEH · neh	well, good	bien	bien	bene	باهي
+it.molto	it	daily	molto		MOL · toh	a lot, very	mucho, muy	beaucoup, très	molto	برشا
+it.perche	it	daily	perché?		per · KEH	why?	¿por qué?	pourquoi ?	perché?	علاش؟
+it.dove	it	daily	dove?		DOH · veh	where?	¿dónde?	où ?	dove?	وين؟
+it.come-stai	it	daily	come stai?		KOH · meh · STAI	how are you?	¿cómo estás?	comment vas-tu ?	come stai?	لاباس؟
+it.tutto-bene	it	daily	tutto bene		TOOT · toh · BEH · neh	all good	todo bien	tout va bien	tutto bene	كل شي لاباس
+it.quando	it	daily	quando?		KWAHN · doh	when?	¿cuándo?	quand ?	quando?	وقتاش؟
+ve.mi-amor	ve	love	mi amor		mee · ah · MOR	my love	mi amor	mon amour	amore mio	حبّي
+ve.mi-gorda	ve	love	mi gordo, mi gorda		mee · GOR · dah	my darling (affectionate)	mi amor (cariñoso)	mon chou (affectueux)	tesoro (affettuoso)	حبيبي (بالحنانة)
+ve.tragado	ve	love	estar tragado, tragada		es · TAR · trah · GAH · doh	to be madly in love	estar muy enamorado	être fou amoureux	essere cotto	طايح في الحبّ
+ve.enamorado	ve	love	enamorado, enamorada		eh · nah · moh · RAH · doh	in love	enamorado	amoureux	innamorato	يحبّ
+ve.piropo	ve	love	el piropo		el · pee · ROH · poh	a flirty compliment	cumplido coqueto	compliment charmeur	complimento galante	كلمة غزل
+ve.consentido	ve	love	consentido, consentida		kohn · sen · TEE · doh	spoiled darling	mimado	chouchou	coccolato	المدلّل
+ve.pelar-el-diente	ve	love	pelar el diente		peh · LAR · el · DYEN · teh	to flirt with a big smile	coquetear sonriendo	draguer avec un grand sourire	flirtare sorridendo	يضحك ويغازل
+ve.serenata	ve	music	la serenata		lah · seh · reh · NAH · tah	serenade	serenata	sérénade	serenata	غناية تحت الشبّاك
+ve.bienmesabe	ve	food	el bienmesabe		el · byen · meh · SAH · beh	coconut cream dessert	postre de crema de coco	dessert à la crème de coco	dolce alla crema di cocco	حلو بالكوكو
+ve.quesillo	ve	food	el quesillo		el · keh · SEE · yoh	caramel flan	flan	flan au caramel	crème caramel	كريم كرامال
+ve.pan-de-jamon	ve	food	el pan de jamón		el · PAHN · deh · hah · MOHN	Christmas ham bread	pan de jamón navideño	pain au jambon de Noël	pane natalizio al prosciutto	خبز بالجمبون متاع الكريسماس
+ve.hervido	ve	food	el hervido		el · er · BEE · doh	hearty soup	sopa abundante	soupe copieuse	zuppa sostanziosa	شربة
+ve.tajadas	ve	food	las tajadas		lahs · tah · HAH · dahs	fried sweet plantain	plátano maduro frito	banane plantain frite	platano dolce fritto	بنان مقلي
+ve.patacon	ve	food	el patacón		el · pah · tah · KOHN	sandwich in fried green plantain	sándwich en plátano verde frito	sandwich en banane plantain frite	panino di platano fritto	ساندويتش في بنان مقلي
+ve.mandoca	ve	food	la mandoca		lah · mahn · DOH · kah	fried corn and plantain ring	rosca frita de maíz y plátano	anneau frit maïs-plantain	ciambella fritta di mais	حلقة مقلية بالذرة
+ve.chicharron	ve	food	el chicharrón		el · chee · chah · ROHN	fried pork crackling	chicharrón	couenne frite	ciccioli fritti	جلد مقلي
+ve.merey	ve	food	el merey		el · meh · RAY	cashew fruit	marañón	pomme de cajou	anacardio (frutto)	غلّة الكاجو
+ve.ponque	ve	food	el ponqué		el · pohn · KEH	cake	bizcocho, torta	gâteau	torta	ڨاتو
+ve.casabe	ve	food	el casabe		el · kah · SAH · beh	cassava flatbread	pan de yuca	galette de manioc	focaccia di manioca	خبز بالمنيهوت
+ve.por-puesto	ve	travel	el por puesto		el · por · PWES · toh	shared taxi	taxi colectivo	taxi collectif	taxi collettivo	لواج
+ve.autopista	ve	travel	la autopista		lah · ow · toh · PEES · tah	highway	autopista	autoroute	autostrada	الأوتوروت
+ve.el-llano	ve	travel	el llano		el · YAH · noh	the plains	las llanuras	les plaines	la pianura	السهل
+ve.tepuy	ve	travel	el tepuy		el · teh · POO · ee	table-top mountain	montaña de cima plana	montagne tabulaire	montagna a tavola	جبل راسو مسطّح
+ve.salto-angel	ve	travel	el Salto Ángel		el · SAHL · toh · AHN · hel	Angel Falls	Salto Ángel	chutes de l’Ange	Salto Angel	شلاّل أنخل
+ve.margarita	ve	travel	la isla de Margarita		lah · EES · lah · deh · mar · gah · REE · tah	Margarita Island	isla de Margarita	île de Margarita	isola di Margarita	جزيرة مارغريتا
+ve.pueblo	ve	travel	el pueblo		el · PWEH · bloh	small town	pueblo	village	paese	القرية
+ve.beisbol	ve	football	el béisbol		el · BAYS · bol	baseball	béisbol	baseball	baseball	البيسبول
+ve.pelotero	ve	football	el pelotero		el · peh · loh · TEH · roh	baseball player	jugador de béisbol	joueur de baseball	giocatore di baseball	لاعب بيسبول
+ve.caimanera	ve	football	la caimanera		lah · kai · mah · NEH · rah	pickup game with friends	partido informal	match entre amis	partitella tra amici	ماتش بين الصحاب
+ve.maracas	ve	music	las maracas		lahs · mah · RAH · kahs	maracas	maracas	maracas	maracas	ماراكاس
+ve.arpa	ve	music	el arpa llanera		el · AR · pah · yah · NEH · rah	plains harp	arpa de los llanos	harpe des plaines	arpa delle pianure	القيثارة متاع السهل
+ve.salsa-musica	ve	music	la salsa		lah · SAHL · sah	salsa (music and dance)	salsa (música y baile)	salsa (musique et danse)	salsa (musica e ballo)	سالسا (مزيكة ورقص)
+ve.que-hubo	ve	daily	¿qué hubo?		keh · OO · boh	hi, what’s up?	¿qué tal?	salut, ça va ?	ciao, come va?	أهلا، شنوّة أحوالك؟
+ve.vale	ve	daily	¡vale!		BAH · leh	okay, buddy	vale, amigo	d’accord, mon pote	va bene, amico	باهي يا صاحبي
+ve.de-una	ve	daily	¡de una!		deh · OO · nah	sure, right away!	¡claro, enseguida!	carrément, tout de suite !	certo, subito!	طول!
+ve.y-entonces	ve	daily	¿y entonces?		ee · en · TOHN · ses	so, what’s new?	¿y qué cuentas?	alors, quoi de neuf ?	allora, che si dice?	ومبعد، شنوّة الجديد؟
+ve.flojera	ve	daily	la flojera		lah · floh · HEH · rah	laziness	pereza	flemme	pigrizia	الكسل
+ve.flojo	ve	daily	flojo, floja		FLOH · hoh	lazy	perezoso	flemmard	pigro	كسلان
+ve.sapo	ve	daily	sapo, sapa		SAH · poh	snitch, nosy person	chismoso	cafteur, fouineur	spione, ficcanaso	يوشوش
+ve.malandro	ve	daily	el malandro		el · mah · LAHN · droh	thug	delincuente	voyou	teppista	باندي
+ve.na-que-ver	ve	daily	¡na’ que ver!		nah · keh · BER	nothing to do with it!	¡nada que ver!	rien à voir !	non c’entra niente!	ما عندو حتى علاقة!
+ve.cuadrar	ve	daily	cuadrar		kwah · DRAR	to make plans	quedar, organizar planes	organiser un plan	organizzarsi	يتّفق على موعد
+ve.echar-broma	ve	daily	echar broma		eh · CHAR · BROH · mah	to joke around	bromear	plaisanter	scherzare	يتمسخر
+ve.burundanga	ve	daily	la burundanga		lah · boo · roon · DAHN · gah	a mix of junk	mezcla de cosas sin valor	un bric-à-brac	accozzaglia	خلطة حوايج
+ve.guachiman	ve	daily	el guachimán		el · gwah · chee · MAHN	security guard	vigilante	vigile	guardiano	العسّاس
+ve.que-es-la-que-hay	ve	daily	¿qué es la que hay?		keh · es · lah · keh · AI	what’s going on?	¿qué pasa?	qu’est-ce qui se passe ?	che succede?	شنوّة صاير؟
+ve.zape	ve	daily	¡zape!		SAH · peh	shoo! / ugh!	¡fuera! / ¡uy!	ouste ! / beurk !	sciò! / uffa!	برّا! / أوف!
+ve.estar-pilas	ve	daily	¡pilas!		PEE · lahs	watch out! stay sharp!	¡atento!	attention ! sois vif !	attento!	رد بالك!
+ve.tremendo	ve	daily	tremendo, tremenda		treh · MEN · doh	huge, amazing	enorme, increíble	énorme, incroyable	enorme, incredibile	هايل
+ve.botar	ve	daily	botar		boh · TAR	to throw away	tirar	jeter	buttare via	يلوّح
+tn.nghir-3lik	tn	love	نغير عليك	nghir 3lik	n · GHEER · 3a · LEEK	I’m jealous over you	tengo celos por ti	je suis jaloux pour toi	sono geloso di te	نغير عليك
+tn.3ini	tn	love	عيني	3ini	3EE · nee	my darling (lit. my eye)	cariño (lit. mi ojo)	mon chéri (litt. mon œil)	tesoro (lett. occhio mio)	عيني
+tn.t7ebni	tn	love	تحبّني؟	t7ebni?	t · 7EB · nee	do you love me?	¿me quieres?	tu m’aimes ?	mi ami?	تحبّني؟
+tn.9albi-m3ak	tn	love	قلبي معاك	9albi m3ak	GAL · bee · m3AK	my heart is with you	mi corazón está contigo	mon cœur est avec toi	il mio cuore è con te	قلبي معاك
+tn.khallini-nchoufek	tn	love	خلّيني نشوفك	khallini nchoufek	KHAL · lee · nee · n · CHOO · fek	let me see you	déjame verte	laisse-moi te voir	fammi vederti	خلّيني نشوفك
+tn.3ich9	tn	love	عشق	3ich9	3ICHG	passion, deep love	pasión	passion	passione	عشق
+tn.chakchouka	tn	food	شكشوكة	chakchouka	chak · CHOO · ka	eggs in pepper and tomato sauce	huevos en salsa de pimiento y tomate	œufs en sauce poivron-tomate	uova in salsa di peperoni e pomodoro	شكشوكة
+tn.3assida	tn	food	عصيدة	3assida	3as · SEE · da	sweet porridge	papilla dulce	bouillie sucrée	pappa dolce	عصيدة
+tn.makharek	tn	food	مخارق	makharek	ma · KHA · rek	honey pastries	dulces con miel	pâtisseries au miel	dolci al miele	مخارق
+tn.baklawa	tn	food	بقلاوة	baklawa	bak · LA · wa	baklava	baklava	baklava	baklava	بقلاوة
+tn.ftayer	tn	food	فطاير	ftayer	FTA · yer	fritters	buñuelos	beignets	frittelle	فطاير
+tn.bambalouni	tn	food	بامبالوني	bambalouni	bam · ba · LOO · nee	sugared doughnut	rosquilla azucarada	beignet sucré	ciambella zuccherata	بامبالوني
+tn.kamounia	tn	food	كمّونية	kamounia	kam · moo · NEE · ya	cumin stew	guiso de comino	ragoût au cumin	stufato al cumino	كمّونية
+tn.mar9a	tn	food	مرقة	mar9a	MAR · ga	stew, sauce	guiso, salsa	ragoût, sauce	stufato, sugo	مرقة
+tn.leben	tn	food	لبن	leben	LEH · ben	buttermilk	suero de leche	lait fermenté	latticello	لبن
+tn.felfel	tn	food	فلفل	felfel	FEL · fel	pepper	pimiento	poivron	peperone	فلفل
+tn.bsal	tn	food	بصل	bsal	BSAL	onion	cebolla	oignon	cipolla	بصل
+tn.tabouna	tn	food	خبز طابونة	khobz tabouna	KHOBZ · ta · BOO · na	clay-oven bread	pan de horno de barro	pain cuit au four en terre	pane cotto nel forno di argilla	خبز طابونة
+tn.matar	tn	travel	مطار	matar	ma · TAR	airport	aeropuerto	aéroport	aeroporto	مطار
+tn.chatt	tn	travel	شطّ	chatt	CHATT	beach	playa	plage	spiaggia	شطّ
+tn.jbal	tn	travel	جبل	jbal	JBAL	mountain	montaña	montagne	montagna	جبل
+tn.sidi-bou-said	tn	travel	سيدي بو سعيد	sidi bou said	SEE · dee · boo · sa · 3EED	the white and blue village by the sea	el pueblo blanco y azul junto al mar	le village blanc et bleu au bord de la mer	il paese bianco e blu sul mare	سيدي بو سعيد
+tn.nahj	tn	travel	نهج	nahj	NAHJ	street	calle	rue	via	نهج
+tn.metro	tn	travel	ميترو	metro	MEH · tro	Tunis tram	tranvía de Túnez	tramway de Tunis	tram di Tunisi	ميترو
+tn.tran	tn	travel	تران	tran	TRAN	train	tren	train	treno	تران
+tn.valija	tn	travel	فاليجة	valija	va · LEE · ja	suitcase	maleta	valise	valigia	فاليجة
+tn.basbour	tn	travel	باسبور	basbour	bas · BOOR	passport	pasaporte	passeport	passaporto	باسبور
+tn.7ares	tn	football	حارس	7ares	7A · res	goalkeeper	portero	gardien	portiere	حارس
+tn.penalty	tn	football	بينالتي	penalty	pe · NAL · tee	penalty	penal	penalty	rigore	بينالتي
+tn.jomhour	tn	football	جمهور	jomhour	jom · HOOR	the crowd, the fans	la afición	le public, les supporters	il pubblico, i tifosi	جمهور
+tn.derby	tn	football	دربي	derby	DER · bee	derby (the big local match)	clásico local	derby	derby	دربي
+tn.tarab	tn	music	طرب	tarab	TA · rab	joy that music gives you	emoción que da la música	l’ivresse de la musique	l’estasi della musica	طرب
+tn.rboukh	tn	music	ربوخ	rboukh	R · BOOKH	popular party music	música popular de fiesta	musique populaire de fête	musica popolare da festa	ربوخ
+tn.3oud	tn	music	عود	3oud	3OOD	oud (lute)	laúd árabe	oud	liuto arabo	عود
+tn.nouba	tn	music	نوبة	nouba	NOO · ba	a suite of songs, a big party	serie de canciones, gran fiesta	suite de chansons, grande fête	serie di canti, grande festa	نوبة
+tn.tfadhel	tn	daily	تفضّل	tfadhel	t · FADH · dhel	please, go ahead	adelante, por favor	je t’en prie	prego, accomodati	تفضّل
+tn.chbik	tn	daily	شبيك؟	chbik?	CH · BEEK	what’s wrong?	¿qué te pasa?	qu’est-ce que tu as ?	che hai?	شبيك؟
+tn.ma-fammech	tn	daily	ما فمّاش	ma fammech	ma · FAM · mech	there isn’t any	no hay	il n’y en a pas	non c’è	ما فمّاش
+tn.le	tn	daily	لا	le	LEH	no	no	non	no	لا
+tn.belmarra	tn	daily	بالمرّة	belmarra	bel · MAR · ra	at all, completely	para nada, del todo	pas du tout, complètement	per niente, del tutto	بالمرّة
+tn.7aja	tn	daily	حاجة	7aja	7A · ja	thing	cosa	chose	cosa	حاجة
+tn.tawa-nji	tn	daily	توّا نجي	tawa nji	TAW · wa · NJEE	I’m coming now	ya voy	j’arrive	arrivo	توّا نجي
+tn.na3sen	tn	daily	نعسان	na3sen	na3 · SEN	sleepy	con sueño	endormi	assonnato	نعسان
+tn.mridh	tn	daily	مريض	mridh	M · REEDH	sick	enfermo	malade	malato	مريض
+tn.khayef	tn	daily	خايف	khayef	KHA · yef	scared	asustado	j’ai peur	ho paura	خايف
+tn.ellila	tn	daily	الليلة	ellila	el · LEE · la	tonight	esta noche	ce soir	stasera	الليلة
+tn.lbere7	tn	daily	البارح	lbere7	L · BEH · re7	yesterday	ayer	hier	ieri	البارح
+tn.sghir	tn	daily	صغير	sghir	S · GHEER	small	pequeño	petit	piccolo	صغير
+tn.kbir	tn	daily	كبير	kbir	K · BEER	big	grande	grand	grande	كبير
+tn.skhoun	tn	daily	سخون	skhoun	S · KHOON	hot	caliente	chaud	caldo	سخون

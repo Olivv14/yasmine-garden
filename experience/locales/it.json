@@ -1377,5 +1377,20 @@
   "talk.learnIt": "Imparala",
   "garden.shootingStar": "Una stella cadente! Esprimi un desiderio ✦",
   "garden.fullMoon": "Luna piena stasera, la stessa sopra entrambi.",
-  "learn.partnerFound": "{{name}} ha trovato {{count}} cose nel giardino"
+  "learn.partnerFound": "{{name}} ha trovato {{count}} cose nel giardino",
+  "eggs.proverbTitle": "Venerdì · un proverbio tunisino",
+  "eggs.tapToClose": "Tocca per chiudere",
+  "eggs.navDance": "Hai trovato il passo di danza segreto!",
+  "eggs.proverb.1.text": "اللي فات مات",
+  "eggs.proverb.1.meaning": "Quel che è stato è stato: lascia andare il passato.",
+  "eggs.proverb.2.text": "اليد الوحدة ما تصفّقش",
+  "eggs.proverb.2.meaning": "Una mano sola non applaude: lo facciamo insieme.",
+  "eggs.proverb.3.text": "الجار قبل الدار",
+  "eggs.proverb.3.meaning": "Il vicino prima della casa: conta chi ti sta accanto.",
+  "eggs.proverb.4.text": "حبيبك يبلعلك الزلط",
+  "eggs.proverb.4.meaning": "Chi ti ama ingoia sassi per te: l’amore perdona le cose dure.",
+  "eggs.proverb.5.text": "القرد في عين أمّو غزال",
+  "eggs.proverb.5.meaning": "Agli occhi della madre la scimmia è una gazzella: l’amore vede bellezza ovunque.",
+  "eggs.proverb.6.text": "الصبر مفتاح الفرج",
+  "eggs.proverb.6.meaning": "La pazienza è la chiave del sollievo: la distanza finirà."
 }

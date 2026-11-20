@@ -1,7 +1,7 @@
 // Easter eggs: when they happen, and the "days together" count on Us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {isGreenHour,isMoonTime,nightKey,wordIn,shakeDetector} from '../src/eggs/eggs.js';
+import {isGreenHour,isMoonTime,nightKey,wordIn,shakeDetector,proverbFor,navSequence} from '../src/eggs/eggs.js';
 import {daysTogether} from '../src/us/us-hero.js';
 import {moonPhase,isFullMoon,moonLight} from '../src/garden3d/sky.js';
 
@@ -30,4 +30,12 @@ test('the moon in the garden is the real moon',()=>{
   assert.ok(isFullMoon(new Date(Date.UTC(2026,0,3,10))),'3 January 2026 was a full moon');
   assert.ok(moonPhase(new Date(Date.UTC(2026,0,18,19)))<.03||moonPhase(new Date(Date.UTC(2026,0,18,19)))>.97,'18 January 2026 was a new moon');
   const full=moonLight(.5);assert.ok(full[2]>.99);const nw=moonLight(0);assert.ok(nw[2]<-.99);assert.ok(moonLight(.25)[0]>.99);
+});
+test('a proverb on Fridays only, the same all day, changing week to week',()=>{
+  assert.equal(proverbFor(new Date(2026,10,19)),null);const f=proverbFor(new Date(2026,10,20,8));assert.ok(f>=1&&f<=6);
+  assert.equal(proverbFor(new Date(2026,10,20,23)),f);assert.notEqual(proverbFor(new Date(2026,10,27)),f);
+});
+test('the secret dance: Home, Talk, Play, Learn, Us, quickly',()=>{
+  const seq=navSequence();let hit=false;['garden','talk','play','learn','us'].forEach((p,i)=>{hit=seq(p,i*400)||hit;});assert.ok(hit);
+  const slow=navSequence();let late=false;['garden','talk','play','learn','us'].forEach((p,i)=>{late=slow(p,i*2000)||late;});assert.ok(!late);
 });

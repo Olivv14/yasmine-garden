@@ -1377,5 +1377,20 @@
   "talk.learnIt": "تعلّمها",
   "garden.shootingStar": "نجمة طايحة! تمنّى أمنية ✦",
   "garden.fullMoon": "قمرة كاملة الليلة، نفسها فوق راسكم الزوز.",
-  "learn.partnerFound": "{{name}} لقى {{count}} حاجات في الجنينة"
+  "learn.partnerFound": "{{name}} لقى {{count}} حاجات في الجنينة",
+  "eggs.proverbTitle": "الجمعة · مثل تونسي",
+  "eggs.tapToClose": "انقر باش تسكّر",
+  "eggs.navDance": "لقيت الخطوة السرّية!",
+  "eggs.proverb.1.text": "اللي فات مات",
+  "eggs.proverb.1.meaning": "اللي فات فات: خلّي الماضي يمشي.",
+  "eggs.proverb.2.text": "اليد الوحدة ما تصفّقش",
+  "eggs.proverb.2.meaning": "يد وحدة ما تصفّقش: نعملوها مع بعضنا.",
+  "eggs.proverb.3.text": "الجار قبل الدار",
+  "eggs.proverb.3.meaning": "الجار قبل الدار: المهم شكون حذاك.",
+  "eggs.proverb.4.text": "حبيبك يبلعلك الزلط",
+  "eggs.proverb.4.meaning": "اللي يحبّك يبلعلك الزلط: الحبّ يسامح.",
+  "eggs.proverb.5.text": "القرد في عين أمّو غزال",
+  "eggs.proverb.5.meaning": "في عين أمّو القرد غزال: الحبّ يشوف الزين في كل شي.",
+  "eggs.proverb.6.text": "الصبر مفتاح الفرج",
+  "eggs.proverb.6.meaning": "الصبر مفتاح الفرج: البعد باش يوفى."
 }

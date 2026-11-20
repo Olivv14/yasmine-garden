@@ -1377,5 +1377,20 @@
   "talk.learnIt": "L'apprendre",
   "garden.shootingStar": "Une étoile filante ! Fais un vœu ✦",
   "garden.fullMoon": "Pleine lune ce soir, la même au-dessus de vous deux.",
-  "learn.partnerFound": "{{name}} a trouvé {{count}} choses dans le jardin"
+  "learn.partnerFound": "{{name}} a trouvé {{count}} choses dans le jardin",
+  "eggs.proverbTitle": "Vendredi · un proverbe tunisien",
+  "eggs.tapToClose": "Touche pour fermer",
+  "eggs.navDance": "Tu as trouvé le pas de danse secret !",
+  "eggs.proverb.1.text": "اللي فات مات",
+  "eggs.proverb.1.meaning": "Ce qui est passé est mort : laisse le passé derrière toi.",
+  "eggs.proverb.2.text": "اليد الوحدة ما تصفّقش",
+  "eggs.proverb.2.meaning": "Une seule main ne peut pas applaudir : on le fait ensemble.",
+  "eggs.proverb.3.text": "الجار قبل الدار",
+  "eggs.proverb.3.meaning": "Le voisin avant la maison : ce qui compte, c’est qui est à côté de toi.",
+  "eggs.proverb.4.text": "حبيبك يبلعلك الزلط",
+  "eggs.proverb.4.meaning": "Celui qui t’aime avale des cailloux pour toi : l’amour pardonne le difficile.",
+  "eggs.proverb.5.text": "القرد في عين أمّو غزال",
+  "eggs.proverb.5.meaning": "Aux yeux de sa mère, le singe est une gazelle : l’amour voit la beauté partout.",
+  "eggs.proverb.6.text": "الصبر مفتاح الفرج",
+  "eggs.proverb.6.meaning": "La patience est la clé du soulagement : la distance finira."
 }

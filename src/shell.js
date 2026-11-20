@@ -122,7 +122,7 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
 
   function tabChanged(tab){talkOpen=tab==='talk';chat?.shown(talkOpen&&pane==='chat');if(tab==='learn')renderLearn();if(tab==='garden')paintTime();}
   // the Talk tab shows how many messages wait for you
-  function unread(count){const b=$('talkBadge');b.hidden=!count;b.textContent=count>9?'9+':String(count||'');copy($('nav-talk'),()=>count?t('talk.unread',{count}):t('nav.talk'),'aria-label');}
+  function unread(count){$('nav-talk').classList.toggle('talk-quiet',!count);const b=$('talkBadge');b.hidden=!count;b.textContent=count>9?'9+':String(count||'');copy($('nav-talk'),()=>count?t('talk.unread',{count}):t('nav.talk'),'aria-label');}
   // the Play tab shows how many rounds wait for you
   function playWaiting(count){const b=$('playBadge');if(!b)return;b.hidden=!count;b.textContent=count>9?'9+':String(count||'');copy($('nav-play'),()=>count?t('play.badge',{count}):t('nav.play'),'aria-label');}
   function render(snap=getSnapshot()){paintBell(snap);paintCombo(snap);paintToad();music.render();chat?.start();}

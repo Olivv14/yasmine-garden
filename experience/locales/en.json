@@ -1377,5 +1377,20 @@
   "talk.learnIt": "Learn it",
   "garden.shootingStar": "A shooting star! Make a wish ✦",
   "garden.fullMoon": "Full moon tonight, the same one over both of you.",
-  "learn.partnerFound": "{{name}} has found {{count}} things in the garden"
+  "learn.partnerFound": "{{name}} has found {{count}} things in the garden",
+  "eggs.proverbTitle": "Friday · a Tunisian proverb",
+  "eggs.tapToClose": "Tap to close",
+  "eggs.navDance": "You found the secret dance step!",
+  "eggs.proverb.1.text": "اللي فات مات",
+  "eggs.proverb.1.meaning": "What’s gone is gone: let the past go.",
+  "eggs.proverb.2.text": "اليد الوحدة ما تصفّقش",
+  "eggs.proverb.2.meaning": "One hand can’t clap: we do it together.",
+  "eggs.proverb.3.text": "الجار قبل الدار",
+  "eggs.proverb.3.meaning": "The neighbour before the house: who is beside you matters most.",
+  "eggs.proverb.4.text": "حبيبك يبلعلك الزلط",
+  "eggs.proverb.4.meaning": "The one who loves you swallows stones for you: love forgives the hard parts.",
+  "eggs.proverb.5.text": "القرد في عين أمّو غزال",
+  "eggs.proverb.5.meaning": "To his mother, the monkey is a gazelle: love sees beauty everywhere.",
+  "eggs.proverb.6.text": "الصبر مفتاح الفرج",
+  "eggs.proverb.6.meaning": "Patience is the key to relief: the distance will end."
 }
