@@ -23,7 +23,7 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
 
   const speak=()=>{try{setExperience({language:gateLanguage(read(),navigator.languages??[navigator.language])});}catch{}};
   function show(){
-    clearTimers();appReady=false;logsDone=false;busy=false;resuming=false;
+    clearTimers();appReady=false;logsDone=false;busy=false;resuming=false;gate.classList.remove('welcome');
     speak();
     gate.hidden=false;gate.classList.remove('leaving');if(shell)shell.inert=true;
     word.value='';copy(status,'');status.classList.remove('visible');log.replaceChildren();step('phrase');
@@ -49,7 +49,10 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
   // This phone is already signed in: the phrase shows for a moment, three short lines run, and the app opens. No word asked.
   function resume(who){
     if(gate.hidden||busy||gate.dataset.step!=='phrase')return;
-    resuming=true;
+    resuming=true;gate.classList.add('welcome');
+    if(!gate.querySelector('.gate-fireflies')){const ff=document.createElement('div');ff.className='gate-fireflies';ff.setAttribute('aria-hidden','true');
+      for(let i=0;i<6;i++){const s=document.createElement('span');s.style.left=[13,31,77,87,54,21][i]+'%';s.style.top=[71,78,73,83,82,85][i]+'%';s.style.animationDelay=[0,1.1,.6,1.8,2.4,1.4][i]+'s';ff.append(s);}
+      const bar=document.createElement('div');bar.className='gate-bar';bar.append(document.createElement('i'));gate.append(ff,bar);}
     const known=who==='oliver'||who==='yasmine';
     timers.push(setTimeout(()=>{resuming=false;
       if(known)runLog(who,[`gate.back.${who}`,`gate.log.${who}.1`,`gate.log.${who}.5`]);

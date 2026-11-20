@@ -58,7 +58,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     if(channel||joining||!pairId())return;joining=true;
     try{await client().realtime.setAuth();}catch{}
     channel=client().channel('pair:'+pairId()+':talk',{config:{private:true,broadcast:{self:false},presence:{key:me()}}});
-    channel.on('broadcast',{event:'message'},({payload})=>{list=mergeMessages(list,[payload]);pending.delete(payload.id);if(payload.sender_id!==me())partnerTypingAt=0;render();scheduleRead();})
+    channel.on('broadcast',{event:'message'},({payload})=>{if(payload?.kind==='text'&&payload.sender_id!==me()&&!list.some(m=>m.id===payload.id))document.dispatchEvent(new CustomEvent('chat-words',{detail:payload.body}));list=mergeMessages(list,[payload]);pending.delete(payload.id);if(payload.sender_id!==me())partnerTypingAt=0;render();scheduleRead();})
       .on('broadcast',{event:'edit'},({payload})=>{list=mergeMessages(list,[payload]);render();})
       .on('broadcast',{event:'delete'},({payload:gone})=>{const old=list.find(m=>m.id===gone?.id);if(!old)return;list=mergeMessages(list,[{...old,deleted_at:gone.deleted_at,body:null,payload:null}]);render();})
       .on('broadcast',{event:'reaction'},({payload})=>{reactions=applyReaction(reactions,payload);render();})
@@ -91,9 +91,9 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     }catch(e){pending.delete(m.id);failed.add(m.id);render();throw e;}
   }
   async function send(kind,body,payload){
-    if(!available)return;const m=draft(kind,body,payload);replyTo=null;paintReply();
+    if(!available)return;if(kind==='text')document.dispatchEvent(new CustomEvent('chat-words',{detail:body}));const m=draft(kind,body,payload);replyTo=null;paintReply();
     list=mergeMessages(list,[m]);stickToBottom=true;
-    if(kind==='text'||kind==='song'||kind==='game'||kind==='word'){box=outboxAdd(box,m);writeBox(box);}
+    if(kind==='text'||kind==='song'||kind==='game'||kind==='word'||kind==='letter'){box=outboxAdd(box,m);writeBox(box);}
     try{return await deliver(m);}catch{return null;}
   }
   function retryOutbox(){for(const m of box){if(m.pair_id&&m.pair_id!==pairId())continue;list=mergeMessages(list,[m]);deliver(m).catch(()=>{});}}
@@ -172,8 +172,13 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       const words=el('div');const ti=el('p',undefined,'song-title');ti.textContent=m.payload.title??'';ti.dir='auto';const ar=el('p',undefined,'small');ar.textContent=m.payload.artist??'';ar.dir='auto';words.append(ti,ar);
       const url=spotifyOpenUrl({ref:m.payload.ref,title:m.payload.title,artist:m.payload.artist});
       card.append(words);if(url)card.append(button(()=>t('music.openSpotify'),()=>window.open(url,'_blank','noopener,noreferrer'),'quiet'));box.append(card);}
+    if(m.kind==='letter'&&m.payload){const card=el('div',undefined,'msg-letter'+(sealed(m)?' sealed':''));const mine=m.sender_id===me();
+      if(sealed(m)){card.append(el('span',undefined,'letter-seal'),el('p',()=>mine?t('letter.sealedMine',{name:person(partner()),date:dateFmt(m.payload.opens_at)}):t('letter.sealed',{name:person(m.sender_id),date:dateFmt(m.payload.opens_at)}),'letter-line'));
+        if(mine){const p=el('p',undefined,'letter-body');p.textContent=m.body??'';p.dir='auto';card.append(p);}}
+      else{card.append(el('p',()=>t('letter.opened',{name:person(m.sender_id),date:dateFmt(String(m.created_at).slice(0,10))}),'letter-line'));const p=el('p',undefined,'letter-body');p.textContent=m.body??'';p.dir='auto';card.append(p);}
+      box.append(card);return box;}
     if(m.kind==='dance'&&m.payload){const card=el('div',undefined,'msg-dance');card.append(icon('dance',22),
-      el('p',()=>m.payload.role==='copy'?t('talk.danceCopy',{name:person(m.sender_id)}):t('talk.danceStep',{name:person(m.sender_id),style:t('dance.style.'+(m.payload.style??'bachata'))})),
+      el('p',()=>{const style=t('dance.style.'+(m.payload.style??'bachata'));if(m.sender_id===me())return m.payload.role==='copy'?t('talk.danceCopyMine',{name:person(partner())}):t('talk.danceStepMine',{name:person(partner()),style});return m.payload.role==='copy'?t('talk.danceCopy',{name:person(m.sender_id)}):t('talk.danceStep',{name:person(m.sender_id),style});}),
       button(()=>t('talk.openStudio'),()=>document.dispatchEvent(new CustomEvent('open-game',{detail:'dance'})),'primary'));box.append(card);}
     if(m.kind==='game'){box.append(el('p',()=>t('talk.gameInvite',{name:person(m.sender_id)}),'msg-game'),button(()=>t('talk.playNow'),()=>navigate('play'),'primary'));}
     if(m.kind==='word'&&m.payload){const w=el('p',undefined,'culture-word');w.textContent=m.payload.word??'';if(m.payload.lang)w.lang=m.payload.lang;const mean=el('p',undefined,'culture-meaning');mean.textContent=m.payload.meaning??'';box.append(w,mean);}
@@ -183,7 +188,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
   function bubble(m,seenId){
     const mine=m.sender_id===me(),b=el('div',undefined,'msg '+(mine?'mine':'theirs')+(m.deleted_at?' deleted':''));b.dataset.id=m.id;
     if(m.reply_to){const q=list.find(x=>x.id===m.reply_to);const quote=el('p',undefined,'msg-quote');quote.dir='auto';
-      if(q)quote.textContent=q.deleted_at?'':(q.body??q.payload?.title??'');if(q?.deleted_at)copy(quote,()=>t('talk.deleted'));b.append(quote);}
+      if(q)quote.textContent=q.deleted_at||sealed(q)?'':(q.body??q.payload?.title??'');if(q?.deleted_at)copy(quote,()=>t('talk.deleted'));b.append(quote);}
     b.append(content(m));
     const meta=el('p',undefined,'msg-meta');const when=el('span');when.textContent=timeFmt(m.created_at);meta.append(when);
     if(m.edited_at&&!m.deleted_at)meta.append(el('span',()=>t('talk.edited')));
@@ -232,10 +237,32 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
   }
   function openExtras(){
     const sheet=openSheet({title:h=>copy(h,()=>t('talk.more')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'music-form'});
-    sheet.body.append(button(()=>t('talk.inviteGame'),()=>{sheet.close();send('game',null,{game:'hockey'});},'primary'));
+    sheet.body.append(button(()=>t('talk.inviteGame'),()=>{sheet.close();send('game',null,{game:'hockey'});},'primary'),
+      button(()=>t('letter.write'),()=>{sheet.close();writeLetter();},'quiet letter-open'));
     const songs=playlistSongs?.()??[];
     if(songs.length){sheet.body.append(el('p',()=>t('talk.shareSong'),'eyebrow'));
       for(const s of songs.slice(0,30)){const b=button(()=>'',()=>{sheet.close();send('song',null,{title:s.title,artist:s.artist??null,ref:s.ref,cover_url:s.cover_url??null});},'inbox-row');b.textContent=[s.title,s.artist].filter(Boolean).join(' · ');b.dir='auto';sheet.body.append(b);}}
+  }
+
+  // ---- a letter for later: written now, sealed until the day you choose
+  const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+  const sealed=m=>m.kind==='letter'&&String(m.payload?.opens_at??'')>today();
+  const dateFmt=v=>{const [y,mo,d]=String(v).split('-').map(Number);return new Intl.DateTimeFormat(locale()==='aeb-TN'?'ar-TN':locale(),{day:'numeric',month:'long',year:'numeric'}).format(new Date(y,mo-1,d));};
+  function nextAnniversary(){const since=snap()?.pairStory?.together_since;if(!since)return null;const [,m,d]=since.split('-');const y=new Date().getFullYear();
+    let c=`${y}-${m}-${d}`;if(c<=today())c=`${y+1}-${m}-${d}`;return c;}
+  function writeLetter(){
+    const sheet=openSheet({title:h=>copy(h,()=>t('letter.title')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'letter-sheet'});
+    const area=document.createElement('textarea');area.rows=8;area.maxLength=4000;area.dir='auto';area.className='letter-text';copy(area,()=>t('letter.placeholder',{name:person(partner())}),'placeholder');
+    const tomorrow=new Date(Date.now()+86400000),min=tomorrow.getFullYear()+'-'+String(tomorrow.getMonth()+1).padStart(2,'0')+'-'+String(tomorrow.getDate()).padStart(2,'0');
+    const when=document.createElement('input');when.type='date';when.min=min;when.value=nextAnniversary()??min;when.className='letter-date';copy(when,()=>t('letter.opensOn'),'aria-label');
+    const picks=el('div',undefined,'letter-picks');const anniv=nextAnniversary();
+    if(anniv)picks.append(button(()=>t('letter.anniversary'),()=>{when.value=anniv;},'quiet'));
+    picks.append(button(()=>t('letter.inMonth'),()=>{const d=new Date();d.setMonth(d.getMonth()+1);when.value=d.toISOString().slice(0,10);},'quiet'),
+      button(()=>t('letter.inYear'),()=>{const d=new Date();d.setFullYear(d.getFullYear()+1);when.value=d.toISOString().slice(0,10);},'quiet'));
+    const go=button(()=>t('letter.seal'),async()=>{const text=area.value.trim();if(!text||!when.value||when.value<min)return;go.disabled=true;sheet.close();
+      await send('letter',text,{opens_at:when.value});},'primary');
+    sheet.body.append(area,el('label',()=>t('letter.opensOn'),'eyebrow'),when,picks,el('p',()=>t('letter.hint',{name:person(partner())}),'small'),go);
+    area.focus();
   }
 
   // ---- the composer
@@ -249,6 +276,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
   $('chatMore').onclick=()=>openExtras();
   listEl.addEventListener('scroll',()=>{if(listEl.scrollTop<40&&hasEarlier)loadEarlier();});
 
+  document.addEventListener('write-letter',()=>writeLetter());
   return {
     // the chat pane became visible (or not): load once, mark as read while it is on screen
     shown(on){visible=on;if(on){if(available===null)load();else{render(true);scheduleRead();}}else paintUnread();},

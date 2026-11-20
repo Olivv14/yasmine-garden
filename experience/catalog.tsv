@@ -1284,3 +1284,37 @@ dance.diaryEmpty	Your dance diary starts with the first step you film.	Su diario
 talk.danceStep	{{name}} sent you a {{style}} step to copy	{{name}} te mandó un paso de {{style}} para copiar	{{name}} t'a envoyé un pas de {{style}} à copier	{{name}} ti ha mandato un passo di {{style}} da copiare	{{name}} بعثلك خطوة {{style}} باش تقلّدها
 talk.danceCopy	{{name}} copied your step	{{name}} copió tu paso	{{name}} a copié ton pas	{{name}} ha copiato il tuo passo	{{name}} قلّد خطوتك
 talk.openStudio	Open the dance studio	Abrir el estudio de baile	Ouvrir le studio de danse	Apri lo studio di danza	حلّ ستوديو الرقص
+us.heroLabel	The two of you	Ustedes dos	Vous deux	Voi due	انتوما الزوز
+us.changePhoto	Change your photo	Cambiar tu foto	Changer ta photo	Cambia la tua foto	بدّل التصويرة متاعك
+us.setSince	When did it start? Set your day	¿Cuándo empezó? Elige su día	Ça a commencé quand ? Choisis votre jour	Quando è iniziato? Scegli il vostro giorno	وقتاش بدات؟ اختار النهار متاعكم
+us.daysTogether	{{count}} days together	{{count}} días juntos	{{count}} jours ensemble	{{count}} giorni insieme	{{count}} يوم مع بعضنا
+us.venezuela	Venezuela	Venezuela	Venezuela	Venezuela	فنزويلا
+us.tunisia	Tunisia	Túnez	Tunisie	Tunisia	تونس
+us.points	points	puntos	points	punti	نقاط
+us.combo	day combo	días de combo	jours de combo	giorni di combo	أيام كومبو
+us.flowers	flowers	flores	fleurs	fiori	ورود
+us.sinceLabel	The day you got together	El día que empezaron	Le jour où tout a commencé	Il giorno in cui vi siete messi insieme	النهار اللي بديتو فيه
+us.saveSince	Save our day	Guardar nuestro día	Enregistrer notre jour	Salva il nostro giorno	سجّل النهار متاعنا
+us.sinceSaved	Saved. You both see it now.	Guardado. Ahora los dos lo ven.	Enregistré. Vous le voyez tous les deux.	Salvato. Ora lo vedete entrambi.	تسجّل. توّا تشوفوه الزوز.
+composer.tab.note	Note	Nota	Note	Nota	نوط
+composer.tab.poem	Poem	Poema	Poème	Poesia	قصيدة
+composer.tab.letter	Letter for later	Carta para después	Lettre pour plus tard	Lettera per dopo	جواب للمستقبل
+letter.write	Write a letter for later	Escribir una carta para después	Écrire une lettre pour plus tard	Scrivi una lettera per dopo	اكتب جواب للمستقبل
+letter.title	A letter for later	Una carta para después	Une lettre pour plus tard	Una lettera per dopo	جواب للمستقبل
+letter.placeholder	Dear {{name}}…	Querida/o {{name}}…	Mon cher·ma chère {{name}}…	Caro/a {{name}}…	عزيزي {{name}}…
+letter.opensOn	It opens on	Se abre el	Elle s'ouvre le	Si apre il	يتحلّ نهار
+letter.anniversary	Our anniversary	Nuestro aniversario	Notre anniversaire	Il nostro anniversario	العيد متاعنا
+letter.inMonth	In a month	En un mes	Dans un mois	Tra un mese	بعد شهر
+letter.inYear	In a year	En un año	Dans un an	Tra un anno	بعد عام
+letter.hint	{{name}} sees a sealed envelope until that day.	{{name}} verá un sobre cerrado hasta ese día.	{{name}} voit une enveloppe scellée jusqu'à ce jour-là.	{{name}} vede una busta sigillata fino a quel giorno.	{{name}} يشوف جواب مسكّر لين يجي النهار هذاك.
+letter.seal	Seal the letter	Sellar la carta	Sceller la lettre	Sigilla la lettera	سكّر الجواب
+letter.sealed	A letter from {{name}}. It opens on {{date}}.	Una carta de {{name}}. Se abre el {{date}}.	Une lettre de {{name}}. Elle s'ouvre le {{date}}.	Una lettera da {{name}}. Si apre il {{date}}.	جواب من {{name}}. يتحلّ نهار {{date}}.
+letter.sealedMine	Sealed for {{name}} until {{date}}	Sellada para {{name}} hasta el {{date}}	Scellée pour {{name}} jusqu'au {{date}}	Sigillata per {{name}} fino al {{date}}	مسكّر لـ{{name}} لين {{date}}
+letter.opened	A letter from {{name}}, written on {{date}}	Una carta de {{name}}, escrita el {{date}}	Une lettre de {{name}}, écrite le {{date}}	Una lettera da {{name}}, scritta il {{date}}	جواب من {{name}}، مكتوب نهار {{date}}
+eggs.bachata	The toad is dancing bachata!	¡El sapo está bailando bachata!	Le crapaud danse la bachata !	Il rospo balla la bachata!	الجرانة قاعدة ترقص باتشاتا!
+eggs.nejma	Nejma means star ✦	Nejma significa estrella ✦	Nejma veut dire étoile ✦	Nejma significa stella ✦	نجمة ✦
+eggs.regenbogen	Regenbogen: a rainbow for you	Regenbogen: un arcoíris para ti	Regenbogen : un arc-en-ciel pour toi	Regenbogen: un arcobaleno per te	Regenbogen: قوس قزح ليك
+eggs.greenHour	11:11, the green hour. Make a wish.	11:11, la hora verde. Pide un deseo.	11:11, l'heure verte. Fais un vœu.	11:11, l'ora verde. Esprimi un desiderio.	11:11، الساعة الخضراء. تمنّى أمنية.
+eggs.moon	Same moon. Goodnight, {{a}} and {{b}}.	La misma luna. Buenas noches, {{a}} y {{b}}.	La même lune. Bonne nuit, {{a}} et {{b}}.	La stessa luna. Buonanotte, {{a}} e {{b}}.	نفس القمرة. تصبحو على خير، {{a}} و{{b}}.
+talk.danceStepMine	You sent {{name}} a {{style}} step to copy	Le mandaste a {{name}} un paso de {{style}} para copiar	Tu as envoyé à {{name}} un pas de {{style}} à copier	Hai mandato a {{name}} un passo di {{style}} da copiare	بعثت لـ{{name}} خطوة {{style}} باش يقلّدها
+talk.danceCopyMine	You copied {{name}}'s step	Copiaste el paso de {{name}}	Tu as copié le pas de {{name}}	Hai copiato il passo di {{name}}	قلّدت خطوة {{name}}

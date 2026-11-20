@@ -655,7 +655,8 @@ renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.el
    if(boltOn>0){boltOn-=step;G.stormM.emissiveIntensity=boltOn>0?1.05*(boltOn/.16)+(Math.sin(t*60)>0?.2:0):0;if(boltOn<=0)G.bolts.forEach(x=>x.visible=false);}}
   if(dayG.visible)for(const b of G.bfs||[]){const u=b.userData,a=t*.55+u.ph;b.position.set(u.home.x+Math.cos(a)*u.r,u.home.y+Math.sin(t*1.7+u.ph)*.12,u.home.z+Math.sin(a*1.3)*u.r);b.rotation.y=-a;b.children.forEach(h=>{if(h.userData.side)h.rotation.z=h.userData.side*(.25+Math.sin(t*16+u.ph)*.75);});}
   (G.notes||[]).forEach((n,i)=>{n.visible=playing;if(!playing)return;n.userData.y0??=n.position.y;n.position.y=n.userData.y0+((t*.3+i*.33)%1)*.5;n.rotation.z=Math.sin(t*2+i)*.3;n.updateMatrix();});
-  if(G.toadBody){G.toadBody.rotation.z=playing?Math.sin(t*3.2)*.05:0;G.toadBody.updateMatrix();}
+  if(G.toadBody){const bachata=document.documentElement.classList.contains('toad-bachata');
+   G.toadBody.rotation.z=bachata?Math.sin(t*8.4)*.16:playing?Math.sin(t*3.2)*.05:0;G.toadBody.rotation.y=bachata?Math.sin(t*4.2)*.5:0;G.toadBody.position.y=.4+(bachata?Math.abs(Math.sin(t*8.4))*.08:0);G.toadBody.updateMatrix();}
   if(G.camelHead){G.camelHead.rotation.x=Math.sin(t*.7)*.07;G.camelHead.rotation.y=Math.sin(t*.31)*.18;G.camelHead.updateMatrix();}
   if(G.camelTail){G.camelTail.rotation.z=Math.sin(t*2.3)*.35;G.camelTail.updateMatrix();}}
  renderer.render(scene,cam);

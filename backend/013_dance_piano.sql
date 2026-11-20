@@ -2,20 +2,22 @@
 -- Copy my step: a dance step is a Talk message of kind 'dance' carrying a short video (the existing media lifecycle:
 -- reserve_message_media -> upload -> finalize), payload {"role":"step"|"copy","style":"bachata|...","of":<step id>}.
 -- The one who filmed the step gives the copy 1 to 3 hearts. Piano tiles results are game events ('piano') that count
--- for the week: one point per star.
+-- for the week: one point per star. A letter for later is a Talk message of kind 'letter' with the words and the day it
+-- opens (payload {"opens_at":"YYYY-MM-DD"}); the app keeps it sealed until that day.
 -- Apply AFTER 012, as postgres, in this one transaction. Additive: checks get wider, one table and one function are
 -- new, reserve_message_media also accepts a video for a dance, and the points count piano stars.
 begin;
 
 -- 1. Dance messages
 alter table public.messages drop constraint if exists messages_kind_check;
-alter table public.messages add constraint messages_kind_check check (kind in ('text','photo','voice','song','game','word','dance'));
+alter table public.messages add constraint messages_kind_check check (kind in ('text','photo','voice','song','game','word','dance','letter'));
 alter table public.messages drop constraint if exists messages_shape;
 alter table public.messages add constraint messages_shape check (
   deleted_at is not null or (kind='text' and body is not null) or kind in ('photo','voice')
   or (kind in ('song','game','word') and payload is not null)
   or (kind='dance' and payload is not null and coalesce(payload->>'role','') in ('step','copy')
-      and (payload->>'role'='step' or (payload ? 'of'))));
+      and (payload->>'role'='step' or (payload ? 'of')))
+  or (kind='letter' and body is not null and payload is not null and coalesce(payload->>'opens_at','') ~ '^\d{4}-\d{2}-\d{2}$'));
 
 -- 2. A dance carries one short video (same quota and lifecycle as photos and voice notes)
 create or replace function public.reserve_message_media(p_id uuid,p_message_id uuid,p_filename text,p_mime_type text)
@@ -129,14 +131,38 @@ language sql stable security definer set search_path='' as $$
 $$;
 revoke all on function app_private.points_earned(uuid) from public, anon, authenticated;
 
+-- 6. The day you got together (shown on Us as "N days together"); either of you can set it
+create table if not exists public.pair_story (
+  pair_id uuid primary key references public.pairs(id),
+  together_since date not null check (together_since between date '1990-01-01' and date '2100-01-01'),
+  updated_by uuid not null references public.users_profiles(id),
+  updated_at timestamptz not null default now()
+);
+alter table public.pair_story enable row level security;
+drop policy if exists pair_story_pair_read on public.pair_story;
+create policy pair_story_pair_read on public.pair_story for select to authenticated using (pair_id=(select app_private.my_pair()));
+revoke all on public.pair_story from public, anon, authenticated;
+grant select on public.pair_story to authenticated;
+create or replace function public.set_together_since(p_date date)
+returns public.pair_story language plpgsql security definer set search_path='' as $$
+declare v_me uuid:=app_private.begin_write(); v_pair uuid:=app_private.my_pair(); v_row public.pair_story;
+begin
+  if p_date is null or p_date>current_date+1 then raise exception 'A day that has come' using errcode='22023'; end if;
+  insert into public.pair_story(pair_id,together_since,updated_by) values(v_pair,p_date,v_me)
+  on conflict (pair_id) do update set together_since=excluded.together_since,updated_by=excluded.updated_by,updated_at=now() returning * into v_row;
+  perform app_private.signal(true); return v_row;
+end $$;
+revoke all on function public.set_together_since(date) from public, anon, authenticated, service_role;
+grant execute on function public.set_together_since(date) to authenticated;
+
 do $verify$
 begin
   if not exists(select 1 from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname='dance_ratings' and c.relrowsecurity) then
     raise exception '013: dance_ratings needs RLS'; end if;
-  if has_table_privilege('authenticated','public.dance_ratings','INSERT') then raise exception '013: unsafe table grant'; end if;
+  if has_table_privilege('authenticated','public.pair_story','INSERT') or has_table_privilege('authenticated','public.dance_ratings','INSERT') then raise exception '013: unsafe table grant'; end if;
   if has_function_privilege('anon','public.rate_dance(uuid,smallint)','EXECUTE') then raise exception '013: unsafe function grant'; end if;
   if exists(select 1 from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-    where n.nspname='public' and p.proname in ('rate_dance','reserve_message_media')
+    where n.nspname='public' and p.proname in ('rate_dance','reserve_message_media','set_together_since')
     and (not p.prosecdef or not ('search_path=""'=any(coalesce(p.proconfig,array[]::text[]))))) then
     raise exception '013: functions need security definer with empty search_path'; end if;
 end $verify$;
