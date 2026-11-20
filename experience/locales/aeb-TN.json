@@ -1374,5 +1374,8 @@
   "talk.learnAgain": "عاود",
   "talk.learnAgainText": "عاود! قول \"{{word}}\" مرّة أخرى 🔁",
   "talk.taughtWord": "{{name}} علّمك كلمة",
-  "talk.learnIt": "تعلّمها"
+  "talk.learnIt": "تعلّمها",
+  "garden.shootingStar": "نجمة طايحة! تمنّى أمنية ✦",
+  "garden.fullMoon": "قمرة كاملة الليلة، نفسها فوق راسكم الزوز.",
+  "learn.partnerFound": "{{name}} لقى {{count}} حاجات في الجنينة"
 }

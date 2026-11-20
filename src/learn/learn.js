@@ -6,6 +6,7 @@
 import {openSheet} from '../design/sheet.js';
 import {icon} from '../design/icons.js';
 import {loadDecks} from '../games/duel-ui.js';
+import {partnerDiscoveries} from '../garden3d/discoveries.js';
 import {teachCard,stateMap,session,modeFor,choiceSet,checkTyped,ratingFor,review,serialize,wordOfDay,stats,meaningOf,previews,RATING,startedToday,DECK_LANG} from './learn-model.js';
 
 const DECKS=['it','ve','tn','w'],KEY='learn.deck',BUCKET='connection-private';
@@ -49,7 +50,8 @@ export function createLearn({$,el,button,t,copy,locale,getSnapshot,getClient,get
     const nums=el('div',undefined,'learn-stats');
     for(const [n,key] of [[st.due,'learn.due'],[st.learned,'learn.learned'],[st.xp,'learn.xp']]){const s=el('div',undefined,'learn-stat');const b=el('b');b.textContent=String(n);s.append(b,el('span',()=>t(key)));nums.append(s);}
     home.append(nums);
-    if(partner())home.append(el('p',()=>t('learn.partnerXp',{name:person(partner()),count:theirs.xp}),'small learn-partner'));
+    if(partner()){home.append(el('p',()=>t('learn.partnerXp',{name:person(partner()),count:theirs.xp}),'small learn-partner'));
+      const found=partnerDiscoveries(snap.gardenDiscoveries,partner()).size;if(found)home.append(el('p',()=>t('learn.partnerFound',{name:person(partner()),count:found}),'small learn-partner'));}
     const queue=session(cards,states(),{newToday:startedToday(snap.learnState,me())});
     const start=button(()=>queue.length?t('learn.start',{count:queue.length}):t('learn.allDone'),()=>startSession(queue,cards),'primary learn-start');start.disabled=!queue.length;
     const teach=button(()=>t('learn.teach',{name:person(partner())}),()=>teachSheet(),'quiet learn-teach');teach.prepend(icon('mic',16));

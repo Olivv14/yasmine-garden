@@ -1374,5 +1374,8 @@
   "talk.learnAgain": "Again",
   "talk.learnAgainText": "Again! Say \"{{word}}\" one more time 🔁",
   "talk.taughtWord": "{{name}} taught you a word",
-  "talk.learnIt": "Learn it"
+  "talk.learnIt": "Learn it",
+  "garden.shootingStar": "A shooting star! Make a wish ✦",
+  "garden.fullMoon": "Full moon tonight, the same one over both of you.",
+  "learn.partnerFound": "{{name}} has found {{count}} things in the garden"
 }

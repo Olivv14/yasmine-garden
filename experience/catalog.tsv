@@ -1375,3 +1375,6 @@ talk.learnAgain	Again	Otra vez	Encore	Ancora	عاود
 talk.learnAgainText	Again! Say "{{word}}" one more time 🔁	¡Otra vez! Di "{{word}}" una vez más 🔁	Encore ! Redis « {{word}} » une fois 🔁	Ancora! Ridici "{{word}}" un'altra volta 🔁	عاود! قول "{{word}}" مرّة أخرى 🔁
 talk.taughtWord	{{name}} taught you a word	{{name}} te enseñó una palabra	{{name}} t'a appris un mot	{{name}} ti ha insegnato una parola	{{name}} علّمك كلمة
 talk.learnIt	Learn it	Aprenderla	L'apprendre	Imparala	تعلّمها
+garden.shootingStar	A shooting star! Make a wish ✦	¡Una estrella fugaz! Pide un deseo ✦	Une étoile filante ! Fais un vœu ✦	Una stella cadente! Esprimi un desiderio ✦	نجمة طايحة! تمنّى أمنية ✦
+garden.fullMoon	Full moon tonight, the same one over both of you.	Luna llena esta noche, la misma sobre los dos.	Pleine lune ce soir, la même au-dessus de vous deux.	Luna piena stasera, la stessa sopra entrambi.	قمرة كاملة الليلة، نفسها فوق راسكم الزوز.
+learn.partnerFound	{{name}} has found {{count}} things in the garden	{{name}} encontró {{count}} cosas en el jardín	{{name}} a trouvé {{count}} choses dans le jardin	{{name}} ha trovato {{count}} cose nel giardino	{{name}} لقى {{count}} حاجات في الجنينة

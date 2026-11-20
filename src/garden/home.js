@@ -21,7 +21,7 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
   let g3=null;
   if(webglAvailable()){
     garden.element.hidden=true;$('gardenMount').classList.add('is-3d');
-    g3=createGarden3D({t,copy,onFlower:id=>openFlower(id),onMoon:()=>openTerminal(),onSpot:id=>openCulture(id),onToad:()=>onToad?.(),
+    g3=createGarden3D({t,copy,onEvent:e=>skyEvent(e),onFlower:id=>openFlower(id),onMoon:()=>openTerminal(),onSpot:id=>openCulture(id),onToad:()=>onToad?.(),
       onFail:()=>{g3?.destroy();g3=null;garden.element.hidden=false;$('gardenMount').classList.remove('is-3d');render();}});
     $('gardenMount').append(g3.element);
   }
@@ -33,6 +33,9 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
   const partner=snap=>snap.members.map(m=>m.profile_id).find(id=>id!==me())??null;
   const tones=snap=>Object.fromEntries(snap.flowers.map(f=>[f.id,authorTone(f.planted_by,snap.members,snap.profiles)]));
 
+  // night events in the 3D sky: a shooting star (at most one note every two minutes) and a full moon
+  let lastStarNote=0;
+  function skyEvent(e){if(document.hidden)return;if(e.kind==='star'){if(Date.now()-lastStarNote<120000)return;lastStarNote=Date.now();notify(()=>t('garden.shootingStar'));}if(e.kind==='fullMoon')notify(()=>t('garden.fullMoon'));}
   function greeting(){const h=new Date().getHours(),key=h<5||h>=22?'home.greetNight':h<12?'home.greetMorning':h<18?'home.greetAfternoon':'home.greetEvening';copy($('gardenTitle'),()=>t(key,{name:person(me())}));}
   // What's new from your partner, in one line: their latest planting, shared note or answer.
   function partnerLine(snap){

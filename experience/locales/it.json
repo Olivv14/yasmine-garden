@@ -1374,5 +1374,8 @@
   "talk.learnAgain": "Ancora",
   "talk.learnAgainText": "Ancora! Ridici \"{{word}}\" un'altra volta 🔁",
   "talk.taughtWord": "{{name}} ti ha insegnato una parola",
-  "talk.learnIt": "Imparala"
+  "talk.learnIt": "Imparala",
+  "garden.shootingStar": "Una stella cadente! Esprimi un desiderio ✦",
+  "garden.fullMoon": "Luna piena stasera, la stessa sopra entrambi.",
+  "learn.partnerFound": "{{name}} ha trovato {{count}} cose nel giardino"
 }

@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {isGreenHour,isMoonTime,nightKey,wordIn,shakeDetector} from '../src/eggs/eggs.js';
 import {daysTogether} from '../src/us/us-hero.js';
+import {moonPhase,isFullMoon,moonLight} from '../src/garden3d/sky.js';
 
 test('green hour is 11:11, morning or night, and only that minute',()=>{
   assert.ok(isGreenHour(new Date(2026,10,20,11,11)));assert.ok(isGreenHour(new Date(2026,10,20,23,11)));
@@ -24,4 +25,9 @@ test('days together count from the day you set',()=>{
   assert.equal(daysTogether('2026-04-20',new Date(2026,3,20,22).getTime()),0);
   assert.equal(daysTogether('2026-04-20',new Date(2026,10,20,9).getTime()),214);
   assert.equal(daysTogether(null),null);
+});
+test('the moon in the garden is the real moon',()=>{
+  assert.ok(isFullMoon(new Date(Date.UTC(2026,0,3,10))),'3 January 2026 was a full moon');
+  assert.ok(moonPhase(new Date(Date.UTC(2026,0,18,19)))<.03||moonPhase(new Date(Date.UTC(2026,0,18,19)))>.97,'18 January 2026 was a new moon');
+  const full=moonLight(.5);assert.ok(full[2]>.99);const nw=moonLight(0);assert.ok(nw[2]<-.99);assert.ok(moonLight(.25)[0]>.99);
 });

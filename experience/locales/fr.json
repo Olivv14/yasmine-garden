@@ -1374,5 +1374,8 @@
   "talk.learnAgain": "Encore",
   "talk.learnAgainText": "Encore ! Redis « {{word}} » une fois 🔁",
   "talk.taughtWord": "{{name}} t'a appris un mot",
-  "talk.learnIt": "L'apprendre"
+  "talk.learnIt": "L'apprendre",
+  "garden.shootingStar": "Une étoile filante ! Fais un vœu ✦",
+  "garden.fullMoon": "Pleine lune ce soir, la même au-dessus de vous deux.",
+  "learn.partnerFound": "{{name}} a trouvé {{count}} choses dans le jardin"
 }
