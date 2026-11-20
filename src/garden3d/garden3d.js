@@ -1,3 +1,4 @@
+import {icon} from '../design/icons.js';
 // The 3D garden on the home screen, in place of the flat one when the phone can draw it.
 // The scene (three.js) is a separate file loaded after the app starts; until it is ready, or if the
 // phone cannot draw WebGL, the flat garden stays. Labels pinned to the 3D scene come from the catalog.
@@ -16,7 +17,19 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
   const stage=document.createElement('div');stage.className='garden3d-stage';
   const loading=document.createElement('p');loading.className='garden3d-loading';copy(loading,()=>t('garden3d.loading'));
   const pins=document.createElement('div');pins.className='garden3d-pins';pins.setAttribute('aria-hidden','true');
-  element.append(stage,loading,pins);
+  // full screen: the whole phone becomes the garden; the same button (or Escape) brings it back
+  const full=document.createElement('button');full.type='button';full.className='garden3d-full';
+  const paintFull=()=>{const on=element.classList.contains('full');full.replaceChildren(icon(on?'shrink':'expand',18));copy(full,()=>t(on?'garden3d.exitFull':'garden3d.full'),'aria-label');full.setAttribute('aria-pressed',String(on));};
+  const holder=document.createComment('garden');
+  function setFull(on){
+    if(on===element.classList.contains('full'))return;
+    if(on){element.replaceWith(holder);document.body.append(element);}else if(holder.parentNode){holder.replaceWith(element);}
+    element.classList.toggle('full',on);document.documentElement.classList.toggle('garden-full',on);paintFull();full.focus({preventScroll:true});
+  }
+  full.onclick=()=>setFull(!element.classList.contains('full'));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&element.classList.contains('full'))setFull(false);});
+  paintFull();
+  element.append(stage,loading,pins,full);
 
   const pin=(cls,at,{side=false,only=null,dx=0,dy=0}={})=>{const n=document.createElement('div');n.className='pin '+cls;pins.append(n);return {n,at,side,only,dx,dy};};
   const score=who=>{const p=pin('score '+who,AT[who],{side:who==='oliver'});const b=document.createElement('b'),initial=document.createElement('em'),name=document.createElement('small'),count=document.createElement('span');b.append(initial,name,count);p.n.append(b,document.createElement('i'));p.parts={initial,name,count};p.n.hidden=true;return p;};
@@ -64,6 +77,7 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
       s.parts.initial.textContent=Array.from(d.name.trim())[0]?.toLocaleUpperCase()??'';copy(s.parts.name,()=>d.isMe?t('garden3d.you'):d.name);s.parts.count.textContent=String(d.count);}},
     setSong(title){song.n.hidden=!title;song.label.textContent=title??'';},
     setPlaying(on){playing=!!on;api?.setPlaying(playing);},
-    destroy(){destroyed=true;clearInterval(timer);api?.destroy();api=null;element.remove();},
+    exitFull(){setFull(false);},
+    destroy(){setFull(false);destroyed=true;clearInterval(timer);api?.destroy();api=null;element.remove();},
   };
 }
