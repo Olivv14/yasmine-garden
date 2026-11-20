@@ -11,22 +11,45 @@
 8. **Word duel and Learn must fit the phone.** No scrolling to reach the answers or Continue: the card shrinks to fit the screen.
 9. **Technical text on screen** ("Authorized data checked · revision 41…", server wording). Remove from what you see.
 
-## B. Garden
-10. 360° rotation.
-11. Walls that flicker: fix them (z-fighting).
+## B. Garden (mockup: "Garden: drag the can, plant from the tray")
+10. Free 360° rotation, from any angle, including from above. No more invisible limit. You can reach every spot (the arepas, Oliver's house and its name) by turning, zooming in and zooming out.
+11. The wall on Yasmine's side:
+    - It flickers ("lightning"): fix it.
+    - It stands at the corner of the island with empty space behind it: rebuild that corner.
+    - Make the island bigger and more spacious.
 12. A button to hide the scores.
-13. Watering can and Plant buttons inside the garden (also in full screen).
-14. More comfortable navigation: smoother drag, double-tap to zoom, a reset view button.
+13. The watering can sits on the edge of the island (as in the round 6 mockup). Drag it onto a flower to water it.
+14. A seed tray at the bottom. Drag a seed onto your side to plant it: Yasmine plants on her side, Oliver on his.
+15. The garden scores show this week's points (today they show air hockey wins, so 0).
+16. A reset view button, and smoother drag and pinch.
+17. Test: I drive the camera all the way round, tap every culture spot from every side, and plant and water on both sides.
 
 ## C. Notifications
 15. A step-by-step tutorial in Us for adding Between us to the iPhone Home Screen and turning notifications on, with pictures, always available.
 
-## D. New designs — mockups first, you choose
-16. "How I am today" (mood).
-17. The Write / Note / Poem / Photo / Voice buttons and the journal.
-18. Questions and Music cards on Home.
+## D. New designs (mockups on the canvas, "Polish round" page)
+18. Home: the garden first, then one row of round icon buttons (Note, Poem, Photo, Voice, Mood), today's question card with lanterns, and a small music + combo row. No more big plain buttons.
+19. Write: a real diary page.
+    - Lined paper with a margin and a ribbon; the date at the top; poems in handwriting.
+    - Photos stuck on the page and voice notes as a tag.
+    - Feelings chosen as icons, not a dropdown.
+    - "For Yasmine too" as a toggle, not a select.
+20. How I am today:
+    - big mood buttons and a glowing mood;
+    - one line on paper;
+    - what Yasmine feels, shown underneath.
+21. Truth or dare:
+    - a "‹ Spice" back arrow to Mild / Hot / Harissa;
+    - leaving clears the card;
+    - everything fits on one screen.
+    - Word duel and Learn follow the same rule.
+22. Every game uses the current dusk design, with sharp backgrounds (no blur).
+23. Themes: Yasmine (green), Oliver (red) and the others must really change the app when chosen. Today green does nothing visible.
+24. Mascots:
+    - One Emmy only; the mini Emmy on the Talk icon goes away.
+    - When a message arrives, Emmy walks to Talk and shows a "!" until it is opened, then naps there or walks on.
 
-## E. Talk (WhatsApp / Telegram / Snapchat level)
+## E. Talk (WhatsApp / Telegram / Snapchat level; mockups: "Talk full screen" and "Before sending")
 19. Full-screen chat, not a box in the middle of the page.
 20. Voice notes: listen before sending, re-record, or delete.
 21. Photos and videos open full screen. You choose before sending: view once, view twice, or keep in the chat.
