@@ -4,6 +4,7 @@
 import {createTruthDare} from './truth-dare.js';
 import {createHockey} from './hockey.js';
 import {createPool} from './pool.js';
+import {SCENE_ART} from './scene-art.js';
 import {createDuel} from './duel-ui.js';
 import {createKnowMe} from './knowme-ui.js';
 import {pointsBy,weekStart,seeds,waitingForMe,answersOf} from './score.js';
@@ -55,14 +56,21 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     b.append(art,el('span',()=>t(g.title),'play-tile-title'),el('span',()=>t(g.hint),'play-tile-hint'));grid.append(b);
   }
   // One game at a time on the stage; "All games" goes back to the tiles.
+  // Every game opens full screen over the app, in the dusk garden; "‹ Games" goes back to the tiles.
+  const backdrop=el('div',undefined,'scene-art game-backdrop');backdrop.innerHTML=SCENE_ART.hockeyScene;backdrop.firstElementChild?.setAttribute('preserveAspectRatio','xMidYMid slice');backdrop.setAttribute('aria-hidden','true');
   function show(id,then){
     if(open&&open!==id)stopGames();open=id;tiles.hidden=!!id;stage.hidden=!id;stage.replaceChildren();
+    document.documentElement.classList.toggle('game-full',!!id);stage.dataset.game=id??'';
+    // full screen means above everything: the stage moves to the top of the page while a game is open
+    if(id&&stage.parentElement!==document.body)document.body.append(stage);
+    if(!id&&stage.parentElement!==mount)mount.append(stage);
     if(!id)return;
-    const back=button(()=>t('play.back'),()=>{stopGames();show(null);},'link play-back');back.prepend(icon('back',16));
-    stage.append(back,GAMES[id].game.element);
+    const back=button(()=>t('games.back'),()=>{stopGames();show(null);},'link play-back');back.prepend(icon('back',16));
+    const bar=el('div',undefined,'game-bar');bar.append(back);
+    stage.append(backdrop,bar,GAMES[id].game.element);
     if(id==='td')td.render(getSnapshot());
     if(then)then();else GAMES[id].game.render?.(getSnapshot());
-    stage.scrollIntoView?.({block:'start'});
+    stage.scrollTop=0;
   }
   function stopGames(){hockey.stop();pool.stop();duel.stop();knowme.stop();}
   // A round from the bell or a "Your turn" card: play it if it waits for you, otherwise show its result.
@@ -109,6 +117,6 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     paintBoard(snap);paintTurns(snap);
     if(open==='td')td.render(snap);else if(open==='duel')duel.render();else if(open==='knowme')knowme.render();
   }
-  function clear(){stopGames();td.clear();duel.clear();knowme.clear();board.replaceChildren();turns.replaceChildren();show(null);onWaiting?.(0);}
-  return {render,clear,stop:()=>stopGames(),openRound,show};
+  function clear(){document.documentElement.classList.remove('game-full');stopGames();td.clear();duel.clear();knowme.clear();board.replaceChildren();turns.replaceChildren();show(null);onWaiting?.(0);}
+  return {render,clear,stop:()=>{stopGames();if(open)show(null);},openRound,show};
 }

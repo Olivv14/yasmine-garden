@@ -9,6 +9,7 @@ import {weekStart,pointEvents,pointsBy,seeds,waitingForMe,waitingForThem,finishe
 import {toadMove,TOAD_LEVELS,crossing} from '../src/games/bot.js';
 import {POOL,rack,strike,runShot,newGame,applyShot,tableKey,groupOf,freeSpot} from '../src/games/pool-rules.js';
 import {toadShot,candidateShots} from '../src/games/pool-bot.js';
+import {homography} from '../src/games/persp.js';
 import {parseDecks} from '../experience/build-decks.mjs';
 
 const at=i=>new Date(Date.UTC(2026,10,15,10,i)).toISOString();
@@ -228,4 +229,11 @@ test('pool toad: finds clean pots, places the white with ball in hand, and the C
 test('pool counts for the week like hockey',()=>{
   const O='o',Y='y',snap={members:[{profile_id:O},{profile_id:Y}],gameEvents:[{game:'pool',kind:'finish',profile_id:O,score_me:1,score_partner:0,created_at:'2026-01-01'},{game:'pool_bot',kind:'finish',profile_id:Y,score_me:0,score_partner:1,created_at:'2026-01-01'}],playRounds:[],playAnswers:[]};
   const p=pointsBy(snap);assert.equal(p.get(O),3);assert.equal(p.get(Y),1+1);
+});
+
+test('perspective: the table corners land on the drawn corners and every point maps back',()=>{
+  const q=[[70,64],[300,64],[334,470],[36,470]],H=homography(q);
+  for(const [u,v,i] of [[0,0,0],[1,0,1],[1,1,2],[0,1,3]]){const [x,y]=H.to(u,v);assert.ok(Math.abs(x-q[i][0])<1e-6&&Math.abs(y-q[i][1])<1e-6);}
+  for(let k=0;k<50;k++){const u=Math.random(),v=Math.random(),[x,y]=H.to(u,v),[u2,v2]=H.from(x,y);assert.ok(Math.abs(u-u2)<1e-9&&Math.abs(v-v2)<1e-9);}
+  assert.ok(H.scale(.5,1)>H.scale(.5,0),'things are bigger near you');
 });

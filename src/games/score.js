@@ -4,6 +4,7 @@ import {duelOutcome} from './duel.js';
 
 const time=v=>{const n=Date.parse(v??'');return Number.isFinite(n)?n:0;};
 export const ROUND_DAYS=14,SEED_POINTS=10,STARTER_SEEDS=3;
+export const TOAD_REWARD=Object.freeze({lv1:1,lv2:3,lv3:6});
 
 // Monday 00:00 on this phone's clock.
 export function weekStart(now=Date.now()){const d=new Date(now);d.setHours(0,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7);return d.getTime();}
@@ -22,7 +23,10 @@ export function pointEvents(snap){
       const other=members.find(id=>id!==e.profile_id);
       add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);add(other,1+(e.score_partner>e.score_me?2:0),e.created_at);
     }
-    if((e.game==='hockey_bot'||e.game==='pool_bot')&&e.kind==='finish')add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);
+    // against the toad: the card says what a win is worth (the Dreamer +1, the Coach +3, the Champion +6);
+    // older games saved without a level count 1, and 2 more for a win
+    if((e.game==='hockey_bot'||e.game==='pool_bot')&&e.kind==='finish'){const won=e.score_me>e.score_partner,reward=TOAD_REWARD[e.card_id];
+      add(e.profile_id,reward?(won?reward:0):1+(won?2:0),e.created_at);}
   }
   for(const r of snap?.playRounds??[]){
     const answers=answersOf(snap,r.id);

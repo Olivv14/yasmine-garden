@@ -32,27 +32,25 @@ const ART={
 };
 export const toadArt=(level,label)=>svg(ART[level]??ART.medium,label);
 
-// Stat bars: speed, reading the puck, attack. Out of five.
-const STATS={easy:[1,1,1],medium:[3,3,2],hard:[5,5,5]};
+import {TOAD_CARD_ART} from './toad-card-art.js';
 
-// A row of three cards; choose(level) starts the match.
-export function createToadPicker({el,button,t,copy,choose}){
+// The approved collectible cards (COMMON · EASY +1, RARE · MEDIUM +3, LEGENDARY · HARD +6), swiped side by side;
+// tapping one starts the match. Texts come from the catalog into the card's slots.
+export function createToadPicker({el,button,t,copy,choose,game='hockey'}){
   const box=el('div',undefined,'rival-picker');
-  const title=el('p',()=>t('game.hockey.pick'),'eyebrow');
-  const row=el('div',undefined,'rival-cards');
+  const title=el('p',()=>t('game.hockey.pick'),'rival-title');
+  const row=el('div',undefined,'rival-cards');row.setAttribute('role','list');
   for(const level of ['easy','medium','hard']){
-    const card=button(undefined,()=>choose(level),'rival-card toad-'+level);
-    card.dataset.level=level;
-    const art=el('span',undefined,'rival-art');art.append(toadArt(level));
-    const name=el('b',()=>t('game.hockey.level.'+level+'.name'));
-    const tag=el('span',()=>t('game.hockey.level.'+level),'rival-tag');
-    const desc=el('small',()=>t('game.hockey.level.'+level+'.desc'));
-    const stats=el('span',undefined,'rival-stats');
-    STATS[level].forEach((v,i)=>{const s=el('span',undefined,'rival-stat');s.append(el('i',()=>t('game.hockey.stat.'+['speed','read','attack'][i])));const bar=el('span',undefined,'bar');bar.style.setProperty('--v',v/5);s.append(bar);stats.append(s);});
-    card.append(tag,art,name,desc,stats);
-    copy(card,()=>t('game.hockey.level.'+level+'.name')+'. '+t('game.hockey.level.'+level+'.desc'),'aria-label');
+    const card=button(undefined,()=>choose(level),'rival-card rival-'+level);card.dataset.level=level;card.setAttribute('role','listitem');
+    const art=el('span',undefined,'toad-card-art');art.innerHTML=TOAD_CARD_ART[level];
+    const slot=(k,fn)=>{const n=art.querySelector(`[data-t="${k}"]`);if(n)copy(n,fn);};
+    slot('tag',()=>t('game.toad.tag.'+level));slot('reward',()=>t('game.toad.reward.'+level));
+    slot('name',()=>t('game.hockey.level.'+level+'.name'));slot('desc',()=>t('game.toad.desc.'+game+'.'+level));
+    for(const k of ['speed','reflex','tricks'])slot(k,()=>t('game.toad.stat.'+k));
+    card.append(art);
+    copy(card,()=>t('game.hockey.level.'+level+'.name')+'. '+t('game.toad.desc.'+game+'.'+level)+' '+t('game.toad.reward.'+level),'aria-label');
     row.append(card);
   }
-  box.append(title,row);
+  box.append(title,row,el('p',()=>t('game.toad.swipe'),'rival-hint'));
   return box;
 }

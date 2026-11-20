@@ -1,7 +1,7 @@
 // Pool (8-ball) on a portrait table, pure and deterministic: the same shot from the same table gives the same
 // result on both phones (only + - * / and sqrt in the physics, a fixed time step). Unit-tested in scripts/games.test.mjs.
 // Units: the table is 1 wide and 2 long; y grows towards the player who breaks (the bottom of the screen).
-export const POOL=Object.freeze({w:1,h:2,r:.026,pocketCorner:.06,pocketSide:.052,maxSpeed:4.6,decel:.42,cushion:.78,balls:.96,dt:1/240});
+export const POOL=Object.freeze({w:1,h:2,r:.031,pocketCorner:.066,pocketSide:.058,maxSpeed:4.6,decel:.42,cushion:.78,balls:.96,dt:1/240});
 export const POCKETS=Object.freeze([[0,0],[1,0],[0,1],[1,1],[0,2],[1,2]].map(([x,y])=>Object.freeze({x,y,r:y===1?POOL.pocketSide:POOL.pocketCorner})));
 export const HEAD=Object.freeze([.5,1.5]);   // where the cue ball starts
 const FOOT=[.5,.55];                         // the apex of the rack

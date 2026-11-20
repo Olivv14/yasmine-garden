@@ -624,7 +624,7 @@ game.dare.d08	Send me ten heart taps, slowly.	Mándame diez toques de corazón, 
 game.dare.d09	Write the first line of a story about us.	Escribe la primera línea de una historia sobre nosotros.	Écris la première phrase d’une histoire sur nous.	Scrivi la prima frase di una storia su di noi.	اكتب أول سطر من حكاية علينا.
 game.dare.d10	Share the last photo you took that made you smile.	Comparte la última foto que tomaste que te hizo sonreír.	Partage la dernière photo prise qui t’a fait sourire.	Condividi l’ultima foto scattata che ti ha fatto sorridere.	شارك آخر تصويرة صوّرتها وضحّكتك.
 game.hockey.title	Air hockey	Hockey de mesa	Air hockey	Air hockey	هوكي هوائي
-game.hockey.intro	Live when you are both here, or practise against the toad. First to 5.	En vivo cuando estén los dos, o practica contra el sapo. Gana quien llegue a 5.	En direct quand vous êtes là tous les deux, ou entraîne-toi contre le crapaud. Le premier à 5.	Dal vivo quando ci siete entrambi, o allenati contro il rospo. Vince chi arriva a 5.	مباشر كي تكونو الزوز هوني، ولّا اتمرّن ضد الجرانة. اللي يوصل لـ5 الأوّل يربح.
+game.hockey.intro	Live when you are both here, or practise against the toad. First to 7.	En vivo cuando estén los dos, o practica contra el sapo. Gana quien llegue a 7.	En direct quand vous êtes là tous les deux, ou entraîne-toi contre le crapaud. Le premier à 7.	Dal vivo quando ci siete entrambi, o allenati contro il rospo. Vince chi arriva a 7.	مباشر كي تكونو الزوز هوني، ولّا اتمرّن ضد الجرانة. اللي يوصل لـ7 الأوّل يربح.
 game.hockey.join	Join the table	Unirme a la mesa	Rejoindre la table	Unisciti al tavolo	ادخل للطاولة
 game.hockey.leave	Leave the table	Salir de la mesa	Quitter la table	Lascia il tavolo	اخرج من الطاولة
 game.hockey.waiting	Waiting for {{name}} to join the table…	Esperando a que {{name}} se una a la mesa…	En attente de {{name}} à la table…	In attesa che {{name}} arrivi al tavolo…	نستنّاو {{name}} يدخل للطاولة…
@@ -1122,3 +1122,82 @@ pool.group.solids	Solids	Lisas	Pleines	Piene	الكاملين
 pool.group.stripes	Stripes	Rayadas	Rayées	Rigate	المخططين
 pool.open	Open table	Mesa abierta	Table ouverte	Tavolo aperto	الطاولة محلولة
 duel.listen	Hear it	Escúchala	L’écouter	Ascoltala	اسمعها
+shop.title	The shop	La tienda	La boutique	Il negozio	الحانوت
+shop.openHint	Themes, mascots and heart buttons	Temas, mascotas y botones de corazón	Thèmes, mascottes et boutons cœur	Temi, mascotte e pulsanti cuore	ثيمات، ماسكوت وبوطونات قلب
+shop.points	{{count}} points to spend	{{count}} puntos para gastar	{{count}} points à dépenser	{{count}} punti da spendere	{{count}} نقطة تصرفها
+shop.tab.themes	Themes	Temas	Thèmes	Temi	الثيمات
+shop.tab.mascots	Mascots	Mascotas	Mascottes	Mascotte	الماسكوت
+shop.tab.hearts	Hearts	Corazones	Cœurs	Cuori	القلوب
+shop.buy	Buy · {{price}}	Comprar · {{price}}	Acheter · {{price}}	Compra · {{price}}	اشري · {{price}}
+shop.use	Use	Usar	Utiliser	Usa	استعمل
+shop.using	In use	En uso	Utilisé	In uso	مستعمل
+shop.owned	Yours	Tuyo	À toi	Tuo	متاعك
+shop.unlock	Unlock	Desbloquear	Débloquer	Sblocca	حلّ
+shop.locked	Beat the Champion toad to unlock	Gana al sapo Campeón para desbloquearlo	Bats le crapaud Champion pour le débloquer	Batti il rospo Campione per sbloccarlo	اربح على الجرانة البطل باش تحلّها
+shop.price	{{price}} points	{{price}} puntos	{{price}} points	{{price}} punti	{{price}} نقطة
+shop.hint	Each of you spends your own points. Your partner sees your heart and your mascots.	Cada uno gasta sus propios puntos. Tu pareja ve tu corazón y tus mascotas.	Chacun dépense ses propres points. Ton partenaire voit ton cœur et tes mascottes.	Ognuno spende i propri punti. Il tuo partner vede il tuo cuore e le tue mascotte.	كل واحد يصرف نقاطو. الطرف الآخر يشوف قلبك والماسكوت متاعك.
+shop.mascotsHint	Up to two mascots live on your app. Pet them, pick them up, let them nap.	Hasta dos mascotas viven en tu app. Acarícialas, levántalas, déjalas dormir.	Jusqu’à deux mascottes vivent dans ton appli. Caresse-les, prends-les, laisse-les dormir.	Fino a due mascotte vivono nella tua app. Accarezzale, prendile in mano, lasciale dormire.	زوز ماسكوت ينجمو يعيشو في التطبيقة متاعك. مسّح عليهم، هزّهم، خلّيهم يرقدو.
+shop.tryHeart	Tap the big heart to try it.	Toca el corazón grande para probarlo.	Touche le grand cœur pour l’essayer.	Tocca il cuore grande per provarlo.	انقر على القلب الكبير باش تجرّبو.
+shop.bought	{{name}} is yours!	¡{{name}} ya es tuyo!	{{name}} est à toi !	{{name}} è tuo!	{{name}} ولّى متاعك!
+shop.notEnough	Not enough points yet. Play a little more!	Todavía no tienes suficientes puntos. ¡Juega un poco más!	Pas encore assez de points. Joue encore un peu !	Non hai ancora abbastanza punti. Gioca ancora un po’!	مازالو النقاط ما يكفيوش. العب شوية زادة!
+shop.notReady	The shop opens once it is set up on the server.	La tienda abre cuando esté lista en el servidor.	La boutique ouvrira une fois prête sur le serveur.	Il negozio apre quando è pronto sul server.	الحانوت يتحل كيف يتحضّر على السيرفر.
+shop.item.heart.classic	Classic heart	Corazón clásico	Cœur classique	Cuore classico	قلب كلاسيك
+shop.item.heart.kiss	Kiss	Beso	Bisou	Bacio	بوسة
+shop.item.heart.harissa	Harissa	Harissa	Harissa	Harissa	هريسة
+shop.item.heart.flower	Pink flower	Flor rosa	Fleur rose	Fiore rosa	وردة روز
+shop.item.heart.jasmine	Jasmine	Jazmín	Jasmin	Gelsomino	ياسمين
+shop.item.heart.star	Nejma	Nejma	Nejma	Nejma	نجمة
+shop.item.heart.rose	Red rose	Rosa roja	Rose rouge	Rosa rossa	وردة حمرا
+shop.item.heart.paw	Emmy’s paw	La patita de Emmy	La patte d’Emmy	La zampa di Emmy	ساق Emmy
+shop.item.heart.arepa	Arepa	Arepa	Arepa	Arepa	أريبا
+shop.item.heart.moon	Moon	Luna	Lune	Luna	قمر
+shop.item.mascot.emmy	Emmy	Emmy	Emmy	Emmy	Emmy
+shop.item.mascot.bird	Cardenalito	Cardenalito	Cardenalito	Cardenalito	Cardenalito
+shop.item.mascot.camel	Camel	Camello	Chameau	Cammello	جمل
+shop.item.mascot.chef	Le Chef	Le Chef	Le Chef	Le Chef	Le Chef
+shop.desc.mascot.emmy	Orange tabby, one blue eye and one amber.	Atigrada naranja, un ojo azul y otro ámbar.	Tigrée rousse, un œil bleu et un ambre.	Tigrata arancione, un occhio blu e uno ambra.	قطوسة حمرا مخططة، عين زرقا وعين عسلي.
+shop.desc.mascot.bird	Venezuela’s little red bird. Sings when music plays.	El pajarito rojo de Venezuela. Canta cuando suena música.	Le petit oiseau rouge du Venezuela. Il chante quand la musique joue.	Il piccolo uccello rosso del Venezuela. Canta quando c’è musica.	العصفور الأحمر الصغير متاع فنزويلا. يغنّي كي تخدم الموسيقى.
+shop.desc.mascot.camel	Chews slowly, kneels to rest.	Mastica despacio y se arrodilla para descansar.	Mâche lentement, s’agenouille pour se reposer.	Mastica piano, si inginocchia per riposare.	يمضغ بالشوية ويبرك باش يرتاح.
+shop.desc.mascot.chef	A special mascot that reminds you of a spicy moment together.	Una mascota especial que les recuerda un momento picante juntos.	Une mascotte spéciale qui vous rappelle un moment épicé à deux.	Una mascotte speciale che vi ricorda un momento piccante insieme.	ماسكوت خاصة تفكّركم في لحظة حارة مع بعضكم.
+shop.item.theme.dusk	Dusk garden	Jardín al atardecer	Jardin au crépuscule	Giardino al tramonto	جنينة العشية
+shop.item.theme.yasmine	Yasmine green	Verde Yasmine	Vert Yasmine	Verde Yasmine	أخضر Yasmine
+shop.item.theme.oliver	Oliver red	Rojo Oliver	Rouge Oliver	Rosso Oliver	أحمر Oliver
+shop.item.theme.sidi	Sidi Bou Said	Sidi Bou Said	Sidi Bou Saïd	Sidi Bou Said	سيدي بوسعيد
+shop.item.theme.salto	Salto Ángel	Salto Ángel	Salto Ángel	Salto Ángel	Salto Ángel
+shop.item.theme.blaugrana	Blaugrana night	Noche blaugrana	Nuit blaugrana	Notte blaugrana	ليلة بلوغرانا
+shop.item.theme.djerba	Djerba sunset	Atardecer en Djerba	Coucher de soleil à Djerba	Tramonto a Djerba	غروب جربة
+shop.sent.heart	{{name}} is thinking of you	{{name}} está pensando en ti	{{name}} pense à toi	{{name}} ti pensa	{{name}} يخمّم فيك
+shop.sent.kiss	{{name}} sent you a kiss	{{name}} te mandó un beso	{{name}} t’envoie un bisou	{{name}} ti manda un bacio	{{name}} بعثلك بوسة
+shop.sent.harissa	{{name}} says things are getting spicy	{{name}} dice que la cosa se pone picante	{{name}} dit que ça devient épicé	{{name}} dice che le cose si fanno piccanti	{{name}} يقول الحكاية بدات تسخن
+shop.sent.flower	{{name}} sent you a pink flower	{{name}} te mandó una flor rosa	{{name}} t’envoie une fleur rose	{{name}} ti manda un fiore rosa	{{name}} بعثلك وردة روز
+shop.sent.jasmine	{{name}} sent you jasmine from Tunis	{{name}} te mandó jazmín de Túnez	{{name}} t’envoie du jasmin de Tunis	{{name}} ti manda gelsomino da Tunisi	{{name}} بعثلك ياسمين من تونس
+shop.sent.star	{{name}} says you are the star, Nejma	{{name}} dice que eres la estrella, Nejma	{{name}} dit que tu es l’étoile, Nejma	{{name}} dice che sei la stella, Nejma	{{name}} يقول إنتِ النجمة، نجمة
+shop.sent.rose	{{name}} sent you a red rose	{{name}} te mandó una rosa roja	{{name}} t’envoie une rose rouge	{{name}} ti manda una rosa rossa	{{name}} بعثلك وردة حمرا
+shop.sent.paw	Emmy gives you a paw (from {{name}})	Emmy te da la patita (de parte de {{name}})	Emmy te donne la patte (de la part de {{name}})	Emmy ti dà la zampa (da {{name}})	Emmy تعطيك ساقها (من عند {{name}})
+shop.sent.arepa	{{name}} sent you an arepa, made with love	{{name}} te mandó una arepa hecha con amor	{{name}} t’envoie une arepa faite avec amour	{{name}} ti manda un’arepa fatta con amore	{{name}} بعثلك أريبا معمولة بالحب
+shop.sent.moon	{{name}} says goodnight under the same moon	{{name}} te da las buenas noches bajo la misma luna	{{name}} te dit bonne nuit sous la même lune	{{name}} ti augura la buonanotte sotto la stessa luna	{{name}} يقلّك تصبح على خير تحت نفس القمر
+game.toad.tag.easy	COMMON · EASY	COMÚN · FÁCIL	COMMUN · FACILE	COMUNE · FACILE	عادي · ساهل
+game.toad.tag.medium	RARE · MEDIUM	RARO · MEDIO	RARE · MOYEN	RARO · MEDIO	نادر · متوسط
+game.toad.tag.hard	LEGENDARY · HARD	LEGENDARIO · DIFÍCIL	LÉGENDAIRE · DIFFICILE	LEGGENDARIO · DIFFICILE	أسطوري · صعيب
+game.toad.reward.easy	+1	+1	+1	+1	+1
+game.toad.reward.medium	+3	+3	+3	+3	+3
+game.toad.reward.hard	+6	+6	+6	+6	+6
+game.toad.desc.hockey.easy	Plays half asleep. Slow to react, sometimes misses on purpose so you can learn.	Juega medio dormido. Reacciona lento y a veces falla a propósito para que aprendas.	Joue à moitié endormi. Lent à réagir, il rate parfois exprès pour que tu apprennes.	Gioca mezzo addormentato. Lento a reagire, a volte sbaglia apposta per farti imparare.	يلعب نص راقد. بطيء في ردّة الفعل، ومرات يغلط بالقصد باش تتعلم.
+game.toad.desc.hockey.medium	Never leaves the goal open. Shoots straight and hard, and punishes lazy defence.	Nunca deja la portería abierta. Tira recto y fuerte, y castiga una defensa floja.	Ne laisse jamais le but ouvert. Tire droit et fort, et punit une défense paresseuse.	Non lascia mai la porta aperta. Tira dritto e forte, e punisce una difesa pigra.	عمرو ما يخلّي الكاج محلول. يضرب دوغري وبالقوة، ويعاقب الدفاع الكسلان.
+game.toad.desc.hockey.hard	Reads bank shots, fakes before it strikes, attacks when the puck is slow. Beat it and its crown goes on your profile.	Lee los rebotes, amaga antes de tirar y ataca cuando el disco va lento. Gánale y su corona va a tu perfil.	Lit les rebonds, feinte avant de frapper, attaque quand le palet est lent. Bats-le et sa couronne va sur ton profil.	Legge i rimbalzi, finta prima di colpire, attacca quando il disco è lento. Battilo e la sua corona va sul tuo profilo.	يقرا الضربات على الحيط، يعمل فينتة قبل ما يضرب، ويهجم كي الكورة تكون بطيئة. اربح عليه وتاجو يمشي لبروفيلك.
+game.toad.desc.pool.easy	Plays half asleep. Misjudges its aim, and leaves you easy shots so you can learn.	Juega medio dormido. Calcula mal la puntería y te deja tiros fáciles para que aprendas.	Joue à moitié endormi. Vise mal et te laisse des coups faciles pour que tu apprennes.	Gioca mezzo addormentato. Mira male e ti lascia tiri facili per farti imparare.	يلعب نص راقد. يغلط في التصويب ويخلّيلك ضربات ساهلة باش تتعلم.
+game.toad.desc.pool.medium	Pots the clean shots and rarely leaves you an open table.	Mete los tiros limpios y casi nunca te deja la mesa abierta.	Empoche les coups propres et te laisse rarement la table ouverte.	Imbuca i tiri puliti e raramente ti lascia il tavolo aperto.	يدخّل الضربات النظيفة ونادرا ما يخلّيلك الطاولة محلولة.
+game.toad.desc.pool.hard	Aims almost perfectly and plans where the white stops for its next shot. Beat it and its crown goes on your profile.	Apunta casi perfecto y planea dónde para la blanca para su siguiente tiro. Gánale y su corona va a tu perfil.	Vise presque parfaitement et prévoit où la blanche s’arrête pour le coup suivant. Bats-le et sa couronne va sur ton profil.	Mira quasi alla perfezione e pianifica dove si ferma la bianca per il tiro dopo. Battilo e la sua corona va sul tuo profilo.	يصوّب تقريب بالضبط ويخطط وين تقف البيضا للضربة الجاية. اربح عليه وتاجو يمشي لبروفيلك.
+game.toad.stat.speed	Speed	Velocidad	Vitesse	Velocità	السرعة
+game.toad.stat.reflex	Reflex	Reflejos	Réflexes	Riflessi	ردّة الفعل
+game.toad.stat.tricks	Tricks	Trucos	Astuces	Trucchi	الحيل
+game.toad.swipe	Swipe to see the three rivals. Tap one to play.	Desliza para ver a los tres rivales. Toca uno para jugar.	Fais glisser pour voir les trois rivaux. Touche-en un pour jouer.	Scorri per vedere i tre rivali. Toccane uno per giocare.	اسحب باش تشوف الثلاثة خصوم. انقر على واحد باش تلعب.
+game.toad.crown	Beat the Champion	Le ganó al Campeón	A battu le Champion	Ha battuto il Campione	ربح على البطل
+games.back	Games	Juegos	Jeux	Giochi	الألعاب
+game.hockey.vs	vs {{name}} · {{level}}	vs {{name}} · {{level}}	contre {{name}} · {{level}}	contro {{name}} · {{level}}	ضد {{name}} · {{level}}
+game.hockey.caption	{{me}} · {{them}} · first to {{win}}	{{me}} · {{them}} · gana quien llegue a {{win}}	{{me}} · {{them}} · le premier à {{win}}	{{me}} · {{them}} · vince chi arriva a {{win}}	{{me}} · {{them}} · اللي يوصل {{win}} الأول
+game.hockey.toadName	{{level}} toad	Sapo {{level}}	Crapaud {{level}}	Rospo {{level}}	جرانة {{level}}
+pool.chip	8-ball · {{state}}	Bola 8 · {{state}}	Billard 8 · {{state}}	Palla 8 · {{state}}	الكورة 8 · {{state}}
+pool.chip.yours	your shot	te toca	à toi	tocca a te	دورك
+pool.chip.theirs	their shot	le toca	à l’autre	tocca all’altro	دور الآخر
+pool.pullToShoot	Pull back to shoot	Tira hacia atrás para disparar	Tire en arrière pour frapper	Tira indietro per colpire	اسحب للتالي باش تضرب

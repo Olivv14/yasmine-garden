@@ -27,26 +27,8 @@
 .hb-score{font:800 26px/1 var(--font-display,inherit)}.hb-dot{opacity:.6}
 .hb-badge{position:absolute;inset-block-start:-9px;inset-inline-end:-6px;font:800 10px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:999px;background:#FFD58A;color:#2A1A10}
 .hb-badge.lvl-easy{background:#9ED67A}.hb-badge.lvl-medium{background:#7FB4FF}.hb-badge.lvl-hard{background:linear-gradient(90deg,#FFD24A,#FF9A4A)}
-.rival-picker{display:grid;gap:var(--space-2)}
-.rival-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-#airHockey .rival-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;font:inherit;line-height:1.2;white-space:normal;inline-size:auto;min-inline-size:0;gap:4px;padding:10px 6px 12px;border-radius:16px;text-align:center;color:#FFF4E6;position:relative;overflow:hidden;min-block-size:0;
   background:radial-gradient(90% 60% at 50% 30%,rgba(255,255,255,.12),rgba(255,255,255,0)),linear-gradient(180deg,#2A3A2C,#141C16);border:2px solid #8DE8B0;box-shadow:0 8px 18px rgba(0,0,0,.4)}
-#airHockey .rival-card.toad-medium{background:radial-gradient(90% 60% at 50% 30%,rgba(255,255,255,.14),rgba(255,255,255,0)),linear-gradient(180deg,#24305A,#121A34);border-color:#7FB4FF}
-#airHockey .rival-card.toad-hard{background:radial-gradient(90% 60% at 50% 30%,rgba(255,230,150,.28),rgba(255,255,255,0)),linear-gradient(180deg,#5A3A14,#24140A);border-color:#FFD24A;box-shadow:0 0 0 1px rgba(255,210,74,.4),0 0 22px rgba(255,180,60,.45),0 8px 18px rgba(0,0,0,.4)}
-.rival-card.toad-hard::after{content:"";position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);animation:rival-shine 3.2s ease-in-out infinite}
-@keyframes rival-shine{0%,60%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
-@media (prefers-reduced-motion:reduce){.rival-card.toad-hard::after{animation:none}}
-.rival-art{inline-size:100%;max-inline-size:96px;aspect-ratio:12/11}.rival-art svg{inline-size:100%;block-size:100%}
-.rival-card b{font:800 14px/1.15 var(--font-display,inherit)}.rival-card small{font:500 11px/1.3 var(--font-sans);color:#FFE2C6}
-.rival-tag{font:800 10px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.12)}
-.rival-stats{display:grid;gap:3px;inline-size:100%;padding-inline:4px}
-.rival-stat{display:grid;grid-template-columns:auto 1fr;gap:5px;align-items:center;font:600 9px/1 var(--font-sans);color:#FFE2C6}.rival-stat i{font-style:normal;text-align:start}
-.rival-stat .bar{block-size:5px;border-radius:3px;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
-.rival-stat .bar::after{content:"";position:absolute;inset:0;inline-size:calc(var(--v)*100%);background:linear-gradient(90deg,#FFD58A,#FF9A4A);border-radius:3px}
-.rival-card:focus-visible{outline:3px solid #FFD58A;outline-offset:2px}
 
-#airHockey .rival-card:hover{filter:brightness(1.08);border-color:inherit}
-#airHockey .rival-card>*{max-inline-size:100%}
 .hockey-on #airHockey{-webkit-user-select:none;user-select:none}
 
 /* pool at dusk */
@@ -136,3 +118,69 @@
 .play-face{inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex:none;font:800 18px var(--font-display,inherit);color:#2A1A10;background:#F2CDBA;border:3px solid var(--edge);box-shadow:2px 2px 0 var(--edge)}
 .play-face img{inline-size:100%;block-size:100%;object-fit:cover}
 .play-score[data-tone=oliver] .play-face{border-color:var(--oliver)}.play-score[data-tone=yasmine] .play-face{border-color:var(--yasmine)}
+
+/* ---- every game full screen, in the dusk garden */
+html.game-full #playStage{position:fixed;inset:0;z-index:80;overflow-y:auto;overscroll-behavior:contain;display:block;padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 18px);background:#1C1418;color:#FFF4E6}
+html.game-full{overflow:hidden}
+html.game-full #affectionDock,html.game-full .bottom-nav{visibility:hidden}
+.game-backdrop{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.game-backdrop>svg{inline-size:100%;block-size:100%}
+html.game-full #playStage .game-bar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;min-block-size:40px;margin-block-end:6px}
+html.game-full #playStage .play-back{color:#FFE2C6;font:600 15px var(--font-sans);text-decoration:none;text-shadow:0 1px 6px rgba(0,0,0,.6);background:none;border:0;padding:6px 4px;min-block-size:40px}
+html.game-full #playStage .game-card{position:relative;background:none;border:0;box-shadow:none;padding:0;min-block-size:calc(100dvh - 90px)}
+html.game-full #playStage .game-card::before{display:none}
+.game-chip{font:700 12px var(--font-sans);background:rgba(18,10,20,.55);border:1px solid rgba(255,226,198,.18);border-radius:99px;padding:5px 10px;color:#FFF4E6}
+
+/* air hockey: the approved HockeyGarden layout */
+.game-chip.in-bar{position:absolute;inset-block-start:-46px;inset-inline-end:0;z-index:2}
+.hk-match{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+.hk-board{text-align:center}
+.hk-board-row{display:flex;align-items:center;justify-content:center;gap:14px}
+.hk-face{inline-size:42px;block-size:42px;flex:none;border-radius:50%;display:grid;place-items:center;overflow:hidden;font:800 17px var(--font-display);color:#2A1A10;background:#F2CDBA;box-shadow:0 0 0 2px #FFE69A,0 4px 12px rgba(0,0,0,.45)}
+.hk-face img{inline-size:100%;block-size:100%;object-fit:cover}
+.hk-face.tone-oliver{box-shadow:0 0 0 2px #FFB4A8,0 4px 12px rgba(0,0,0,.45)}.hk-face.tone-yasmine{box-shadow:0 0 0 2px #C6EDA8,0 4px 12px rgba(0,0,0,.45)}
+.hk-face-toad{background:radial-gradient(circle at 35% 30%,#C8EAA8,#3F8A3A 60%,#173F18);color:#FFF4C8;font:800 10px var(--font-sans);text-transform:uppercase;box-shadow:0 0 0 2px #FFE69A,0 4px 12px rgba(0,0,0,.45)}
+.hk-score{font:800 44px/1 var(--font-display);text-shadow:0 2px 14px rgba(0,0,0,.55);display:flex;align-items:baseline;gap:8px}
+.hk-dash{font-size:24px;color:#FFE2C6;opacity:.6}
+.hk-caption{margin:2px 0 0;font:600 12px var(--font-sans);color:#FFE2C6;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.hk-table{position:relative;margin-inline:auto;flex:none}
+.hk-art,.hk-toad{position:absolute;inset:0}.hk-art>svg,.hk-toad>svg{inline-size:100%;block-size:100%;display:block}
+.hk-toad{pointer-events:none}
+.hk-table>canvas.hockey-table{position:absolute;inset:0;inline-size:100%;block-size:100%;border:0;box-shadow:none;border-radius:0;cursor:none;touch-action:none}
+.hk-status{margin:0;text-align:center;font:600 13px var(--font-sans);color:#FFE2C6;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.hk-foot{justify-content:center}
+/* the toad cards: swipe sideways, one at a time on a phone */
+.rival-picker{display:grid;gap:10px;margin-block-start:8px}
+.rival-title{margin:0;font:800 22px var(--font-display);color:#FFF4E6;text-align:center}
+.rival-hint{margin:0;text-align:center;font:600 12px var(--font-sans);color:#FFE2C6}
+.rival-cards{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 6px 18px;scrollbar-width:none}
+.rival-cards::-webkit-scrollbar{display:none}
+#playStage button.rival-card{flex:none;scroll-snap-align:center;padding:0;border:0;background:none!important;box-shadow:none;border-radius:26px;min-block-size:0;display:block;cursor:pointer}
+.rival-card .toad-card-art{display:block;zoom:.82}
+@media (min-width:700px){.rival-card .toad-card-art{zoom:1}.rival-cards{justify-content:center}}
+#playStage button.rival-card:focus-visible{outline:3px solid #FFD58A;outline-offset:4px}
+
+/* pool: the approved PoolDusk / PoolAim layout */
+.pl-match{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.pl-table{position:relative;margin-inline:auto;flex:none}
+.pl-art{position:absolute;inset:0}.pl-art>svg{inline-size:100%;block-size:100%;display:block}
+.pl-table>canvas.pool-table{position:absolute;inset:0;inline-size:100%;block-size:100%;border-radius:0;box-shadow:none;touch-action:none}
+#pool .pool-board{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;background:rgba(18,10,20,.5);border:1px solid rgba(255,226,198,.14);border-radius:18px;padding:10px 12px;inline-size:100%;box-sizing:border-box}
+#pool .pb-side{display:flex;gap:8px;align-items:center;background:none;border:0;padding:0;box-shadow:none;min-inline-size:0}
+#pool .pb-side.end{flex-direction:row-reverse;text-align:end}
+#pool .pb-side.end .pb-rack{justify-content:flex-end}
+#pool .pb-side.on .hk-face{box-shadow:0 0 0 2px #FFD58A,0 0 14px rgba(255,190,110,.6)}
+#pool .pb-name{font:700 13px var(--font-sans);color:#FFB4A8;white-space:normal}#pool .pb-name.tone-y{color:#C6EDA8}
+#pool .pb-rack{display:flex;flex-wrap:wrap;gap:4px;margin-block-start:5px}
+#pool .pb-ball{inline-size:11px;block-size:11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),var(--c) 55%,rgba(0,0,0,.65));box-shadow:none}
+#pool .pb-ball.stripe{background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),transparent 45%),linear-gradient(#F4EFE2 0 28%,var(--c) 28% 72%,#F4EFE2 72%)}
+#pool .pb-ball.in{background:none;border:1px solid rgba(255,255,255,.3);opacity:1;box-sizing:border-box}
+.pb-tally{font:800 22px var(--font-display);color:#FFF4E6}
+#pool .pool-controls{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:rgba(18,10,20,.58);border:1px solid rgba(255,226,198,.14);border-radius:18px;padding:12px 14px;inline-size:100%;box-sizing:border-box}
+#pool .pool-pull{background:none;border:0;block-size:auto;display:grid;grid-template-columns:1fr auto;gap:8px;cursor:grab;overflow:visible;padding:4px 0}
+.pool-pull-text{font:700 13px var(--font-sans);color:#FFF4E6}.pool-pct{font:700 13px var(--font-sans);color:#FFE2C6}
+.pool-track{grid-column:1/-1;block-size:5px;border-radius:3px;background:rgba(255,255,255,.12);position:relative;overflow:hidden}
+#pool .pool-meter{position:absolute;inset:0 auto 0 0;inline-size:calc(var(--p,0)*100%);background:linear-gradient(90deg,#FFD58A,#FF8A5A);border-radius:3px}
+#playStage #pool .pool-shoot{min-inline-size:84px;min-block-size:48px;border-radius:14px;font:800 15px var(--font-display)}
+#playStage .game-card button.primary{background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;border-color:transparent}
+#pool .pool-controls,#airHockey .hk-match{-webkit-user-select:none;user-select:none}

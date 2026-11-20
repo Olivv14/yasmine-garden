@@ -1,54 +1,79 @@
-// Air hockey, two ways. Live: a private Realtime channel ("hockey:<pair>", backend/005 policies); slot 1 hosts
-// the physics, the guest sends its mallet and draws the host's state mirrored, so each player always defends
-// the bottom of their own screen. Against the toad: everything runs on this phone, the toad takes the top half.
+// Air hockey in the garden at dusk (the approved HockeyGarden design), full screen. Two ways to play.
+// Live: a private Realtime channel ("hockey:<pair>", backend/005 policies); slot 1 hosts the physics, the guest
+// sends its mallet and draws the host's state mirrored, so each player always defends the bottom of their screen.
+// Against the toad: everything runs on this phone; pick the Dreamer, the Coach or the Champion from their cards.
+// The table is the mockup's own art; puck and mallets are drawn on top through the table's perspective (persp.js).
 import {TABLE,clampMallet,step,servePuck} from './rules.js';
 import {toadMove,levelOrDefault} from './bot.js';
-import {createToadPicker,toadArt} from './toads.js';
+import {createToadPicker} from './toads.js';
+import {LEVEL_CARD} from '../shop/items.js';
+import {SCENE_ART} from './scene-art.js';
+import {homography} from './persp.js';
 import {icon} from '../design/icons.js';
 
-const SEND_MS=33;
+const SEND_MS=33,WIN=7;
+// the drawn table's playing surface in the art's coordinates (far-left, far-right, near-right, near-left)
+const SURFACE=homography([[70,64],[300,64],[334,470],[36,470]]),ART_W=370,ART_H=560;
+// mallet colours: Oliver's red, Yasmine's green, the toad's clay
+const MALLET={oliver:['#FFC9C0','#E0473C','#8A1A14','#4A0C08'],yasmine:['#D8FFE6','#2FB070','#0E5A34','#06301A'],toad:['#D9F2C2','#8CC06A','#3F7A30','#1F4418']};
+const SCORE_TINT={oliver:'#FFB4A8',yasmine:'#C6EDA8',toad:'#C6EDA8'};
+
 export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,notify,photo=()=>null}){
-  const root=el('article',undefined,'card game-card');root.id='airHockey';
+  const root=el('article',undefined,'card game-card hockey-card');root.id='airHockey';
+  // home: title, the two ways to play, and the toad cards
+  const home=el('div',undefined,'hk-home');
   const head=el('div',undefined,'game-head');head.append(icon('live',22),el('h3',()=>t('game.hockey.title'),'title'));
   const intro=el('p',()=>t('game.hockey.intro'),'small');
-  const status=el('p',undefined,'body-strong');status.setAttribute('role','status');status.id='hockeyStatus';
-  const score=el('p',undefined,'visually-hidden hockey-score');score.setAttribute('aria-live','polite');
-  // the scoreboard: your photo and score, then theirs (the toad's card art when you play the toad)
-  const board=el('div',undefined,'hockey-board');board.hidden=true;board.setAttribute('aria-hidden','true');
-  const side=()=>{const s=el('span',undefined,'hb-side');const face=el('span',undefined,'hb-face');const n=el('b',undefined,'hb-score');s.append(face,n);return {s,face,n};};
-  const mineSide=side(),theirSide=side(),badge=el('span',undefined,'hb-badge');
-  board.append(mineSide.s,el('span','·','hb-dot'),theirSide.s,badge);
-  const canvas=document.createElement('canvas');canvas.className='hockey-table';canvas.tabIndex=0;canvas.hidden=true;canvas.setAttribute('role','img');copy(canvas,()=>t('game.hockey.canvas')+' '+t('game.hockey.keys'),'aria-label');
   const join=button(()=>t('game.hockey.join'),()=>start(),'primary');join.id='hockeyJoin';
-  const bot=button(()=>t('game.hockey.bot'),()=>{picker.hidden=!picker.hidden;},'');bot.id='hockeyBot';
-  const picker=createToadPicker({el,button,t,copy,choose:level=>startBot(level)});picker.hidden=true;
-  const leave=button(()=>t('game.hockey.leave'),()=>stop(),'quiet');leave.hidden=true;
-  const again=button(()=>t('game.hockey.again'),()=>{if(host())reset();else send('again',{});},'');again.hidden=true;
+  const bot=button(()=>t('game.hockey.bot'),()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'');bot.id='hockeyBot';
   const starts=el('div',undefined,'game-actions');starts.append(join,bot);
-  root.append(head,intro,status,board,score,canvas,starts,picker,again,leave);
+  const picker=createToadPicker({el,button,t,copy,choose:level=>startBot(level),game:'hockey'});picker.hidden=true;
+  home.append(head,intro,starts,picker);
+  // the match: chip, scoreboard, table, status
+  const match=el('div',undefined,'hk-match');match.hidden=true;
+  const chip=el('span',undefined,'game-chip in-bar');
+  const board=el('div',undefined,'hk-board');
+  const faceMe=el('span',undefined,'hk-face'),faceThem=el('span',undefined,'hk-face'),scoreMe=el('b'),scoreThem=el('b');
+  const nums=el('div',undefined,'hk-score');nums.append(scoreMe,el('span','–','hk-dash'),scoreThem);
+  const row=el('div',undefined,'hk-board-row');row.append(faceMe,nums,faceThem);
+  const caption=el('p',undefined,'hk-caption');board.append(row,caption);
+  const score=el('p',undefined,'visually-hidden hockey-score');score.setAttribute('aria-live','polite');
+  const stageBox=el('div',undefined,'hk-table scene-art');
+  const art=el('div',undefined,'hk-art');art.innerHTML=SCENE_ART.hockeyTable;
+  const toadLayer=el('div',undefined,'hk-toad');toadLayer.innerHTML=SCENE_ART.hockeyToad;toadLayer.setAttribute('aria-hidden','true');
+  const canvas=document.createElement('canvas');canvas.className='hockey-table';canvas.tabIndex=0;canvas.setAttribute('role','img');copy(canvas,()=>t('game.hockey.canvas')+' '+t('game.hockey.keys'),'aria-label');
+  stageBox.append(art,toadLayer,canvas);
+  const status=el('p',undefined,'hk-status');status.setAttribute('role','status');status.id='hockeyStatus';
+  const again=button(()=>t('game.hockey.again'),()=>{if(host())reset();else send('again',{});},'primary');again.hidden=true;
+  const leave=button(()=>t('game.hockey.leave'),()=>stop(),'quiet');
+  const foot=el('div',undefined,'game-actions hk-foot');foot.append(again,leave);
+  match.append(chip,board,score,stageBox,status,foot);
+  root.append(home,match);
 
   // mode: null (not playing), 'live' (with your partner), 'bot' (against the toad)
   let mode=null,channel=null,live=false,raf=0,lastSend=0,state=null,mine=null,theirs=null,lastMine=null,lastTheirs=null,recordedId=null,pause=0,level='medium',memo={},trail=[];
   const host=()=>mode==='bot'||isHost();
   const ctx=canvas.getContext('2d');
   function fresh(){return {puck:servePuck(Math.random()<.5?'host':'guest'),host:[TABLE.w/2,TABLE.h*.85],guest:[TABLE.w/2,TABLE.h*.15],score:[0,0],over:false};}
-  function setStatus(fn){copy(status,fn);}
+  const setStatus=fn=>copy(status,fn);
+  const myTone=()=>tones().me==='yasmine'?'yasmine':'oliver',theirTone=()=>mode==='bot'?'toad':tones().partner==='yasmine'?'yasmine':'oliver';
   function paintScore(){
-    if(!state){score.textContent='';board.hidden=true;return;}const [h,g]=state.score,[m,o]=host()?[h,g]:[g,h];
+    if(!state){score.textContent='';return;}const [h,g]=state.score,[m,o]=host()?[h,g]:[g,h];
     copy(score,()=>mode==='bot'?t('game.hockey.botScore',{me:m,them:o}):t('game.hockey.score',{me:m,them:o,name:person(partner())}));
-    board.hidden=false;mineSide.n.textContent=String(m);theirSide.n.textContent=String(o);
+    scoreMe.textContent=String(m);scoreThem.textContent=String(o);scoreMe.style.color=SCORE_TINT[myTone()];scoreThem.style.color=SCORE_TINT[theirTone()];
   }
-  function send(event,payload){channel?.send({type:'broadcast',event,payload}).catch(()=>{});}
-  // while a table is on screen the floating heart steps aside, so it never covers your half
-  function playing(on){starts.hidden=on;picker.hidden=true;leave.hidden=!on;document.documentElement.classList.toggle('hockey-on',on);}
-  // faces on the scoreboard: a photo when there is one, else the initial in your colour
-  function face(slot,who,tone){slot.replaceChildren();slot.className='hb-face '+tone;
-    if(who==='toad'){slot.append(toadArt(level));return;}
+  function face(slot,who){slot.replaceChildren();slot.className='hk-face';
+    if(who==='toad'){slot.classList.add('hk-face-toad','lvl-'+level);slot.append(el('span',()=>t('game.hockey.level.'+level)));return;}
+    slot.classList.add('tone-'+(who===me()?myTone():theirTone()));
     const src=photo(who);if(src){const img=document.createElement('img');img.src=src;img.alt='';slot.append(img);}
     else slot.textContent=(person(who)||'?').trim().charAt(0).toUpperCase();}
-  function faces(){face(mineSide.face,me(),'tone-'+tones().me);
-    if(mode==='bot'){face(theirSide.face,'toad','tone-success');copy(badge,()=>t('game.hockey.level.'+level));badge.className='hb-badge lvl-'+level;badge.hidden=false;}
-    else{face(theirSide.face,partner(),'tone-'+tones().partner);badge.hidden=true;}}
+  function faces(){face(faceMe,me());face(faceThem,mode==='bot'?'toad':partner());toadLayer.hidden=mode!=='bot';
+    const them=()=>mode==='bot'?t('game.hockey.toadName',{level:t('game.hockey.level.'+level+'.name')}):person(partner());
+    copy(chip,()=>mode==='bot'?t('game.hockey.vs',{name:t('game.hockey.level.'+level+'.name'),level:t('game.hockey.level.'+level)}):person(partner()));
+    copy(caption,()=>t('game.hockey.caption',{me:person(me()),them:them(),win:WIN}));}
+  function send(event,payload){channel?.send({type:'broadcast',event,payload}).catch(()=>{});}
+  // while a table is on screen the floating heart steps aside
+  function playing(on){home.hidden=on;match.hidden=!on;picker.hidden=true;document.documentElement.classList.toggle('hockey-on',on);}
 
   async function start(){
     const client=getClient();if(!client||!pairId())return;
@@ -60,26 +85,25 @@ export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partne
       .on('broadcast',{event:'s'},({payload})=>{if(!isHost()&&payload)receive(payload);})
       .on('broadcast',{event:'again'},()=>{if(isHost())reset();})
       .subscribe(async st=>{
-        if(st==='SUBSCRIBED'){await channel.track({at:Date.now()});playing(true);join.disabled=false;setLive(false);}
+        if(st==='SUBSCRIBED'){await channel.track({at:Date.now()});playing(true);faces();join.disabled=false;setLive(false);}
         else if(st==='CHANNEL_ERROR'||st==='TIMED_OUT'){setStatus(()=>t('game.hockey.offline'));join.disabled=false;stop(false);}
       });
   }
-  // Against the toad: no channel, no partner needed; you are the host and defend the bottom.
   function startBot(choice){
-    stop(false);mode='bot';level=levelOrDefault(choice);memo={};playing(true);live=true;canvas.hidden=false;faces();
+    stop(false);mode='bot';level=levelOrDefault(choice);memo={};playing(true);faces();live=true;
     setStatus(()=>t('game.hockey.botLive'));reset();resize();if(!raf)raf=requestAnimationFrame(loop);canvas.focus({preventScroll:true});
   }
   function stop(clearStatus=true){
     cancelAnimationFrame(raf);raf=0;const ch=channel;channel=null;live=false;if(ch)getClient()?.removeChannel(ch);
-    canvas.hidden=true;playing(false);again.hidden=true;state=null;mine=null;theirs=null;lastMine=null;lastTheirs=null;mode=null;paintScore();if(clearStatus)copy(status,'');
+    playing(false);again.hidden=true;state=null;mine=null;theirs=null;lastMine=null;lastTheirs=null;mode=null;trail=[];paintScore();if(clearStatus)copy(status,'');
   }
   function setLive(on){
-    live=on;canvas.hidden=!on;if(on)faces();
+    live=on;
     setStatus(()=>on?t('game.hockey.live',{name:person(partner())}):t('game.hockey.waiting',{name:person(partner())}));
-    if(on){if(isHost()&&(!state||state.over))reset();mine??=isHost()?[TABLE.w/2,TABLE.h*.85]:[TABLE.w/2,TABLE.h*.15];resize();if(!raf)raf=requestAnimationFrame(loop);}
+    if(on){faces();if(isHost()&&(!state||state.over))reset();mine??=isHost()?[TABLE.w/2,TABLE.h*.85]:[TABLE.w/2,TABLE.h*.15];resize();if(!raf)raf=requestAnimationFrame(loop);}
     else{cancelAnimationFrame(raf);raf=0;}
   }
-  function reset(){state=fresh();mine=[...state.host];theirs=[...state.guest];recordedId=null;pause=performance.now()+700;again.hidden=true;paintScore();
+  function reset(){state=fresh();mine=[...state.host];theirs=[...state.guest];recordedId=null;pause=performance.now()+700;again.hidden=true;trail=[];paintScore();
     if(mode==='bot')setStatus(()=>t('game.hockey.botLive'));}
   function receive(p){
     const wasOver=state?.over;state={puck:p.puck,host:p.host,guest:p.guest,score:p.score,over:p.over};paintScore();
@@ -89,19 +113,20 @@ export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partne
     again.hidden=false;const [h,g]=state.score,[m,o]=host()?[h,g]:[g,h];
     if(mode==='bot'){
       setStatus(()=>m>o?t('game.hockey.botWon',{me:m,them:o}):t('game.hockey.botLost',{me:m,them:o}));
-      if(!recordedId){recordedId=crypto.randomUUID();record({id:recordedId,game:'hockey_bot',kind:'finish',scoreMe:m,scorePartner:o});}
+      if(!recordedId){recordedId=crypto.randomUUID();record({id:recordedId,game:'hockey_bot',kind:'finish',card:LEVEL_CARD[level],scoreMe:m,scorePartner:o});}
       return;
     }
     setStatus(()=>m>o?t('game.hockey.won',{me:m,them:o}):t('game.hockey.lost',{name:person(partner()),me:m,them:o}));
     if(isHost()&&!recordedId){recordedId=crypto.randomUUID();record({id:recordedId,game:'hockey',kind:'finish',scoreMe:h,scorePartner:g});}
   }
 
-  // Input: pointer or arrow keys move your mallet inside your half. Live guests see the table mirrored.
-  const toTable=(px,py)=>{const r=canvas.getBoundingClientRect();let x=(px-r.left)/r.width*TABLE.w,y=(py-r.top)/r.height*TABLE.h;if(!host()){x=TABLE.w-x;y=TABLE.h-y;}return [x,y];};
+  // Input: your finger moves your mallet in your half; the touch is mapped back through the table's perspective.
+  let k=1;
+  const toTable=(px,py)=>{const r=canvas.getBoundingClientRect();const [u,v]=SURFACE.from((px-r.left)/k,(py-r.top)/k);let x=u*TABLE.w,y=v*TABLE.h;if(!host()){x=TABLE.w-x;y=TABLE.h-y;}return [x,y];};
   const move=p=>{mine=clampMallet(p,host());};
   canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);move(toTable(e.clientX,e.clientY));});
   canvas.addEventListener('pointermove',e=>{if(e.buttons||e.pointerType!=='mouse')move(toTable(e.clientX,e.clientY));});
-  canvas.addEventListener('keydown',e=>{if(!mine)return;const d=.05,f=host()?1:-1,k={ArrowLeft:[-d*f,0],ArrowRight:[d*f,0],ArrowUp:[0,-d*f],ArrowDown:[0,d*f]}[e.key];if(k){e.preventDefault();move([mine[0]+k[0],mine[1]+k[1]]);}});
+  canvas.addEventListener('keydown',e=>{if(!mine)return;const d=.05,f=host()?1:-1,kk={ArrowLeft:[-d*f,0],ArrowRight:[d*f,0],ArrowUp:[0,-d*f],ArrowDown:[0,d*f]}[e.key];if(kk){e.preventDefault();move([mine[0]+kk[0],mine[1]+kk[1]]);}});
   canvas.style.touchAction='none';
 
   function loop(now){
@@ -115,61 +140,49 @@ export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partne
         const [hvx,hvy]=vel(state.host,lastMine),[gvx,gvy]=vel(state.guest,lastTheirs);
         const r=step(state.puck,[{x:state.host[0],y:state.host[1],vx:hvx,vy:hvy},{x:state.guest[0],y:state.guest[1],vx:gvx,vy:gvy}],dt);
         state.puck=r.puck;
-        if(r.scored){state.score[r.scored==='host'?0:1]++;state.puck=servePuck(r.scored==='host'?'guest':'host');pause=now+900;paintScore();if(Math.max(...state.score)>=TABLE.win){state.over=true;finished();}}
+        if(r.scored){state.score[r.scored==='host'?0:1]++;state.puck=servePuck(r.scored==='host'?'guest':'host');pause=now+900;trail=[];paintScore();if(Math.max(...state.score)>=WIN){state.over=true;finished();}}
       }
       lastMine=[...state.host];lastTheirs=[...state.guest];
       if(mode==='live'&&now-lastSend>SEND_MS){lastSend=now;send('s',{puck:state.puck.map(v=>+v.toFixed(4)),host:state.host,guest:state.guest,score:state.score,over:state.over});}
     }else if(mine&&now-lastSend>SEND_MS){lastSend=now;send('m',{p:mine.map(v=>+v.toFixed(4))});}
     draw();
   }
-  function resize(){const w=Math.min(root.clientWidth-2,420),h=w*TABLE.h/TABLE.w,dpr=Math.min(2,devicePixelRatio||1);canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);canvas._w=w;canvas._h=h;}
-  new ResizeObserver(()=>{if(live)resize();}).observe(root);
-  // The table at dusk: a wooden rim, a deep blue ice that catches the sunset, gold lines, a glossy puck with a trail.
-  const myImg=new Image();let myImgSrc='';
-  function draw(){
-    const w=canvas._w,h=canvas._h;if(!w||!state)return;const css=n=>getComputedStyle(root).getPropertyValue(n).trim();
-    const R=Math.max(8,w*.035),iw=w-2*R,ih=h-2*R,S=iw/TABLE.w;
-    const tx=([x,y])=>host()?[R+x*S,R+y*(ih/TABLE.h)]:[R+(TABLE.w-x)*S,R+(TABLE.h-y)*(ih/TABLE.h)];
-    ctx.clearRect(0,0,w,h);
-    // rim
-    const wood=ctx.createLinearGradient(0,0,w,h);wood.addColorStop(0,'#7A4426');wood.addColorStop(.5,'#4A2814');wood.addColorStop(1,'#6A3A1E');
-    ctx.fillStyle=wood;round(0,0,w,h,R*1.4);ctx.fill();
-    ctx.strokeStyle='rgba(255,213,138,.35)';ctx.lineWidth=1;round(R*.45,R*.45,w-R*.9,h-R*.9,R);ctx.stroke();
-    // ice
-    const ice=ctx.createRadialGradient(w*.5,h*.5,10,w*.5,h*.5,h*.7);ice.addColorStop(0,'#2C3C6E');ice.addColorStop(1,'#141A34');
-    ctx.fillStyle=ice;round(R,R,iw,ih,R*.6);ctx.fill();
-    ctx.save();round(R,R,iw,ih,R*.6);ctx.clip();
-    const glow=ctx.createRadialGradient(w*.82,R,4,w*.82,R,h*.6);glow.addColorStop(0,'rgba(255,170,110,.28)');glow.addColorStop(1,'rgba(255,170,110,0)');ctx.fillStyle=glow;ctx.fillRect(R,R,iw,ih);
-    ctx.fillStyle='rgba(255,255,255,.05)';for(let y=R+10;y<R+ih;y+=14)for(let x=R+10;x<R+iw;x+=14){ctx.beginPath();ctx.arc(x,y,1,0,6.28);ctx.fill();}
-    ctx.strokeStyle='rgba(255,213,138,.55)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(R,h/2);ctx.lineTo(R+iw,h/2);ctx.stroke();
-    ctx.beginPath();ctx.arc(w/2,h/2,iw*.16,0,6.28);ctx.stroke();
-    ctx.strokeStyle='rgba(255,213,138,.3)';const cr=TABLE.goal*S*.62;ctx.beginPath();ctx.arc(w/2,R,cr,0,Math.PI);ctx.stroke();ctx.beginPath();ctx.arc(w/2,R+ih,cr,Math.PI,6.28);ctx.stroke();
-    // trail and puck
-    const [px,py]=tx(state.puck);trail.push([px,py]);if(trail.length>9)trail.shift();
-    trail.forEach(([x,y],i)=>{ctx.fillStyle=`rgba(255,213,138,${(i/trail.length)*.18})`;ctx.beginPath();ctx.arc(x,y,TABLE.puck*S*(.5+i/trail.length*.5),0,6.28);ctx.fill();});
-    ctx.restore();
-    // goals: dark slots with gold lips
-    const gw=TABLE.goal*S;for(const y of [R*.5,h-R*.5]){ctx.fillStyle='#08060A';round((w-gw)/2,y-R*.32,gw,R*.64,R*.3);ctx.fill();ctx.strokeStyle='#E8B23A';ctx.lineWidth=2;ctx.stroke();}
-    const myTone=css('--'+tones().me)||'#E8443A',theirTone=mode==='bot'?'#E8A040':(css('--'+tones().partner)||'#2FA866');
-    const hostPos=host()?(mine??state.host):state.host,guestPos=host()?state.guest:(mine??state.guest);
-    const src=photo(me());if(src&&src!==myImgSrc){myImgSrc=src;myImg.src=src;}
-    for(const [pos,color,isMe] of [[hostPos,host()?myTone:theirTone,host()],[guestPos,host()?theirTone:myTone,!host()]]){
-      const [x,y]=tx(pos),r=TABLE.mallet*S;
-      ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(x+2,y+4,r,r*.9,0,0,6.28);ctx.fill();
-      const g=ctx.createRadialGradient(x-r*.35,y-r*.35,1,x,y,r);g.addColorStop(0,'#FFFFFF');g.addColorStop(.25,color);g.addColorStop(1,shade(color));
-      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.28);ctx.fill();
-      ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=1.2;ctx.stroke();
-      const k=r*.52;ctx.save();ctx.beginPath();ctx.arc(x,y,k,0,6.28);ctx.clip();
-      if(isMe&&myImg.complete&&myImg.naturalWidth){ctx.drawImage(myImg,x-k,y-k,2*k,2*k);}
-      else{const kg=ctx.createRadialGradient(x-k*.3,y-k*.3,1,x,y,k);kg.addColorStop(0,'#FFFFFF');kg.addColorStop(1,shade(color));ctx.fillStyle=kg;ctx.fillRect(x-k,y-k,2*k,2*k);}
-      ctx.restore();
-      if(!isMe&&mode==='bot'){ctx.fillStyle='#FFFDF0';for(const dx of [-.32,.32]){ctx.beginPath();ctx.arc(x+dx*r,y-.3*r,r*.2,0,6.28);ctx.fill();}
-        ctx.fillStyle='#1A1414';for(const dx of [-.32,.32]){ctx.beginPath();ctx.arc(x+dx*r,y-.28*r,r*.11,0,6.28);ctx.fill();}}
-    }
-    const pr=TABLE.puck*S,pg=ctx.createRadialGradient(px-pr*.4,py-pr*.4,1,px,py,pr);pg.addColorStop(0,'#5A5A66');pg.addColorStop(1,'#0A0A0E');
-    ctx.fillStyle=pg;ctx.beginPath();ctx.arc(px,py,pr,0,6.28);ctx.fill();ctx.strokeStyle='#E8B23A';ctx.lineWidth=1.6;ctx.stroke();
+  // The table keeps the art's proportions and fills the space left between the scoreboard and the status.
+  function resize(){
+    const avail=Math.max(260,(innerHeight||800)-(board.offsetHeight||110)-170),w=Math.min(stageBox.parentElement?.clientWidth||root.clientWidth||360,ART_W*1.25,avail*ART_W/ART_H);
+    const h=w*ART_H/ART_W,dpr=Math.min(2,devicePixelRatio||1);
+    stageBox.style.width=w+'px';stageBox.style.height=h+'px';canvas.width=w*dpr;canvas.height=h*dpr;k=w/ART_W;ctx.setTransform(dpr*k,0,0,dpr*k,0,0);
   }
-  function round(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-  function shade(c){const m=/^#?([0-9a-f]{6})$/i.exec(c||'');if(!m)return '#222';const n=parseInt(m[1],16);const f=v=>Math.round(v*.45).toString(16).padStart(2,'0');return '#'+f(n>>16)+f((n>>8)&255)+f(n&255);}
+  new ResizeObserver(()=>{if(live)resize();}).observe(root);
+  addEventListener('resize',()=>{if(live)resize();});
+
+  // Drawing in the art's units: everything through the table's perspective, the farthest first.
+  const at=([x,y])=>{const u=host()?x/TABLE.w:1-x/TABLE.w,v=host()?y/TABLE.h:1-y/TABLE.h;return {p:SURFACE.to(u,v),s:SURFACE.scale(u,v)};};
+  function ellipse(x,y,rx,ry,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,6.2832);ctx.fill();}
+  function mallet(pos,set){
+    const {p:[x,y],s}=at(pos),r=TABLE.mallet*s,[c0,c1,c2,c3]=set;
+    const sh=ctx.createRadialGradient(x+4,y+r*.5,1,x+4,y+r*.5,r*1.3);sh.addColorStop(0,'rgba(26,42,52,.5)');sh.addColorStop(1,'rgba(26,42,52,0)');ellipse(x+4,y+r*.45,r*1.3,r*.5,sh);
+    ellipse(x,y+r*.17,r,r*.72,c3);
+    const g=ctx.createRadialGradient(x-r*.24,y-r*.3,1,x,y,r*1.05);g.addColorStop(0,c0);g.addColorStop(.35,c1);g.addColorStop(.8,c2);g.addColorStop(1,c3);ellipse(x,y,r,r*.7,g);
+    ellipse(x,y-r*.17,r*.43,r*.33,c3);
+    const kg=ctx.createRadialGradient(x-r*.12,y-r*.48,1,x,y-r*.37,r*.45);kg.addColorStop(0,c0);kg.addColorStop(.5,c1);kg.addColorStop(1,c3);ellipse(x,y-r*.37,r*.43,r*.33,kg);
+    ellipse(x-r*.17,y-r*.5,r*.17,r*.1,'rgba(255,255,255,.55)');ellipse(x-r*.33,y-r*.23,r*.33,r*.13,'rgba(255,255,255,.18)');
+  }
+  function puck(pos){
+    const {p:[x,y],s}=at(pos),r=TABLE.puck*s;
+    for(const [i,[tx,ty]] of trail.entries())ellipse(tx,ty,r,r*.66,`rgba(26,26,32,${(i/trail.length)*.12})`);
+    trail.push([x,y]);if(trail.length>7)trail.shift();
+    const sh=ctx.createRadialGradient(x+2,y+r*.6,1,x+2,y+r*.6,r*1.2);sh.addColorStop(0,'rgba(26,42,52,.45)');sh.addColorStop(1,'rgba(26,42,52,0)');ellipse(x+2,y+r*.55,r*1.15,r*.45,sh);
+    ellipse(x,y+r*.2,r,r*.72,'#050507');
+    const g=ctx.createRadialGradient(x-r*.16,y-r*.2,1,x,y,r);g.addColorStop(0,'#5A5A64');g.addColorStop(.6,'#1A1A20');g.addColorStop(1,'#050507');ellipse(x,y,r,r*.68,g);
+    ellipse(x-r*.33,y-r*.27,r*.33,r*.17,'rgba(255,255,255,.35)');
+  }
+  function draw(){
+    if(!state)return;ctx.clearRect(0,0,ART_W,ART_H);
+    const hostPos=host()?(mine??state.host):state.host,guestPos=host()?state.guest:(mine??state.guest);
+    const meSet=MALLET[myTone()],themSet=MALLET[theirTone()];
+    const items=[{pos:hostPos,draw:()=>mallet(hostPos,host()?meSet:themSet)},{pos:guestPos,draw:()=>mallet(guestPos,host()?themSet:meSet)},{pos:state.puck,draw:()=>puck(state.puck)}];
+    items.sort((a,b)=>at(a.pos).p[1]-at(b.pos).p[1]);for(const i of items)i.draw();
+  }
   return {element:root,stop,get live(){return live;}};
 }
