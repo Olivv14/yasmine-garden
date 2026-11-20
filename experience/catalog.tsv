@@ -649,9 +649,9 @@ shell.sendThought	Send {{name}} a thought	Mándale un pensamiento a {{name}}	Env
 appearance.title	Appearance	Apariencia	Apparence	Aspetto	الشكل
 appearance.open	Appearance: {{time}}	Apariencia: {{time}}	Apparence : {{time}}	Aspetto: {{time}}	الشكل: {{time}}
 appearance.follow	Follow the time of day	Seguir la hora del día	Suivre l’heure de la journée	Segui l’ora del giorno	يتبّع وقت النهار
-appearance.followHint	Light by day, dark from 20:00 until 6:00	Claro de día, oscuro de 20:00 a 6:00	Clair le jour, sombre de 20 h à 6 h	Chiaro di giorno, scuro dalle 20:00 alle 6:00	فاتح في النهار، غامق من 20:00 حتى 6:00
+appearance.followHint	The garden follows your day: sun, golden hour, night.	El jardín sigue tu día: sol, atardecer, noche.	Le jardin suit ta journée : soleil, heure dorée, nuit.	Il giardino segue la tua giornata: sole, ora dorata, notte.	الجنينة تمشي مع نهارك: شمس، مغرب، ليل.
 appearance.dark	Always dark	Siempre oscuro	Toujours sombre	Sempre scuro	ديما غامق
-appearance.darkHint	Dark all day. The garden still shows daylight.	Oscuro todo el día. El jardín sigue mostrando la luz del día.	Sombre toute la journée. Le jardin montre toujours la lumière du jour.	Scuro tutto il giorno. Il giardino mostra comunque la luce del giorno.	غامق النهار الكل. الجنينة تبان ديما بضو النهار.
+appearance.darkHint	Night in the garden all day, the app at dusk.	Noche en el jardín todo el día, la app al atardecer.	La nuit au jardin toute la journée, l’app au crépuscule.	Notte nel giardino tutto il giorno, l’app al tramonto.	ليل في الجنينة النهار الكلّ، والتطبيق وقت المغرب.
 appearance.gardenTime	Time in the garden	Hora en el jardín	Heure au jardin	Ora nel giardino	الوقت في الجنينة
 appearance.day	Day	Día	Jour	Giorno	نهار
 appearance.dusk	Golden hour	Atardecer	Heure dorée	Ora d’oro	العشية
@@ -1075,7 +1075,7 @@ garden.seeds	Seeds: {{count}}	Semillas: {{count}}	Graines : {{count}}	Semi: {{co
 garden.noSeeds	No seeds left. Play together to earn more.	No quedan semillas. Jueguen juntos para ganar más.	Plus de graines. Jouez ensemble pour en gagner.	Niente più semi. Giocate insieme per guadagnarne altri.	ما بقاتش زريعة. العبو مع بعضكم باش تربحو أكثر.
 garden.goPlay	Go to Play	Ir a Jugar	Aller jouer	Vai a Gioca	امشي للعب
 appearance.light	Always light	Siempre claro	Toujours clair	Sempre chiaro	ديما فاتح
-appearance.lightHint	Light all day, even at night.	Claro todo el día, incluso de noche.	Clair toute la journée, même la nuit.	Chiaro tutto il giorno, anche di notte.	فاتح النهار الكل، حتى في الليل.
+appearance.lightHint	A light app and a sunny garden, all day.	App clara y jardín soleado, todo el día.	Une app claire et un jardin ensoleillé, toute la journée.	App chiara e giardino soleggiato, tutto il giorno.	تطبيق فاتح وجنينة بالشمس، النهار الكلّ.
 gate.back.oliver	Welcome back, 7obbi.	Bienvenido de nuevo, 7obbi.	Bon retour, 7obbi.	Bentornato, 7obbi.	مرحبا بيك من جديد، حبّي.
 gate.back.yasmine	Welcome back, mi amor.	Bienvenida de nuevo, mi amor.	Bon retour, mi amor.	Bentornata, mi amor.	مرحبا بيك من جديد، mi amor.
 game.hockey.pick	Pick your rival	Elige a tu rival	Choisis ton adversaire	Scegli il tuo rivale	اختار خصمك

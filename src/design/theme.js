@@ -3,7 +3,7 @@
 import {getTheme,THEMES} from '../../experience/themes.mjs';
 
 export const GARDEN_THEMES=Object.freeze(['night','day','harissa']);
-export const THEME_COLOR=Object.freeze({night:'#0F1424',day:'#F6EFE3',harissa:'#1C0A08'});
+export const THEME_COLOR=Object.freeze({night:'#0F1424',day:'#F6EFE3',harissa:'#1C0A08',dusk:'#1F2148'});
 const KEY_FOLLOW='garden.followTime',KEY_HARISSA='garden.harissa',KEY_DARK='garden.alwaysDark',KEY_LIGHT='garden.alwaysLight';
 
 // Day is 06:00 to 20:00 in the viewer's own local time.
@@ -44,8 +44,11 @@ export function applyGardenTheme(root,legacy){
   const id=resolveGardenTheme({legacy:legacyTheme,followTime:followsTime(),harissa:harissaOn(),alwaysDark:alwaysDark(),alwaysLight:alwaysLight()});
   const changed=root.dataset.gardenTheme!==id;
   root.dataset.gardenTheme=id;root.style.setProperty('color-scheme',id==='day'?'light':'dark');
-  const color=document.querySelector('meta[name=theme-color]');if(color)color.content=THEME_COLOR[id];
-  const scheme=document.querySelector('meta[name=color-scheme]');if(scheme)scheme.content=id==='day'?'light':'dark';
+  // the approved dusk look covers every page, unless this phone chose Always light (or Harissa mode)
+  const dusk=!alwaysLight()&&id!=='harissa';root.dataset.ui=dusk?'dusk':'';
+  if(dusk)root.style.setProperty('color-scheme','dark');
+  const color=document.querySelector('meta[name=theme-color]');if(color)color.content=dusk?THEME_COLOR.dusk:THEME_COLOR[id];
+  const scheme=document.querySelector('meta[name=color-scheme]');if(scheme)scheme.content=id==='day'&&!dusk?'light':'dark';
   if(changed)for(const fn of listeners)fn(id);
   if(!timer)timer=setInterval(()=>{if(followsTime())refreshGardenTheme();},60000);
   return id;

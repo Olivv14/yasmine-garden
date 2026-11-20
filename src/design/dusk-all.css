@@ -1,0 +1,62 @@
+/* The approved dusk look on every page (html[data-ui=dusk], set by theme.js unless the phone chose Always light).
+   Tokens first, so every component follows; then the few shapes that change (soft panels instead of stickers). */
+html[data-ui=dusk][data-garden-theme]{
+  --bg:#1C1418;--surface:#2A1C26;--surface-2:#352430;--line:rgba(255,226,198,.18);--ink:#FFF4E6;--ink-soft:#FFE2C6;
+  --accent:#FFD58A;--on-accent:#2A1A10;--danger:#FF9A8A;--success:#9FE0B8;--info:#A9BCFF;--heart:#FF7FA6;
+  --glass:rgba(18,10,20,.82);--scrim:rgba(8,4,8,.6);
+  --edge:rgba(255,226,198,.22);--fill:#FFD58A;--on-fill:#2A1A10;--sun:#FFD58A;--flame:#FFB25A;--page:#1C1418;--note:#FFD58A;
+  --shadow-card:0 12px 26px rgba(0,0,0,.35);--shadow-float:0 16px 40px rgba(0,0,0,.5);color-scheme:dark;
+}
+html[data-ui=dusk] body{background:linear-gradient(180deg,#1F2148 0,#5A3C66 260px,#C9765A 520px,#3A262C 820px,#1C1418 1100px) no-repeat,#1C1418;background-attachment:fixed,scroll;color:var(--ink)}
+/* the string of lights over the top of every page */
+html[data-ui=dusk] .shell::before{content:"";position:fixed;left:0;right:0;top:0;block-size:96px;pointer-events:none;z-index:0;opacity:.85;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 96'%3E%3Cdefs%3E%3CradialGradient id='b'%3E%3Cstop offset='0' stop-color='%23FFE4A0' stop-opacity='.95'/%3E%3Cstop offset='.4' stop-color='%23FFB86A' stop-opacity='.35'/%3E%3Cstop offset='1' stop-color='%23FFB86A' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M-10 22 Q 90 58 190 58 T 400 26' fill='none' stroke='%231A1018' stroke-width='1.4'/%3E%3Cg fill='url(%23b)'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Ccircle cx='88' cy='47' r='8'/%3E%3Ccircle cx='150' cy='56' r='8'/%3E%3Ccircle cx='214' cy='57' r='8'/%3E%3Ccircle cx='276' cy='50' r='8'/%3E%3Ccircle cx='336' cy='37' r='8'/%3E%3C/g%3E%3Cg fill='%23FFF0C8'%3E%3Cellipse cx='30' cy='31' rx='2.2' ry='3.2'/%3E%3Cellipse cx='88' cy='48' rx='2.2' ry='3.2'/%3E%3Cellipse cx='150' cy='57' rx='2.2' ry='3.2'/%3E%3Cellipse cx='214' cy='58' rx='2.2' ry='3.2'/%3E%3Cellipse cx='276' cy='51' rx='2.2' ry='3.2'/%3E%3Cellipse cx='336' cy='38' rx='2.2' ry='3.2'/%3E%3C/g%3E%3C/svg%3E") top center/100% 96px no-repeat}
+html[data-ui=dusk] .shell>*{position:relative;z-index:1}
+/* the top bar */
+html[data-ui=dusk] .top .brand,html[data-ui=dusk] .top-actions>button,html[data-ui=dusk] .top-actions .round-button{background:rgba(18,10,20,.62);color:var(--ink);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+html[data-ui=dusk] .statusbar{color:rgba(255,226,198,.7)}
+html[data-ui=dusk] .eyebrow{color:#FFD58A}
+html[data-ui=dusk] .title,html[data-ui=dusk] h2,html[data-ui=dusk] h3{color:var(--ink)}
+html[data-ui=dusk] .muted,html[data-ui=dusk] .small,html[data-ui=dusk] .hint{color:var(--ink-soft)}
+/* panels: soft dusk glass instead of stickers */
+html[data-ui=dusk] :is(.card,.note,.play-tile,.play-turn,.inbox-row,.learn-card,.toad-card,.knowme-list>*,.entries>*,.pin):not(.us-shop){
+  background:rgba(18,10,20,.62);border:1px solid var(--line);border-radius:18px;box-shadow:none;color:var(--ink);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+html[data-ui=dusk] .learn-card.hidden-word{background:rgba(18,10,20,.4);border-style:dashed}
+html[data-ui=dusk] .play-tile:hover,html[data-ui=dusk] .play-tile:focus-visible{border-color:#FFD58A;background:rgba(255,213,138,.1)}
+html[data-ui=dusk] .play-tile-icon{background:rgba(255,213,138,.14);color:#FFD58A;border:0;box-shadow:none}
+html[data-ui=dusk] .play-points{color:#FFD58A}
+html[data-ui=dusk] .play-bar{background:rgba(255,226,198,.15);border:0}
+html[data-ui=dusk] .play-face{border-color:#FFD58A}
+/* buttons */
+html[data-ui=dusk] button:not(.gate-go):not(.gate-phrase):not(.rival-card):not(.pool-spin):not([class*="ds-"]):not([class*="pn-"]):not([class*="ls-"]):not(.learn-deck):not(.shop-tab):not(.us-shop):not(.us-days):not(.us-cam){border-color:var(--line);box-shadow:none}
+html[data-ui=dusk] button.primary,html[data-ui=dusk] .primary-round{background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;border:0}
+html[data-ui=dusk] button.quiet,html[data-ui=dusk] .round-button:not(.primary-round){background:rgba(18,10,20,.55);color:var(--ink);border:1px solid var(--line)}
+html[data-ui=dusk] button.link{color:#FFD58A}
+html[data-ui=dusk] .pill{background:rgba(255,213,138,.14);color:#FFD58A;border:1px solid rgba(255,213,138,.4);box-shadow:none}
+/* tabs (Chat / Notes / Questions, and every segmented control) */
+html[data-ui=dusk] .segmented,html[data-ui=dusk] .seg{background:rgba(18,10,20,.55);border:1px solid var(--line);border-radius:14px;box-shadow:none;padding:4px;gap:4px}
+html[data-ui=dusk] .segmented button,html[data-ui=dusk] .seg button{background:transparent;color:var(--ink);border:0;border-radius:10px;box-shadow:none}
+html[data-ui=dusk] .segmented button[aria-selected="true"],html[data-ui=dusk] .segmented button[aria-pressed="true"],html[data-ui=dusk] .seg button[aria-pressed="true"]{background:#FFD58A;color:#2A1A10}
+/* fields */
+html[data-ui=dusk] :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select){background:rgba(255,244,230,.06);color:var(--ink);border:1px solid rgba(255,226,198,.25);box-shadow:none}
+html[data-ui=dusk] :is(input,textarea)::placeholder{color:rgba(255,226,198,.5)}
+/* chat */
+html[data-ui=dusk] .msg{border:1px solid var(--line);box-shadow:none}
+html[data-ui=dusk] .msg.theirs{background:rgba(18,10,20,.7);color:var(--ink)}
+html[data-ui=dusk] .msg.mine{background:linear-gradient(160deg,#C9765A,#8A4A6A);color:#FFF4E6;border-color:transparent}
+html[data-ui=dusk] .msg-meta{color:rgba(255,244,230,.7)}
+html[data-ui=dusk] .chat-composer{background:rgba(18,10,20,.82);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+html[data-ui=dusk] .chat-list{background:transparent}
+/* home cards under the garden */
+html[data-ui=dusk] .greeting{color:var(--ink)}
+/* the bottom bar */
+html[data-ui=dusk] .bottom-nav{background:rgba(18,10,20,.86);border:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+html[data-ui=dusk] .bottom-nav button{color:rgba(255,226,198,.75);background:transparent;border:0;box-shadow:none}
+html[data-ui=dusk] .bottom-nav button[aria-current="page"]{color:#FFD58A}
+html[data-ui=dusk] .nav-badge{background:#FF7FA6;color:#2A1A10;border-color:#1C1418}
+/* sheets */
+html[data-ui=dusk] dialog.sheet{background:linear-gradient(180deg,#2A1C2C,#1C1418 60%);color:var(--ink);border:0;border-top:1px solid rgba(255,213,138,.3)}
+/* Us and Learn already carry their own dusk panels: no double background */
+html[data-ui=dusk] #page-us{background:transparent}
+html[data-ui=dusk] #page-us::before{display:none}
+html[data-ui=dusk] .learn-home{background:rgba(18,10,20,.45)}
