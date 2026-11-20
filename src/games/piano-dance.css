@@ -1,0 +1,114 @@
+/* Dance studio (approved DanceStudioDuo) and colour piano tiles (approved PianoGrand), both full screen at dusk. */
+#playStage[data-game="dance"] .game-backdrop,#playStage[data-game="piano"] .game-backdrop{display:none}
+html.game-full #playStage[data-game="dance"]{background:#1C1418;overflow:hidden}
+html.game-full #playStage[data-game="piano"]{background:linear-gradient(180deg,#1A1636 0%,#3E2A4E 30%,#8A5458 62%,#3A2228 82%,#1A1014 100%)}
+html.game-full #playStage[data-game="dance"] .game-bar,html.game-full #playStage[data-game="piano"] .game-bar{z-index:4;pointer-events:none}
+html.game-full #playStage[data-game="dance"] .game-bar .play-back,html.game-full #playStage[data-game="piano"] .game-bar .play-back{pointer-events:auto}
+html.game-full #playStage:has(.ds-overlay) .game-bar,html.game-full #playStage:has(.pn-board) .game-bar{display:none}
+
+/* ---------- dance studio ---------- */
+html.game-full #playStage .dance-card{position:fixed;inset:0;z-index:1;overflow:hidden;color:#FFF4E6;font-family:var(--font-sans);background:#1C1418;--beat:.476s;min-block-size:0}
+.dance-card .ds-sky{position:absolute;left:0;top:0;inline-size:100%;block-size:66.4%}
+.dance-card .ds-sky svg{inline-size:100%;block-size:100%;display:block}
+.dance-card .ds-shim{animation:ds-shim 3s ease-in-out infinite alternate}
+@keyframes ds-shim{to{opacity:.45;transform:scaleX(1.08)}}
+.dance-card .ds-floor{position:absolute;left:0;right:0;top:66.4%;block-size:40px;background:linear-gradient(180deg,#120A0E,#1C1418)}
+.dance-card .ds-floor-glow{position:absolute;left:50%;top:0;inline-size:260px;block-size:120px;margin-inline-start:-130px;background:radial-gradient(50% 60% at 50% 0,rgba(255,180,110,.35),rgba(255,180,110,0))}
+.dance-card .ds-duo{--w:min(64.6vw,calc(47.4dvh*.63));position:absolute;left:50%;top:16.1%;inline-size:var(--w);block-size:calc(var(--w)/.63);margin-inline-start:calc(var(--w)/-2);z-index:2;
+  background:url(./art/dance-duo.webp) 0 0/calc(var(--w)*24) 100% no-repeat;animation:ds-sway calc(var(--beat)*4) steps(24) infinite}
+@keyframes ds-sway{to{background-position:calc(var(--w)*-24) 0}}
+.dance-card.dancing .ds-duo{filter:drop-shadow(0 0 18px rgba(255,200,120,.45))}
+@media (prefers-reduced-motion:reduce){.dance-card .ds-duo,.dance-card .ds-shim,.dance-card .ds-dot{animation:none}}
+.dance-card .ds-top{position:absolute;left:16px;right:16px;top:calc(env(safe-area-inset-top) + 58px);display:flex;justify-content:space-between;align-items:center;gap:8px;z-index:3}
+.dance-card .ds-studio{font:800 13px var(--font-sans);letter-spacing:.1em;color:#FFE2C6;text-transform:uppercase}
+.dance-card .ds-chip{font:700 12px var(--font-sans);background:rgba(18,10,20,.6);border-radius:99px;padding:6px 12px}
+.dance-card .ds-beat{position:absolute;left:0;right:0;top:calc(66.4% + 14px);display:flex;justify-content:center;align-items:center;gap:8px;z-index:3}
+.dance-card .ds-dot{inline-size:9px;block-size:9px;border-radius:50%;background:#FFD58A;animation:ds-beat var(--beat) ease-out infinite}
+@keyframes ds-beat{0%{transform:scale(1.35);opacity:1}100%{transform:scale(1);opacity:.5}}
+html.game-full #playStage .dance-card button.ds-style{font:700 12px var(--font-sans);color:#FFE2C6;background:none;border:0;padding:6px 2px;min-block-size:32px;box-shadow:none;text-decoration:underline dotted rgba(255,226,198,.5);text-underline-offset:4px}
+.dance-card .ds-card{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 84px);border-radius:20px;padding:14px;background:rgba(18,10,20,.78);border:1px solid rgba(255,226,198,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;gap:8px;z-index:3}
+.dance-card .ds-card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.dance-card .ds-card-title{font:800 19px var(--font-display,'Bricolage Grotesque'),var(--font-sans)}
+.dance-card .ds-today{font:700 12px var(--font-sans);color:#9FE0B8}
+.dance-card .ds-text{font-size:13px;line-height:1.45;color:#FFE2C6;margin:0}
+.dance-card .ds-wait{font-size:12px;color:#9FE0B8;margin:0}
+html.game-full #playStage .dance-card button.primary{min-block-size:46px;border:0;border-radius:14px;background:#FFD58A;color:#2A1A10;font:800 15px var(--font-display,'Bricolage Grotesque'),var(--font-sans);box-shadow:none}
+.dance-card .ds-actions{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 18px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;z-index:3}
+html.game-full #playStage .dance-card button.ds-act{min-block-size:50px;border-radius:14px;background:rgba(18,10,20,.7);border:1px solid rgba(255,226,198,.18);color:#FFF4E6;font:700 13px var(--font-sans);box-shadow:none;padding:4px 6px}
+html.game-full #playStage .dance-card button.ds-act-gold{background:rgba(255,213,138,.18);border-color:rgba(255,213,138,.5)}
+.dance-card .ds-overlay{position:absolute;inset:0;z-index:6;background:rgba(14,8,12,.94);display:flex;flex-direction:column;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top) + 64px) 16px calc(env(safe-area-inset-bottom) + 20px);overflow-y:auto}
+html.game-full #playStage .dance-card button.ds-close{position:absolute;top:calc(env(safe-area-inset-top) + 12px);right:12px;inline-size:44px;block-size:44px;min-block-size:44px;border-radius:50%;padding:0;display:grid;place-items:center;background:rgba(18,10,20,.7);border:1px solid rgba(255,226,198,.25);color:#FFF4E6}
+html.game-full #playStage .dance-card button.ds-secondary{min-block-size:46px;border-radius:14px;background:rgba(18,10,20,.7);border:1px solid rgba(255,226,198,.25);color:#FFF4E6;font:700 14px var(--font-sans);padding:0 16px}
+.dance-card .ds-film{padding:0;justify-content:flex-end}
+.dance-card .ds-live{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover;transform:scaleX(-1);background:#0E080C}
+.dance-card .ds-review{transform:none}
+.dance-card .ds-pip{position:absolute;right:12px;top:calc(env(safe-area-inset-top) + 64px);inline-size:32%;aspect-ratio:9/16;object-fit:cover;border-radius:14px;border:2px solid #FFD58A;box-shadow:0 10px 24px rgba(0,0,0,.5);z-index:2}
+.dance-card .ds-ring{position:absolute;left:0;right:0;top:0;block-size:4px;background:rgba(255,226,198,.2);z-index:2;--done:0;display:none}
+.dance-card .ds-ring.on{display:block}
+.dance-card .ds-ring::after{content:"";position:absolute;inset:0 auto 0 0;inline-size:calc(var(--done)*100%);background:linear-gradient(90deg,#FFD58A,#FF9EC2)}
+.dance-card .ds-film-status{position:relative;z-index:2;margin:0 0 4px;font:700 15px var(--font-sans);text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.7);padding:0 16px}
+.dance-card .ds-film-status.ds-count{font:800 88px var(--font-display,'Bricolage Grotesque'),var(--font-sans);color:#FFD58A;margin-block-end:30vh}
+.dance-card .ds-film-controls{position:relative;z-index:2;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:0 16px calc(env(safe-area-inset-bottom) + 24px);inline-size:100%}
+.dance-card .ds-film-controls button{flex:1 1 140px;max-inline-size:220px}
+.dance-card .ds-sheet-title{margin:0;font:800 22px var(--font-display,'Bricolage Grotesque'),var(--font-sans);color:#FFF4E6}
+.dance-card .ds-styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;inline-size:100%;max-inline-size:420px}
+html.game-full #playStage .dance-card button.ds-style-pick{min-block-size:64px;border-radius:16px;background:rgba(255,244,230,.06);border:1px solid rgba(255,226,198,.2);color:#FFF4E6;font:800 16px var(--font-sans);display:grid;gap:2px;place-items:center}
+html.game-full #playStage .dance-card button.ds-style-pick[aria-pressed="true"]{border-color:#FFD58A;background:rgba(255,213,138,.16)}
+.dance-card .ds-style-pick small{font:600 11px var(--font-sans);color:#FFE2C6}
+.dance-card .ds-side-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;inline-size:100%;max-inline-size:520px}
+.dance-card .ds-side-cell{margin:0;display:grid;gap:6px;text-align:center;font:700 12px var(--font-sans);color:#FFE2C6}
+.dance-card .ds-side-cell .ds-video{inline-size:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#2A1A22;border:1px solid rgba(255,226,198,.2)}
+.dance-card .ds-hearts{display:flex;gap:14px;justify-content:center}
+html.game-full #playStage .dance-card button.ds-heart{inline-size:56px;block-size:56px;min-block-size:56px;border-radius:50%;padding:0;display:grid;place-items:center;background:rgba(255,244,230,.06);border:1px solid rgba(255,226,198,.25);color:#FFE2C6}
+html.game-full #playStage .dance-card button.ds-heart.on{color:#FF7FA6;background:rgba(255,127,166,.18);border-color:#FF9EC2}
+.dance-card .ds-heart.on svg{fill:currentColor}
+html.game-full #playStage .dance-card button.ds-heart:disabled{opacity:1}
+.dance-card .ds-list{display:grid;gap:8px;inline-size:100%;max-inline-size:520px}
+html.game-full #playStage .dance-card button.ds-row{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;align-items:center;text-align:start;min-block-size:56px;border-radius:14px;background:rgba(255,244,230,.06);border:1px solid rgba(255,226,198,.16);color:#FFF4E6;font:600 13px var(--font-sans);padding:8px 12px}
+.dance-card .ds-row-date{font-size:11px;color:#FFE2C6}
+.dance-card .ds-row-hearts{color:#FF9EC2;font-weight:700}
+.msg-dance{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center}
+.msg-dance>button{grid-column:1/-1}
+
+/* ---------- piano tiles ---------- */
+html.game-full #playStage .piano-card{color:#FFF4E6;min-block-size:calc(100dvh - 90px)}
+.piano-card .pn-head{display:grid;gap:4px;margin:6px 0 14px}
+.piano-card .pn-eyebrow{margin:0;font:800 12px var(--font-sans);letter-spacing:.1em;color:#FFD58A;text-transform:uppercase}
+.piano-card .pn-title{margin:0;font:800 28px var(--font-display,'Bricolage Grotesque'),var(--font-sans);color:#FFF4E6}
+.piano-card .pn-intro{margin:0;font-size:14px;line-height:1.45;color:#FFE2C6}
+.piano-card .pn-hint{color:#FFE2C6;opacity:.85;margin-top:12px}
+.piano-card .pn-error{color:#FFB0A0;font-weight:700}
+.piano-card .pn-songs{display:grid;gap:10px}
+.piano-card .pn-song{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(18,10,20,.6);border:1px solid rgba(255,226,198,.18);backdrop-filter:blur(6px)}
+.piano-card .pn-song-words{display:grid;gap:2px;min-inline-size:0}
+.piano-card .pn-song-words b{font:800 15px var(--font-sans);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.piano-card .pn-song-words small{font-size:12px;color:#FFE2C6}
+.piano-card .pn-song-stars{display:flex;gap:1px}
+.piano-card .pn-song-stars svg{inline-size:16px;block-size:16px}
+html.game-full #playStage .piano-card button.primary{min-block-size:44px;border:0;border-radius:14px;background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;font:800 15px var(--font-sans);padding:0 16px;box-shadow:none}
+html.game-full #playStage .piano-card button.pn-secondary{min-block-size:44px;border-radius:14px;background:rgba(18,10,20,.6);border:1px solid rgba(255,226,198,.25);color:#FFF4E6;font:700 14px var(--font-sans)}
+.piano-card .pn-loading{display:grid;place-items:center;min-block-size:60dvh}
+.piano-card .pn-board{position:fixed;inset:0;z-index:5;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;background:linear-gradient(180deg,#1A1636 0%,#3E2A4E 30%,#8A5458 62%,#3A2228 82%,#1A1014 100%)}
+.piano-card .pn-scene{position:absolute;inset:0;pointer-events:none}
+.piano-card .pn-hills{position:absolute;inset:0;inline-size:100%;block-size:100%;filter:blur(4px);opacity:.6}
+.piano-card .pn-scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,244,230,.05),rgba(255,244,230,.09))}
+.piano-card .pn-lights{position:absolute;left:0;top:calc(env(safe-area-inset-top) + 58px);inline-size:100%;block-size:110px;opacity:.65}
+.piano-card .pn-col{position:absolute;top:0;bottom:0;inline-size:1px;background:linear-gradient(180deg,rgba(255,226,198,0),rgba(255,226,198,.16) 20%,rgba(255,226,198,.16) 80%,rgba(255,226,198,0))}
+.piano-card .pn-col:nth-of-type(1){left:25%}.piano-card .pn-col:nth-of-type(2){left:50%}.piano-card .pn-col:nth-of-type(3){left:75%}
+.piano-card .pn-top{position:absolute;left:0;right:0;top:0;block-size:120px;background:linear-gradient(180deg,rgba(26,22,54,.9),rgba(26,22,54,0));z-index:2}
+.piano-card .pn-canvas{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:1;-webkit-mask-image:linear-gradient(180deg,transparent 0,transparent 96px,#000 150px);mask-image:linear-gradient(180deg,transparent 0,transparent 96px,#000 150px)}
+.piano-card .pn-hud{position:absolute;left:16px;right:16px;top:calc(env(safe-area-inset-top) + 16px);display:flex;justify-content:space-between;align-items:center;z-index:3;pointer-events:none}
+.piano-card .pn-hud>*{pointer-events:auto}
+.piano-card .pn-stars{display:flex;gap:3px;min-inline-size:66px}
+.piano-card .pn-score{text-align:center;display:grid}
+.piano-card .pn-score b{font:800 30px var(--font-display,'Bricolage Grotesque'),var(--font-sans);line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.piano-card .pn-score span{font:800 11px var(--font-sans);letter-spacing:.1em;color:#FFD58A;min-block-size:14px;text-transform:uppercase}
+html.game-full #playStage .piano-card button.pn-pause{inline-size:44px;block-size:44px;min-block-size:44px;border-radius:50%;border:1px solid rgba(255,226,198,.3);background:rgba(18,10,20,.55);color:#FFF4E6;display:grid;place-items:center;padding:0}
+.piano-card .pn-progress{position:absolute;left:60px;right:60px;top:calc(env(safe-area-inset-top) + 86px);block-size:3px;border-radius:2px;background:rgba(255,226,198,.18);z-index:3}
+.piano-card .pn-progress i{display:block;block-size:100%;inline-size:0;border-radius:2px;background:linear-gradient(90deg,#FFD58A,#FF9EC2)}
+.piano-card .pn-caption{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 96px);text-align:center;font:600 12px var(--font-sans);color:#FFE2C6;z-index:3;margin:0}
+.piano-card .pn-overlay{position:absolute;inset:0;z-index:6;display:grid;place-items:center;background:rgba(14,8,12,.55);backdrop-filter:blur(4px)}
+.piano-card .pn-result{display:grid;gap:10px;justify-items:center;inline-size:min(320px,86vw);padding:22px 18px;border-radius:24px;background:rgba(18,10,20,.86);border:1px solid rgba(255,226,198,.22);text-align:center}
+.piano-card .pn-result>button{inline-size:100%}
+.piano-card .pn-result-stars{display:flex;gap:6px}
+.piano-card .pn-result-score{margin:0;font:800 44px var(--font-display,'Bricolage Grotesque'),var(--font-sans)}

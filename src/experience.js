@@ -13,6 +13,15 @@ export {THEME_IDS, LANGUAGE_CHOICES};
 const catalogs={en,es,fr,it,'aeb-TN':aeb};
 let translator=createTranslator('en',catalogs), theme='dark';
 const bindings=new Map();
+// Nodes taken off the page keep their bindings here, weakly (nothing is retained once the node is gone), and come back
+// up to date when they are attached again: a game screen built before a language switch shows the new language.
+const parked=new WeakMap();
+function park(node){parked.set(node,bindings.get(node));bindings.delete(node);}
+function revive(root){
+  if(root.nodeType!==1)return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT);
+  for(let n=root;n;n=walker.nextNode()){const values=parked.get(n);if(!values)continue;parked.delete(n);bindings.set(n,values);for(const [attr,value] of values)copy(n,value,attr);}
+}
 export const t=(key,params)=>translator.t(key,params);
 export const locale=()=>translator.locale;
 export function uiError(key,params={}){const e=new Error(key);e.uiKey=key;e.uiParams=params;return e;}
@@ -33,7 +42,7 @@ export function initializeCopy(){
   document.getElementById('languageFlag')?.replaceChildren(flagIcon(translator.locale));
   // Drop detached render bindings promptly so old private snapshots/blobs are not
   // retained until the next language switch. New nodes are attached synchronously.
-  new MutationObserver(()=>{for(const node of bindings.keys())if(!node.isConnected)bindings.delete(node);}).observe(document.body,{childList:true,subtree:true});
+  new MutationObserver(records=>{for(const node of bindings.keys())if(!node.isConnected)park(node);for(const r of records)for(const n of r.addedNodes)if(n.isConnected)revive(n);}).observe(document.body,{childList:true,subtree:true});
   document.addEventListener('invalid',event=>{const n=event.target;if(!n.setCustomValidity)return;const key=n.validity.valueMissing?'errors.required':n.validity.tooShort?'auth.passwordShort':n.type==='url'?'dedication.invalidURL':'errors.invalidValue';const params=key==='auth.passwordShort'?{min:n.minLength}:{};copy(n,()=>t(key,params),'validation');},true);
   document.addEventListener('input',event=>{const n=event.target;if(n.setCustomValidity)copy(n,'','validation');},true);
 }
@@ -44,7 +53,7 @@ export function setExperience(next={}){
   translator=candidate;theme=next.theme??theme;
   translator.applyLanguage(document.documentElement);applyTheme(document.documentElement,theme);
   document.getElementById('languageFlag')?.replaceChildren(flagIcon(translator.locale));
-  for(const [node,values] of bindings){if(!node.isConnected){bindings.delete(node);continue;}for(const [attr,value] of values)copy(node,value,attr);}
+  for(const [node,values] of bindings){if(!node.isConnected){park(node);continue;}for(const [attr,value] of values)copy(node,value,attr);}
   const select=document.getElementById('languageSelect');if(select)select.value=translator.locale;
   const themes=document.getElementById('themeSelect');if(themes)themes.value=theme;
   const scheme=document.querySelector('meta[name=color-scheme]');if(scheme)scheme.content=document.documentElement.style.getPropertyValue('color-scheme');

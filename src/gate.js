@@ -23,13 +23,14 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
 
   const speak=()=>{try{setExperience({language:gateLanguage(read(),navigator.languages??[navigator.language])});}catch{}};
   function show(){
-    clearTimers();appReady=false;logsDone=false;busy=false;
+    clearTimers();appReady=false;logsDone=false;busy=false;resuming=false;gate.classList.remove('welcome');
     speak();
     gate.hidden=false;gate.classList.remove('leaving');if(shell)shell.inert=true;
     word.value='';copy(status,'');status.classList.remove('visible');log.replaceChildren();step('phrase');
   }
   function hide(){clearTimers();gate.hidden=true;gate.classList.remove('leaving');if(shell)shell.inert=false;onHidden?.();}
-  phrase.onclick=()=>{step('word');word.focus();};
+  let resuming=false;
+  phrase.onclick=()=>{if(resuming)return;step('word');word.focus();};
   form.onsubmit=async e=>{
     e.preventDefault();const value=word.value;if(!value||busy)return;
     busy=true;copy(status,'');
@@ -39,17 +40,29 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
     finally{busy=false;}
   };
   // Five lines of your own while the garden loads behind the black screen.
-  function runLog(who){
+  function runLog(who,keys=null){
     step('log');log.dataset.who=who;log.replaceChildren();logsDone=false;
-    const quick=reducedMotion();
-    for(let i=1;i<=LOG_LINES;i++)timers.push(setTimeout(()=>{const li=document.createElement('li');copy(li,()=>t(`gate.log.${who}.${i}`));log.append(li);
-      if(i===LOG_LINES){logsDone=true;finish();}},quick?0:i*LINE_MS));
+    const quick=reducedMotion(),lines=keys??Array.from({length:LOG_LINES},(_,i)=>`gate.log.${who}.${i+1}`);
+    lines.forEach((key,i)=>timers.push(setTimeout(()=>{const li=document.createElement('li');copy(li,()=>t(key));log.append(li);
+      if(i===lines.length-1){logsDone=true;finish();}},quick?0:(i+1)*LINE_MS)));
+  }
+  // This phone is already signed in: the phrase shows for a moment, three short lines run, and the app opens. No word asked.
+  function resume(who){
+    if(gate.hidden||busy||gate.dataset.step!=='phrase')return;
+    resuming=true;gate.classList.add('welcome');
+    if(!gate.querySelector('.gate-fireflies')){const ff=document.createElement('div');ff.className='gate-fireflies';ff.setAttribute('aria-hidden','true');
+      for(let i=0;i<6;i++){const s=document.createElement('span');s.style.left=[13,31,77,87,54,21][i]+'%';s.style.top=[71,78,73,83,82,85][i]+'%';s.style.animationDelay=[0,1.1,.6,1.8,2.4,1.4][i]+'s';ff.append(s);}
+      const bar=document.createElement('div');bar.className='gate-bar';bar.append(document.createElement('i'));gate.append(ff,bar);}
+    const known=who==='oliver'||who==='yasmine';
+    timers.push(setTimeout(()=>{resuming=false;
+      if(known)runLog(who,[`gate.back.${who}`,`gate.log.${who}.1`,`gate.log.${who}.5`]);
+      else{logsDone=true;finish();}},reducedMotion()?0:1300));
   }
   function finish(){
     if(!appReady||!logsDone||gate.hidden)return;
     timers.push(setTimeout(()=>{gate.classList.add('leaving');timers.push(setTimeout(hide,reducedMotion()?0:620));},reducedMotion()?0:420));
   }
-  return {show,hide,
+  return {show,hide,resume,
     open:()=>!gate.hidden,
     // signing out resets the app to English; the open gate keeps speaking this phone's language
     language:speak,

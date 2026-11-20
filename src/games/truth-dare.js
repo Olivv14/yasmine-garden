@@ -42,7 +42,8 @@ export function createTruthDare({el,button,t,copy,me,person,partner,record,notif
         root.append(row);
       }else{
         const card=el('div',undefined,'game-draw');card.dataset.kind=drawn.kind;card.dataset.level=String(levelOf(drawn.card));
-        card.append(el('p',()=>t('game.td.'+drawn.kind)+' · '+t('game.td.level'+levelOf(drawn.card)),'eyebrow'),el('p',()=>t(cardKey(drawn.card)),'title'));
+        const chilis=el('div',undefined,'td-chilis');chilis.setAttribute('aria-hidden','true');for(let i=0;i<levelOf(drawn.card);i++)chilis.append(chili());
+        card.append(chilis,el('p',()=>t('game.td.'+drawn.kind)+' · '+t('game.td.level'+levelOf(drawn.card)),'td-tag'),el('p',()=>t(cardKey(drawn.card)),'title'));
         const label=el('label',()=>t('game.td.response'));const area=document.createElement('textarea');area.id='tdResponse';area.maxLength=500;area.dir='auto';area.value=draft;area.oninput=()=>{draft=area.value;};label.htmlFor=area.id;
         const done=button(()=>t('game.td.done'),async e=>{if(busy)return;busy=true;const b=e.currentTarget;b.disabled=true;try{if(await record({game:'truth_dare',kind:drawn.kind,card:drawn.card,response:draft.trim()||null})){drawn=null;draft='';}}finally{busy=false;if(b.isConnected)b.disabled=false;render();}},'primary');
         card.append(label,area,done);root.append(card);
@@ -50,7 +51,12 @@ export function createTruthDare({el,button,t,copy,me,person,partner,record,notif
     }
     copy(root.appendChild(el('p',undefined,'small')),()=>t('game.td.turns',{count:turns.length}));
     if(turns.length)root.append(button(()=>t('game.td.finish'),async e=>{const b=e.currentTarget;b.disabled=true;try{if(await record({game:'truth_dare',kind:'finish'}))notify(()=>t('game.td.finished'));}finally{if(b.isConnected)b.disabled=false;}},'quiet'));
+    // the brazier at the bottom burns brighter at Hot and Harissa
+    const fire=el('div',undefined,'td-brazier');fire.dataset.level=String(drawn?levelOf(drawn.card):spice);fire.setAttribute('aria-hidden','true');
+    fire.append(el('span',undefined,'td-glow'),el('span',undefined,'td-flame'),el('span',undefined,'td-flame two'),el('span',undefined,'td-bowl'));root.append(fire);
   }
+  function chili(){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 40 60');
+    s.innerHTML='<path d="M20 14 C8 22 6 40 14 56 C24 50 32 34 28 18 Z" fill="#E0201A"/><path d="M15 30 C14 38 15 46 17 52" stroke="#FF9A8A" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M20 15 C20 8 25 4 30 4" stroke="#3E8A2A" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M15 16 C19 11 25 12 28 17" stroke="#3E8A2A" stroke-width="3" fill="none" stroke-linecap="round"/>';return s;}
   function clear(){snap=null;drawn=null;draft='';root.replaceChildren();}
   return {element:root,render,clear};
 }

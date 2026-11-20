@@ -624,7 +624,7 @@ game.dare.d08	Send me ten heart taps, slowly.	Mándame diez toques de corazón, 
 game.dare.d09	Write the first line of a story about us.	Escribe la primera línea de una historia sobre nosotros.	Écris la première phrase d’une histoire sur nous.	Scrivi la prima frase di una storia su di noi.	اكتب أول سطر من حكاية علينا.
 game.dare.d10	Share the last photo you took that made you smile.	Comparte la última foto que tomaste que te hizo sonreír.	Partage la dernière photo prise qui t’a fait sourire.	Condividi l’ultima foto scattata che ti ha fatto sorridere.	شارك آخر تصويرة صوّرتها وضحّكتك.
 game.hockey.title	Air hockey	Hockey de mesa	Air hockey	Air hockey	هوكي هوائي
-game.hockey.intro	Live when you are both here, or practise against the toad. First to 5.	En vivo cuando estén los dos, o practica contra el sapo. Gana quien llegue a 5.	En direct quand vous êtes là tous les deux, ou entraîne-toi contre le crapaud. Le premier à 5.	Dal vivo quando ci siete entrambi, o allenati contro il rospo. Vince chi arriva a 5.	مباشر كي تكونو الزوز هوني، ولّا اتمرّن ضد الجرانة. اللي يوصل لـ5 الأوّل يربح.
+game.hockey.intro	Live when you are both here, or practise against the toad. First to 7.	En vivo cuando estén los dos, o practica contra el sapo. Gana quien llegue a 7.	En direct quand vous êtes là tous les deux, ou entraîne-toi contre le crapaud. Le premier à 7.	Dal vivo quando ci siete entrambi, o allenati contro il rospo. Vince chi arriva a 7.	مباشر كي تكونو الزوز هوني، ولّا اتمرّن ضد الجرانة. اللي يوصل لـ7 الأوّل يربح.
 game.hockey.join	Join the table	Unirme a la mesa	Rejoindre la table	Unisciti al tavolo	ادخل للطاولة
 game.hockey.leave	Leave the table	Salir de la mesa	Quitter la table	Lascia il tavolo	اخرج من الطاولة
 game.hockey.waiting	Waiting for {{name}} to join the table…	Esperando a que {{name}} se una a la mesa…	En attente de {{name}} à la table…	In attesa che {{name}} arrivi al tavolo…	نستنّاو {{name}} يدخل للطاولة…
@@ -649,9 +649,9 @@ shell.sendThought	Send {{name}} a thought	Mándale un pensamiento a {{name}}	Env
 appearance.title	Appearance	Apariencia	Apparence	Aspetto	الشكل
 appearance.open	Appearance: {{time}}	Apariencia: {{time}}	Apparence : {{time}}	Aspetto: {{time}}	الشكل: {{time}}
 appearance.follow	Follow the time of day	Seguir la hora del día	Suivre l’heure de la journée	Segui l’ora del giorno	يتبّع وقت النهار
-appearance.followHint	Light by day, dark from 20:00 until 6:00	Claro de día, oscuro de 20:00 a 6:00	Clair le jour, sombre de 20 h à 6 h	Chiaro di giorno, scuro dalle 20:00 alle 6:00	فاتح في النهار، غامق من 20:00 حتى 6:00
+appearance.followHint	The garden follows your day: sun, golden hour, night.	El jardín sigue tu día: sol, atardecer, noche.	Le jardin suit ta journée : soleil, heure dorée, nuit.	Il giardino segue la tua giornata: sole, ora dorata, notte.	الجنينة تمشي مع نهارك: شمس، مغرب، ليل.
 appearance.dark	Always dark	Siempre oscuro	Toujours sombre	Sempre scuro	ديما غامق
-appearance.darkHint	Dark all day. The garden still shows daylight.	Oscuro todo el día. El jardín sigue mostrando la luz del día.	Sombre toute la journée. Le jardin montre toujours la lumière du jour.	Scuro tutto il giorno. Il giardino mostra comunque la luce del giorno.	غامق النهار الكل. الجنينة تبان ديما بضو النهار.
+appearance.darkHint	Night in the garden all day, the app at dusk.	Noche en el jardín todo el día, la app al atardecer.	La nuit au jardin toute la journée, l’app au crépuscule.	Notte nel giardino tutto il giorno, l’app al tramonto.	ليل في الجنينة النهار الكلّ، والتطبيق وقت المغرب.
 appearance.gardenTime	Time in the garden	Hora en el jardín	Heure au jardin	Ora nel giardino	الوقت في الجنينة
 appearance.day	Day	Día	Jour	Giorno	نهار
 appearance.dusk	Golden hour	Atardecer	Heure dorée	Ora d’oro	العشية
@@ -796,7 +796,7 @@ gate.log.oliver.1	Compiling the garden in red…	Compilando el jardín en rojo�
 gate.log.oliver.2	Tuning the toad’s guitar…	Afinando la guitarra del sapo…	J’accorde la guitare du crapaud…	Accordo la chitarra del rospo…	نعدّل في قيتارة الجرانة…
 gate.log.oliver.3	Catching Catatumbo lightning in a jar…	Atrapando un relámpago del Catatumbo en un frasco…	J’attrape un éclair du Catatumbo dans un bocal…	Catturo un lampo del Catatumbo in un barattolo…	نشدّ برق الكاتاتومبو في بوكال…
 gate.log.oliver.4	Looking for her last thought…	Buscando su último pensamiento…	Je cherche sa dernière pensée…	Cerco il suo ultimo pensiero…	نلوّج على آخر فكرة منها…
-gate.log.oliver.5	Ready, habibi.	Listo, habibi.	Prêt, habibi.	Pronto, habibi.	حاضر، حبيبي.
+gate.log.oliver.5	Ready, 7obbi.	Listo, 7obbi.	Prêt, 7obbi.	Pronto, 7obbi.	حاضر، حبّي.
 gate.log.yasmine.1	Watering the jasmine…	Regando el jazmín…	J’arrose le jasmin…	Innaffio il gelsomino…	نسقي في الياسمين…
 gate.log.yasmine.2	Warming up the harissa…	Calentando la harissa…	Je réchauffe la harissa…	Scaldo l’harissa…	نسخّن في الهريسة…
 gate.log.yasmine.3	Queueing your K-pop…	Poniendo tu K-pop en la cola…	Je mets ta K-pop dans la file…	Metto in coda il tuo K-pop…	نحضّر الكي-بوب متاعك…
@@ -1074,3 +1074,322 @@ push.kind.gameResult	{{sender}} played your game	{{sender}} jugó tu juego	{{sen
 garden.seeds	Seeds: {{count}}	Semillas: {{count}}	Graines : {{count}}	Semi: {{count}}	الزريعة: {{count}}
 garden.noSeeds	No seeds left. Play together to earn more.	No quedan semillas. Jueguen juntos para ganar más.	Plus de graines. Jouez ensemble pour en gagner.	Niente più semi. Giocate insieme per guadagnarne altri.	ما بقاتش زريعة. العبو مع بعضكم باش تربحو أكثر.
 garden.goPlay	Go to Play	Ir a Jugar	Aller jouer	Vai a Gioca	امشي للعب
+appearance.light	Always light	Siempre claro	Toujours clair	Sempre chiaro	ديما فاتح
+appearance.lightHint	A light app and a sunny garden, all day.	App clara y jardín soleado, todo el día.	Une app claire et un jardin ensoleillé, toute la journée.	App chiara e giardino soleggiato, tutto il giorno.	تطبيق فاتح وجنينة بالشمس، النهار الكلّ.
+gate.back.oliver	Welcome back, 7obbi.	Bienvenido de nuevo, 7obbi.	Bon retour, 7obbi.	Bentornato, 7obbi.	مرحبا بيك من جديد، حبّي.
+gate.back.yasmine	Welcome back, mi amor.	Bienvenida de nuevo, mi amor.	Bon retour, mi amor.	Bentornata, mi amor.	مرحبا بيك من جديد، mi amor.
+game.hockey.pick	Pick your rival	Elige a tu rival	Choisis ton adversaire	Scegli il tuo rivale	اختار خصمك
+game.hockey.level.easy	Easy	Fácil	Facile	Facile	ساهل
+game.hockey.level.medium	Medium	Medio	Moyen	Medio	متوسط
+game.hockey.level.hard	Hard	Difícil	Difficile	Difficile	صعيب
+game.hockey.level.easy.name	The Dreamer	El Soñador	Le Rêveur	Il Sognatore	الحالم
+game.hockey.level.easy.desc	Slow and sleepy. Drifts off mid-game.	Lento y dormilón. Se distrae a mitad del partido.	Lent et endormi. Il rêvasse en plein match.	Lento e assonnato. Si distrae a metà partita.	بطيء وناعس. يسرح في وسط الماتش.
+game.hockey.level.medium.name	The Coach	El Entrenador	Le Coach	L’Allenatore	الكوتش
+game.hockey.level.medium.desc	Plays fair and reads the puck.	Juega limpio y lee el disco.	Joue franc jeu et lit le palet.	Gioca pulito e legge il disco.	يلعب نظيف ويفهم الكورة.
+game.hockey.level.hard.name	The Champion	El Campeón	Le Champion	Il Campione	البطل
+game.hockey.level.hard.desc	Fast, reads every bounce, aims for the corners.	Rápido, lee cada rebote y apunta a las esquinas.	Rapide, lit chaque rebond et vise les coins.	Veloce, legge ogni rimbalzo e mira agli angoli.	فيسع، يقرا كل ضربة ويصوّب على الزوايا.
+game.hockey.stat.speed	Speed	Velocidad	Vitesse	Velocità	السرعة
+game.hockey.stat.read	Reading	Lectura	Lecture	Lettura	القراية
+game.hockey.stat.attack	Attack	Ataque	Attaque	Attacco	الهجوم
+pool.title	Pool	Billar	Billard	Biliardo	بيار
+play.pool.hint	8-ball with your finger: aim, pull, shoot	Bola 8 con el dedo: apunta, tira y dispara	Billard 8 au doigt : vise, tire, frappe	Palla 8 col dito: mira, tira, colpisci	الكورة 8 بصبعك: صوّب، اسحب، اضرب
+pool.intro	8-ball. Drag on the table to aim, pull the cue down and let go to shoot. Pot your group, then the 8.	Bola 8. Arrastra sobre la mesa para apuntar, baja el taco y suéltalo para tirar. Mete tu grupo y luego la 8.	Billard 8. Glisse sur la table pour viser, tire la queue vers le bas et lâche pour frapper. Empoche ton groupe, puis la 8.	Palla 8. Trascina sul tavolo per mirare, tira giù la stecca e lasciala per colpire. Imbuca il tuo gruppo, poi la 8.	الكورة 8. اسحب على الطاولة باش تصوّب، هبّط العصا وسيّبها باش تضرب. دخّل مجموعتك، ومن بعد الـ8.
+pool.canvas	Pool table. Drag to aim; arrow keys turn the cue.	Mesa de billar. Arrastra para apuntar; las flechas giran el taco.	Table de billard. Glisse pour viser ; les flèches tournent la queue.	Tavolo da biliardo. Trascina per mirare; le frecce ruotano la stecca.	طاولة البيار. اسحب باش تصوّب؛ الفلاش يدوّرو العصا.
+pool.pull	Cue power: pull down, let go to shoot	Fuerza del taco: tira hacia abajo y suelta para tirar	Puissance : tire vers le bas, lâche pour frapper	Potenza: tira giù, lascia per colpire	قوة العصا: اسحب للتحت وسيّب باش تضرب
+pool.spin	Spin	Efecto	Effet	Effetto	الإفي
+pool.spin.follow	follow	hacia delante	coulé	in avanti	للقدّام
+pool.spin.draw	draw	hacia atrás	rétro	all’indietro	للتالي
+pool.spin.center	centre	al centro	centre	al centro	في الوسط
+pool.shoot	Shoot	Tirar	Frapper	Colpisci	اضرب
+pool.join	Play live together	Jugar en vivo juntos	Jouer en direct ensemble	Gioca dal vivo insieme	العبو مع بعضكم مباشر
+pool.bot	Play against the toad	Jugar contra el sapo	Jouer contre le crapaud	Gioca contro il rospo	العب ضد الجرانة
+pool.leave	Leave the table	Salir de la mesa	Quitter la table	Lascia il tavolo	اخرج من الطاولة
+pool.again	New rack	Otra partida	Nouvelle partie	Nuova partita	طرح جديد
+pool.offline	The live table is unavailable right now. Check your connection and try again.	La mesa en vivo no está disponible ahora. Revisa tu conexión y vuelve a intentarlo.	La table en direct n’est pas disponible. Vérifie ta connexion et réessaie.	Il tavolo dal vivo non è disponibile ora. Controlla la connessione e riprova.	الطاولة المباشرة مش متوفرة توّا. ثبّت في الكونكسيون وعاود.
+pool.waiting	Waiting for {{name}} to come to the table…	Esperando a que {{name}} llegue a la mesa…	On attend que {{name}} arrive à la table…	Aspettando che {{name}} arrivi al tavolo…	نستناو في {{name}} يجي للطاولة…
+pool.yourTurn	Your shot.	Te toca tirar.	À toi de jouer.	Tocca a te.	دورك تضرب.
+pool.ballInHand	Ball in hand: drag the white ball anywhere, then shoot.	Bola en mano: arrastra la blanca a donde quieras y tira.	Bille en main : place la blanche où tu veux, puis frappe.	Palla in mano: sposta la bianca dove vuoi, poi colpisci.	الكورة في يدك: حط البيضا وين تحب ومن بعد اضرب.
+pool.toadTurn	The toad is lining up a shot…	El sapo está preparando su tiro…	Le crapaud prépare son coup…	Il rospo prepara il tiro…	الجرانة قاعدة تحضّر في الضربة…
+pool.theirTurn	{{name}} is shooting…	{{name}} está tirando…	{{name}} joue…	{{name}} sta tirando…	{{name}} قاعد يضرب…
+pool.foul.scratch	Foul: the white went in.	Falta: entró la blanca.	Faute : la blanche est tombée.	Fallo: è entrata la bianca.	فاول: دخلت البيضا.
+pool.foul.miss	Foul: no ball was hit.	Falta: no tocó ninguna bola.	Faute : aucune bille touchée.	Fallo: nessuna palla colpita.	فاول: ما لمست حتى كورة.
+pool.foul.wrongBall	Foul: the wrong ball was hit first.	Falta: tocó primero la bola equivocada.	Faute : mauvaise bille touchée en premier.	Fallo: colpita prima la palla sbagliata.	فاول: لمس الكورة الغالطة الأولى.
+pool.won	You won the rack!	¡Ganaste la partida!	Tu as gagné la partie !	Hai vinto la partita!	ربحت الطرح!
+pool.toadWon	The toad wins this one. Another rack?	Gana el sapo esta vez. ¿Otra?	Le crapaud gagne celle-ci. Une autre ?	Vince il rospo stavolta. Un’altra?	الجرانة ربحت هالمرة. نعاودو؟
+pool.lost	{{name}} wins this one.	{{name}} gana esta vez.	{{name}} gagne celle-ci.	{{name}} vince stavolta.	{{name}} ربح هالمرة.
+pool.you	You	Tú	Toi	Tu	إنت
+pool.group.solids	Solids	Lisas	Pleines	Piene	الكاملين
+pool.group.stripes	Stripes	Rayadas	Rayées	Rigate	المخططين
+pool.open	Open table	Mesa abierta	Table ouverte	Tavolo aperto	الطاولة محلولة
+duel.listen	Hear it	Escúchala	L’écouter	Ascoltala	اسمعها
+shop.title	The shop	La tienda	La boutique	Il negozio	الحانوت
+shop.openHint	Themes, mascots and heart buttons	Temas, mascotas y botones de corazón	Thèmes, mascottes et boutons cœur	Temi, mascotte e pulsanti cuore	ثيمات، ماسكوت وبوطونات قلب
+shop.points	{{count}} points to spend	{{count}} puntos para gastar	{{count}} points à dépenser	{{count}} punti da spendere	{{count}} نقطة تصرفها
+shop.tab.themes	Themes	Temas	Thèmes	Temi	الثيمات
+shop.tab.mascots	Mascots	Mascotas	Mascottes	Mascotte	الماسكوت
+shop.tab.hearts	Hearts	Corazones	Cœurs	Cuori	القلوب
+shop.buy	Buy · {{price}}	Comprar · {{price}}	Acheter · {{price}}	Compra · {{price}}	اشري · {{price}}
+shop.use	Use	Usar	Utiliser	Usa	استعمل
+shop.using	In use	En uso	Utilisé	In uso	مستعمل
+shop.owned	Yours	Tuyo	À toi	Tuo	متاعك
+shop.unlock	Unlock	Desbloquear	Débloquer	Sblocca	حلّ
+shop.locked	Beat the Champion toad to unlock	Gana al sapo Campeón para desbloquearlo	Bats le crapaud Champion pour le débloquer	Batti il rospo Campione per sbloccarlo	اربح على الجرانة البطل باش تحلّها
+shop.price	{{price}} points	{{price}} puntos	{{price}} points	{{price}} punti	{{price}} نقطة
+shop.hint	Each of you spends your own points. Your partner sees your heart and your mascots.	Cada uno gasta sus propios puntos. Tu pareja ve tu corazón y tus mascotas.	Chacun dépense ses propres points. Ton partenaire voit ton cœur et tes mascottes.	Ognuno spende i propri punti. Il tuo partner vede il tuo cuore e le tue mascotte.	كل واحد يصرف نقاطو. الطرف الآخر يشوف قلبك والماسكوت متاعك.
+shop.mascotsHint	Up to two mascots live on your app. Pet them, pick them up, let them nap.	Hasta dos mascotas viven en tu app. Acarícialas, levántalas, déjalas dormir.	Jusqu’à deux mascottes vivent dans ton appli. Caresse-les, prends-les, laisse-les dormir.	Fino a due mascotte vivono nella tua app. Accarezzale, prendile in mano, lasciale dormire.	زوز ماسكوت ينجمو يعيشو في التطبيقة متاعك. مسّح عليهم، هزّهم، خلّيهم يرقدو.
+shop.tryHeart	Tap the big heart to try it.	Toca el corazón grande para probarlo.	Touche le grand cœur pour l’essayer.	Tocca il cuore grande per provarlo.	انقر على القلب الكبير باش تجرّبو.
+shop.bought	{{name}} is yours!	¡{{name}} ya es tuyo!	{{name}} est à toi !	{{name}} è tuo!	{{name}} ولّى متاعك!
+shop.notEnough	Not enough points yet. Play a little more!	Todavía no tienes suficientes puntos. ¡Juega un poco más!	Pas encore assez de points. Joue encore un peu !	Non hai ancora abbastanza punti. Gioca ancora un po’!	مازالو النقاط ما يكفيوش. العب شوية زادة!
+shop.notReady	The shop opens once it is set up on the server.	La tienda abre cuando esté lista en el servidor.	La boutique ouvrira une fois prête sur le serveur.	Il negozio apre quando è pronto sul server.	الحانوت يتحل كيف يتحضّر على السيرفر.
+shop.item.heart.classic	Classic heart	Corazón clásico	Cœur classique	Cuore classico	قلب كلاسيك
+shop.item.heart.kiss	Kiss	Beso	Bisou	Bacio	بوسة
+shop.item.heart.harissa	Harissa	Harissa	Harissa	Harissa	هريسة
+shop.item.heart.flower	Pink flower	Flor rosa	Fleur rose	Fiore rosa	وردة روز
+shop.item.heart.jasmine	Jasmine	Jazmín	Jasmin	Gelsomino	ياسمين
+shop.item.heart.star	Nejma	Nejma	Nejma	Nejma	نجمة
+shop.item.heart.rose	Red rose	Rosa roja	Rose rouge	Rosa rossa	وردة حمرا
+shop.item.heart.paw	Emmy’s paw	La patita de Emmy	La patte d’Emmy	La zampa di Emmy	ساق Emmy
+shop.item.heart.arepa	Arepa	Arepa	Arepa	Arepa	أريبا
+shop.item.heart.moon	Moon	Luna	Lune	Luna	قمر
+shop.item.mascot.emmy	Emmy	Emmy	Emmy	Emmy	Emmy
+shop.item.mascot.bird	Cardenalito	Cardenalito	Cardenalito	Cardenalito	Cardenalito
+shop.item.mascot.camel	Camel	Camello	Chameau	Cammello	جمل
+shop.item.mascot.chef	Le Chef	Le Chef	Le Chef	Le Chef	Le Chef
+shop.desc.mascot.emmy	Orange tabby, one blue eye and one amber.	Atigrada naranja, un ojo azul y otro ámbar.	Tigrée rousse, un œil bleu et un ambre.	Tigrata arancione, un occhio blu e uno ambra.	قطوسة حمرا مخططة، عين زرقا وعين عسلي.
+shop.desc.mascot.bird	Venezuela’s little red bird. Sings when music plays.	El pajarito rojo de Venezuela. Canta cuando suena música.	Le petit oiseau rouge du Venezuela. Il chante quand la musique joue.	Il piccolo uccello rosso del Venezuela. Canta quando c’è musica.	العصفور الأحمر الصغير متاع فنزويلا. يغنّي كي تخدم الموسيقى.
+shop.desc.mascot.camel	Chews slowly, kneels to rest.	Mastica despacio y se arrodilla para descansar.	Mâche lentement, s’agenouille pour se reposer.	Mastica piano, si inginocchia per riposare.	يمضغ بالشوية ويبرك باش يرتاح.
+shop.desc.mascot.chef	A special mascot that reminds you of a spicy moment together.	Una mascota especial que les recuerda un momento picante juntos.	Une mascotte spéciale qui vous rappelle un moment épicé à deux.	Una mascotte speciale che vi ricorda un momento piccante insieme.	ماسكوت خاصة تفكّركم في لحظة حارة مع بعضكم.
+shop.item.theme.dusk	Dusk garden	Jardín al atardecer	Jardin au crépuscule	Giardino al tramonto	جنينة العشية
+shop.item.theme.yasmine	Yasmine green	Verde Yasmine	Vert Yasmine	Verde Yasmine	أخضر Yasmine
+shop.item.theme.oliver	Oliver red	Rojo Oliver	Rouge Oliver	Rosso Oliver	أحمر Oliver
+shop.item.theme.sidi	Sidi Bou Said	Sidi Bou Said	Sidi Bou Saïd	Sidi Bou Said	سيدي بوسعيد
+shop.item.theme.salto	Salto Ángel	Salto Ángel	Salto Ángel	Salto Ángel	Salto Ángel
+shop.item.theme.blaugrana	Blaugrana night	Noche blaugrana	Nuit blaugrana	Notte blaugrana	ليلة بلوغرانا
+shop.item.theme.djerba	Djerba sunset	Atardecer en Djerba	Coucher de soleil à Djerba	Tramonto a Djerba	غروب جربة
+shop.sent.heart	{{name}} is thinking of you	{{name}} está pensando en ti	{{name}} pense à toi	{{name}} ti pensa	{{name}} يخمّم فيك
+shop.sent.kiss	{{name}} sent you a kiss	{{name}} te mandó un beso	{{name}} t’envoie un bisou	{{name}} ti manda un bacio	{{name}} بعثلك بوسة
+shop.sent.harissa	{{name}} says things are getting spicy	{{name}} dice que la cosa se pone picante	{{name}} dit que ça devient épicé	{{name}} dice che le cose si fanno piccanti	{{name}} يقول الحكاية بدات تسخن
+shop.sent.flower	{{name}} sent you a pink flower	{{name}} te mandó una flor rosa	{{name}} t’envoie une fleur rose	{{name}} ti manda un fiore rosa	{{name}} بعثلك وردة روز
+shop.sent.jasmine	{{name}} sent you jasmine from Tunis	{{name}} te mandó jazmín de Túnez	{{name}} t’envoie du jasmin de Tunis	{{name}} ti manda gelsomino da Tunisi	{{name}} بعثلك ياسمين من تونس
+shop.sent.star	{{name}} says you are the star, Nejma	{{name}} dice que eres la estrella, Nejma	{{name}} dit que tu es l’étoile, Nejma	{{name}} dice che sei la stella, Nejma	{{name}} يقول إنتِ النجمة، نجمة
+shop.sent.rose	{{name}} sent you a red rose	{{name}} te mandó una rosa roja	{{name}} t’envoie une rose rouge	{{name}} ti manda una rosa rossa	{{name}} بعثلك وردة حمرا
+shop.sent.paw	Emmy gives you a paw (from {{name}})	Emmy te da la patita (de parte de {{name}})	Emmy te donne la patte (de la part de {{name}})	Emmy ti dà la zampa (da {{name}})	Emmy تعطيك ساقها (من عند {{name}})
+shop.sent.arepa	{{name}} sent you an arepa, made with love	{{name}} te mandó una arepa hecha con amor	{{name}} t’envoie une arepa faite avec amour	{{name}} ti manda un’arepa fatta con amore	{{name}} بعثلك أريبا معمولة بالحب
+shop.sent.moon	{{name}} says goodnight under the same moon	{{name}} te da las buenas noches bajo la misma luna	{{name}} te dit bonne nuit sous la même lune	{{name}} ti augura la buonanotte sotto la stessa luna	{{name}} يقلّك تصبح على خير تحت نفس القمر
+game.toad.tag.easy	COMMON · EASY	COMÚN · FÁCIL	COMMUN · FACILE	COMUNE · FACILE	عادي · ساهل
+game.toad.tag.medium	RARE · MEDIUM	RARO · MEDIO	RARE · MOYEN	RARO · MEDIO	نادر · متوسط
+game.toad.tag.hard	LEGENDARY · HARD	LEGENDARIO · DIFÍCIL	LÉGENDAIRE · DIFFICILE	LEGGENDARIO · DIFFICILE	أسطوري · صعيب
+game.toad.reward.easy	+1	+1	+1	+1	+1
+game.toad.reward.medium	+3	+3	+3	+3	+3
+game.toad.reward.hard	+6	+6	+6	+6	+6
+game.toad.desc.hockey.easy	Plays half asleep. Slow to react, sometimes misses on purpose so you can learn.	Juega medio dormido. Reacciona lento y a veces falla a propósito para que aprendas.	Joue à moitié endormi. Lent à réagir, il rate parfois exprès pour que tu apprennes.	Gioca mezzo addormentato. Lento a reagire, a volte sbaglia apposta per farti imparare.	يلعب نص راقد. بطيء في ردّة الفعل، ومرات يغلط بالقصد باش تتعلم.
+game.toad.desc.hockey.medium	Never leaves the goal open. Shoots straight and hard, and punishes lazy defence.	Nunca deja la portería abierta. Tira recto y fuerte, y castiga una defensa floja.	Ne laisse jamais le but ouvert. Tire droit et fort, et punit une défense paresseuse.	Non lascia mai la porta aperta. Tira dritto e forte, e punisce una difesa pigra.	عمرو ما يخلّي الكاج محلول. يضرب دوغري وبالقوة، ويعاقب الدفاع الكسلان.
+game.toad.desc.hockey.hard	Reads bank shots, fakes before it strikes, attacks when the puck is slow. Beat it and its crown goes on your profile.	Lee los rebotes, amaga antes de tirar y ataca cuando el disco va lento. Gánale y su corona va a tu perfil.	Lit les rebonds, feinte avant de frapper, attaque quand le palet est lent. Bats-le et sa couronne va sur ton profil.	Legge i rimbalzi, finta prima di colpire, attacca quando il disco è lento. Battilo e la sua corona va sul tuo profilo.	يقرا الضربات على الحيط، يعمل فينتة قبل ما يضرب، ويهجم كي الكورة تكون بطيئة. اربح عليه وتاجو يمشي لبروفيلك.
+game.toad.desc.pool.easy	Plays half asleep. Misjudges its aim, and leaves you easy shots so you can learn.	Juega medio dormido. Calcula mal la puntería y te deja tiros fáciles para que aprendas.	Joue à moitié endormi. Vise mal et te laisse des coups faciles pour que tu apprennes.	Gioca mezzo addormentato. Mira male e ti lascia tiri facili per farti imparare.	يلعب نص راقد. يغلط في التصويب ويخلّيلك ضربات ساهلة باش تتعلم.
+game.toad.desc.pool.medium	Pots the clean shots and rarely leaves you an open table.	Mete los tiros limpios y casi nunca te deja la mesa abierta.	Empoche les coups propres et te laisse rarement la table ouverte.	Imbuca i tiri puliti e raramente ti lascia il tavolo aperto.	يدخّل الضربات النظيفة ونادرا ما يخلّيلك الطاولة محلولة.
+game.toad.desc.pool.hard	Aims almost perfectly and plans where the white stops for its next shot. Beat it and its crown goes on your profile.	Apunta casi perfecto y planea dónde para la blanca para su siguiente tiro. Gánale y su corona va a tu perfil.	Vise presque parfaitement et prévoit où la blanche s’arrête pour le coup suivant. Bats-le et sa couronne va sur ton profil.	Mira quasi alla perfezione e pianifica dove si ferma la bianca per il tiro dopo. Battilo e la sua corona va sul tuo profilo.	يصوّب تقريب بالضبط ويخطط وين تقف البيضا للضربة الجاية. اربح عليه وتاجو يمشي لبروفيلك.
+game.toad.stat.speed	Speed	Velocidad	Vitesse	Velocità	السرعة
+game.toad.stat.reflex	Reflex	Reflejos	Réflexes	Riflessi	ردّة الفعل
+game.toad.stat.tricks	Tricks	Trucos	Astuces	Trucchi	الحيل
+game.toad.swipe	Swipe to see the three rivals. Tap one to play.	Desliza para ver a los tres rivales. Toca uno para jugar.	Fais glisser pour voir les trois rivaux. Touche-en un pour jouer.	Scorri per vedere i tre rivali. Toccane uno per giocare.	اسحب باش تشوف الثلاثة خصوم. انقر على واحد باش تلعب.
+game.toad.crown	Beat the Champion	Le ganó al Campeón	A battu le Champion	Ha battuto il Campione	ربح على البطل
+games.back	Games	Juegos	Jeux	Giochi	الألعاب
+game.hockey.vs	vs {{name}} · {{level}}	vs {{name}} · {{level}}	contre {{name}} · {{level}}	contro {{name}} · {{level}}	ضد {{name}} · {{level}}
+game.hockey.caption	{{me}} · {{them}} · first to {{win}}	{{me}} · {{them}} · gana quien llegue a {{win}}	{{me}} · {{them}} · le premier à {{win}}	{{me}} · {{them}} · vince chi arriva a {{win}}	{{me}} · {{them}} · اللي يوصل {{win}} الأول
+game.hockey.toadName	{{level}} toad	Sapo {{level}}	Crapaud {{level}}	Rospo {{level}}	جرانة {{level}}
+pool.chip	8-ball · {{state}}	Bola 8 · {{state}}	Billard 8 · {{state}}	Palla 8 · {{state}}	الكورة 8 · {{state}}
+pool.chip.yours	your shot	te toca	à toi	tocca a te	دورك
+pool.chip.theirs	their shot	le toca	à l’autre	tocca all’altro	دور الآخر
+pool.pullToShoot	Pull back to shoot	Tira hacia atrás para disparar	Tire en arrière pour frapper	Tira indietro per colpire	اسحب للتالي باش تضرب
+piano.eyebrow	Colour tiles	Teclas de colores	Touches en couleur	Tasti a colori	بلايص ملوّنة
+piano.title	Piano tiles	Piano tiles	Piano tiles	Piano tiles	Piano tiles
+piano.intro	Tap the lowest tile, hold the long ones, and don't touch the dark. Each star is a point.	Toca la tecla más baja, mantén las largas y no toques lo oscuro. Cada estrella es un punto.	Touche la tuile la plus basse, garde le doigt sur les longues, et ne touche pas le noir. Chaque étoile vaut un point.	Tocca il tasto più in basso, tieni premuti quelli lunghi e non toccare il buio. Ogni stella è un punto.	انقر على البلاصة اللوطة، شدّ الطوال، وما تمسّش الظلمة. كل نجمة بنقطة.
+piano.best	Best: {{score}}	Mejor: {{score}}	Record : {{score}}	Record: {{score}}	أحسن سكور: {{score}}
+piano.play	Play	Jugar	Jouer	Gioca	العب
+piano.uploadHint	Songs you upload in Music appear here too: the tiles follow their beat.	Las canciones que subes en Música aparecen aquí también: las teclas siguen su ritmo.	Les chansons que tu ajoutes dans Musique apparaissent ici aussi : les tuiles suivent leur rythme.	Le canzoni che carichi in Musica compaiono anche qui: i tasti seguono il loro ritmo.	الأغاني اللي تحطّهم في الموسيقى يظهروا هنا زادة: البلايص يمشيو على الريتم متاعهم.
+piano.listening	Listening to the song's beat…	Escuchando el ritmo de la canción…	J'écoute le rythme de la chanson…	Ascolto il ritmo della canzone…	قاعد نسمع في ريتم الأغنية…
+piano.cannotPlay	This song can't be played here. Try another one.	Esta canción no se puede tocar aquí. Prueba otra.	Cette chanson ne peut pas être jouée ici. Essaie une autre.	Questa canzone non si può suonare qui. Provane un'altra.	الأغنية هاذي ما تتعزفش هنا. جرّب وحدة أخرى.
+piano.boardLabel	Piano tiles: tap the falling tiles	Piano tiles: toca las teclas que caen	Piano tiles : touche les tuiles qui tombent	Piano tiles: tocca i tasti che cadono	Piano tiles: انقر على البلايص اللي طايحين
+piano.pause	Pause	Pausa	Pause	Pausa	وقّف
+piano.paused	Paused	En pausa	En pause	In pausa	واقف
+piano.resume	Keep playing	Seguir jugando	Continuer	Continua	كمّل
+piano.quit	Back to the songs	Volver a las canciones	Retour aux chansons	Torna alle canzoni	ارجع للأغاني
+piano.combo	Combo ×{{count}}	Combo ×{{count}}	Combo ×{{count}}	Combo ×{{count}}	كومبو ×{{count}}
+piano.finished	The whole song! Bravo.	¡La canción entera! Bravo.	La chanson entière ! Bravo.	Tutta la canzone! Bravo.	الأغنية الكلّ! برافو.
+piano.over	Oops, a wrong tile. Again?	Uy, una tecla equivocada. ¿Otra vez?	Oups, une mauvaise tuile. On recommence ?	Ops, un tasto sbagliato. Di nuovo?	أوبس، بلاصة غالطة. نعاودو؟
+piano.points	+{{count}} points for the week	+{{count}} puntos para la semana	+{{count}} points pour la semaine	+{{count}} punti per la settimana	+{{count}} نقاط للجمعة
+piano.again	Again	Otra vez	Encore	Ancora	عاود
+piano.songs	Songs	Canciones	Chansons	Canzoni	الأغاني
+play.piano.hint	Colour tiles to your songs	Teclas de colores con tus canciones	Des tuiles en couleur sur tes chansons	Tasti a colori sulle tue canzoni	بلايص ملوّنة على الأغاني متاعكم
+dance.title	Dance studio	Estudio de baile	Studio de danse	Studio di danza	ستوديو الرقص
+play.dance.hint	Copy my step, at sunset	Copia mi paso, al atardecer	Copie mon pas, au coucher du soleil	Copia il mio passo, al tramonto	قلّد الخطوة متاعي، وقت المغرب
+dance.duoLabel	The two of you dancing {{style}}, as silhouettes against the sunset	Ustedes dos bailando {{style}}, en silueta contra el atardecer	Vous deux en train de danser la {{style}}, en silhouettes devant le coucher du soleil	Voi due che ballate {{style}}, in silhouette contro il tramonto	انتوما الزوز ترقصو {{style}}، ظلال قدّام المغرب
+dance.style.bachata	Bachata	Bachata	Bachata	Bachata	باتشاتا
+dance.style.salsa	Salsa	Salsa	Salsa	Salsa	سالسا
+dance.style.merengue	Merengue	Merengue	Merengue	Merengue	ميرينغي
+dance.style.reggaeton	Reggaeton	Reguetón	Reggaeton	Reggaeton	ريغيتون
+dance.style.mezoued	Mezoued	Mezoued	Mezoued	Mezoued	مزود
+dance.style.joropo	Joropo	Joropo	Joropo	Joropo	خوروبو
+dance.studio	{{name}}'s studio	Estudio de {{name}}	Studio de {{name}}	Studio di {{name}}	ستوديو {{name}}
+dance.streak	{{count}} days dancing in a row	{{count}} días bailando seguidos	{{count}} jours de danse d'affilée	{{count}} giorni di ballo di fila	{{count}} أيام ترقصو ورا بعضهم
+dance.beatLine	{{style}} · {{bpm}} BPM · you and {{name}}	{{style}} · {{bpm}} BPM · tú y {{name}}	{{style}} · {{bpm}} BPM · toi et {{name}}	{{style}} · {{bpm}} BPM · tu e {{name}}	{{style}} · {{bpm}} BPM · انت و{{name}}
+dance.copyTitle	Copy my step	Copia mi paso	Copie mon pas	Copia il mio passo	قلّد خطوتي
+dance.today	Today: {{style}}	Hoy: {{style}}	Aujourd'hui : {{style}}	Oggi: {{style}}	اليوم: {{style}}
+dance.needsUpdate	The dance studio needs the latest update of Between us.	El estudio de baile necesita la última actualización de Entre nosotros.	Le studio de danse a besoin de la dernière mise à jour d'Entre nous.	Lo studio di danza ha bisogno dell'ultimo aggiornamento di Tra noi.	ستوديو الرقص يستحق آخر تحديث متاع بيناتنا.
+dance.toCopy	{{name}} filmed a {{style}} step for you. Watch it, then film your copy.	{{name}} grabó un paso de {{style}} para ti. Míralo y graba tu copia.	{{name}} a filmé un pas de {{style}} pour toi. Regarde-le, puis filme ta copie.	{{name}} ha filmato un passo di {{style}} per te. Guardalo, poi filma la tua copia.	{{name}} صوّر خطوة {{style}} ليك. شوفها، وبعد صوّر التقليد متاعك.
+dance.watchCopy	Watch and copy	Mirar y copiar	Regarder et copier	Guarda e copia	شوف وقلّد
+dance.toRate	{{name}} copied your step. How close was it?	{{name}} copió tu paso. ¿Qué tan parecido quedó?	{{name}} a copié ton pas. C'était proche ?	{{name}} ha copiato il tuo passo. Quanto si avvicina?	{{name}} قلّد خطوتك. قدّاش قريب؟
+dance.sideBySide	Watch side by side	Ver lado a lado	Voir côte à côte	Guarda fianco a fianco	شوفهم جنب بعضهم
+dance.howTo	You film a short step ({{seconds}} s). {{name}} tries to copy it. You give them 1 to 3 hearts.	Grabas un paso corto ({{seconds}} s). {{name}} intenta copiarlo. Le das de 1 a 3 corazones.	Tu filmes un petit pas ({{seconds}} s). {{name}} essaie de le copier. Tu lui donnes de 1 à 3 cœurs.	Filmi un passo breve ({{seconds}} s). {{name}} prova a copiarlo. Gli dai da 1 a 3 cuori.	تصوّر خطوة قصيرة ({{seconds}} ث). {{name}} يحاول يقلّدها. تعطيه من 1 لـ 3 قلوب.
+dance.waiting	{{name}} hasn't copied your last step yet.	{{name}} todavía no ha copiado tu último paso.	{{name}} n'a pas encore copié ton dernier pas.	{{name}} non ha ancora copiato il tuo ultimo passo.	{{name}} مازال ما قلّدش آخر خطوة متاعك.
+dance.filmStep	Film my step	Grabar mi paso	Filmer mon pas	Filma il mio passo	صوّر خطوتي
+dance.diary	Dance diary	Diario de baile	Journal de danse	Diario di danza	كرّاس الرقص
+dance.ourSteps	Our steps	Nuestros pasos	Nos pas	I nostri passi	الخطوات متاعنا
+dance.withMe	Dance with me	Baila conmigo	Danse avec moi	Balla con me	ارقص معايا
+dance.stopDancing	Stop the beat	Parar el ritmo	Arrêter le rythme	Ferma il ritmo	وقّف الريتم
+dance.pickStyle	Pick a style	Elige un estilo	Choisis un style	Scegli uno stile	اختار ستيل
+dance.bpm	{{bpm}} BPM	{{bpm}} BPM	{{bpm}} BPM	{{bpm}} BPM	{{bpm}} BPM
+dance.pickVideo	Choose a video	Elegir un video	Choisir une vidéo	Scegli un video	اختار فيديو
+dance.noCamera	The camera can't open here. You can choose a video you filmed.	La cámara no se puede abrir aquí. Puedes elegir un video que grabaste.	La caméra ne peut pas s'ouvrir ici. Tu peux choisir une vidéo que tu as filmée.	La fotocamera non si apre qui. Puoi scegliere un video che hai girato.	الكاميرا ما تتحلّش هنا. تنجم تختار فيديو صوّرتو.
+dance.cameraDenied	Allow the camera to film your step, or choose a video.	Permite la cámara para grabar tu paso, o elige un video.	Autorise la caméra pour filmer ton pas, ou choisis une vidéo.	Consenti la fotocamera per filmare il tuo passo, o scegli un video.	خلّي الكاميرا تخدم باش تصوّر خطوتك، ولا اختار فيديو.
+dance.readyCopy	Their step plays in the corner. Ready to copy it?	Su paso se ve en la esquina. ¿Listo para copiarlo?	Son pas passe dans le coin. Prêt à le copier ?	Il suo passo scorre nell'angolo. Pronto a copiarlo?	الخطوة متاعو تتعدّى في الركن. حاضر تقلّدها؟
+dance.readyStep	Find your spot. You have {{seconds}} seconds.	Busca tu sitio. Tienes {{seconds}} segundos.	Trouve ta place. Tu as {{seconds}} secondes.	Trova il tuo posto. Hai {{seconds}} secondi.	لقى بلاصتك. عندك {{seconds}} ثانية.
+dance.record	Start filming	Empezar a grabar	Commencer à filmer	Inizia a filmare	ابدا صوّر
+dance.stopRec	Stop	Parar	Arrêter	Stop	وقّف
+dance.recording	Dancing… {{seconds}} s left	Bailando… quedan {{seconds}} s	Ça danse… encore {{seconds}} s	Si balla… mancano {{seconds}} s	ترقص… باقي {{seconds}} ث
+dance.tooBig	This video is too big. Film a shorter one.	Este video es demasiado grande. Graba uno más corto.	Cette vidéo est trop lourde. Filmes-en une plus courte.	Questo video è troppo grande. Girane uno più corto.	الفيديو هذا كبير برشة. صوّر واحد أقصر.
+dance.again	Film again	Grabar otra vez	Refilmer	Rifilma	عاود صوّر
+dance.sendCopyQ	Send your copy to {{name}}?	¿Enviar tu copia a {{name}}?	Envoyer ta copie à {{name}} ?	Mandare la tua copia a {{name}}?	تبعث التقليد متاعك لـ{{name}}؟
+dance.sendStepQ	Send this step to {{name}}?	¿Enviar este paso a {{name}}?	Envoyer ce pas à {{name}} ?	Mandare questo passo a {{name}}?	تبعث الخطوة هاذي لـ{{name}}؟
+dance.send	Send	Enviar	Envoyer	Invia	ابعث
+dance.sending	Sending your dance…	Enviando tu baile…	Envoi de ta danse…	Invio del tuo ballo…	قاعد نبعث الرقصة متاعك…
+dance.copySent	Your copy is on its way to {{name}}	Tu copia va de camino a {{name}}	Ta copie part chez {{name}}	La tua copia sta arrivando a {{name}}	التقليد متاعك ماشي لـ{{name}}
+dance.stepSent	Your step is on its way to {{name}}	Tu paso va de camino a {{name}}	Ton pas part chez {{name}}	Il tuo passo sta arrivando a {{name}}	الخطوة متاعك ماشية لـ{{name}}
+dance.sendFailed	The dance couldn't be sent. Try again.	No se pudo enviar el baile. Inténtalo otra vez.	La danse n'a pas pu partir. Réessaie.	Il ballo non è partito. Riprova.	الرقصة ما تبعثتش. عاود جرّب.
+dance.stepBy	Step by {{name}}	Paso de {{name}}	Pas de {{name}}	Passo di {{name}}	خطوة {{name}}
+dance.copyBy	Copy by {{name}}	Copia de {{name}}	Copie de {{name}}	Copia di {{name}}	تقليد {{name}}
+dance.noCopyYet	{{name}} hasn't copied it yet.	{{name}} todavía no lo ha copiado.	{{name}} ne l'a pas encore copié.	{{name}} non l'ha ancora copiato.	{{name}} مازال ما قلّدهاش.
+dance.playBoth	Play both	Reproducir los dos	Lire les deux	Riproduci entrambi	شغّل الزوز
+dance.giveHearts	Give hearts	Dar corazones	Donner des cœurs	Dai cuori	اعطي قلوب
+dance.hearts	{{count}} hearts	{{count}} corazones	{{count}} cœurs	{{count}} cuori	{{count}} قلوب
+dance.youGave	You gave {{count}} hearts. Tap to change.	Diste {{count}} corazones. Toca para cambiar.	Tu as donné {{count}} cœurs. Touche pour changer.	Hai dato {{count}} cuori. Tocca per cambiare.	عطيت {{count}} قلوب. انقر باش تبدّل.
+dance.rateHint	Give {{name}} 1 to 3 hearts for the copy.	Dale a {{name}} de 1 a 3 corazones por la copia.	Donne à {{name}} de 1 à 3 cœurs pour la copie.	Dai a {{name}} da 1 a 3 cuori per la copia.	اعطي {{name}} من 1 لـ 3 قلوب على التقليد.
+dance.theyGave	{{name}} gave you {{count}} hearts	{{name}} te dio {{count}} corazones	{{name}} t'a donné {{count}} cœurs	{{name}} ti ha dato {{count}} cuori	{{name}} عطاك {{count}} قلوب
+dance.notRatedYet	{{name}} hasn't given hearts yet.	{{name}} todavía no ha dado corazones.	{{name}} n'a pas encore donné de cœurs.	{{name}} non ha ancora dato cuori.	{{name}} مازال ما عطاش قلوب.
+dance.rated	{{count}} hearts for {{name}}	{{count}} corazones para {{name}}	{{count}} cœurs pour {{name}}	{{count}} cuori per {{name}}	{{count}} قلوب لـ{{name}}
+dance.noPairs	When one of you copies the other's step, it shows up here.	Cuando uno copie el paso del otro, aparecerá aquí.	Quand l'un de vous copie le pas de l'autre, ça s'affiche ici.	Quando uno di voi copia il passo dell'altro, compare qui.	كي واحد فيكم يقلّد خطوة الآخر، تظهر هنا.
+dance.pairLine	{{step}} danced, {{copy}} copied	{{step}} bailó, {{copy}} copió	{{step}} a dansé, {{copy}} a copié	{{step}} ha ballato, {{copy}} ha copiato	{{step}} رقص، {{copy}} قلّد
+dance.unrated	No hearts yet	Aún sin corazones	Pas encore de cœurs	Ancora nessun cuore	مازال حتى قلب
+dance.diaryEmpty	Your dance diary starts with the first step you film.	Su diario de baile empieza con el primer paso que graben.	Votre journal de danse commence avec le premier pas filmé.	Il vostro diario di danza inizia con il primo passo filmato.	كرّاس الرقص متاعكم يبدا بأوّل خطوة تصوّروها.
+talk.danceStep	{{name}} sent you a {{style}} step to copy	{{name}} te mandó un paso de {{style}} para copiar	{{name}} t'a envoyé un pas de {{style}} à copier	{{name}} ti ha mandato un passo di {{style}} da copiare	{{name}} بعثلك خطوة {{style}} باش تقلّدها
+talk.danceCopy	{{name}} copied your step	{{name}} copió tu paso	{{name}} a copié ton pas	{{name}} ha copiato il tuo passo	{{name}} قلّد خطوتك
+talk.openStudio	Open the dance studio	Abrir el estudio de baile	Ouvrir le studio de danse	Apri lo studio di danza	حلّ ستوديو الرقص
+us.heroLabel	The two of you	Ustedes dos	Vous deux	Voi due	انتوما الزوز
+us.changePhoto	Change your photo	Cambiar tu foto	Changer ta photo	Cambia la tua foto	بدّل التصويرة متاعك
+us.setSince	When did it start? Set your day	¿Cuándo empezó? Elige su día	Ça a commencé quand ? Choisis votre jour	Quando è iniziato? Scegli il vostro giorno	وقتاش بدات؟ اختار النهار متاعكم
+us.daysTogether	{{count}} days together	{{count}} días juntos	{{count}} jours ensemble	{{count}} giorni insieme	{{count}} يوم مع بعضنا
+us.venezuela	Venezuela	Venezuela	Venezuela	Venezuela	فنزويلا
+us.tunisia	Tunisia	Túnez	Tunisie	Tunisia	تونس
+us.points	points	puntos	points	punti	نقاط
+us.combo	day combo	días de combo	jours de combo	giorni di combo	أيام كومبو
+us.flowers	flowers	flores	fleurs	fiori	ورود
+us.sinceLabel	The day you got together	El día que empezaron	Le jour où tout a commencé	Il giorno in cui vi siete messi insieme	النهار اللي بديتو فيه
+us.saveSince	Save our day	Guardar nuestro día	Enregistrer notre jour	Salva il nostro giorno	سجّل النهار متاعنا
+us.sinceSaved	Saved. You both see it now.	Guardado. Ahora los dos lo ven.	Enregistré. Vous le voyez tous les deux.	Salvato. Ora lo vedete entrambi.	تسجّل. توّا تشوفوه الزوز.
+composer.tab.note	Note	Nota	Note	Nota	نوط
+composer.tab.poem	Poem	Poema	Poème	Poesia	قصيدة
+composer.tab.letter	Letter for later	Carta para después	Lettre pour plus tard	Lettera per dopo	جواب للمستقبل
+letter.write	Write a letter for later	Escribir una carta para después	Écrire une lettre pour plus tard	Scrivi una lettera per dopo	اكتب جواب للمستقبل
+letter.title	A letter for later	Una carta para después	Une lettre pour plus tard	Una lettera per dopo	جواب للمستقبل
+letter.placeholder	Dear {{name}}…	Querida/o {{name}}…	Mon cher·ma chère {{name}}…	Caro/a {{name}}…	عزيزي {{name}}…
+letter.opensOn	It opens on	Se abre el	Elle s'ouvre le	Si apre il	يتحلّ نهار
+letter.anniversary	Our anniversary	Nuestro aniversario	Notre anniversaire	Il nostro anniversario	العيد متاعنا
+letter.inMonth	In a month	En un mes	Dans un mois	Tra un mese	بعد شهر
+letter.inYear	In a year	En un año	Dans un an	Tra un anno	بعد عام
+letter.hint	{{name}} sees a sealed envelope until that day.	{{name}} verá un sobre cerrado hasta ese día.	{{name}} voit une enveloppe scellée jusqu'à ce jour-là.	{{name}} vede una busta sigillata fino a quel giorno.	{{name}} يشوف جواب مسكّر لين يجي النهار هذاك.
+letter.seal	Seal the letter	Sellar la carta	Sceller la lettre	Sigilla la lettera	سكّر الجواب
+letter.sealed	A letter from {{name}}. It opens on {{date}}.	Una carta de {{name}}. Se abre el {{date}}.	Une lettre de {{name}}. Elle s'ouvre le {{date}}.	Una lettera da {{name}}. Si apre il {{date}}.	جواب من {{name}}. يتحلّ نهار {{date}}.
+letter.sealedMine	Sealed for {{name}} until {{date}}	Sellada para {{name}} hasta el {{date}}	Scellée pour {{name}} jusqu'au {{date}}	Sigillata per {{name}} fino al {{date}}	مسكّر لـ{{name}} لين {{date}}
+letter.opened	A letter from {{name}}, written on {{date}}	Una carta de {{name}}, escrita el {{date}}	Une lettre de {{name}}, écrite le {{date}}	Una lettera da {{name}}, scritta il {{date}}	جواب من {{name}}، مكتوب نهار {{date}}
+eggs.bachata	The toad is dancing bachata!	¡El sapo está bailando bachata!	Le crapaud danse la bachata !	Il rospo balla la bachata!	الجرانة قاعدة ترقص باتشاتا!
+eggs.nejma	Nejma means star ✦	Nejma significa estrella ✦	Nejma veut dire étoile ✦	Nejma significa stella ✦	نجمة ✦
+eggs.regenbogen	Regenbogen: a rainbow for you	Regenbogen: un arcoíris para ti	Regenbogen : un arc-en-ciel pour toi	Regenbogen: un arcobaleno per te	Regenbogen: قوس قزح ليك
+eggs.greenHour	11:11, the green hour. Make a wish.	11:11, la hora verde. Pide un deseo.	11:11, l'heure verte. Fais un vœu.	11:11, l'ora verde. Esprimi un desiderio.	11:11، الساعة الخضراء. تمنّى أمنية.
+eggs.moon	Same moon. Goodnight, {{a}} and {{b}}.	La misma luna. Buenas noches, {{a}} y {{b}}.	La même lune. Bonne nuit, {{a}} et {{b}}.	La stessa luna. Buonanotte, {{a}} e {{b}}.	نفس القمرة. تصبحو على خير، {{a}} و{{b}}.
+talk.danceStepMine	You sent {{name}} a {{style}} step to copy	Le mandaste a {{name}} un paso de {{style}} para copiar	Tu as envoyé à {{name}} un pas de {{style}} à copier	Hai mandato a {{name}} un passo di {{style}} da copiare	بعثت لـ{{name}} خطوة {{style}} باش يقلّدها
+talk.danceCopyMine	You copied {{name}}'s step	Copiaste el paso de {{name}}	Tu as copié le pas de {{name}}	Hai copiato il passo di {{name}}	قلّدت خطوة {{name}}
+learn.deck.it	Italian	Italiano	Italien	Italiano	طلياني
+learn.deck.ve	Venezuelan Spanish	Español venezolano	Espagnol du Venezuela	Spagnolo venezuelano	إسباني فنزويلي
+learn.deck.tn	Tunisian Derja	Derja tunecino	Derja tunisien	Derja tunisino	الدارجة التونسية
+learn.deck.w	From {{name}}	De {{name}}	De {{name}}	Da {{name}}	من {{name}}
+learn.wordOfDay	Word of the day	Palabra del día	Mot du jour	Parola del giorno	كلمة النهار
+learn.due	to review	por repasar	à revoir	da ripassare	للمراجعة
+learn.learned	learned	aprendidas	apprises	imparate	تعلّمتهم
+learn.xp	XP	XP	XP	XP	XP
+learn.partnerXp	{{name}} has {{count}} XP in this deck	{{name}} tiene {{count}} XP en este mazo	{{name}} a {{count}} XP dans ce paquet	{{name}} ha {{count}} XP in questo mazzo	{{name}} عندو {{count}} XP في الكرطة هاذي
+learn.start	Review now · {{count}}	Repasar ahora · {{count}}	Réviser maintenant · {{count}}	Ripassa ora · {{count}}	راجع توّا · {{count}}
+learn.allDone	All done for today	Todo listo por hoy	Tout est fait pour aujourd'hui	Tutto fatto per oggi	كمّلت لليوم
+learn.teach	Teach {{name}} a word	Enséñale una palabra a {{name}}	Apprends un mot à {{name}}	Insegna una parola a {{name}}	علّم {{name}} كلمة
+learn.noTaught	{{name}} hasn't taught you a word yet.	{{name}} todavía no te ha enseñado ninguna palabra.	{{name}} ne t'a pas encore appris de mot.	{{name}} non ti ha ancora insegnato una parola.	{{name}} مازال ما علّمكش حتى كلمة.
+learn.listen	Listen	Escuchar	Écouter	Ascolta	اسمع
+learn.sessionLabel	Review session	Sesión de repaso	Séance de révision	Sessione di ripasso	حصّة مراجعة
+learn.taughtBy	Taught by {{name}}	Enseñada por {{name}}	Appris par {{name}}	Insegnata da {{name}}	علّمهالك {{name}}
+learn.newWord	A new word	Una palabra nueva	Un nouveau mot	Una parola nuova	كلمة جديدة
+learn.sayIt	Say it to {{name}}	Díselo a {{name}}	Dis-le à {{name}}	Dillo a {{name}}	قولها لـ{{name}}
+learn.stopSay	Stop and send	Parar y enviar	Arrêter et envoyer	Ferma e invia	وقّف وابعث
+learn.sending	Sending…	Enviando…	Envoi…	Invio…	قاعد نبعث…
+learn.sent	Sent to {{name}}	Enviado a {{name}}	Envoyé à {{name}}	Inviato a {{name}}	تبعث لـ{{name}}
+learn.whatHear	What do you hear?	¿Qué escuchas?	Qu'entends-tu ?	Cosa senti?	شنوّة تسمع؟
+learn.whatMeans	What does it mean?	¿Qué significa?	Qu'est-ce que ça veut dire ?	Cosa significa?	شنوّة معناها؟
+learn.typeIt	Write it	Escríbela	Écris-le	Scrivila	اكتبها
+learn.typeHere	Type the word	Escribe la palabra	Tape le mot	Scrivi la parola	اكتب الكلمة
+learn.check	Check	Comprobar	Vérifier	Controlla	ثبّت
+learn.right	Right!	¡Bien!	Juste !	Giusto!	صحيح!
+learn.almost	Almost: one letter off	Casi: una letra distinta	Presque : une lettre de travers	Quasi: una lettera sbagliata	قريب: حرف غالط
+learn.wrong	Not quite. Here it is:	No exactamente. Es así:	Pas tout à fait. La voici :	Non proprio. Eccola:	موش هكّا. هاهي:
+learn.rate.again	Again	Otra vez	Encore	Ancora	عاود
+learn.rate.good	Got it	Lo tengo	Retenu	Ce l'ho	فهمتها
+learn.rate.easy	Easy	Fácil	Facile	Facile	ساهلة
+learn.inMinutes	in {{count}} min	en {{count}} min	dans {{count}} min	tra {{count}} min	بعد {{count}} دق
+learn.inHours	in {{count}} h	en {{count}} h	dans {{count}} h	tra {{count}} h	بعد {{count}} سوايع
+learn.inDays	in {{count}} days	en {{count}} días	dans {{count}} jours	tra {{count}} giorni	بعد {{count}} أيام
+learn.next	Next	Siguiente	Suivant	Avanti	اللي بعدها
+learn.doneTitle	Done for now!	¡Listo por ahora!	Fini pour l'instant !	Fatto per ora!	كمّلت توّا!
+learn.doneXp	+{{count}} XP. The words come back when it's time.	+{{count}} XP. Las palabras vuelven cuando toca.	+{{count}} XP. Les mots reviendront au bon moment.	+{{count}} XP. Le parole tornano quando è il momento.	+{{count}} XP. الكلمات يرجعو في وقتهم.
+learn.backToDecks	Back to the decks	Volver a los mazos	Retour aux paquets	Torna ai mazzi	ارجع للكرطات
+learn.teachTitle	Teach {{name}} a word	Enséñale una palabra a {{name}}	Apprends un mot à {{name}}	Insegna una parola a {{name}}	علّم {{name}} كلمة
+learn.teachHint	A word from your language. Record how you say it: {{name}} will hear your voice.	Una palabra de tu idioma. Graba cómo la dices: {{name}} escuchará tu voz.	Un mot de ta langue. Enregistre comment tu le dis : {{name}} entendra ta voix.	Una parola della tua lingua. Registra come la dici: {{name}} sentirà la tua voce.	كلمة من لغتك. سجّل كيفاش تقولها: {{name}} باش يسمع صوتك.
+learn.teachWord	The word	La palabra	Le mot	La parola	الكلمة
+learn.teachMeaning	What it means	Qué significa	Ce qu'il veut dire	Cosa significa	شنوّة معناها
+learn.teachSay	How to say it (optional)	Cómo se dice (opcional)	Comment le dire (facultatif)	Come si dice (facoltativo)	كيفاش تتقال (اختياري)
+learn.recordWord	Record your voice	Grabar tu voz	Enregistrer ta voix	Registra la tua voce	سجّل صوتك
+learn.recordAgain	Record again	Grabar otra vez	Réenregistrer	Registra di nuovo	عاود سجّل
+learn.voiceReady	Your voice is ready.	Tu voz está lista.	Ta voix est prête.	La tua voce è pronta.	صوتك حاضر.
+learn.recording	Recording…	Grabando…	Enregistrement…	Registrazione…	قاعد نسجّل…
+learn.teachSend	Send the word	Enviar la palabra	Envoyer le mot	Invia la parola	ابعث الكلمة
+learn.taught	{{name}} has a new word to learn	{{name}} tiene una palabra nueva para aprender	{{name}} a un nouveau mot à apprendre	{{name}} ha una parola nuova da imparare	{{name}} عندو كلمة جديدة يتعلّمها
+talk.practising	{{name}} is practising: {{word}}	{{name}} está practicando: {{word}}	{{name}} s'entraîne : {{word}}	{{name}} si esercita: {{word}}	{{name}} قاعد يتدرّب: {{word}}
+talk.youPractised	You practised: {{word}}	Practicaste: {{word}}	Tu t'es entraîné·e : {{word}}	Ti sei esercitato/a: {{word}}	تدرّبت: {{word}}
+talk.learnHeart	❤️ Perfect	❤️ Perfecto	❤️ Parfait	❤️ Perfetto	❤️ مية مية
+talk.learnAgain	Again	Otra vez	Encore	Ancora	عاود
+talk.learnAgainText	Again! Say "{{word}}" one more time 🔁	¡Otra vez! Di "{{word}}" una vez más 🔁	Encore ! Redis « {{word}} » une fois 🔁	Ancora! Ridici "{{word}}" un'altra volta 🔁	عاود! قول "{{word}}" مرّة أخرى 🔁
+talk.taughtWord	{{name}} taught you a word	{{name}} te enseñó una palabra	{{name}} t'a appris un mot	{{name}} ti ha insegnato una parola	{{name}} علّمك كلمة
+talk.learnIt	Learn it	Aprenderla	L'apprendre	Imparala	تعلّمها
+garden.shootingStar	A shooting star! Make a wish ✦	¡Una estrella fugaz! Pide un deseo ✦	Une étoile filante ! Fais un vœu ✦	Una stella cadente! Esprimi un desiderio ✦	نجمة طايحة! تمنّى أمنية ✦
+garden.fullMoon	Full moon tonight, the same one over both of you.	Luna llena esta noche, la misma sobre los dos.	Pleine lune ce soir, la même au-dessus de vous deux.	Luna piena stasera, la stessa sopra entrambi.	قمرة كاملة الليلة، نفسها فوق راسكم الزوز.
+learn.partnerFound	{{name}} has found {{count}} things in the garden	{{name}} encontró {{count}} cosas en el jardín	{{name}} a trouvé {{count}} choses dans le jardin	{{name}} ha trovato {{count}} cose nel giardino	{{name}} لقى {{count}} حاجات في الجنينة
+eggs.proverbTitle	Friday · a Tunisian proverb	Viernes · un refrán tunecino	Vendredi · un proverbe tunisien	Venerdì · un proverbio tunisino	الجمعة · مثل تونسي
+eggs.tapToClose	Tap to close	Toca para cerrar	Touche pour fermer	Tocca per chiudere	انقر باش تسكّر
+eggs.navDance	You found the secret dance step!	¡Encontraste el paso de baile secreto!	Tu as trouvé le pas de danse secret !	Hai trovato il passo di danza segreto!	لقيت الخطوة السرّية!
+eggs.proverb.1.text	اللي فات مات	اللي فات مات	اللي فات مات	اللي فات مات	اللي فات مات
+eggs.proverb.1.meaning	What’s gone is gone: let the past go.	Lo pasado, pasado está: deja ir lo de antes.	Ce qui est passé est mort : laisse le passé derrière toi.	Quel che è stato è stato: lascia andare il passato.	اللي فات فات: خلّي الماضي يمشي.
+eggs.proverb.2.text	اليد الوحدة ما تصفّقش	اليد الوحدة ما تصفّقش	اليد الوحدة ما تصفّقش	اليد الوحدة ما تصفّقش	اليد الوحدة ما تصفّقش
+eggs.proverb.2.meaning	One hand can’t clap: we do it together.	Una mano sola no aplaude: lo hacemos juntos.	Une seule main ne peut pas applaudir : on le fait ensemble.	Una mano sola non applaude: lo facciamo insieme.	يد وحدة ما تصفّقش: نعملوها مع بعضنا.
+eggs.proverb.3.text	الجار قبل الدار	الجار قبل الدار	الجار قبل الدار	الجار قبل الدار	الجار قبل الدار
+eggs.proverb.3.meaning	The neighbour before the house: who is beside you matters most.	El vecino antes que la casa: importa quién está a tu lado.	Le voisin avant la maison : ce qui compte, c’est qui est à côté de toi.	Il vicino prima della casa: conta chi ti sta accanto.	الجار قبل الدار: المهم شكون حذاك.
+eggs.proverb.4.text	حبيبك يبلعلك الزلط	حبيبك يبلعلك الزلط	حبيبك يبلعلك الزلط	حبيبك يبلعلك الزلط	حبيبك يبلعلك الزلط
+eggs.proverb.4.meaning	The one who loves you swallows stones for you: love forgives the hard parts.	Quien te quiere se traga piedras por ti: el amor perdona lo difícil.	Celui qui t’aime avale des cailloux pour toi : l’amour pardonne le difficile.	Chi ti ama ingoia sassi per te: l’amore perdona le cose dure.	اللي يحبّك يبلعلك الزلط: الحبّ يسامح.
+eggs.proverb.5.text	القرد في عين أمّو غزال	القرد في عين أمّو غزال	القرد في عين أمّو غزال	القرد في عين أمّو غزال	القرد في عين أمّو غزال
+eggs.proverb.5.meaning	To his mother, the monkey is a gazelle: love sees beauty everywhere.	Para su madre, el mono es una gacela: el amor ve belleza en todo.	Aux yeux de sa mère, le singe est une gazelle : l’amour voit la beauté partout.	Agli occhi della madre la scimmia è una gazzella: l’amore vede bellezza ovunque.	في عين أمّو القرد غزال: الحبّ يشوف الزين في كل شي.
+eggs.proverb.6.text	الصبر مفتاح الفرج	الصبر مفتاح الفرج	الصبر مفتاح الفرج	الصبر مفتاح الفرج	الصبر مفتاح الفرج
+eggs.proverb.6.meaning	Patience is the key to relief: the distance will end.	La paciencia es la llave del alivio: la distancia terminará.	La patience est la clé du soulagement : la distance finira.	La pazienza è la chiave del sollievo: la distanza finirà.	الصبر مفتاح الفرج: البعد باش يوفى.

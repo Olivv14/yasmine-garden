@@ -174,6 +174,19 @@ Whoever added the song, or the owner of a custom playlist. In "Our dedicated son
 
 The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and read only by the music helper Edge Function with the service role; the browser has no access.
 
+### Dance, piano, letters, our day (backend/013)
+- `send_message` also takes kind `dance` (payload `{role:'step'|'copy', style, of}`; a copy names its step in `of`) and kind `letter` (body + payload `{opens_at:'YYYY-MM-DD'}`; the app keeps it sealed until that day). `reserve_message_media` accepts one `video/mp4|webm|quicktime` for a dance.
+- `rate_dance(p_copy_id uuid, p_hearts smallint) -> dance_ratings`: 1 to 3 hearts, only by the one who filmed the step; rating again changes the hearts.
+- `record_game_event` takes game `piano` (kind `finish`, `score_me` the score up to 32000, `score_partner` the stars 0 to 3, `response` the song's title). Each star is a point.
+- `set_together_since(p_date date) -> pair_story`: the day you got together, shared by both; not a future day.
+
+### Learn (backend/014)
+- `learn_review(p_card_key text, p_state jsonb) -> learn_state`: the card's new FSRS state after one review. `p_card_key` is a deck card (`it.amore`) or a taught word (`w:<message id>` of a `word` message in this pair). `reps` must grow by exactly one; the same state again returns the stored row (safe retry); otherwise `PT409`. Each review adds to today's `learn_days`; every 10 reviews in a day is a point.
+- A `word` message may carry one `audio/*` recording (your voice saying the word).
+
+### Garden discoveries (backend/015)
+- `discover(p_spot text) -> garden_discoveries`: saves a culture spot you found; finding it again changes nothing.
+
 ## 4. Private Storage lifecycle / permissions
 
 Bucket: **`connection-private`**, `public=false`, per-object 25 MiB. Object key is exactly `<pair_id>/<owner_profile_id>/<media_id>` returned by RPC; no extension, names, Auth UUIDs, URLs or credentials needed in paths. Metadata row links the object to the owned parent and pair. Path alone grants NOTHING.

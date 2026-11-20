@@ -4,6 +4,7 @@ import {duelOutcome} from './duel.js';
 
 const time=v=>{const n=Date.parse(v??'');return Number.isFinite(n)?n:0;};
 export const ROUND_DAYS=14,SEED_POINTS=10,STARTER_SEEDS=3;
+export const TOAD_REWARD=Object.freeze({lv1:1,lv2:3,lv3:6});
 
 // Monday 00:00 on this phone's clock.
 export function weekStart(now=Date.now()){const d=new Date(now);d.setHours(0,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7);return d.getTime();}
@@ -11,19 +12,26 @@ export function weekStart(now=Date.now()){const d=new Date(now);d.setHours(0,0,0
 export const answersOf=(snap,roundId)=>(snap?.playAnswers??[]).filter(a=>a.round_id===roundId);
 
 // Every point with who earned it and when:
-// a truth or dare turn 1; a hockey game 1 each and 2 more for the winner; against the toad 1, and 2 more for a win;
+// a truth or dare turn 1; a hockey or pool game 1 each and 2 more for the winner; against the toad 1, and 2 more for a win;
 // a word duel 1 per right word and 2 more for the winner; know me 1 for answering about yourself, 1 per right guess.
 export function pointEvents(snap){
   const out=[],members=(snap?.members??[]).map(m=>m.profile_id);
   const add=(who,points,at)=>{if(who&&points>0)out.push({who,points,at:typeof at==='number'?at:time(at)});};
   for(const e of snap?.gameEvents??[]){
     if(e.game==='truth_dare'&&e.kind!=='finish')add(e.profile_id,1,e.created_at);
-    if(e.game==='hockey'&&e.kind==='finish'){
+    if((e.game==='hockey'||e.game==='pool')&&e.kind==='finish'){
       const other=members.find(id=>id!==e.profile_id);
       add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);add(other,1+(e.score_partner>e.score_me?2:0),e.created_at);
     }
-    if(e.game==='hockey_bot'&&e.kind==='finish')add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);
+    // against the toad: the card says what a win is worth (the Dreamer +1, the Coach +3, the Champion +6);
+    // older games saved without a level count 1, and 2 more for a win
+    if((e.game==='hockey_bot'||e.game==='pool_bot')&&e.kind==='finish'){const won=e.score_me>e.score_partner,reward=TOAD_REWARD[e.card_id];
+      add(e.profile_id,reward?(won?reward:0):1+(won?2:0),e.created_at);}
+    // piano tiles: one point per star
+    if(e.game==='piano'&&e.kind==='finish')add(e.profile_id,Math.max(0,Math.min(3,e.score_partner??0)),e.created_at);
   }
+  // learning: every 10 reviews in a day is a point
+  for(const d of snap?.learnDays??[])add(d.profile_id,Math.floor((d.reviews??0)/10),String(d.day)+'T12:00:00Z');
   for(const r of snap?.playRounds??[]){
     const answers=answersOf(snap,r.id);
     for(const a of answers){

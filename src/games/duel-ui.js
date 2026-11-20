@@ -7,7 +7,11 @@ import {icon} from '../design/icons.js';
 let decksJob=null;
 // The decks load on first use, in their own file, so the app starts without them.
 export const loadDecks=()=>decksJob??=import('../../experience/decks.json',{with:{type:'json'}}).then(m=>m.default).catch(e=>{decksJob=null;throw e;});
-const DECK_KEY='play.duelDeck',WORD_LANG={it:'it',ve:'es-VE',tn:'ar-TN'};
+const DECK_KEY='play.duelDeck',WORD_LANG={it:'it',ve:'es-VE',tn:'ar-TN'},VOICE={it:['it-IT','it'],ve:['es-VE','es-419','es-US','es'],tn:['ar-TN','ar']};
+// Read a word aloud with the closest voice this phone has (nothing is sent anywhere).
+function say(c){try{const synth=window.speechSynthesis,voices=synth.getVoices(),want=VOICE[c.deck]??[];
+  const voice=want.map(l=>voices.find(v=>v.lang?.toLowerCase().startsWith(l.toLowerCase()))).find(Boolean);
+  const u=new SpeechSynthesisUtterance(String(c.word).split(/[,،]/)[0]);u.lang=voice?.lang??want[0]??'';if(voice)u.voice=voice;u.rate=.85;synth.cancel();synth.speak(u);}catch{}}
 const readDeck=()=>{try{const v=localStorage.getItem(DECK_KEY);return DUEL_DECKS.includes(v)?v:'it';}catch{return 'it';}};
 
 export function createDuel({el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer}){
@@ -50,8 +54,15 @@ export function createDuel({el,button,t,copy,locale,me,person,partner,getSnapsho
     root.replaceChildren(head(),el('p',()=>t('duel.progress',{n:run.idx+1,total:run.cards.length}),'eyebrow'));
     const bar=el('div',undefined,'duel-timer');bar.setAttribute('role','progressbar');bar.setAttribute('aria-valuemin','0');bar.setAttribute('aria-valuemax',String(DUEL_SECONDS));
     const fill=el('span');bar.append(fill);root.append(bar);
-    const w=el('p',undefined,'duel-word');w.textContent=c.word;w.lang=WORD_LANG[c.deck]??'';w.dir='auto';root.append(w);
-    if(c.roman){const r=el('p',undefined,'duel-roman');r.textContent=c.roman;r.lang='aeb-Latn';r.dir='ltr';root.append(r);}
+    // the word on a tile of its own country: Tunisian blue ceramic, Venezuelan painted wood, Italian terracotta
+    const tile=el('div',undefined,'duel-tile');tile.dataset.deck=c.deck;
+    const w=el('p',undefined,'duel-word');w.textContent=c.word;w.lang=WORD_LANG[c.deck]??'';w.dir='auto';tile.append(w);
+    if(c.roman){const r=el('p',undefined,'duel-roman');r.textContent=c.roman;r.lang='aeb-Latn';r.dir='ltr';tile.append(r);}
+    root.append(tile);
+    // how to say it: syllables with the stressed one in capitals, and the phone's voice when it has one
+    if(c.say){const row=el('div',undefined,'duel-say');
+      if('speechSynthesis' in window){const speak=button(undefined,()=>say(c),'duel-speak');speak.append(icon('sound',18));copy(speak,()=>t('duel.listen'),'aria-label');row.append(speak);}
+      const txt=el('p',undefined,'duel-say-text');txt.textContent=c.say;txt.lang='en';txt.dir='ltr';row.append(txt);root.append(row);}
     root.append(el('p',()=>t('duel.question'),'small'));
     const opts=el('div',undefined,'duel-options'),feedback=el('p',undefined,'duel-feedback');feedback.setAttribute('role','status');
     const list=choices(c,run.all,locale(),seed),right=list.find(o=>o.correct).text;

@@ -9,6 +9,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 
 
+import {moonPhase,moonLight,isFullMoon,nextShootingStar} from './sky.js';
 export async function mountGarden(GEL,{light='night',reducedMotion=false}={}){
 const G={},reduce=reducedMotion;
 let LIGHT=['day','dusk','night'].includes(light)?light:'night';const VIEW='home';
@@ -509,7 +510,9 @@ const dayG=new THREE.Group();dayG.userData.dyn=true;scene.add(dayG);G.bfs=[];
 dayG.visible=LIGHT==='day';
 const cloudG=new THREE.Group();cloudG.userData.dyn=true;scene.add(cloudG);const cloudM=M('#FFFFFF',{flatShading:true,roughness:1,emissive:'#FFFFFF',emissiveIntensity:.12});{const cm=cloudM;for(const [x,y,z,s] of [[-30,4.5,-48,1.6],[14,5.5,-58,1.3],[44,3.5,-30,1.1],[-52,3,-20,1.2],[-8,6.5,-70,1.5]]){const c=new THREE.Group();for(let i=0;i<7;i++){const b=blob(rr(1.2,2.2),cm,1);b.position.set(rr(-2.6,2.6),rr(-.3,.6),rr(-1,1));b.scale.y=.6;b.castShadow=false;c.add(b);}c.position.set(x,y,z);c.scale.setScalar(s);cloudG.add(c);}}
 const nightG=new THREE.Group();nightG.userData.dyn=true;scene.add(nightG);{const sg=new THREE.BufferGeometry();const sp=[];for(let i=0;i<500;i++){const a=rnd()*Math.PI*2,e=rr(.12,1.3);sp.push(Math.cos(a)*Math.cos(e)*150,Math.sin(e)*150,Math.sin(a)*Math.cos(e)*150);}sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));nightG.add(new THREE.Points(sg,new THREE.PointsMaterial({color:'#FFFFFF',size:.8,sizeAttenuation:true,fog:false})));
- const moon=new THREE.Mesh(new THREE.SphereGeometry(3.2,32,24),new THREE.MeshBasicMaterial({color:'#F4EEDC',fog:false}));moon.position.copy(new THREE.Vector3(...PALS.night.sunPos).normalize().multiplyScalar(120));nightG.add(moon);
+ const moon=new THREE.Mesh(new THREE.SphereGeometry(3.2,32,24),new THREE.ShaderMaterial({fog:false,uniforms:{L:{value:new THREE.Vector3(...moonLight(moonPhase()))},c:{value:new THREE.Color('#F4EEDC')}},
+  vertexShader:'varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+  fragmentShader:'uniform vec3 L;uniform vec3 c;varying vec3 vN;void main(){float lit=smoothstep(-.08,.12,dot(vN,normalize(L)));gl_FragColor=vec4(mix(c*.07,c,lit),1.);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'}));G.moon=moon;moon.position.copy(new THREE.Vector3(...PALS.night.sunPos).normalize().multiplyScalar(120));nightG.add(moon);
  const ff=new THREE.MeshBasicMaterial({color:'#FFE9A0'});const ffG=new THREE.SphereGeometry(.018,6,4);for(let i=0;i<20;i++){const f=mesh(ffG,ff,{cast:false});const a=rnd()*Math.PI*2,r=rr(1.2,5.4);f.position.set(Math.cos(a)*r,rr(.35,1.6),Math.sin(a)*r);nightG.add(f);(G.ff||(G.ff=[])).push(f);}}
 nightG.visible=LIGHT==='night';cloudG.visible=LIGHT!=='night';
 
@@ -521,6 +524,9 @@ nightG.visible=LIGHT==='night';cloudG.visible=LIGHT!=='night';
  const boltM=new THREE.MeshBasicMaterial({color:'#EEEAFF',fog:false});G.bolts=[];
  for(let k=0;k<3;k++){const pts=[];let x=rr(-4,4),z=rr(-1,1);for(let y=9;y>-2.4;y-=1.1){pts.push(new THREE.Vector3(x,y,z));x+=rr(-1.1,1.1);z+=rr(-.4,.4);}const bo=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,false,'catmullrom',.1),40,.09,4,false),boltM);bo.visible=false;sg.add(bo);G.bolts.push(bo);}}
 spot('catatumbo',34,9,-50,9);
+// ---------- night only: a shooting star now and then (and the real moon, full or not) ----------
+{const sm=new THREE.MeshBasicMaterial({color:'#FFF6D8',transparent:true,opacity:0,fog:false,depthWrite:false});const st=new THREE.Mesh(new THREE.CylinderGeometry(.09,0,10,6,1,true),sm);
+ st.visible=false;st.userData.dyn=true;nightG.add(st);G.shoot={mesh:st,mat:sm,t:-1,next:nextShootingStar(),v:new THREE.Vector3()};}
 
 // ---------- switch the time of day in place ----------
 function applyLight(L){LIGHT=L;P=PALS[L];
@@ -640,6 +646,8 @@ const onUp=e=>{if(!tapCb||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])
 renderer.domElement.addEventListener('pointerdown',onDown);renderer.domElement.addEventListener('pointerup',onUp);
 
 await renderer.compileAsync(scene,cam).catch(()=>{});
+const _sd=new THREE.Vector3(),_ss=new THREE.Vector3(),_up=new THREE.Vector3(0,1,0);let eventCb=null,fullMoonSaid=false;
+const sayFullMoon=()=>{if(LIGHT==='night'&&!fullMoonSaid&&isFullMoon()){fullMoonSaid=true;setTimeout(()=>eventCb?.({kind:'fullMoon'}),1500);}};
 const clock=new THREE.Clock();let frame=0,fpsN=0,fpsT=0,warm=0,nextBolt=2.5,boltOn=0,toadPlaying=false,frameCb=null;
 renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.elapsedTime;frame++;
  if(!onScreen||document.hidden)return;
@@ -652,10 +660,17 @@ renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.el
  if(!reduce){const w=G.water;if(w)w.material.uniforms.time.value+=step*.45;if(G.fallTex)G.fallTex.offset.y+=step*1.1;
   if(nightG.visible){(G.ff||[]).forEach((f,i)=>{f.userData.o??=f.position.clone();f.position.set(f.userData.o.x+Math.sin(t*.5+i)*.3,f.userData.o.y+Math.sin(t*.9+i*2)*.15,f.userData.o.z+Math.cos(t*.4+i)*.3);f.scale.setScalar(.3+1.1*Math.max(0,Math.sin(t*1.6+i*1.9)));});
    nextBolt-=step;if(nextBolt<=0&&G.bolts){boltOn=.16;const b=G.bolts[Math.floor(Math.random()*3)];G.bolts.forEach(x=>x.visible=x===b);nextBolt=2+Math.random()*4.5;}
-   if(boltOn>0){boltOn-=step;G.stormM.emissiveIntensity=boltOn>0?1.05*(boltOn/.16)+(Math.sin(t*60)>0?.2:0):0;if(boltOn<=0)G.bolts.forEach(x=>x.visible=false);}}
+   if(boltOn>0){boltOn-=step;G.stormM.emissiveIntensity=boltOn>0?1.05*(boltOn/.16)+(Math.sin(t*60)>0?.2:0):0;if(boltOn<=0)G.bolts.forEach(x=>x.visible=false);}
+   const S=G.shoot;if(S){if(S.t<0){S.next-=dt;if(S.next<=0){cam.getWorldDirection(_sd);_ss.crossVectors(_sd,_up).normalize();
+      S.mesh.position.copy(cam.position).addScaledVector(_sd,90).addScaledVector(_up,28+Math.random()*16).addScaledVector(_ss,(Math.random()-.5)*50);
+      S.v.copy(_ss).multiplyScalar(Math.random()<.5?-1:1).addScaledVector(_up,-.45).normalize();S.mesh.quaternion.setFromUnitVectors(_up,S.v.clone().negate());
+      S.t=0;S.mesh.visible=true;eventCb?.({kind:'star'});}}
+    else{S.t+=dt;S.mesh.position.addScaledVector(S.v,dt*70);S.mat.opacity=Math.sin(Math.PI*Math.min(1,S.t/.9));S.mesh.updateMatrix();
+      if(S.t>=.9){S.t=-1;S.mesh.visible=false;S.next=nextShootingStar();}}}}
   if(dayG.visible)for(const b of G.bfs||[]){const u=b.userData,a=t*.55+u.ph;b.position.set(u.home.x+Math.cos(a)*u.r,u.home.y+Math.sin(t*1.7+u.ph)*.12,u.home.z+Math.sin(a*1.3)*u.r);b.rotation.y=-a;b.children.forEach(h=>{if(h.userData.side)h.rotation.z=h.userData.side*(.25+Math.sin(t*16+u.ph)*.75);});}
   (G.notes||[]).forEach((n,i)=>{n.visible=playing;if(!playing)return;n.userData.y0??=n.position.y;n.position.y=n.userData.y0+((t*.3+i*.33)%1)*.5;n.rotation.z=Math.sin(t*2+i)*.3;n.updateMatrix();});
-  if(G.toadBody){G.toadBody.rotation.z=playing?Math.sin(t*3.2)*.05:0;G.toadBody.updateMatrix();}
+  if(G.toadBody){const bachata=document.documentElement.classList.contains('toad-bachata');
+   G.toadBody.rotation.z=bachata?Math.sin(t*8.4)*.16:playing?Math.sin(t*3.2)*.05:0;G.toadBody.rotation.y=bachata?Math.sin(t*4.2)*.5:0;G.toadBody.position.y=.4+(bachata?Math.abs(Math.sin(t*8.4))*.08:0);G.toadBody.updateMatrix();}
   if(G.camelHead){G.camelHead.rotation.x=Math.sin(t*.7)*.07;G.camelHead.rotation.y=Math.sin(t*.31)*.18;G.camelHead.updateMatrix();}
   if(G.camelTail){G.camelTail.rotation.z=Math.sin(t*2.3)*.35;G.camelTail.updateMatrix();}}
  renderer.render(scene,cam);
@@ -667,10 +682,11 @@ const warmTimer=setTimeout(()=>{if(busy)return;const cur=LIGHT;for(const L of ['
 return {
  canvas:renderer.domElement,
  get light(){return LIGHT;},
- setLight(L){if(!PALS[L]||L===LIGHT)return;applyLight(L);updGlow();lastActive=performance.now();},
+ setLight(L){if(!PALS[L]||L===LIGHT)return;applyLight(L);updGlow();lastActive=performance.now();sayFullMoon();},
  setPlaying(on){toadPlaying=!!on;lastActive=performance.now();},
  setFlowers,
  onTap(fn){tapCb=fn;},
+ onEvent(fn){eventCb=fn;sayFullMoon();},
  onFrame(fn){frameCb=fn;},
  // screen position of a point in the garden, in CSS pixels inside the garden element
  project(x,y,z){_p.set(x,y,z).project(cam);return {x:(_p.x+1)/2*GEL.clientWidth,y:(1-_p.y)/2*GEL.clientHeight,front:_p.z<1};},

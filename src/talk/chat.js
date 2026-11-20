@@ -17,7 +17,7 @@ const missingTable=e=>['42P01','PGRST205','PGRST200'].includes(e?.code);
 export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapshot,me,person,navigate,onUnread,playlistSongs}){
   let list=[],reactions={},reads={},media=new Map(),urls=new Map(),hasEarlier=false,available=null,loading=false,channel=null,joining=false;
   let lastTyping=0,partnerTypingAt=0,online=false,replyTo=null,box=readBox(),failed=new Set(),pending=new Set(),visible=false,readTimer=null,tick=null;
-  let recorder=null,recChunks=[],recStart=0,recTimer=null,stickToBottom=true;
+  let recorder=null,recChunks=[],recStart=0,recTimer=null,stickToBottom=true,letters=new Map(),askedLetters=new Set();
   const snap=()=>getSnapshot(),pairId=()=>snap()?.pairId,partner=()=>snap()?.members?.find(m=>m.profile_id!==me())?.profile_id??null;
   const client=()=>getClient(),api=()=>getApi();
   const listEl=$('chatList'),input=$('chatInput'),form=$('chatForm');
@@ -32,7 +32,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       const q=client().from('messages').select('*').eq('pair_id',pairId()).order('created_at',{ascending:false}).order('id',{ascending:false}).limit(PAGE);
       const {data,error}=await q;if(error)throw error;
       available=true;hasEarlier=data.length===PAGE;list=mergeMessages([],data);
-      await Promise.all([loadReactions(data.map(m=>m.id)),loadReads(),loadMedia(data.filter(m=>['photo','voice'].includes(m.kind)).map(m=>m.id))]);
+      await Promise.all([loadLetters(data.filter(m=>m.kind==='letter').map(m=>m.id)),loadReactions(data.map(m=>m.id)),loadReads(),loadMedia(data.filter(m=>['photo','voice','word'].includes(m.kind)).map(m=>m.id))]);
       connect();render(true);retryOutbox();sweepUploads();
     }catch(e){if(missingTable(e)){available=false;render();}}
     finally{loading=false;}
@@ -41,10 +41,12 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     const oldest=list[0];if(!oldest||!hasEarlier)return;
     const {data,error}=await client().from('messages').select('*').eq('pair_id',pairId()).lt('created_at',oldest.created_at).order('created_at',{ascending:false}).order('id',{ascending:false}).limit(PAGE);
     if(error)return;hasEarlier=data.length===PAGE;const before=listEl.scrollHeight;list=mergeMessages(list,data);
-    await Promise.all([loadReactions(data.map(m=>m.id)),loadMedia(data.filter(m=>['photo','voice'].includes(m.kind)).map(m=>m.id))]);
+    await Promise.all([loadLetters(data.filter(m=>m.kind==='letter').map(m=>m.id)),loadReactions(data.map(m=>m.id)),loadMedia(data.filter(m=>['photo','voice','word'].includes(m.kind)).map(m=>m.id))]);
     render();listEl.scrollTop=listEl.scrollHeight-before;
   }
   async function loadReactions(ids){if(!ids.length)return;const {data}=await client().from('message_reactions').select('*').in('message_id',ids);for(const r of data??[])reactions=applyReaction(reactions,r);}
+  // a letter's words: the server gives them to the writer, and to the other one from the day it opens
+  async function loadLetters(ids){if(!ids.length)return;const {data}=await client().from('sealed_letters').select('id,body').in('id',ids);for(const r of data??[])letters.set(r.id,r.body);}
   async function loadReads(){const {data}=await client().from('chat_reads').select('*').eq('pair_id',pairId());for(const r of data??[])reads[r.profile_id]=r.last_read_at;}
   async function loadMedia(ids){if(!ids.length)return;const {data}=await client().from('media_files').select('*').in('message_id',ids);for(const m of data??[])media.set(m.message_id,m);render();}
   async function urlFor(row){
@@ -58,7 +60,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     if(channel||joining||!pairId())return;joining=true;
     try{await client().realtime.setAuth();}catch{}
     channel=client().channel('pair:'+pairId()+':talk',{config:{private:true,broadcast:{self:false},presence:{key:me()}}});
-    channel.on('broadcast',{event:'message'},({payload})=>{list=mergeMessages(list,[payload]);pending.delete(payload.id);if(payload.sender_id!==me())partnerTypingAt=0;render();scheduleRead();})
+    channel.on('broadcast',{event:'message'},({payload})=>{if(payload?.kind==='letter')loadLetters([payload.id]).then(()=>render());if(payload?.kind==='text'&&payload.sender_id!==me()&&!list.some(m=>m.id===payload.id))document.dispatchEvent(new CustomEvent('chat-words',{detail:payload.body}));list=mergeMessages(list,[payload]);pending.delete(payload.id);if(payload.sender_id!==me())partnerTypingAt=0;render();scheduleRead();})
       .on('broadcast',{event:'edit'},({payload})=>{list=mergeMessages(list,[payload]);render();})
       .on('broadcast',{event:'delete'},({payload:gone})=>{const old=list.find(m=>m.id===gone?.id);if(!old)return;list=mergeMessages(list,[{...old,deleted_at:gone.deleted_at,body:null,payload:null}]);render();})
       .on('broadcast',{event:'reaction'},({payload})=>{reactions=applyReaction(reactions,payload);render();})
@@ -91,7 +93,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     }catch(e){pending.delete(m.id);failed.add(m.id);render();throw e;}
   }
   async function send(kind,body,payload){
-    if(!available)return;const m=draft(kind,body,payload);replyTo=null;paintReply();
+    if(!available)return;if(kind==='text')document.dispatchEvent(new CustomEvent('chat-words',{detail:body}));const m=draft(kind,body,payload);replyTo=null;paintReply();
     list=mergeMessages(list,[m]);stickToBottom=true;
     if(kind==='text'||kind==='song'||kind==='game'||kind==='word'){box=outboxAdd(box,m);writeBox(box);}
     try{return await deliver(m);}catch{return null;}
@@ -166,21 +168,36 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       else fig.append(el('p',()=>t('talk.uploading'),'tiny'));box.append(fig);}
     if(m.kind==='voice'){const row=media.get(m.id);
       if(row&&row.status==='ready'||row&&row.owner_id===me()){const a=document.createElement('audio');a.controls=true;a.preload='none';copy(a,()=>t('talk.voiceFrom',{name:person(m.sender_id)}),'aria-label');urlFor(row).then(u=>{if(u)a.src=u;});box.append(a);}
-      else box.append(el('p',()=>t('talk.uploading'),'tiny'));}
+      else box.append(el('p',()=>t('talk.uploading'),'tiny'));
+      // practising a word: the partner answers with a heart or "again"
+      if(m.payload?.learn?.word){const w=el('p',undefined,'msg-learn');copy(w,()=>m.sender_id===me()?t('talk.youPractised',{word:m.payload.learn.word}):t('talk.practising',{name:person(m.sender_id),word:m.payload.learn.word}));box.append(w);
+        if(m.sender_id!==me()){const row=el('div',undefined,'msg-learn-row');
+          row.append(button(()=>t('talk.learnHeart'),async()=>{try{await api().rpc('react_message',{p_message_id:m.id,p_emoji:'❤️'},true);reactions=applyReaction(reactions,{message_id:m.id,profile_id:me(),emoji:'❤️'});render();}catch{}},'quiet'),
+            button(()=>t('talk.learnAgain'),()=>send('text',t('talk.learnAgainText',{word:m.payload.learn.word}),null),'quiet'));box.append(row);}}}
     if(m.kind==='song'&&m.payload){const card=el('div',undefined,'msg-song');
       if(isCoverUrl(m.payload.cover_url)){const img=document.createElement('img');img.src=m.payload.cover_url;img.alt='';img.referrerPolicy='no-referrer';img.width=44;img.height=44;card.append(img);}
       const words=el('div');const ti=el('p',undefined,'song-title');ti.textContent=m.payload.title??'';ti.dir='auto';const ar=el('p',undefined,'small');ar.textContent=m.payload.artist??'';ar.dir='auto';words.append(ti,ar);
       const url=spotifyOpenUrl({ref:m.payload.ref,title:m.payload.title,artist:m.payload.artist});
       card.append(words);if(url)card.append(button(()=>t('music.openSpotify'),()=>window.open(url,'_blank','noopener,noreferrer'),'quiet'));box.append(card);}
+    if(m.kind==='letter'&&m.payload){const card=el('div',undefined,'msg-letter'+(sealed(m)?' sealed':''));const mine=m.sender_id===me();
+      if(sealed(m)){card.append(el('span',undefined,'letter-seal'),el('p',()=>mine?t('letter.sealedMine',{name:person(partner()),date:dateFmt(m.payload.opens_at)}):t('letter.sealed',{name:person(m.sender_id),date:dateFmt(m.payload.opens_at)}),'letter-line'));
+        if(mine){const p=el('p',undefined,'letter-body');p.textContent=letters.get(m.id)??'';p.dir='auto';card.append(p);}}
+      else{card.append(el('p',()=>t('letter.opened',{name:person(m.sender_id),date:dateFmt(String(m.created_at).slice(0,10))}),'letter-line'));const p=el('p',undefined,'letter-body');p.textContent=letters.get(m.id)??'';p.dir='auto';card.append(p);if(!letters.has(m.id)&&!askedLetters.has(m.id)){askedLetters.add(m.id);loadLetters([m.id]).then(()=>{if(letters.has(m.id))render();});}}
+      box.append(card);return box;}
+    if(m.kind==='dance'&&m.payload){const card=el('div',undefined,'msg-dance');card.append(icon('dance',22),
+      el('p',()=>{const style=t('dance.style.'+(m.payload.style??'bachata'));if(m.sender_id===me())return m.payload.role==='copy'?t('talk.danceCopyMine',{name:person(partner())}):t('talk.danceStepMine',{name:person(partner()),style});return m.payload.role==='copy'?t('talk.danceCopy',{name:person(m.sender_id)}):t('talk.danceStep',{name:person(m.sender_id),style});}),
+      button(()=>t('talk.openStudio'),()=>document.dispatchEvent(new CustomEvent('open-game',{detail:'dance'})),'primary'));box.append(card);}
     if(m.kind==='game'){box.append(el('p',()=>t('talk.gameInvite',{name:person(m.sender_id)}),'msg-game'),button(()=>t('talk.playNow'),()=>navigate('play'),'primary'));}
-    if(m.kind==='word'&&m.payload){const w=el('p',undefined,'culture-word');w.textContent=m.payload.word??'';if(m.payload.lang)w.lang=m.payload.lang;const mean=el('p',undefined,'culture-meaning');mean.textContent=m.payload.meaning??'';box.append(w,mean);}
+    if(m.kind==='word'&&m.payload){if(m.payload.teach)box.append(el('p',()=>t('talk.taughtWord',{name:person(m.sender_id)}),'tiny'));const w=el('p',undefined,'culture-word');w.textContent=m.payload.word??'';if(m.payload.lang)w.lang=m.payload.lang;const mean=el('p',undefined,'culture-meaning');mean.textContent=m.payload.meaning??'';box.append(w,mean);
+      const row=media.get(m.id);if(row&&(row.status==='ready'||row.owner_id===me())){const a=document.createElement('audio');a.controls=true;a.preload='none';copy(a,()=>t('talk.voiceFrom',{name:person(m.sender_id)}),'aria-label');urlFor(row).then(u=>{if(u)a.src=u;});box.append(a);}
+      if(m.payload.teach&&m.sender_id!==me())box.append(button(()=>t('talk.learnIt'),()=>navigate('learn'),'quiet'));}
     if(m.body){const p=el('p',undefined,'msg-text');p.textContent=m.body;p.dir='auto';box.append(p);}
     return box;
   }
   function bubble(m,seenId){
     const mine=m.sender_id===me(),b=el('div',undefined,'msg '+(mine?'mine':'theirs')+(m.deleted_at?' deleted':''));b.dataset.id=m.id;
     if(m.reply_to){const q=list.find(x=>x.id===m.reply_to);const quote=el('p',undefined,'msg-quote');quote.dir='auto';
-      if(q)quote.textContent=q.deleted_at?'':(q.body??q.payload?.title??'');if(q?.deleted_at)copy(quote,()=>t('talk.deleted'));b.append(quote);}
+      if(q)quote.textContent=q.deleted_at||sealed(q)?'':(q.body??q.payload?.title??'');if(q?.deleted_at)copy(quote,()=>t('talk.deleted'));b.append(quote);}
     b.append(content(m));
     const meta=el('p',undefined,'msg-meta');const when=el('span');when.textContent=timeFmt(m.created_at);meta.append(when);
     if(m.edited_at&&!m.deleted_at)meta.append(el('span',()=>t('talk.edited')));
@@ -229,10 +246,38 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
   }
   function openExtras(){
     const sheet=openSheet({title:h=>copy(h,()=>t('talk.more')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'music-form'});
-    sheet.body.append(button(()=>t('talk.inviteGame'),()=>{sheet.close();send('game',null,{game:'hockey'});},'primary'));
+    sheet.body.append(button(()=>t('talk.inviteGame'),()=>{sheet.close();send('game',null,{game:'hockey'});},'primary'),
+      button(()=>t('letter.write'),()=>{sheet.close();writeLetter();},'quiet letter-open'));
     const songs=playlistSongs?.()??[];
     if(songs.length){sheet.body.append(el('p',()=>t('talk.shareSong'),'eyebrow'));
       for(const s of songs.slice(0,30)){const b=button(()=>'',()=>{sheet.close();send('song',null,{title:s.title,artist:s.artist??null,ref:s.ref,cover_url:s.cover_url??null});},'inbox-row');b.textContent=[s.title,s.artist].filter(Boolean).join(' · ');b.dir='auto';sheet.body.append(b);}}
+  }
+
+  // ---- a letter for later: written now, sealed until the day you choose
+  const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+  const sealed=m=>m.kind==='letter'&&String(m.payload?.opens_at??'')>today();
+  const dateFmt=v=>{const [y,mo,d]=String(v).split('-').map(Number);return new Intl.DateTimeFormat(locale()==='aeb-TN'?'ar-TN':locale(),{day:'numeric',month:'long',year:'numeric'}).format(new Date(y,mo-1,d));};
+  function nextAnniversary(){const since=snap()?.pairStory?.together_since;if(!since)return null;const [,m,d]=since.split('-');const y=new Date().getFullYear();
+    let c=`${y}-${m}-${d}`;if(c<=today())c=`${y+1}-${m}-${d}`;return c;}
+  async function sendLetter(text,day){
+    const m=draft('letter',null,{opens_at:day});letters.set(m.id,text);list=mergeMessages(list,[m]);pending.add(m.id);stickToBottom=true;render();
+    try{const row=await api().rpc('send_letter',{p_id:m.id,p_body:text,p_opens_at:day});list=mergeMessages(list,[row]);pending.delete(m.id);render();
+      client().functions.invoke('dispatch-notification',{body:{event_id:m.id}}).catch(()=>{});}
+    catch{pending.delete(m.id);list=list.filter(x=>x.id!==m.id);letters.delete(m.id);render();copy($('chatStatus'),()=>t('dance.sendFailed'));}
+  }
+  function writeLetter(){
+    const sheet=openSheet({title:h=>copy(h,()=>t('letter.title')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'letter-sheet'});
+    const area=document.createElement('textarea');area.rows=8;area.maxLength=4000;area.dir='auto';area.className='letter-text';copy(area,()=>t('letter.placeholder',{name:person(partner())}),'placeholder');
+    const tomorrow=new Date(Date.now()+86400000),min=tomorrow.getFullYear()+'-'+String(tomorrow.getMonth()+1).padStart(2,'0')+'-'+String(tomorrow.getDate()).padStart(2,'0');
+    const when=document.createElement('input');when.type='date';when.min=min;when.value=nextAnniversary()??min;when.className='letter-date';copy(when,()=>t('letter.opensOn'),'aria-label');
+    const picks=el('div',undefined,'letter-picks');const anniv=nextAnniversary();
+    if(anniv)picks.append(button(()=>t('letter.anniversary'),()=>{when.value=anniv;},'quiet'));
+    picks.append(button(()=>t('letter.inMonth'),()=>{const d=new Date();d.setMonth(d.getMonth()+1);when.value=d.toISOString().slice(0,10);},'quiet'),
+      button(()=>t('letter.inYear'),()=>{const d=new Date();d.setFullYear(d.getFullYear()+1);when.value=d.toISOString().slice(0,10);},'quiet'));
+    const go=button(()=>t('letter.seal'),async()=>{const text=area.value.trim();if(!text||!when.value||when.value<min)return;go.disabled=true;sheet.close();
+      await sendLetter(text,when.value);},'primary');
+    sheet.body.append(area,el('label',()=>t('letter.opensOn'),'eyebrow'),when,picks,el('p',()=>t('letter.hint',{name:person(partner())}),'small'),go);
+    area.focus();
   }
 
   // ---- the composer
@@ -246,12 +291,13 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
   $('chatMore').onclick=()=>openExtras();
   listEl.addEventListener('scroll',()=>{if(listEl.scrollTop<40&&hasEarlier)loadEarlier();});
 
+  document.addEventListener('write-letter',()=>writeLetter());
   return {
     // the chat pane became visible (or not): load once, mark as read while it is on screen
     shown(on){visible=on;if(on){if(available===null)load();else{render(true);scheduleRead();}}else paintUnread();},
     refresh(){if(available===null||!api()?.context)return;if(!channel)connect();},
     start(){if(available===null)load();},
-    clear(){const c=channel;channel=null;if(c)client()?.removeChannel(c);clearInterval(tick);clearTimeout(readTimer);if(recorder)finishVoice(false);
+    clear(){letters=new Map();askedLetters=new Set();const c=channel;channel=null;if(c)client()?.removeChannel(c);clearInterval(tick);clearTimeout(readTimer);if(recorder)finishVoice(false);
       for(const u of urls.values())u.then(x=>x&&URL.revokeObjectURL(x)).catch(()=>{});urls.clear();media.clear();
       list=[];reactions={};reads={};available=null;hasEarlier=false;replyTo=null;failed.clear();pending.clear();online=false;listEl.replaceChildren();paintReply();onUnread?.(0);},
   };

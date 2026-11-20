@@ -135,6 +135,7 @@ html[lang=aeb-TN] .bottom-nav button{font:600 12px/16px var(--font-arabic)}
 .sw i{display:block}
 .sw.auto i:first-child{background:linear-gradient(#9CCBEE 0 45%,#F5F2FF 45%)}.sw.auto i:last-child{background:linear-gradient(#1E2A5E 0 45%,#14102B 45%)}
 .sw.dark i:first-child{background:linear-gradient(#9CCBEE 0 45%,#14102B 45%)}.sw.dark i:last-child{background:linear-gradient(#1E2A5E 0 45%,#14102B 45%)}
+.sw.light i:first-child{background:linear-gradient(#9CCBEE 0 45%,#F5F2FF 45%)}.sw.light i:last-child{background:linear-gradient(#1E2A5E 0 45%,#F5F2FF 45%)}
 .seg{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--edge);border-radius:12px;overflow:hidden;box-shadow:2px 2px 0 var(--edge)}
 .seg button{border:0;border-radius:0;background:var(--surface);color:var(--ink);font:800 13px var(--font-display);min-height:44px;display:flex;align-items:center;justify-content:center;gap:5px;padding:0 4px}
 .seg button+button{border-inline-start:2px solid var(--edge)}

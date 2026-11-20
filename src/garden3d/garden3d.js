@@ -11,7 +11,7 @@ export function webglAvailable(){
 // Where the labels sit in the garden (x, y, z in scene units).
 const AT=Object.freeze({yasmine:[-4.15,2.85,-2.2],oliver:[3.35,4.45,-2.95],toad:[4.05,1.7,1.25],catatumbo:[34,12.5,-50],angel:[10.4,6.4,-4.8]});
 
-export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onReady,onFail}){
+export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onReady,onFail}){
   const element=document.createElement('div');element.className='garden3d';
   const stage=document.createElement('div');stage.className='garden3d-stage';
   const loading=document.createElement('p');loading.className='garden3d-loading';copy(loading,()=>t('garden3d.loading'));
@@ -47,6 +47,7 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onReady,onF
       if(destroyed){api.destroy();api=null;return;}
       api.canvas.setAttribute('role','img');copy(api.canvas,()=>t('garden3d.label'),'aria-label');
       api.onFrame(place);
+      api.onEvent?.(e=>onEvent?.(e));
       api.onTap(hit=>{if(hit.kind==='toad')onToad?.();else if(hit.kind==='flower')onFlower?.(hit.id);else if(hit.kind==='moon')onMoon?.();else if(hit.kind==='spot')onSpot?.(hit.id);});
       api.setPlaying(playing);sendFlowers();
       timer=setInterval(()=>api?.setLight(light()),60000);

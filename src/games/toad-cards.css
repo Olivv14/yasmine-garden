@@ -1,0 +1,38 @@
+/* toad cards: generated from the approved mockup (ToadCards) */
+.toad-card-art{font-family:Inter,sans-serif;color:#F4EEE6}
+.toad-card-art b{font-weight:inherit}
+.toad-card-art .tc1{width: 360px; height: 560px; border-radius: 26px; position: relative; overflow: hidden; background: linear-gradient(170deg, #0F1A3A 0%, #1E1B4A 55%, #2A1E5A 100%); padding: 3px; box-shadow: 0 30px 60px rgba(0,0,0,.6)}
+.toad-card-art .tc2{position: absolute; inset: 0; border-radius: 26px; padding: 2px; background: linear-gradient(140deg, #E6ECF5, #8A96AE, #F4F7FB, #6A7690); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude}
+.toad-card-art .tc3{position: absolute; top: 16px; left: 18px; right: 18px; display: flex; justify-content: space-between; font: 800 12px Inter; letter-spacing: .1em; z-index: 2}
+.toad-card-art .tc4{color: #C9D4EA}
+.toad-card-art .tc5{color: #E6ECF5}
+.toad-card-art .tc6{position: absolute; top: 34px; left: 3px}
+.toad-card-art .tc7{position: absolute; left: 22px; right: 22px; bottom: 22px; display: grid; gap: 10px}
+.toad-card-art .tc8{font: 800 28px 'Bricolage Grotesque'}
+.toad-card-art .tc9{font-size: 13px; line-height: 1.4; color: #B9C4E2}
+.toad-card-art .tc10{display: grid; grid-template-columns: 60px 1fr; gap: 6px 10px; align-items: center; font: 700 11px Inter; color: #C9D4EA}
+.toad-card-art .tc11{height: 6px; border-radius: 3px; background: rgba(255,255,255,.12)}
+.toad-card-art .tc12{display: block; width: 28%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #9FC4FF, #E6ECF5)}
+.toad-card-art .tc13{display: block; width: 22%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #9FC4FF, #E6ECF5)}
+.toad-card-art .tc14{display: block; width: 10%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #9FC4FF, #E6ECF5)}
+.toad-card-art .tc15{width: 360px; height: 560px; border-radius: 26px; position: relative; overflow: hidden; background: linear-gradient(170deg, #0C2E33 0%, #154A4E 45%, #8A4A22 100%); padding: 3px; box-shadow: 0 30px 60px rgba(0,0,0,.6)}
+.toad-card-art .tc16{position: absolute; inset: 0; border-radius: 26px; padding: 2px; background: linear-gradient(140deg, #9FF2E6, #2E9AA6, #CFFFF6, #1E6A74); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude}
+.toad-card-art .tc17{color: #9FF2E6}
+.toad-card-art .tc18{color: #E6FFFA}
+.toad-card-art .tc19{font-size: 13px; line-height: 1.4; color: #B8E6DF}
+.toad-card-art .tc20{display: grid; grid-template-columns: 60px 1fr; gap: 6px 10px; align-items: center; font: 700 11px Inter; color: #CFFFF6}
+.toad-card-art .tc21{display: block; width: 60%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #2E9AA6, #9FF2E6)}
+.toad-card-art .tc22{display: block; width: 62%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #2E9AA6, #9FF2E6)}
+.toad-card-art .tc23{display: block; width: 45%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #2E9AA6, #9FF2E6)}
+.toad-card-art .tc24{width: 360px; height: 560px; border-radius: 26px; position: relative; overflow: hidden; background: linear-gradient(170deg, #2A0E14 0%, #5A1414 45%, #B0481A 100%); padding: 3px; box-shadow: 0 30px 70px rgba(0,0,0,.65), 0 0 60px rgba(242,180,80,.25)}
+.toad-card-art .tc25{position: absolute; inset: 0; border-radius: 26px; padding: 3px; background: linear-gradient(140deg, #FFF4C8, #C9962E, #FFE69A, #7A5410, #FFF4C8); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude}
+.toad-card-art .tc26{position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,230,180,.16) 42%, rgba(160,220,255,.10) 48%, transparent 58%); z-index: 1}
+.toad-card-art .tc27{color: #FFE69A}
+.toad-card-art .tc28{color: #FFF4C8}
+.toad-card-art .tc29{position: absolute; left: 22px; right: 22px; bottom: 22px; display: grid; gap: 10px; z-index: 2}
+.toad-card-art .tc30{font: 800 28px 'Bricolage Grotesque'; color: #FFF4C8; text-shadow: 0 2px 14px rgba(242,180,80,.5)}
+.toad-card-art .tc31{font-size: 13px; line-height: 1.4; color: #FFD8B8}
+.toad-card-art .tc32{display: grid; grid-template-columns: 60px 1fr; gap: 6px 10px; align-items: center; font: 700 11px Inter; color: #FFE69A}
+.toad-card-art .tc33{display: block; width: 92%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #E0302A, #FFD24A)}
+.toad-card-art .tc34{display: block; width: 95%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #E0302A, #FFD24A)}
+.toad-card-art .tc35{display: block; width: 88%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #E0302A, #FFD24A)}

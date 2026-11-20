@@ -3,6 +3,10 @@
 // played in turns (backend/010). Every label comes from the catalog.
 import {createTruthDare} from './truth-dare.js';
 import {createHockey} from './hockey.js';
+import {createPool} from './pool.js';
+import {createPiano} from './piano.js';
+import {createDance} from '../dance/dance.js';
+import {SCENE_ART} from './scene-art.js';
 import {createDuel} from './duel-ui.js';
 import {createKnowMe} from './knowme-ui.js';
 import {pointsBy,weekStart,seeds,waitingForMe,answersOf} from './score.js';
@@ -10,7 +14,7 @@ import {authorTone} from '../garden/model.js';
 import {icon} from '../design/icons.js';
 
 const MISSING=['PGRST202','42883','42P01'];
-export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,rpc,notify,navigate,openPlant,onWaiting,onRound}){
+export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,photoOf=()=>null,getApi=()=>null,rpc,notify,navigate,openPlant,onWaiting,onRound}){
   const mount=$('playMount');
   const partner=()=>getSnapshot()?.members.map(m=>m.profile_id).find(id=>id!==me())??null;
   const tones=()=>{const s=getSnapshot();return s?{me:authorTone(me(),s.members,s.profiles),partner:authorTone(partner(),s.members,s.profiles)}:{me:'oliver',partner:'yasmine'};};
@@ -33,10 +37,14 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   }
   const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer};
   const td=createTruthDare({el,button,t,copy,me,person,partner,record,notify});
-  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify});
+  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf});
+  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
-  const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},
-    duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme}};
+  const piano=createPiano({el,button,t,copy,me,getSnapshot,download:m=>getApi().download(m),record});
+  const dance=createDance({el,button,t,copy,me,person,partner,getSnapshot,getClient,getApi,notify});
+  const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},pool:{icon:'pool',title:'pool.title',hint:'play.pool.hint',game:pool},
+    duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme},
+    dance:{icon:'dance',title:'dance.title',hint:'play.dance.hint',game:dance},piano:{icon:'piano',title:'piano.title',hint:'play.piano.hint',game:piano}};
 
   const board=el('section',undefined,'card play-board');board.id='playBoard';
   const turns=el('section',undefined,'play-turns');turns.id='playTurns';
@@ -53,22 +61,32 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     b.append(art,el('span',()=>t(g.title),'play-tile-title'),el('span',()=>t(g.hint),'play-tile-hint'));grid.append(b);
   }
   // One game at a time on the stage; "All games" goes back to the tiles.
+  // Every game opens full screen over the app, in the dusk garden; "‹ Games" goes back to the tiles.
+  const backdrop=el('div',undefined,'scene-art game-backdrop');backdrop.innerHTML=SCENE_ART.hockeyScene;backdrop.firstElementChild?.setAttribute('preserveAspectRatio','xMidYMid slice');backdrop.setAttribute('aria-hidden','true');
   function show(id,then){
     if(open&&open!==id)stopGames();open=id;tiles.hidden=!!id;stage.hidden=!id;stage.replaceChildren();
+    document.documentElement.classList.toggle('game-full',!!id);stage.dataset.game=id??'';
+    // full screen means above everything: the stage moves to the top of the page while a game is open
+    if(id&&stage.parentElement!==document.body)document.body.append(stage);
+    if(!id&&stage.parentElement!==mount)mount.append(stage);
     if(!id)return;
-    const back=button(()=>t('play.back'),()=>{stopGames();show(null);},'link play-back');back.prepend(icon('back',16));
-    stage.append(back,GAMES[id].game.element);
+    const back=button(()=>t('games.back'),()=>{stopGames();show(null);},'link play-back');back.prepend(icon('back',16));
+    const bar=el('div',undefined,'game-bar');bar.append(back);
+    stage.append(backdrop,bar,GAMES[id].game.element);
     if(id==='td')td.render(getSnapshot());
     if(then)then();else GAMES[id].game.render?.(getSnapshot());
-    stage.scrollIntoView?.({block:'start'});
+    stage.scrollTop=0;
   }
-  function stopGames(){hockey.stop();duel.stop();knowme.stop();}
+  function stopGames(){hockey.stop();pool.stop();duel.stop();knowme.stop();piano.stop();dance.stop();}
   // A round from the bell or a "Your turn" card: play it if it waits for you, otherwise show its result.
   function openRound(roundId){
     const snap=getSnapshot(),r=snap?.playRounds?.find(x=>x.id===roundId);if(!r)return false;
     const id=r.game==='word_duel'?'duel':'knowme',g=GAMES[id].game,mine=answersOf(snap,r.id).some(a=>a.profile_id===me());
     show(id,()=>mine?g.showResult(r):g.open(r));onRound?.(r.id);return true;
   }
+
+  // a dance step in the chat (or anywhere) opens the studio
+  document.addEventListener('open-game',e=>{if(GAMES[e.detail]){navigate('play');setTimeout(()=>show(e.detail),60);}});
 
   function paintBoard(snap){
     const pts=pointsBy(snap,weekStart()),p=partner(),s=seeds(snap,me()),max=Math.max(1,...pts.values());
@@ -79,7 +97,11 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
       const n=el('p',undefined,'play-points');n.textContent=new Intl.NumberFormat(locale()==='aeb-TN'?'ar-TN':locale()).format(pts.get(id)??0);
       const who=el('p',undefined,'small');who.textContent=person(id);who.dir='auto';
       const bar=el('span',undefined,'play-bar');bar.style.setProperty('--fill',((pts.get(id)??0)/max*100).toFixed(1)+'%');
-      col.append(n,who,bar);row.append(col);
+      // your faces instead of coloured dots: the photo when there is one, else the initial in your colour
+      const face=el('span',undefined,'play-face');const src=photoOf(id);
+      if(src){const img=document.createElement('img');img.src=src;img.alt='';face.append(img);}else face.textContent=(person(id)||'?').trim().charAt(0).toUpperCase();
+      const top=el('div',undefined,'play-score-top');top.append(face,n);
+      col.append(top,who,bar);row.append(col);
     }
     const seed=el('div',undefined,'play-seeds');seed.append(icon('sprout',20),el('p',()=>t('play.seeds',{count:s.left}),'body-strong'));
     board.append(row,seed,el('p',()=>t('play.seedsHint'),'small muted'));
@@ -103,6 +125,6 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     paintBoard(snap);paintTurns(snap);
     if(open==='td')td.render(snap);else if(open==='duel')duel.render();else if(open==='knowme')knowme.render();
   }
-  function clear(){stopGames();td.clear();duel.clear();knowme.clear();board.replaceChildren();turns.replaceChildren();show(null);onWaiting?.(0);}
-  return {render,clear,stop:()=>stopGames(),openRound,show};
+  function clear(){document.documentElement.classList.remove('game-full');stopGames();td.clear();duel.clear();knowme.clear();board.replaceChildren();turns.replaceChildren();show(null);onWaiting?.(0);}
+  return {render,clear,stop:()=>{stopGames();if(open)show(null);},openRound,show};
 }
