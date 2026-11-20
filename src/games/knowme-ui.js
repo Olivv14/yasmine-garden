@@ -45,10 +45,17 @@ export function createKnowMe({el,button,t,copy,me,person,partner,getSnapshot,sta
     run={round,id:crypto.randomUUID(),items:round?round.items:pickQuestions(recent,KNOWME_SIZE),idx:0,picks:[]};
     failed=false;view='ask';ask();
   }
+  // the question on a cream card under a little sunset with the two of you
+  function knowCard(q){
+    const card=el('div',undefined,'knowme-card');const sky=el('div',undefined,'knowme-sky');sky.setAttribute('aria-hidden','true');
+    sky.append(el('span',undefined,'knowme-sun'),el('span',undefined,'knowme-hill'),el('span',undefined,'knowme-pair'));
+    card.append(sky,el('p',()=>t(questionKey(q)),'title knowme-question'),el('p',()=>run.round?t('knowme.guessFor',{name:name()}):t('knowme.aboutYou'),'knowme-for'));
+    return card;
+  }
   function ask(){
     const q=run.items[run.idx];
     root.replaceChildren(head(),el('p',()=>t('knowme.progress',{n:run.idx+1,total:run.items.length}),'eyebrow'),
-      el('p',()=>run.round?t('knowme.guessFor',{name:name()}):t('knowme.aboutYou'),'small'),el('p',()=>t(questionKey(q)),'title knowme-question'));
+      knowCard(q));
     const opts=el('div',undefined,'duel-options');
     OPTIONS.forEach((_,i)=>{const b=button(()=>t(optionKey(q,i)),()=>{run.picks.push(i);if(run.idx<run.items.length-1){run.idx++;ask();}else save();},'duel-option');b.dir='auto';opts.append(b);});
     if(run.idx>0)root.append(opts,button(()=>t('common.back'),()=>{run.idx--;run.picks.pop();ask();},'link'));else root.append(opts);

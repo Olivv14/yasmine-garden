@@ -69,3 +69,70 @@
 .pool-meter{position:absolute;inset:0;inline-size:calc(var(--p,0)*100%);background:linear-gradient(90deg,rgba(255,213,138,.25),rgba(255,120,80,.55))}
 .pool-stick{position:absolute;inset-inline:12px;inset-block-start:calc(50% - 4px + var(--p,0)*18px);block-size:8px;border-radius:4px;background:linear-gradient(90deg,#F4E6CC 0 5%,#3A6AC8 5% 7%,#E8C27A 7% 60%,#B8783A 60% 90%,#3A1E10 90%);box-shadow:0 2px 6px rgba(0,0,0,.5)}
 #pool .pool-shoot{min-inline-size:72px}
+
+/* ---- every game at dusk: the same evening garden behind each game, in light mode too */
+.play-stage .game-card{--ink:#FFF4E6;--ink-soft:#FFE2C6;--line:rgba(255,226,198,.2);--surface:rgba(18,10,20,.62);--surface-2:rgba(18,10,20,.5);
+  --accent:#FFD58A;--on-accent:#2A1A10;--edge:#0C0710;--sun:#FFD58A;--danger:#FF8A7A;--success:#8DE8B0;
+  color:var(--ink);position:relative;overflow:hidden;padding-block-start:70px;border-color:#0C0710;
+  background:linear-gradient(180deg,#1F2148 0%,#4A3266 9%,#B8665A 20%,#3A2430 34%,#1C1418 60%,#140E12 100%)}
+.play-stage .game-card::before{content:"";position:absolute;inset:0 0 auto 0;block-size:64px;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 64' preserveAspectRatio='none'%3E%3Cpath d='M-10 14 Q 95 50 195 50 T 400 16' fill='none' stroke='%231A1018' stroke-width='1.4'/%3E%3Cg fill='%23FFF0C8'%3E%3Ccircle cx='30' cy='24' r='2.6'/%3E%3Ccircle cx='90' cy='40' r='2.6'/%3E%3Ccircle cx='150' cy='48' r='2.6'/%3E%3Ccircle cx='214' cy='49' r='2.6'/%3E%3Ccircle cx='276' cy='42' r='2.6'/%3E%3Ccircle cx='336' cy='28' r='2.6'/%3E%3C/g%3E%3Cg fill='%23FFB86A' opacity='.28'%3E%3Ccircle cx='30' cy='24' r='9'/%3E%3Ccircle cx='90' cy='40' r='9'/%3E%3Ccircle cx='150' cy='48' r='9'/%3E%3Ccircle cx='214' cy='49' r='9'/%3E%3Ccircle cx='276' cy='42' r='9'/%3E%3Ccircle cx='336' cy='28' r='9'/%3E%3C/g%3E%3C/svg%3E") center/100% 100% no-repeat}
+.play-stage .game-card .game-head{color:#FFD58A}.play-stage .game-card .game-head h3{color:#FFF4E6}
+.play-stage .game-card .small,.play-stage .game-card .muted{color:#FFE2C6}
+.play-stage .game-card button:not(.rival-card):not(.pool-spin){background:rgba(18,10,20,.62);color:#FFF4E6;border:1px solid rgba(255,226,198,.22);box-shadow:none}
+.play-stage .game-card button.primary{background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;border-color:transparent}
+.play-stage .game-card button.link{background:transparent;border-color:transparent;color:#FFD58A}
+.play-stage .game-card textarea{background:rgba(255,244,230,.08);color:#FFF4E6;border:1px solid rgba(255,226,198,.25)}
+
+/* word duel: a tile from each country, and how to say it */
+.duel-tile{justify-self:center;inline-size:min(240px,70%);aspect-ratio:1;display:grid;place-content:center;gap:4px;border-radius:14px;padding:16px;position:relative;
+  box-shadow:0 18px 34px rgba(0,0,0,.5),0 0 0 6px rgba(255,213,138,.12),0 0 40px rgba(255,190,110,.25)}
+.duel-tile .duel-word{margin:0;color:inherit}
+.duel-tile[data-deck=tn]{color:#1E2E5A;background:radial-gradient(circle at 50% 50%,#FFFFFF 0 52%,transparent 53%),repeating-conic-gradient(from 45deg,#1E5AA8 0 25%,#F4ECD8 0 50%) 0 0/34px 34px;border:6px solid #1E5AA8}
+.duel-tile[data-deck=tn]::before{content:"";position:absolute;inset:14px;border-radius:50%;background:#FFFDF6;z-index:-0;box-shadow:inset 0 0 0 3px #2E8A6A}
+.duel-tile[data-deck=tn]>*{position:relative}
+.duel-tile[data-deck=ve]{color:#2A1A10;background:linear-gradient(180deg,#F2C42A 0 33%,#2A4AA8 33% 66%,#D8282A 66%);border:6px solid #8A5A2A}
+.duel-tile[data-deck=ve]::before{content:"";position:absolute;inset:16px;border-radius:10px;background:#FFF6E2;box-shadow:inset 0 0 0 2px rgba(138,90,42,.4)}
+.duel-tile[data-deck=ve]>*{position:relative}
+.duel-tile[data-deck=it]{color:#3A1E10;background:radial-gradient(circle at 30% 25%,#E8936A,#B8562E 70%);border:6px solid #8A3A1A}
+.duel-tile[data-deck=it]::before{content:"";position:absolute;inset:16px;border-radius:10px;background:#FBEFD8;box-shadow:inset 0 0 0 2px rgba(138,58,26,.35)}
+.duel-tile[data-deck=it]>*{position:relative}
+.duel-tile .duel-roman{margin:0;font:600 15px var(--font-mono,monospace);color:#7A4A1A;text-align:center}
+.duel-say{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:rgba(18,10,20,.62);border:1px solid rgba(255,226,198,.18)}
+.play-stage .game-card button.duel-speak{inline-size:44px;block-size:44px;min-block-size:44px;padding:0;border-radius:50%;background:#FFD58A;color:#2A1A10;border:0;flex:none}
+.duel-say-text{margin:0;font:800 19px/1.2 var(--font-display,inherit);letter-spacing:.01em;color:#FFF4E6}
+.play-stage .game-card button.duel-option.right,.play-stage .game-card button.duel-option.right:disabled{color:#FFFFFF;opacity:1;background:linear-gradient(180deg,rgba(94,212,148,.35),rgba(46,138,98,.35));border-color:#8DE8B0}
+.play-stage .game-card button.duel-option.wrong,.play-stage .game-card button.duel-option.wrong:disabled{color:#FFFFFF;opacity:1;background:linear-gradient(180deg,rgba(255,120,110,.3),rgba(180,40,40,.3));border-color:#FF8A7A}
+
+/* know me: the question on a cream card under a sunset */
+.knowme-card{border-radius:20px;overflow:hidden;background:#FBF3E4;color:#2A1A10;box-shadow:0 18px 34px rgba(0,0,0,.45),6px 10px 0 -2px rgba(251,243,228,.35)}
+.knowme-sky{position:relative;block-size:110px;background:linear-gradient(180deg,#3A2A5A,#B8665A 70%,#F2A06A)}
+.knowme-sun{position:absolute;inset-inline-end:22%;inset-block-end:18px;inline-size:52px;block-size:52px;border-radius:50%;background:radial-gradient(circle,#FFF4C8,#FFC870 70%)}
+.knowme-hill{position:absolute;inset-inline:0;inset-block-end:0;block-size:34px;background:#2A1A24;border-radius:60% 40% 0 0/100% 100% 0 0}
+.knowme-pair{position:absolute;inset-inline-start:36%;inset-block-end:22px;inline-size:26px;block-size:32px;background:radial-gradient(circle at 25% 18%,#1A1018 0 5px,transparent 6px),radial-gradient(circle at 72% 14%,#1A1018 0 5.5px,transparent 6.5px),linear-gradient(90deg,transparent 8%,#1A1018 8% 44%,transparent 44% 54%,#1A1018 54% 92%,transparent 92%) 0 12px/100% 20px no-repeat}
+.knowme-card .knowme-question{margin:14px 16px 4px;color:#2A1A10}
+.knowme-for{margin:0 16px 16px!important;font:700 19px/1.2 var(--font-hand,'Caveat',cursive);color:#B3261E}
+
+/* truth or dare: the card gets redder with the spice, the brazier burns brighter */
+.play-stage .game-draw{background:linear-gradient(180deg,#FBF3E4,#EFDDBA);color:#2A1A10;border:2px solid #E8C27A;border-radius:22px;box-shadow:0 18px 34px rgba(0,0,0,.45)}
+.play-stage .game-draw[data-level="2"]{background:linear-gradient(180deg,#E8823A,#B8401A);color:#FFF4E6}
+.play-stage .game-draw[data-level="3"]{background:linear-gradient(180deg,#C42A1E,#7A0E0A);color:#FFF4E6;border-color:#FFD58A;box-shadow:0 0 30px rgba(255,90,40,.45),0 18px 34px rgba(0,0,0,.45)}
+.play-stage .game-draw .title{color:inherit}
+.play-stage .game-draw textarea{background:rgba(255,255,255,.55);color:#2A1A10;border-color:rgba(0,0,0,.15)}
+.td-tag{justify-self:start;font:800 11px/1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1.5px solid currentColor;opacity:.9}
+.td-chilis{display:flex;justify-content:center;gap:2px;block-size:54px}.td-chilis svg{block-size:100%;inline-size:auto;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.td-chilis svg:nth-child(2){transform:rotate(-14deg)}.td-chilis svg:nth-child(3){transform:rotate(14deg)}
+.td-brazier{position:relative;justify-self:center;inline-size:150px;block-size:110px;margin-block-start:8px}
+.td-bowl{position:absolute;inset-inline:15px;inset-block-end:0;block-size:28px;border-radius:0 0 60px 60px;background:linear-gradient(180deg,#5A3A2A,#24140E);box-shadow:0 8px 16px rgba(0,0,0,.5)}
+.td-glow{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,170,80,.45),rgba(255,120,40,0))}
+.td-flame{position:absolute;inset-inline-start:50%;inset-block-end:22px;inline-size:46px;block-size:62px;margin-inline-start:-23px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 75%,#FFF6D0,#FFC24A 35%,#FF6A2A 70%,rgba(255,80,30,0) 72%);transform-origin:50% 100%;animation:td-flicker 1.4s ease-in-out infinite;filter:blur(.5px)}
+.td-flame.two{inline-size:30px;block-size:44px;margin-inline-start:-4px;animation-duration:1.1s;animation-delay:-.4s;opacity:.85}
+@keyframes td-flicker{0%,100%{transform:scale(1,1) rotate(-2deg)}50%{transform:scale(1.08,1.14) rotate(2deg)}}
+.td-brazier[data-level="1"] .td-flame{transform:scale(.55);block-size:40px}.td-brazier[data-level="1"] .td-flame.two{display:none}.td-brazier[data-level="1"] .td-glow{opacity:.45}
+.td-brazier[data-level="3"] .td-flame{inline-size:62px;block-size:84px;margin-inline-start:-31px}.td-brazier[data-level="3"] .td-glow{inset:-50px}
+@media (prefers-reduced-motion:reduce){.td-flame{animation:none}}
+.play-score-top{display:flex;align-items:center;gap:10px}
+.play-face{inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;overflow:hidden;flex:none;font:800 18px var(--font-display,inherit);color:#2A1A10;background:#F2CDBA;border:3px solid var(--edge);box-shadow:2px 2px 0 var(--edge)}
+.play-face img{inline-size:100%;block-size:100%;object-fit:cover}
+.play-score[data-tone=oliver] .play-face{border-color:var(--oliver)}.play-score[data-tone=yasmine] .play-face{border-color:var(--yasmine)}

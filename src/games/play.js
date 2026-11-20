@@ -11,7 +11,7 @@ import {authorTone} from '../garden/model.js';
 import {icon} from '../design/icons.js';
 
 const MISSING=['PGRST202','42883','42P01'];
-export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,rpc,notify,navigate,openPlant,onWaiting,onRound}){
+export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,photoOf=()=>null,rpc,notify,navigate,openPlant,onWaiting,onRound}){
   const mount=$('playMount');
   const partner=()=>getSnapshot()?.members.map(m=>m.profile_id).find(id=>id!==me())??null;
   const tones=()=>{const s=getSnapshot();return s?{me:authorTone(me(),s.members,s.profiles),partner:authorTone(partner(),s.members,s.profiles)}:{me:'oliver',partner:'yasmine'};};
@@ -34,8 +34,8 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   }
   const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer};
   const td=createTruthDare({el,button,t,copy,me,person,partner,record,notify});
-  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:who=>who===me()?document.getElementById('profilePhoto')?.getAttribute('src')||null:null});
-  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:who=>who===me()?document.getElementById('profilePhoto')?.getAttribute('src')||null:null});
+  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf});
+  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
   const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},pool:{icon:'pool',title:'pool.title',hint:'play.pool.hint',game:pool},
     duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme}};
@@ -81,7 +81,11 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
       const n=el('p',undefined,'play-points');n.textContent=new Intl.NumberFormat(locale()==='aeb-TN'?'ar-TN':locale()).format(pts.get(id)??0);
       const who=el('p',undefined,'small');who.textContent=person(id);who.dir='auto';
       const bar=el('span',undefined,'play-bar');bar.style.setProperty('--fill',((pts.get(id)??0)/max*100).toFixed(1)+'%');
-      col.append(n,who,bar);row.append(col);
+      // your faces instead of coloured dots: the photo when there is one, else the initial in your colour
+      const face=el('span',undefined,'play-face');const src=photoOf(id);
+      if(src){const img=document.createElement('img');img.src=src;img.alt='';face.append(img);}else face.textContent=(person(id)||'?').trim().charAt(0).toUpperCase();
+      const top=el('div',undefined,'play-score-top');top.append(face,n);
+      col.append(top,who,bar);row.append(col);
     }
     const seed=el('div',undefined,'play-seeds');seed.append(icon('sprout',20),el('p',()=>t('play.seeds',{count:s.left}),'body-strong'));
     board.append(row,seed,el('p',()=>t('play.seedsHint'),'small muted'));

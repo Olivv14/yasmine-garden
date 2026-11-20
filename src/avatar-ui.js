@@ -5,6 +5,7 @@ import {createAvatarContextAdapter} from './auth.js';
 // Files/URLs stay in memory. Only the controller can publish or remove bytes.
 export function createAvatarUI({$,el,button,client,getApi,getGeneration,onIdentityFailure,isFrozen=()=>false,beginHost=()=>()=>{}}){
  let serial=0,viewSerial=0,busy=false,error=null,message='avatar.empty',previewURL=null,recovery=[],ownId=null,photoId=null,loaded=false,scope=null;
+ let partnerId=null,partnerPhotoId=null,partnerURL=null;const photoListeners=new Set();const photosChanged=()=>{for(const fn of photoListeners)try{fn();}catch{}};
  const adapter=createAvatarContextAdapter({client,getTransport:getApi,getGeneration,onIdentityFailure,onUnavailable:()=>unavailable()});
  const controller=createAvatarController({client,getVerifiedContext:adapter.getVerifiedContext,isCurrentContext:adapter.isCurrentContext});
  const root=$('avatarEditor'),title=el('h3',()=>t('avatar.title')),hint=el('p',()=>t('avatar.hint'),'hint');
@@ -40,14 +41,21 @@ export function createAvatarUI({$,el,button,client,getApi,getGeneration,onIdenti
  input.onchange=()=>{const file=input.files?.[0],binding=pickerBinding;input.value='';pickerBinding=null;if(isFrozen()||!file||!binding||binding!==hostBinding()||!input.isConnected)return;const request=selection={file,binding,token:serial};run(async()=>{try{if(request.binding!==hostBinding()||request.token!==serial||!request.file)return;await controller.select(request.file,{userSelected:true});if(request.binding!==hostBinding()||request.token!==serial||!request.file||!input.isConnected)return;clearPreview();previewURL=URL.createObjectURL(request.file);preview.src=previewURL;preview.hidden=false;consent.checked=false;message='avatar.selected';}finally{request.file=null;if(selection===request)selection=null;}});};
  consent.onchange=paint;
  function freeze(){serial++;pickerBinding=null;if(selection)selection.file=null;selection=null;controller.setUnavailable();adapter.markUnavailable();busy=false;releaseView();paint();}
- async function load(id,owner){const token=serial,view=++viewSerial;const current=()=>token===serial&&view===viewSerial&&owner===ownId&&id===photoId;try{const photo=await controller.loadPhoto(owner);if(!current())return;if(photo&&photo.id===id){header.src=photo.url;header.dataset.avatarId=photo.id;header.hidden=false;$('profileInitials').hidden=true;loaded=true;}}catch(e){if(current()){error=e;paint();}}}
+ async function loadPartner(id,owner){const token=serial;try{const photo=await controller.loadPhoto(owner);if(token!==serial||owner!==partnerId||id!==partnerPhotoId)return;partnerURL=photo&&photo.id===id?photo.url:null;photosChanged();}catch{}}
+ function dropPartner(){if(partnerId)controller.releasePhoto(partnerId);partnerURL=null;partnerPhotoId=null;photosChanged();}
+ async function load(id,owner){const token=serial,view=++viewSerial;const current=()=>token===serial&&view===viewSerial&&owner===ownId&&id===photoId;try{const photo=await controller.loadPhoto(owner);if(!current())return;if(photo&&photo.id===id){header.src=photo.url;header.dataset.avatarId=photo.id;header.hidden=false;$('profileInitials').hidden=true;loaded=true;photosChanged();}}catch(e){if(current()){error=e;paint();}}}
  paint();
  return {
   receive(data){if(isFrozen()){paint();return;}const nextScope=[data.me.auth_user_id,data.me.id,data.pairId,...data.members.map(m=>m.profile_id).sort()].join(':');if(scope&&scope!==nextScope){onIdentityFailure({code:'AVATAR_CONTEXT_INVALID'});return;}scope=nextScope;const nextOwn=data.me.id,active=(data.avatars??[]).filter(r=>r.owner_id===nextOwn&&r.status==='ready'&&r.active===true);const next=active.length===1?active[0].id:null;
    if(ownId&&ownId!==nextOwn)this.clear();ownId=nextOwn;recovery=(data.avatars??[]).filter(r=>r.owner_id===ownId&&!(r.status==='ready'&&r.active));
-   if(photoId!==next){releaseView();photoId=next;}if(next&&!loaded)load(next,ownId);paint();},
-  clear(){serial++;pickerBinding=null;if(selection)selection.file=null;selection=null;adapter.reset();controller.clear();busy=false;error=null;message='avatar.empty';input.value='';consent.checked=false;clearPreview();releaseView();ownId=photoId=null;scope=null;recovery=[];paint();},
+   if(photoId!==next){releaseView();photoId=next;}if(next&&!loaded)load(next,ownId);
+   const theirId=data.members.map(m=>m.profile_id).find(id=>id!==nextOwn)??null,theirs=(data.avatars??[]).filter(r=>r.owner_id===theirId&&r.status==='ready'&&r.active===true),theirNext=theirs.length===1?theirs[0].id:null;
+   if(theirId!==partnerId||theirNext!==partnerPhotoId){dropPartner();partnerId=theirId;partnerPhotoId=theirNext;if(theirNext)loadPartner(theirNext,theirId);}paint();},
+  clear(){serial++;pickerBinding=null;if(selection)selection.file=null;selection=null;adapter.reset();controller.clear();busy=false;error=null;message='avatar.empty';input.value='';consent.checked=false;clearPreview();releaseView();ownId=photoId=null;partnerId=partnerPhotoId=partnerURL=null;photosChanged();scope=null;recovery=[];paint();},
   unavailable,freeze,
+  // photos for the games and the scoreboard: your own and your partner's (object URLs, released on sign-out)
+  photo(id){if(id&&id===ownId)return header.getAttribute('src')||null;if(id&&id===partnerId)return partnerURL;return null;},
+  onPhotos(fn){photoListeners.add(fn);return()=>photoListeners.delete(fn);},
   dirty(){const s=controller.getState();return busy||!!s&&s.state!=='complete';},
  };
 }

@@ -1120,5 +1120,6 @@
   "pool.you": "You",
   "pool.group.solids": "Solids",
   "pool.group.stripes": "Stripes",
-  "pool.open": "Open table"
+  "pool.open": "Open table",
+  "duel.listen": "Hear it"
 }

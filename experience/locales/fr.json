@@ -1120,5 +1120,6 @@
   "pool.you": "Toi",
   "pool.group.solids": "Pleines",
   "pool.group.stripes": "Rayées",
-  "pool.open": "Table ouverte"
+  "pool.open": "Table ouverte",
+  "duel.listen": "L’écouter"
 }
