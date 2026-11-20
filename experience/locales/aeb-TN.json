@@ -1073,5 +1073,9 @@
   "push.kind.gameResult": "{{sender}} لعب اللعبة متاعك",
   "garden.seeds": "الزريعة: {{count}}",
   "garden.noSeeds": "ما بقاتش زريعة. العبو مع بعضكم باش تربحو أكثر.",
-  "garden.goPlay": "امشي للعب"
+  "garden.goPlay": "امشي للعب",
+  "appearance.light": "ديما فاتح",
+  "appearance.lightHint": "فاتح النهار الكل، حتى في الليل.",
+  "gate.back.oliver": "مرحبا بيك من جديد، حبيبي.",
+  "gate.back.yasmine": "مرحبا بيك من جديد، mi amor."
 }

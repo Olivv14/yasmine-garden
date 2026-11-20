@@ -1074,3 +1074,7 @@ push.kind.gameResult	{{sender}} played your game	{{sender}} jugó tu juego	{{sen
 garden.seeds	Seeds: {{count}}	Semillas: {{count}}	Graines : {{count}}	Semi: {{count}}	الزريعة: {{count}}
 garden.noSeeds	No seeds left. Play together to earn more.	No quedan semillas. Jueguen juntos para ganar más.	Plus de graines. Jouez ensemble pour en gagner.	Niente più semi. Giocate insieme per guadagnarne altri.	ما بقاتش زريعة. العبو مع بعضكم باش تربحو أكثر.
 garden.goPlay	Go to Play	Ir a Jugar	Aller jouer	Vai a Gioca	امشي للعب
+appearance.light	Always light	Siempre claro	Toujours clair	Sempre chiaro	ديما فاتح
+appearance.lightHint	Light all day, even at night.	Claro todo el día, incluso de noche.	Clair toute la journée, même la nuit.	Chiaro tutto il giorno, anche di notte.	فاتح النهار الكل، حتى في الليل.
+gate.back.oliver	Welcome back, habibi.	Bienvenido de nuevo, habibi.	Bon retour, habibi.	Bentornato, habibi.	مرحبا بيك من جديد، حبيبي.
+gate.back.yasmine	Welcome back, mi amor.	Bienvenida de nuevo, mi amor.	Bon retour, mi amor.	Bentornata, mi amor.	مرحبا بيك من جديد، mi amor.

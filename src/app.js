@@ -200,8 +200,11 @@ async function activate(){if(!client)return;const g=epoch;copy($('authStatus'),(
 function authEvent(event,session){if(event==='SIGNED_OUT'||!session){authUser=null;clearPrivate();api.disconnect().catch(showError);$('authPanel').hidden=false;$('loginForm').hidden=false;$('passwordForm').hidden=true;$('setupPassword').hidden=true;$('retryActivation').hidden=true;copy($('connectionStatus'),()=>(t('sync.noSession')));if(!gate.open())gate.show();else gate.language();return;}const changed=authUser?.id!==session.user.id;if(changed){clearPrivate();authUser=session.user;}$('logout').hidden=false;$('accountPassword').hidden=false;$('setupPassword').hidden=false;
  if(event==='PASSWORD_RECOVERY'||new URLSearchParams(location.search).get('setup')==='1'){authUser=session.user;gate.hide();$('authPanel').hidden=false;$('loginForm').hidden=true;$('passwordForm').hidden=false;copy($('authStatus'),()=>(t('auth.linkAccepted')));return;}
  if(event==='TOKEN_REFRESHED'){client.realtime.setAuth(session.access_token).then(()=>api.schedule()).catch(showError);return;}
+ if(event==='INITIAL_SESSION'&&gate.open())gate.resume(whoIs(session.user));
  if(changed||event==='INITIAL_SESSION'||event==='SIGNED_IN')authSerial=authSerial.then(activate).catch(showError);
 }
+// Which of you this phone belongs to, from the account's address and the public login aliases.
+function whoIs(user){const mail=String(user?.email??'').toLowerCase();for(const [who,email] of Object.entries(client?.connectionPublicConfig?.loginAliases??{}))if(String(email).toLowerCase()===mail)return who.toLowerCase();return '';}
 async function signInWithWord(word){
   if(!client)throw Object.assign(new Error('config'),{gateKey:'errors.config'});
   const mine=authUser?.email?.toLowerCase()??'',aliases=Object.entries(client.connectionPublicConfig.loginAliases??{}).sort(([,a],[,b])=>(b===mine)-(a===mine));

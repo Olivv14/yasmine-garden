@@ -1073,5 +1073,9 @@
   "push.kind.gameResult": "{{sender}} jugó tu juego",
   "garden.seeds": "Semillas: {{count}}",
   "garden.noSeeds": "No quedan semillas. Jueguen juntos para ganar más.",
-  "garden.goPlay": "Ir a Jugar"
+  "garden.goPlay": "Ir a Jugar",
+  "appearance.light": "Siempre claro",
+  "appearance.lightHint": "Claro todo el día, incluso de noche.",
+  "gate.back.oliver": "Bienvenido de nuevo, habibi.",
+  "gate.back.yasmine": "Bienvenida de nuevo, mi amor."
 }

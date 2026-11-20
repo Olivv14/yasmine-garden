@@ -1073,5 +1073,9 @@
   "push.kind.gameResult": "{{sender}} ha giocato la tua partita",
   "garden.seeds": "Semi: {{count}}",
   "garden.noSeeds": "Niente più semi. Giocate insieme per guadagnarne altri.",
-  "garden.goPlay": "Vai a Gioca"
+  "garden.goPlay": "Vai a Gioca",
+  "appearance.light": "Sempre chiaro",
+  "appearance.lightHint": "Chiaro tutto il giorno, anche di notte.",
+  "gate.back.oliver": "Bentornato, habibi.",
+  "gate.back.yasmine": "Bentornata, mi amor."
 }
