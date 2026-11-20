@@ -1,0 +1,50 @@
+/* Learn at dusk: the decks, the word of the day, your numbers, and the full-screen review session. */
+.learn-home{display:grid;gap:12px;padding:16px;border-radius:24px;color:#FFF4E6;margin-block:8px 16px;
+  background:linear-gradient(180deg,#1F2148 0%,#5A3C66 22%,#3A262C 60%,#1C1418 100%);border:1px solid rgba(255,226,198,.16)}
+.learn-decks{display:flex;gap:6px;overflow-x:auto;padding-block-end:2px;scrollbar-width:none}
+.learn-home button.learn-deck{flex:none;min-block-size:38px;border-radius:99px;padding:0 14px;background:rgba(18,10,20,.55);border:1px solid rgba(255,226,198,.22);color:#FFF4E6;font:700 13px var(--font-sans);box-shadow:none}
+.learn-home button.learn-deck[aria-selected="true"]{background:#FFD58A;color:#2A1A10;border-color:#FFD58A}
+.learn-wod,.ls-card{display:grid;justify-items:center;gap:6px;text-align:center;padding:18px 14px;border-radius:20px;background:rgba(18,10,20,.62);border:1px solid rgba(255,226,198,.16)}
+.learn-eyebrow{margin:0;font:800 11px var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:#FFD58A}
+.learn-word{margin:0;font:800 34px/1.1 var(--font-display);color:#FFF4E6;overflow-wrap:anywhere}
+.learn-word:lang(ar),.learn-word[lang^="ar"]{font:700 34px/1.4 var(--font-arabic)}
+.learn-say{margin:0;font:500 14px var(--font-mono);color:#FFE2C6}
+.learn-say:empty{display:none}
+.learn-meaning{margin:0;font:600 17px var(--font-sans);color:#FFE2C6}
+button.learn-listen{inline-size:44px;block-size:44px;min-block-size:44px;border-radius:50%;padding:0;display:grid;place-items:center;background:#FFD58A;color:#2A1A10;border:0;box-shadow:none}
+button.learn-listen.big{inline-size:84px;block-size:84px;min-block-size:84px}
+.learn-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.learn-stat{background:rgba(18,10,20,.62);border:1px solid rgba(255,226,198,.16);border-radius:16px;padding:10px 6px;text-align:center}
+.learn-stat b{display:block;font:800 22px var(--font-display);color:#FFD58A}
+.learn-stat:nth-child(2) b{color:#9FE0B8}.learn-stat:nth-child(3) b{color:#FF9EC2}
+.learn-stat span{font:600 11px var(--font-sans);color:#FFE2C6}
+.learn-home .learn-partner,.learn-home .small{color:#FFE2C6;margin:0}
+.learn-home button.primary,.learn-session button.primary{min-block-size:48px;border:0;border-radius:14px;background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;font:800 16px var(--font-display);box-shadow:none}
+.learn-home button.quiet,.learn-session button.quiet{min-block-size:44px;border-radius:14px;background:rgba(18,10,20,.55);border:1px solid rgba(255,226,198,.25);color:#FFF4E6;font:700 14px var(--font-sans);box-shadow:none}
+html.learn-open{overflow:hidden}
+html.learn-open .bottom-nav,html.learn-open #affectionDock{visibility:hidden}
+.learn-session{position:fixed;inset:0;z-index:90;overflow-y:auto;display:flex;flex-direction:column;gap:14px;color:#FFF4E6;
+  padding:calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 20px);
+  background:linear-gradient(180deg,#1A1640 0%,#3E2A56 35%,#9A5A5A 62%,#2A1A20 80%,#120A0E 100%)}
+.ls-top{display:flex;align-items:center;gap:12px}
+.learn-session button.ls-close{inline-size:44px;block-size:44px;min-block-size:44px;border-radius:50%;padding:0;display:grid;place-items:center;background:rgba(18,10,20,.6);border:1px solid rgba(255,226,198,.25);color:#FFF4E6;flex:none}
+.ls-progress{flex:1;block-size:6px;border-radius:3px;background:rgba(255,226,198,.18);overflow:hidden}
+.ls-progress i{display:block;block-size:100%;background:linear-gradient(90deg,#FFD58A,#FF9EC2);transition:inline-size .3s}
+.ls-card{margin-block:auto;padding:24px 16px;gap:12px}
+.ls-options{display:grid;gap:8px;inline-size:100%}
+.learn-session button.ls-option{min-block-size:52px;border-radius:14px;background:rgba(255,244,230,.06);border:1px solid rgba(255,226,198,.22);color:#FFF4E6;font:700 16px var(--font-sans);box-shadow:none}
+.learn-session button.ls-option.right,.learn-session button.ls-option.right:disabled{opacity:1;background:rgba(94,212,148,.3);border-color:#8DE8B0;color:#FFFFFF}
+.learn-session button.ls-option.wrong,.learn-session button.ls-option.wrong:disabled{opacity:1;background:rgba(255,120,110,.28);border-color:#FF8A7A;color:#FFFFFF}
+.ls-type{display:grid;gap:8px;inline-size:100%}
+.ls-type input{min-block-size:52px;border-radius:14px;background:rgba(255,244,230,.08);border:1px solid rgba(255,226,198,.3);color:#FFF4E6;font:700 20px var(--font-sans);text-align:center}
+.ls-type.right input{border-color:#8DE8B0}.ls-type.almost input{border-color:#FFD58A}.ls-type.wrong input{border-color:#FF8A7A}
+.ls-verdict{margin:0;font:800 15px var(--font-sans);color:#FFD58A}
+.ls-rate{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;inline-size:100%}
+.ls-rate button{display:grid;gap:2px;min-block-size:58px;border-radius:14px;border:1px solid rgba(255,226,198,.22);background:rgba(255,244,230,.06);color:#FFF4E6;box-shadow:none;padding:6px}
+.ls-rate button b{font:800 14px var(--font-sans)}.ls-rate button small{font:600 11px var(--font-sans);color:#FFE2C6}
+.ls-rate .ls-rate-again{border-color:rgba(255,138,128,.6)}.ls-rate .ls-rate-good{background:rgba(255,213,138,.18);border-color:#FFD58A}.ls-rate .ls-rate-easy{border-color:rgba(141,232,176,.6)}
+.learn-session .ls-next{inline-size:100%}
+.learn-teach-form{display:grid;gap:10px}
+.learn-teach-form label{display:grid;gap:4px;font:700 13px var(--font-sans)}
+.msg-learn{margin:4px 0 0;font:700 13px var(--font-sans)}
+.msg-learn-row{display:flex;gap:6px;margin-top:6px}

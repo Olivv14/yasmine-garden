@@ -1318,3 +1318,60 @@ eggs.greenHour	11:11, the green hour. Make a wish.	11:11, la hora verde. Pide un
 eggs.moon	Same moon. Goodnight, {{a}} and {{b}}.	La misma luna. Buenas noches, {{a}} y {{b}}.	La même lune. Bonne nuit, {{a}} et {{b}}.	La stessa luna. Buonanotte, {{a}} e {{b}}.	نفس القمرة. تصبحو على خير، {{a}} و{{b}}.
 talk.danceStepMine	You sent {{name}} a {{style}} step to copy	Le mandaste a {{name}} un paso de {{style}} para copiar	Tu as envoyé à {{name}} un pas de {{style}} à copier	Hai mandato a {{name}} un passo di {{style}} da copiare	بعثت لـ{{name}} خطوة {{style}} باش يقلّدها
 talk.danceCopyMine	You copied {{name}}'s step	Copiaste el paso de {{name}}	Tu as copié le pas de {{name}}	Hai copiato il passo di {{name}}	قلّدت خطوة {{name}}
+learn.deck.it	Italian	Italiano	Italien	Italiano	طلياني
+learn.deck.ve	Venezuelan Spanish	Español venezolano	Espagnol du Venezuela	Spagnolo venezuelano	إسباني فنزويلي
+learn.deck.tn	Tunisian Derja	Derja tunecino	Derja tunisien	Derja tunisino	الدارجة التونسية
+learn.deck.w	From {{name}}	De {{name}}	De {{name}}	Da {{name}}	من {{name}}
+learn.wordOfDay	Word of the day	Palabra del día	Mot du jour	Parola del giorno	كلمة النهار
+learn.due	to review	por repasar	à revoir	da ripassare	للمراجعة
+learn.learned	learned	aprendidas	apprises	imparate	تعلّمتهم
+learn.xp	XP	XP	XP	XP	XP
+learn.partnerXp	{{name}} has {{count}} XP in this deck	{{name}} tiene {{count}} XP en este mazo	{{name}} a {{count}} XP dans ce paquet	{{name}} ha {{count}} XP in questo mazzo	{{name}} عندو {{count}} XP في الكرطة هاذي
+learn.start	Review now · {{count}}	Repasar ahora · {{count}}	Réviser maintenant · {{count}}	Ripassa ora · {{count}}	راجع توّا · {{count}}
+learn.allDone	All done for today	Todo listo por hoy	Tout est fait pour aujourd'hui	Tutto fatto per oggi	كمّلت لليوم
+learn.teach	Teach {{name}} a word	Enséñale una palabra a {{name}}	Apprends un mot à {{name}}	Insegna una parola a {{name}}	علّم {{name}} كلمة
+learn.noTaught	{{name}} hasn't taught you a word yet.	{{name}} todavía no te ha enseñado ninguna palabra.	{{name}} ne t'a pas encore appris de mot.	{{name}} non ti ha ancora insegnato una parola.	{{name}} مازال ما علّمكش حتى كلمة.
+learn.listen	Listen	Escuchar	Écouter	Ascolta	اسمع
+learn.sessionLabel	Review session	Sesión de repaso	Séance de révision	Sessione di ripasso	حصّة مراجعة
+learn.taughtBy	Taught by {{name}}	Enseñada por {{name}}	Appris par {{name}}	Insegnata da {{name}}	علّمهالك {{name}}
+learn.newWord	A new word	Una palabra nueva	Un nouveau mot	Una parola nuova	كلمة جديدة
+learn.sayIt	Say it to {{name}}	Díselo a {{name}}	Dis-le à {{name}}	Dillo a {{name}}	قولها لـ{{name}}
+learn.stopSay	Stop and send	Parar y enviar	Arrêter et envoyer	Ferma e invia	وقّف وابعث
+learn.sending	Sending…	Enviando…	Envoi…	Invio…	قاعد نبعث…
+learn.sent	Sent to {{name}}	Enviado a {{name}}	Envoyé à {{name}}	Inviato a {{name}}	تبعث لـ{{name}}
+learn.whatHear	What do you hear?	¿Qué escuchas?	Qu'entends-tu ?	Cosa senti?	شنوّة تسمع؟
+learn.whatMeans	What does it mean?	¿Qué significa?	Qu'est-ce que ça veut dire ?	Cosa significa?	شنوّة معناها؟
+learn.typeIt	Write it	Escríbela	Écris-le	Scrivila	اكتبها
+learn.typeHere	Type the word	Escribe la palabra	Tape le mot	Scrivi la parola	اكتب الكلمة
+learn.check	Check	Comprobar	Vérifier	Controlla	ثبّت
+learn.right	Right!	¡Bien!	Juste !	Giusto!	صحيح!
+learn.almost	Almost: one letter off	Casi: una letra distinta	Presque : une lettre de travers	Quasi: una lettera sbagliata	قريب: حرف غالط
+learn.wrong	Not quite. Here it is:	No exactamente. Es así:	Pas tout à fait. La voici :	Non proprio. Eccola:	موش هكّا. هاهي:
+learn.rate.again	Again	Otra vez	Encore	Ancora	عاود
+learn.rate.good	Got it	Lo tengo	Retenu	Ce l'ho	فهمتها
+learn.rate.easy	Easy	Fácil	Facile	Facile	ساهلة
+learn.inMinutes	in {{count}} min	en {{count}} min	dans {{count}} min	tra {{count}} min	بعد {{count}} دق
+learn.inHours	in {{count}} h	en {{count}} h	dans {{count}} h	tra {{count}} h	بعد {{count}} سوايع
+learn.inDays	in {{count}} days	en {{count}} días	dans {{count}} jours	tra {{count}} giorni	بعد {{count}} أيام
+learn.next	Next	Siguiente	Suivant	Avanti	اللي بعدها
+learn.doneTitle	Done for now!	¡Listo por ahora!	Fini pour l'instant !	Fatto per ora!	كمّلت توّا!
+learn.doneXp	+{{count}} XP. The words come back when it's time.	+{{count}} XP. Las palabras vuelven cuando toca.	+{{count}} XP. Les mots reviendront au bon moment.	+{{count}} XP. Le parole tornano quando è il momento.	+{{count}} XP. الكلمات يرجعو في وقتهم.
+learn.backToDecks	Back to the decks	Volver a los mazos	Retour aux paquets	Torna ai mazzi	ارجع للكرطات
+learn.teachTitle	Teach {{name}} a word	Enséñale una palabra a {{name}}	Apprends un mot à {{name}}	Insegna una parola a {{name}}	علّم {{name}} كلمة
+learn.teachHint	A word from your language. Record how you say it: {{name}} will hear your voice.	Una palabra de tu idioma. Graba cómo la dices: {{name}} escuchará tu voz.	Un mot de ta langue. Enregistre comment tu le dis : {{name}} entendra ta voix.	Una parola della tua lingua. Registra come la dici: {{name}} sentirà la tua voce.	كلمة من لغتك. سجّل كيفاش تقولها: {{name}} باش يسمع صوتك.
+learn.teachWord	The word	La palabra	Le mot	La parola	الكلمة
+learn.teachMeaning	What it means	Qué significa	Ce qu'il veut dire	Cosa significa	شنوّة معناها
+learn.teachSay	How to say it (optional)	Cómo se dice (opcional)	Comment le dire (facultatif)	Come si dice (facoltativo)	كيفاش تتقال (اختياري)
+learn.recordWord	Record your voice	Grabar tu voz	Enregistrer ta voix	Registra la tua voce	سجّل صوتك
+learn.recordAgain	Record again	Grabar otra vez	Réenregistrer	Registra di nuovo	عاود سجّل
+learn.voiceReady	Your voice is ready.	Tu voz está lista.	Ta voix est prête.	La tua voce è pronta.	صوتك حاضر.
+learn.recording	Recording…	Grabando…	Enregistrement…	Registrazione…	قاعد نسجّل…
+learn.teachSend	Send the word	Enviar la palabra	Envoyer le mot	Invia la parola	ابعث الكلمة
+learn.taught	{{name}} has a new word to learn	{{name}} tiene una palabra nueva para aprender	{{name}} a un nouveau mot à apprendre	{{name}} ha una parola nuova da imparare	{{name}} عندو كلمة جديدة يتعلّمها
+talk.practising	{{name}} is practising: {{word}}	{{name}} está practicando: {{word}}	{{name}} s'entraîne : {{word}}	{{name}} si esercita: {{word}}	{{name}} قاعد يتدرّب: {{word}}
+talk.youPractised	You practised: {{word}}	Practicaste: {{word}}	Tu t'es entraîné·e : {{word}}	Ti sei esercitato/a: {{word}}	تدرّبت: {{word}}
+talk.learnHeart	❤️ Perfect	❤️ Perfecto	❤️ Parfait	❤️ Perfetto	❤️ مية مية
+talk.learnAgain	Again	Otra vez	Encore	Ancora	عاود
+talk.learnAgainText	Again! Say "{{word}}" one more time 🔁	¡Otra vez! Di "{{word}}" una vez más 🔁	Encore ! Redis « {{word}} » une fois 🔁	Ancora! Ridici "{{word}}" un'altra volta 🔁	عاود! قول "{{word}}" مرّة أخرى 🔁
+talk.taughtWord	{{name}} taught you a word	{{name}} te enseñó una palabra	{{name}} t'a appris un mot	{{name}} ti ha insegnato una parola	{{name}} علّمك كلمة
+talk.learnIt	Learn it	Aprenderla	L'apprendre	Imparala	تعلّمها

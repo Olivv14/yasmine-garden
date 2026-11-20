@@ -62,11 +62,13 @@ export class Transport{
     // the shop (backend/012): optional, so the app still opens before the migration is applied
     const shopPurchases=await optional(()=>this.client.from('shop_purchases').select('*').eq('pair_id',pairId).order('created_at').then(checked));
     const shopChoices=await optional(()=>this.client.from('shop_choices').select('*').eq('pair_id',pairId).then(checked));
+    const learnState=await optional(()=>pages(()=>this.client.from('learn_state').select('*').eq('pair_id',pairId).order('profile_id').order('card_key')));
+    const learnDays=await optional(()=>this.client.from('learn_days').select('*').eq('pair_id',pairId).then(checked));
     const pairStory=await optional(()=>this.client.from('pair_story').select('*').eq('pair_id',pairId).then(checked));
     const notifications=await optional(()=>this.client.from('notifications').select('*').eq('recipient_id',me.id).order('created_at',{ascending:false}).order('id').limit(200).then(checked));
     const answers=[];for(const r of rounds)answers.push(...await pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').eq('round_id',r.id).order('owner_id')));
     const currentMe=profiles.find(p=>p.id===me.id);if(!currentMe||currentMe.auth_user_id!==me.auth_user_id)throw uiError('sync.changedSession');
-    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,playlists,playlistItems,notifications,me:currentMe,pairId};
+    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,learnState:learnState??[],learnDays:learnDays??[],playlists,playlistItems,notifications,me:currentMe,pairId};
   }
   schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh().catch(this.onFailure),120);}
   refresh(){if(this.inflight){this.again=true;return this.inflight;}const g=this.generation;this.inflight=(async()=>{try{let attempts=0;do{this.again=false;this.guard(g);const r0=await this.revision();const data=await this.snapshot();const r1=await this.revision();this.guard(g);if(r0!==r1||this.again){if(++attempts>=6)throw uiError('errors.changedDuringRead');continue;}this.context.members=data.members;this.onSnapshot({...data,revision:r1});this.onStatus(()=>t('sync.revision',{revision:r1}));return;}while(true)}finally{if(g===this.generation){this.inflight=null;if(this.again)this.schedule();}}})();return this.inflight;}

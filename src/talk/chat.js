@@ -32,7 +32,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       const q=client().from('messages').select('*').eq('pair_id',pairId()).order('created_at',{ascending:false}).order('id',{ascending:false}).limit(PAGE);
       const {data,error}=await q;if(error)throw error;
       available=true;hasEarlier=data.length===PAGE;list=mergeMessages([],data);
-      await Promise.all([loadReactions(data.map(m=>m.id)),loadReads(),loadMedia(data.filter(m=>['photo','voice'].includes(m.kind)).map(m=>m.id))]);
+      await Promise.all([loadReactions(data.map(m=>m.id)),loadReads(),loadMedia(data.filter(m=>['photo','voice','word'].includes(m.kind)).map(m=>m.id))]);
       connect();render(true);retryOutbox();sweepUploads();
     }catch(e){if(missingTable(e)){available=false;render();}}
     finally{loading=false;}
@@ -41,7 +41,7 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     const oldest=list[0];if(!oldest||!hasEarlier)return;
     const {data,error}=await client().from('messages').select('*').eq('pair_id',pairId()).lt('created_at',oldest.created_at).order('created_at',{ascending:false}).order('id',{ascending:false}).limit(PAGE);
     if(error)return;hasEarlier=data.length===PAGE;const before=listEl.scrollHeight;list=mergeMessages(list,data);
-    await Promise.all([loadReactions(data.map(m=>m.id)),loadMedia(data.filter(m=>['photo','voice'].includes(m.kind)).map(m=>m.id))]);
+    await Promise.all([loadReactions(data.map(m=>m.id)),loadMedia(data.filter(m=>['photo','voice','word'].includes(m.kind)).map(m=>m.id))]);
     render();listEl.scrollTop=listEl.scrollHeight-before;
   }
   async function loadReactions(ids){if(!ids.length)return;const {data}=await client().from('message_reactions').select('*').in('message_id',ids);for(const r of data??[])reactions=applyReaction(reactions,r);}
@@ -166,7 +166,12 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       else fig.append(el('p',()=>t('talk.uploading'),'tiny'));box.append(fig);}
     if(m.kind==='voice'){const row=media.get(m.id);
       if(row&&row.status==='ready'||row&&row.owner_id===me()){const a=document.createElement('audio');a.controls=true;a.preload='none';copy(a,()=>t('talk.voiceFrom',{name:person(m.sender_id)}),'aria-label');urlFor(row).then(u=>{if(u)a.src=u;});box.append(a);}
-      else box.append(el('p',()=>t('talk.uploading'),'tiny'));}
+      else box.append(el('p',()=>t('talk.uploading'),'tiny'));
+      // practising a word: the partner answers with a heart or "again"
+      if(m.payload?.learn?.word){const w=el('p',undefined,'msg-learn');copy(w,()=>m.sender_id===me()?t('talk.youPractised',{word:m.payload.learn.word}):t('talk.practising',{name:person(m.sender_id),word:m.payload.learn.word}));box.append(w);
+        if(m.sender_id!==me()){const row=el('div',undefined,'msg-learn-row');
+          row.append(button(()=>t('talk.learnHeart'),async()=>{try{await api().rpc('react_message',{p_message_id:m.id,p_emoji:'❤️'},true);reactions=applyReaction(reactions,{message_id:m.id,profile_id:me(),emoji:'❤️'});render();}catch{}},'quiet'),
+            button(()=>t('talk.learnAgain'),()=>send('text',t('talk.learnAgainText',{word:m.payload.learn.word}),null),'quiet'));box.append(row);}}}
     if(m.kind==='song'&&m.payload){const card=el('div',undefined,'msg-song');
       if(isCoverUrl(m.payload.cover_url)){const img=document.createElement('img');img.src=m.payload.cover_url;img.alt='';img.referrerPolicy='no-referrer';img.width=44;img.height=44;card.append(img);}
       const words=el('div');const ti=el('p',undefined,'song-title');ti.textContent=m.payload.title??'';ti.dir='auto';const ar=el('p',undefined,'small');ar.textContent=m.payload.artist??'';ar.dir='auto';words.append(ti,ar);
@@ -181,7 +186,9 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       el('p',()=>{const style=t('dance.style.'+(m.payload.style??'bachata'));if(m.sender_id===me())return m.payload.role==='copy'?t('talk.danceCopyMine',{name:person(partner())}):t('talk.danceStepMine',{name:person(partner()),style});return m.payload.role==='copy'?t('talk.danceCopy',{name:person(m.sender_id)}):t('talk.danceStep',{name:person(m.sender_id),style});}),
       button(()=>t('talk.openStudio'),()=>document.dispatchEvent(new CustomEvent('open-game',{detail:'dance'})),'primary'));box.append(card);}
     if(m.kind==='game'){box.append(el('p',()=>t('talk.gameInvite',{name:person(m.sender_id)}),'msg-game'),button(()=>t('talk.playNow'),()=>navigate('play'),'primary'));}
-    if(m.kind==='word'&&m.payload){const w=el('p',undefined,'culture-word');w.textContent=m.payload.word??'';if(m.payload.lang)w.lang=m.payload.lang;const mean=el('p',undefined,'culture-meaning');mean.textContent=m.payload.meaning??'';box.append(w,mean);}
+    if(m.kind==='word'&&m.payload){if(m.payload.teach)box.append(el('p',()=>t('talk.taughtWord',{name:person(m.sender_id)}),'tiny'));const w=el('p',undefined,'culture-word');w.textContent=m.payload.word??'';if(m.payload.lang)w.lang=m.payload.lang;const mean=el('p',undefined,'culture-meaning');mean.textContent=m.payload.meaning??'';box.append(w,mean);
+      const row=media.get(m.id);if(row&&(row.status==='ready'||row.owner_id===me())){const a=document.createElement('audio');a.controls=true;a.preload='none';copy(a,()=>t('talk.voiceFrom',{name:person(m.sender_id)}),'aria-label');urlFor(row).then(u=>{if(u)a.src=u;});box.append(a);}
+      if(m.payload.teach&&m.sender_id!==me())box.append(button(()=>t('talk.learnIt'),()=>navigate('learn'),'quiet'));}
     if(m.body){const p=el('p',undefined,'msg-text');p.textContent=m.body;p.dir='auto';box.append(p);}
     return box;
   }
