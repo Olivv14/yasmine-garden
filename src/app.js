@@ -44,7 +44,7 @@ const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:(
 // Talk: the chat. It reads and writes its own way (live room, pages, outbox), never through a full refresh.
 const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=>api,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),onUnread:n=>shell?.unread(n),playlistSongs:()=>(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at)});
 const shell=createShell({$,el,button,t,copy,navigate:next=>navigate(next),getSnapshot:()=>snapshot,me:()=>state.profile,person,home,player,music,chat,openRound:id=>play?.openRound(id),markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true))});
-const play=createPlay({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,photoOf:id=>avatarUI?.photo(id)??null,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x),
+const play=createPlay({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,photoOf:id=>avatarUI?.photo(id)??null,getApi:()=>api,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x),
   navigate:next=>navigate(next),openPlant:()=>home.openPlant(),onWaiting:n=>shell?.playWaiting(n),onRound:id=>markRoundSeen(id)});
 const shop=createShop({el,button,t,copy,getSnapshot:()=>snapshot,me:()=>state.profile,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,person,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x)});$('openShop').onclick=()=>shop.open();
 // Opening a round from Play marks its bell rows (your turn, the result) as read.

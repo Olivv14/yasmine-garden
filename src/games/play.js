@@ -4,6 +4,8 @@
 import {createTruthDare} from './truth-dare.js';
 import {createHockey} from './hockey.js';
 import {createPool} from './pool.js';
+import {createPiano} from './piano.js';
+import {createDance} from '../dance/dance.js';
 import {SCENE_ART} from './scene-art.js';
 import {createDuel} from './duel-ui.js';
 import {createKnowMe} from './knowme-ui.js';
@@ -12,7 +14,7 @@ import {authorTone} from '../garden/model.js';
 import {icon} from '../design/icons.js';
 
 const MISSING=['PGRST202','42883','42P01'];
-export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,photoOf=()=>null,rpc,notify,navigate,openPlant,onWaiting,onRound}){
+export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,photoOf=()=>null,getApi=()=>null,rpc,notify,navigate,openPlant,onWaiting,onRound}){
   const mount=$('playMount');
   const partner=()=>getSnapshot()?.members.map(m=>m.profile_id).find(id=>id!==me())??null;
   const tones=()=>{const s=getSnapshot();return s?{me:authorTone(me(),s.members,s.profiles),partner:authorTone(partner(),s.members,s.profiles)}:{me:'oliver',partner:'yasmine'};};
@@ -38,8 +40,11 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf});
   const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
+  const piano=createPiano({el,button,t,copy,me,getSnapshot,download:m=>getApi().download(m),record});
+  const dance=createDance({el,button,t,copy,me,person,partner,getSnapshot,getClient,getApi,notify});
   const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},pool:{icon:'pool',title:'pool.title',hint:'play.pool.hint',game:pool},
-    duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme}};
+    duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme},
+    dance:{icon:'dance',title:'dance.title',hint:'play.dance.hint',game:dance},piano:{icon:'piano',title:'piano.title',hint:'play.piano.hint',game:piano}};
 
   const board=el('section',undefined,'card play-board');board.id='playBoard';
   const turns=el('section',undefined,'play-turns');turns.id='playTurns';
@@ -72,13 +77,16 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     if(then)then();else GAMES[id].game.render?.(getSnapshot());
     stage.scrollTop=0;
   }
-  function stopGames(){hockey.stop();pool.stop();duel.stop();knowme.stop();}
+  function stopGames(){hockey.stop();pool.stop();duel.stop();knowme.stop();piano.stop();dance.stop();}
   // A round from the bell or a "Your turn" card: play it if it waits for you, otherwise show its result.
   function openRound(roundId){
     const snap=getSnapshot(),r=snap?.playRounds?.find(x=>x.id===roundId);if(!r)return false;
     const id=r.game==='word_duel'?'duel':'knowme',g=GAMES[id].game,mine=answersOf(snap,r.id).some(a=>a.profile_id===me());
     show(id,()=>mine?g.showResult(r):g.open(r));onRound?.(r.id);return true;
   }
+
+  // a dance step in the chat (or anywhere) opens the studio
+  document.addEventListener('open-game',e=>{if(GAMES[e.detail]){navigate('play');setTimeout(()=>show(e.detail),60);}});
 
   function paintBoard(snap){
     const pts=pointsBy(snap,weekStart()),p=partner(),s=seeds(snap,me()),max=Math.max(1,...pts.values());

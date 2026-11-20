@@ -1201,3 +1201,86 @@ pool.chip	8-ball · {{state}}	Bola 8 · {{state}}	Billard 8 · {{state}}	Palla 8
 pool.chip.yours	your shot	te toca	à toi	tocca a te	دورك
 pool.chip.theirs	their shot	le toca	à l’autre	tocca all’altro	دور الآخر
 pool.pullToShoot	Pull back to shoot	Tira hacia atrás para disparar	Tire en arrière pour frapper	Tira indietro per colpire	اسحب للتالي باش تضرب
+piano.eyebrow	Colour tiles	Teclas de colores	Touches en couleur	Tasti a colori	بلايص ملوّنة
+piano.title	Piano tiles	Piano tiles	Piano tiles	Piano tiles	Piano tiles
+piano.intro	Tap the lowest tile, hold the long ones, and don't touch the dark. Each star is a point.	Toca la tecla más baja, mantén las largas y no toques lo oscuro. Cada estrella es un punto.	Touche la tuile la plus basse, garde le doigt sur les longues, et ne touche pas le noir. Chaque étoile vaut un point.	Tocca il tasto più in basso, tieni premuti quelli lunghi e non toccare il buio. Ogni stella è un punto.	انقر على البلاصة اللوطة، شدّ الطوال، وما تمسّش الظلمة. كل نجمة بنقطة.
+piano.best	Best: {{score}}	Mejor: {{score}}	Record : {{score}}	Record: {{score}}	أحسن سكور: {{score}}
+piano.play	Play	Jugar	Jouer	Gioca	العب
+piano.uploadHint	Songs you upload in Music appear here too: the tiles follow their beat.	Las canciones que subes en Música aparecen aquí también: las teclas siguen su ritmo.	Les chansons que tu ajoutes dans Musique apparaissent ici aussi : les tuiles suivent leur rythme.	Le canzoni che carichi in Musica compaiono anche qui: i tasti seguono il loro ritmo.	الأغاني اللي تحطّهم في الموسيقى يظهروا هنا زادة: البلايص يمشيو على الريتم متاعهم.
+piano.listening	Listening to the song's beat…	Escuchando el ritmo de la canción…	J'écoute le rythme de la chanson…	Ascolto il ritmo della canzone…	قاعد نسمع في ريتم الأغنية…
+piano.cannotPlay	This song can't be played here. Try another one.	Esta canción no se puede tocar aquí. Prueba otra.	Cette chanson ne peut pas être jouée ici. Essaie une autre.	Questa canzone non si può suonare qui. Provane un'altra.	الأغنية هاذي ما تتعزفش هنا. جرّب وحدة أخرى.
+piano.boardLabel	Piano tiles: tap the falling tiles	Piano tiles: toca las teclas que caen	Piano tiles : touche les tuiles qui tombent	Piano tiles: tocca i tasti che cadono	Piano tiles: انقر على البلايص اللي طايحين
+piano.pause	Pause	Pausa	Pause	Pausa	وقّف
+piano.paused	Paused	En pausa	En pause	In pausa	واقف
+piano.resume	Keep playing	Seguir jugando	Continuer	Continua	كمّل
+piano.quit	Back to the songs	Volver a las canciones	Retour aux chansons	Torna alle canzoni	ارجع للأغاني
+piano.combo	Combo ×{{count}}	Combo ×{{count}}	Combo ×{{count}}	Combo ×{{count}}	كومبو ×{{count}}
+piano.finished	The whole song! Bravo.	¡La canción entera! Bravo.	La chanson entière ! Bravo.	Tutta la canzone! Bravo.	الأغنية الكلّ! برافو.
+piano.over	Oops, a wrong tile. Again?	Uy, una tecla equivocada. ¿Otra vez?	Oups, une mauvaise tuile. On recommence ?	Ops, un tasto sbagliato. Di nuovo?	أوبس، بلاصة غالطة. نعاودو؟
+piano.points	+{{count}} points for the week	+{{count}} puntos para la semana	+{{count}} points pour la semaine	+{{count}} punti per la settimana	+{{count}} نقاط للجمعة
+piano.again	Again	Otra vez	Encore	Ancora	عاود
+piano.songs	Songs	Canciones	Chansons	Canzoni	الأغاني
+play.piano.hint	Colour tiles to your songs	Teclas de colores con tus canciones	Des tuiles en couleur sur tes chansons	Tasti a colori sulle tue canzoni	بلايص ملوّنة على الأغاني متاعكم
+dance.title	Dance studio	Estudio de baile	Studio de danse	Studio di danza	ستوديو الرقص
+play.dance.hint	Copy my step, at sunset	Copia mi paso, al atardecer	Copie mon pas, au coucher du soleil	Copia il mio passo, al tramonto	قلّد الخطوة متاعي، وقت المغرب
+dance.duoLabel	The two of you dancing {{style}}, as silhouettes against the sunset	Ustedes dos bailando {{style}}, en silueta contra el atardecer	Vous deux en train de danser la {{style}}, en silhouettes devant le coucher du soleil	Voi due che ballate {{style}}, in silhouette contro il tramonto	انتوما الزوز ترقصو {{style}}، ظلال قدّام المغرب
+dance.style.bachata	Bachata	Bachata	Bachata	Bachata	باتشاتا
+dance.style.salsa	Salsa	Salsa	Salsa	Salsa	سالسا
+dance.style.merengue	Merengue	Merengue	Merengue	Merengue	ميرينغي
+dance.style.reggaeton	Reggaeton	Reguetón	Reggaeton	Reggaeton	ريغيتون
+dance.style.mezoued	Mezoued	Mezoued	Mezoued	Mezoued	مزود
+dance.style.joropo	Joropo	Joropo	Joropo	Joropo	خوروبو
+dance.studio	{{name}}'s studio	Estudio de {{name}}	Studio de {{name}}	Studio di {{name}}	ستوديو {{name}}
+dance.streak	{{count}} days dancing in a row	{{count}} días bailando seguidos	{{count}} jours de danse d'affilée	{{count}} giorni di ballo di fila	{{count}} أيام ترقصو ورا بعضهم
+dance.beatLine	{{style}} · {{bpm}} BPM · you and {{name}}	{{style}} · {{bpm}} BPM · tú y {{name}}	{{style}} · {{bpm}} BPM · toi et {{name}}	{{style}} · {{bpm}} BPM · tu e {{name}}	{{style}} · {{bpm}} BPM · انت و{{name}}
+dance.copyTitle	Copy my step	Copia mi paso	Copie mon pas	Copia il mio passo	قلّد خطوتي
+dance.today	Today: {{style}}	Hoy: {{style}}	Aujourd'hui : {{style}}	Oggi: {{style}}	اليوم: {{style}}
+dance.needsUpdate	The dance studio needs the latest update of Between us.	El estudio de baile necesita la última actualización de Entre nosotros.	Le studio de danse a besoin de la dernière mise à jour d'Entre nous.	Lo studio di danza ha bisogno dell'ultimo aggiornamento di Tra noi.	ستوديو الرقص يستحق آخر تحديث متاع بيناتنا.
+dance.toCopy	{{name}} filmed a {{style}} step for you. Watch it, then film your copy.	{{name}} grabó un paso de {{style}} para ti. Míralo y graba tu copia.	{{name}} a filmé un pas de {{style}} pour toi. Regarde-le, puis filme ta copie.	{{name}} ha filmato un passo di {{style}} per te. Guardalo, poi filma la tua copia.	{{name}} صوّر خطوة {{style}} ليك. شوفها، وبعد صوّر التقليد متاعك.
+dance.watchCopy	Watch and copy	Mirar y copiar	Regarder et copier	Guarda e copia	شوف وقلّد
+dance.toRate	{{name}} copied your step. How close was it?	{{name}} copió tu paso. ¿Qué tan parecido quedó?	{{name}} a copié ton pas. C'était proche ?	{{name}} ha copiato il tuo passo. Quanto si avvicina?	{{name}} قلّد خطوتك. قدّاش قريب؟
+dance.sideBySide	Watch side by side	Ver lado a lado	Voir côte à côte	Guarda fianco a fianco	شوفهم جنب بعضهم
+dance.howTo	You film a short step ({{seconds}} s). {{name}} tries to copy it. You give them 1 to 3 hearts.	Grabas un paso corto ({{seconds}} s). {{name}} intenta copiarlo. Le das de 1 a 3 corazones.	Tu filmes un petit pas ({{seconds}} s). {{name}} essaie de le copier. Tu lui donnes de 1 à 3 cœurs.	Filmi un passo breve ({{seconds}} s). {{name}} prova a copiarlo. Gli dai da 1 a 3 cuori.	تصوّر خطوة قصيرة ({{seconds}} ث). {{name}} يحاول يقلّدها. تعطيه من 1 لـ 3 قلوب.
+dance.waiting	{{name}} hasn't copied your last step yet.	{{name}} todavía no ha copiado tu último paso.	{{name}} n'a pas encore copié ton dernier pas.	{{name}} non ha ancora copiato il tuo ultimo passo.	{{name}} مازال ما قلّدش آخر خطوة متاعك.
+dance.filmStep	Film my step	Grabar mi paso	Filmer mon pas	Filma il mio passo	صوّر خطوتي
+dance.diary	Dance diary	Diario de baile	Journal de danse	Diario di danza	كرّاس الرقص
+dance.ourSteps	Our steps	Nuestros pasos	Nos pas	I nostri passi	الخطوات متاعنا
+dance.withMe	Dance with me	Baila conmigo	Danse avec moi	Balla con me	ارقص معايا
+dance.stopDancing	Stop the beat	Parar el ritmo	Arrêter le rythme	Ferma il ritmo	وقّف الريتم
+dance.pickStyle	Pick a style	Elige un estilo	Choisis un style	Scegli uno stile	اختار ستيل
+dance.bpm	{{bpm}} BPM	{{bpm}} BPM	{{bpm}} BPM	{{bpm}} BPM	{{bpm}} BPM
+dance.pickVideo	Choose a video	Elegir un video	Choisir une vidéo	Scegli un video	اختار فيديو
+dance.noCamera	The camera can't open here. You can choose a video you filmed.	La cámara no se puede abrir aquí. Puedes elegir un video que grabaste.	La caméra ne peut pas s'ouvrir ici. Tu peux choisir une vidéo que tu as filmée.	La fotocamera non si apre qui. Puoi scegliere un video che hai girato.	الكاميرا ما تتحلّش هنا. تنجم تختار فيديو صوّرتو.
+dance.cameraDenied	Allow the camera to film your step, or choose a video.	Permite la cámara para grabar tu paso, o elige un video.	Autorise la caméra pour filmer ton pas, ou choisis une vidéo.	Consenti la fotocamera per filmare il tuo passo, o scegli un video.	خلّي الكاميرا تخدم باش تصوّر خطوتك، ولا اختار فيديو.
+dance.readyCopy	Their step plays in the corner. Ready to copy it?	Su paso se ve en la esquina. ¿Listo para copiarlo?	Son pas passe dans le coin. Prêt à le copier ?	Il suo passo scorre nell'angolo. Pronto a copiarlo?	الخطوة متاعو تتعدّى في الركن. حاضر تقلّدها؟
+dance.readyStep	Find your spot. You have {{seconds}} seconds.	Busca tu sitio. Tienes {{seconds}} segundos.	Trouve ta place. Tu as {{seconds}} secondes.	Trova il tuo posto. Hai {{seconds}} secondi.	لقى بلاصتك. عندك {{seconds}} ثانية.
+dance.record	Start filming	Empezar a grabar	Commencer à filmer	Inizia a filmare	ابدا صوّر
+dance.stopRec	Stop	Parar	Arrêter	Stop	وقّف
+dance.recording	Dancing… {{seconds}} s left	Bailando… quedan {{seconds}} s	Ça danse… encore {{seconds}} s	Si balla… mancano {{seconds}} s	ترقص… باقي {{seconds}} ث
+dance.tooBig	This video is too big. Film a shorter one.	Este video es demasiado grande. Graba uno más corto.	Cette vidéo est trop lourde. Filmes-en une plus courte.	Questo video è troppo grande. Girane uno più corto.	الفيديو هذا كبير برشة. صوّر واحد أقصر.
+dance.again	Film again	Grabar otra vez	Refilmer	Rifilma	عاود صوّر
+dance.sendCopyQ	Send your copy to {{name}}?	¿Enviar tu copia a {{name}}?	Envoyer ta copie à {{name}} ?	Mandare la tua copia a {{name}}?	تبعث التقليد متاعك لـ{{name}}؟
+dance.sendStepQ	Send this step to {{name}}?	¿Enviar este paso a {{name}}?	Envoyer ce pas à {{name}} ?	Mandare questo passo a {{name}}?	تبعث الخطوة هاذي لـ{{name}}؟
+dance.send	Send	Enviar	Envoyer	Invia	ابعث
+dance.sending	Sending your dance…	Enviando tu baile…	Envoi de ta danse…	Invio del tuo ballo…	قاعد نبعث الرقصة متاعك…
+dance.copySent	Your copy is on its way to {{name}}	Tu copia va de camino a {{name}}	Ta copie part chez {{name}}	La tua copia sta arrivando a {{name}}	التقليد متاعك ماشي لـ{{name}}
+dance.stepSent	Your step is on its way to {{name}}	Tu paso va de camino a {{name}}	Ton pas part chez {{name}}	Il tuo passo sta arrivando a {{name}}	الخطوة متاعك ماشية لـ{{name}}
+dance.sendFailed	The dance couldn't be sent. Try again.	No se pudo enviar el baile. Inténtalo otra vez.	La danse n'a pas pu partir. Réessaie.	Il ballo non è partito. Riprova.	الرقصة ما تبعثتش. عاود جرّب.
+dance.stepBy	Step by {{name}}	Paso de {{name}}	Pas de {{name}}	Passo di {{name}}	خطوة {{name}}
+dance.copyBy	Copy by {{name}}	Copia de {{name}}	Copie de {{name}}	Copia di {{name}}	تقليد {{name}}
+dance.noCopyYet	{{name}} hasn't copied it yet.	{{name}} todavía no lo ha copiado.	{{name}} ne l'a pas encore copié.	{{name}} non l'ha ancora copiato.	{{name}} مازال ما قلّدهاش.
+dance.playBoth	Play both	Reproducir los dos	Lire les deux	Riproduci entrambi	شغّل الزوز
+dance.giveHearts	Give hearts	Dar corazones	Donner des cœurs	Dai cuori	اعطي قلوب
+dance.hearts	{{count}} hearts	{{count}} corazones	{{count}} cœurs	{{count}} cuori	{{count}} قلوب
+dance.youGave	You gave {{count}} hearts. Tap to change.	Diste {{count}} corazones. Toca para cambiar.	Tu as donné {{count}} cœurs. Touche pour changer.	Hai dato {{count}} cuori. Tocca per cambiare.	عطيت {{count}} قلوب. انقر باش تبدّل.
+dance.rateHint	Give {{name}} 1 to 3 hearts for the copy.	Dale a {{name}} de 1 a 3 corazones por la copia.	Donne à {{name}} de 1 à 3 cœurs pour la copie.	Dai a {{name}} da 1 a 3 cuori per la copia.	اعطي {{name}} من 1 لـ 3 قلوب على التقليد.
+dance.theyGave	{{name}} gave you {{count}} hearts	{{name}} te dio {{count}} corazones	{{name}} t'a donné {{count}} cœurs	{{name}} ti ha dato {{count}} cuori	{{name}} عطاك {{count}} قلوب
+dance.notRatedYet	{{name}} hasn't given hearts yet.	{{name}} todavía no ha dado corazones.	{{name}} n'a pas encore donné de cœurs.	{{name}} non ha ancora dato cuori.	{{name}} مازال ما عطاش قلوب.
+dance.rated	{{count}} hearts for {{name}}	{{count}} corazones para {{name}}	{{count}} cœurs pour {{name}}	{{count}} cuori per {{name}}	{{count}} قلوب لـ{{name}}
+dance.noPairs	When one of you copies the other's step, it shows up here.	Cuando uno copie el paso del otro, aparecerá aquí.	Quand l'un de vous copie le pas de l'autre, ça s'affiche ici.	Quando uno di voi copia il passo dell'altro, compare qui.	كي واحد فيكم يقلّد خطوة الآخر، تظهر هنا.
+dance.pairLine	{{step}} danced, {{copy}} copied	{{step}} bailó, {{copy}} copió	{{step}} a dansé, {{copy}} a copié	{{step}} ha ballato, {{copy}} ha copiato	{{step}} رقص، {{copy}} قلّد
+dance.unrated	No hearts yet	Aún sin corazones	Pas encore de cœurs	Ancora nessun cuore	مازال حتى قلب
+dance.diaryEmpty	Your dance diary starts with the first step you film.	Su diario de baile empieza con el primer paso que graben.	Votre journal de danse commence avec le premier pas filmé.	Il vostro diario di danza inizia con il primo passo filmato.	كرّاس الرقص متاعكم يبدا بأوّل خطوة تصوّروها.
+talk.danceStep	{{name}} sent you a {{style}} step to copy	{{name}} te mandó un paso de {{style}} para copiar	{{name}} t'a envoyé un pas de {{style}} à copier	{{name}} ti ha mandato un passo di {{style}} da copiare	{{name}} بعثلك خطوة {{style}} باش تقلّدها
+talk.danceCopy	{{name}} copied your step	{{name}} copió tu paso	{{name}} a copié ton pas	{{name}} ha copiato il tuo passo	{{name}} قلّد خطوتك
+talk.openStudio	Open the dance studio	Abrir el estudio de baile	Ouvrir le studio de danse	Apri lo studio di danza	حلّ ستوديو الرقص

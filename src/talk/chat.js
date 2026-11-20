@@ -172,6 +172,9 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       const words=el('div');const ti=el('p',undefined,'song-title');ti.textContent=m.payload.title??'';ti.dir='auto';const ar=el('p',undefined,'small');ar.textContent=m.payload.artist??'';ar.dir='auto';words.append(ti,ar);
       const url=spotifyOpenUrl({ref:m.payload.ref,title:m.payload.title,artist:m.payload.artist});
       card.append(words);if(url)card.append(button(()=>t('music.openSpotify'),()=>window.open(url,'_blank','noopener,noreferrer'),'quiet'));box.append(card);}
+    if(m.kind==='dance'&&m.payload){const card=el('div',undefined,'msg-dance');card.append(icon('dance',22),
+      el('p',()=>m.payload.role==='copy'?t('talk.danceCopy',{name:person(m.sender_id)}):t('talk.danceStep',{name:person(m.sender_id),style:t('dance.style.'+(m.payload.style??'bachata'))})),
+      button(()=>t('talk.openStudio'),()=>document.dispatchEvent(new CustomEvent('open-game',{detail:'dance'})),'primary'));box.append(card);}
     if(m.kind==='game'){box.append(el('p',()=>t('talk.gameInvite',{name:person(m.sender_id)}),'msg-game'),button(()=>t('talk.playNow'),()=>navigate('play'),'primary'));}
     if(m.kind==='word'&&m.payload){const w=el('p',undefined,'culture-word');w.textContent=m.payload.word??'';if(m.payload.lang)w.lang=m.payload.lang;const mean=el('p',undefined,'culture-meaning');mean.textContent=m.payload.meaning??'';box.append(w,mean);}
     if(m.body){const p=el('p',undefined,'msg-text');p.textContent=m.body;p.dir='auto';box.append(p);}

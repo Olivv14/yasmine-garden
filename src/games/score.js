@@ -27,6 +27,8 @@ export function pointEvents(snap){
     // older games saved without a level count 1, and 2 more for a win
     if((e.game==='hockey_bot'||e.game==='pool_bot')&&e.kind==='finish'){const won=e.score_me>e.score_partner,reward=TOAD_REWARD[e.card_id];
       add(e.profile_id,reward?(won?reward:0):1+(won?2:0),e.created_at);}
+    // piano tiles: one point per star
+    if(e.game==='piano'&&e.kind==='finish')add(e.profile_id,Math.max(0,Math.min(3,e.score_partner??0)),e.created_at);
   }
   for(const r of snap?.playRounds??[]){
     const answers=answersOf(snap,r.id);
