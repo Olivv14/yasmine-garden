@@ -48,11 +48,20 @@ export function createMascots({t,copy}){
     else if(r<.92){setAct(p,'jump',1);p.air=true;p.vy=-260;}
     else{p.climb={side:p.x<innerWidth/2?-1:1,up:true,top:ground()-rand(70,130)};p.x=p.climb.side<0?-8:innerWidth-W+8;setAct(p,'walk',99);}
   }
+  // a message is waiting: the first pet walks to the Talk tab, sits there with a "!", and goes back to its day when it is read
+  let waitingAt=null;
+  function talkX(){const b=document.getElementById('nav-talk');const r=b?.getBoundingClientRect();return r&&r.width?r.left+r.width/2-W/2:null;}
   function tick(now){
     raf=requestAnimationFrame(tick);const dt=Math.min(.05,(now-(last||now))/1000);last=now;if(!pets.length)return;
     const g=ground();
     for(const p of pets){
       if(p.held){place(p);continue;}
+      if(waitingAt!==null&&p===pets[0]&&!p.air&&!p.climb){const x=talkX();if(x!==null){p.y=g;const d=x-p.x;
+        if(Math.abs(d)>3){p.dir=d>0?1:-1;if(p.act!=='run')setAct(p,'run',99);p.x+=Math.sign(d)*Math.min(Math.abs(d),90*dt);}
+        else if(p.act!=='sit'){setAct(p,'sit',99);}
+        if(!p.bang){p.bang=document.createElement('i');p.bang.className='mascot-bang';p.bang.textContent='!';p.node.append(p.bang);}
+        place(p);continue;}}
+      if(p.bang&&(waitingAt===null||p!==pets[0])){p.bang.remove();p.bang=null;setAct(p,'blink',1);}
       if(p.climb){const c=p.climb;p.y+=(c.up?-40:40)*dt;if(c.up&&p.y<c.top)c.up=false;if(!c.up&&p.y>=g){p.climb=null;p.y=g;setAct(p,'sit',2);}place(p);continue;}
       if(p.air){p.vy+=900*dt;p.y+=p.vy*dt;if(p.act==='jump')p.x+=p.dir*60*dt;if(p.y>=g){p.y=g;p.air=false;p.vy=0;setAct(p,'sit',rand(1.5,3));}place(p);continue;}
       p.y=g;
@@ -63,6 +72,7 @@ export function createMascots({t,copy}){
     }
   }
   return {
+    waiting(on){waitingAt=on?Date.now():null;},
     // show these mascots (each {sheet, owner}); the same list keeps the same pets
     show(list){
       const key=list.map(m=>m.owner+':'+m.sheet).join(',');if(key===this._key)return;this._key=key;

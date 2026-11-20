@@ -62,7 +62,7 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   }
   // One game at a time on the stage; "All games" goes back to the tiles.
   // Every game opens full screen over the app, in the dusk garden; "‹ Games" goes back to the tiles.
-  const backdrop=el('div',undefined,'scene-art game-backdrop');backdrop.innerHTML=SCENE_ART.hockeyScene;backdrop.firstElementChild?.setAttribute('preserveAspectRatio','xMidYMid slice');backdrop.setAttribute('aria-hidden','true');
+  const backdrop=el('div',undefined,'scene-art game-backdrop');backdrop.innerHTML=SCENE_ART.hockeyScene;backdrop.firstElementChild?.setAttribute('preserveAspectRatio','xMidYMid slice');backdrop.querySelectorAll('[filter*="haze"],[filter*="grain"]').forEach(n=>n.removeAttribute('filter'));backdrop.setAttribute('aria-hidden','true');
   function show(id,then){
     if(open&&open!==id)stopGames();open=id;tiles.hidden=!!id;stage.hidden=!id;stage.replaceChildren();
     document.documentElement.classList.toggle('game-full',!!id);stage.dataset.game=id??'';
@@ -77,7 +77,7 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     if(then)then();else GAMES[id].game.render?.(getSnapshot());
     stage.scrollTop=0;
   }
-  function stopGames(){hockey.stop();pool.stop();duel.stop();knowme.stop();piano.stop();dance.stop();}
+  function stopGames(){td.leave?.();hockey.stop();pool.stop();duel.stop();knowme.stop();piano.stop();dance.stop();}
   // A round from the bell or a "Your turn" card: play it if it waits for you, otherwise show its result.
   function openRound(roundId){
     const snap=getSnapshot(),r=snap?.playRounds?.find(x=>x.id===roundId);if(!r)return false;

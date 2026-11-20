@@ -4,6 +4,7 @@
 // "Dance with me" plays the style's beat while the silhouettes dance.
 // Steps and copies are Talk messages of kind 'dance' with a video (backend/013, the usual private uploads), so they
 // also show in your chat; the hearts are dance_ratings (rate_dance).
+import {trackContext} from '../sound.js';
 import {STYLES,STEP_SECONDS,todayStyle,styleOf,streak,pairs,nextMove,dances} from './dance-model.js';
 import {icon} from '../design/icons.js';
 
@@ -101,7 +102,7 @@ export function createDance({el,button,t,copy,me,person,partner,getSnapshot,getC
 
   // ---- "Dance with me": the style's beat (a soft click and a low drum) while the silhouettes dance
   function startBeat(){
-    if(beat)return;let ac;try{ac=new (window.AudioContext||window.webkitAudioContext)();}catch{return;}
+    if(beat)return;let ac;try{ac=trackContext(new (window.AudioContext||window.webkitAudioContext)());}catch{return;}
     const step=60/style.bpm;let next=ac.currentTime+.08,n=0;
     const hit=(at,strong)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=strong?'sine':'triangle';o.frequency.setValueAtTime(strong?110:880,at);o.frequency.exponentialRampToValueAtTime(strong?50:440,at+.12);
       g.gain.setValueAtTime(strong?.55:.12,at);g.gain.exponentialRampToValueAtTime(.001,at+.16);o.connect(g).connect(ac.destination);o.start(at);o.stop(at+.18);};

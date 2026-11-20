@@ -8,6 +8,7 @@ import {webglAvailable,createGarden3D} from '../garden3d/garden3d.js';
 import {CULTURE,cultureById} from '../garden3d/culture.js';
 import {addDiscovery} from '../garden3d/discoveries.js';
 import {openSheet} from '../design/sheet.js';
+import {pointsBy,weekStart} from '../games/score.js';
 import {icon} from '../design/icons.js';
 import {currentGardenTheme,onGardenTheme,setHarissa,harissaOn} from '../design/theme.js';
 
@@ -21,7 +22,11 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
   let g3=null;
   if(webglAvailable()){
     garden.element.hidden=true;$('gardenMount').classList.add('is-3d');
-    g3=createGarden3D({t,copy,onEvent:e=>skyEvent(e),onFlower:id=>openFlower(id),onMoon:()=>openTerminal(),onSpot:id=>openCulture(id),onToad:()=>onToad?.(),
+    g3=createGarden3D({t,copy,onEvent:e=>skyEvent(e),
+      onWater:async id=>{const f=(getSnapshot()?.flowers??[]).find(x=>x.id===id&&!x.deleted_at);if(f&&await water(f))notify(()=>t('garden3d.watered',{flower:t('flowers.'+f.flower_type)}));},
+      onPlant:async(type,spot)=>{try{const id=await plant(type,spot);if(id)notify(()=>t('garden3d.planted',{flower:t('flowers.'+type)}));}catch(err){notify(()=>err?.gardenKey?t(err.gardenKey):t('common.unknownError'));}},
+      seedsLeft:()=>seeds()?.left??0,
+      mySide:()=>{const snap=getSnapshot();if(!snap)return 0;return authorTone(me(),snap.members,snap.profiles)==='yasmine'?-1:1;},onFlower:id=>openFlower(id),onMoon:()=>openTerminal(),onSpot:id=>openCulture(id),onToad:()=>onToad?.(),
       onFail:()=>{g3?.destroy();g3=null;garden.element.hidden=false;$('gardenMount').classList.remove('is-3d');render();}});
     $('gardenMount').append(g3.element);
   }
@@ -35,7 +40,7 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
 
   // night events in the 3D sky: a shooting star (at most one note every two minutes) and a full moon
   let lastStarNote=0;
-  function skyEvent(e){if(document.hidden)return;if(e.kind==='star'){if(Date.now()-lastStarNote<120000)return;lastStarNote=Date.now();notify(()=>t('garden.shootingStar'));}if(e.kind==='fullMoon')notify(()=>t('garden.fullMoon'));}
+  function skyEvent(e){if(document.hidden)return;if(e.kind==='ownSide'){notify(()=>t('garden3d.ownSide'));return;}if(e.kind==='star'){if(Date.now()-lastStarNote<120000)return;lastStarNote=Date.now();notify(()=>t('garden.shootingStar'));}if(e.kind==='fullMoon')notify(()=>t('garden.fullMoon'));}
   function greeting(){const h=new Date().getHours(),key=h<5||h>=22?'home.greetNight':h<12?'home.greetMorning':h<18?'home.greetAfternoon':'home.greetEvening';copy($('gardenTitle'),()=>t(key,{name:person(me())}));}
   // What's new from your partner, in one line: their latest planting, shared note or answer.
   function partnerLine(snap){
@@ -76,7 +81,8 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
       visitors:visitors(finished),mode:theme,summary:text,
       items:placed.map(p=>({id:p.flower.id,label:t('garden.flowerItem',{flower:t('flowers.'+p.flower.flower_type),stage:t('garden.stage.'+STAGES[stageFor(p.flower.water)]),count:p.flower.water,name:person(p.flower.planted_by)})}))});
     if(g3){g3.update({flowers:live,mode:theme});
-      const wins=hockeyWins(snap.gameEvents??[],snap.members),houses={};
+      // the houses show this week's points, the same numbers as Play
+      const wins=Object.fromEntries(pointsBy(snap,weekStart())),houses={};
       for(const m of snap.members){const who=authorTone(m.profile_id,snap.members,snap.profiles);if(!houses[who])houses[who]={name:person(m.profile_id),isMe:m.profile_id===me(),count:wins[m.profile_id]??0};}
       g3.setScores(snap.members.length===2?houses:null);}
     copy($('gardenCount'),()=>t('garden.count',{count:sum.count}));$('gardenEmpty').hidden=!!sum.count;

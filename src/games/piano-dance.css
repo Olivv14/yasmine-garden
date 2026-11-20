@@ -90,7 +90,7 @@ html.game-full #playStage .piano-card button.pn-secondary{min-block-size:44px;bo
 .piano-card .pn-loading{display:grid;place-items:center;min-block-size:60dvh}
 .piano-card .pn-board{position:fixed;inset:0;z-index:5;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;background:linear-gradient(180deg,#1A1636 0%,#3E2A4E 30%,#8A5458 62%,#3A2228 82%,#1A1014 100%)}
 .piano-card .pn-scene{position:absolute;inset:0;pointer-events:none}
-.piano-card .pn-hills{position:absolute;inset:0;inline-size:100%;block-size:100%;filter:blur(4px);opacity:.6}
+.piano-card .pn-hills{position:absolute;inset:0;inline-size:100%;block-size:100%;opacity:.6}
 .piano-card .pn-scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,244,230,.05),rgba(255,244,230,.09))}
 .piano-card .pn-lights{position:absolute;left:0;top:calc(env(safe-area-inset-top) + 58px);inline-size:100%;block-size:110px;opacity:.65}
 .piano-card .pn-col{position:absolute;top:0;bottom:0;inline-size:1px;background:linear-gradient(180deg,rgba(255,226,198,0),rgba(255,226,198,.16) 20%,rgba(255,226,198,.16) 80%,rgba(255,226,198,0))}

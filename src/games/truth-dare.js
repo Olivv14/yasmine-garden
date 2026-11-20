@@ -41,6 +41,11 @@ export function createTruthDare({el,button,t,copy,me,person,partner,record,notif
         for(const kind of ['truth','dare'])row.append(button(()=>t('game.td.'+kind),()=>{drawn={kind,card:drawCard(kind,turns,Math.random,spice)};render();},kind==='truth'?'primary':''));
         root.append(row);
       }else{
+        // back to the spice levels (and another card of the same kind), without leaving the game
+        const nav=el('div',undefined,'td-nav');
+        const back=button(()=>t('game.td.backSpice'),()=>{drawn=null;draft='';render();},'link td-back');back.prepend(icon('back',16));
+        const again=button(()=>t('game.td.another'),()=>{drawn={kind:drawn.kind,card:drawCard(drawn.kind,turns,Math.random,spice)};draft='';render();},'link td-again');
+        nav.append(back,again);root.append(nav);
         const card=el('div',undefined,'game-draw');card.dataset.kind=drawn.kind;card.dataset.level=String(levelOf(drawn.card));
         const chilis=el('div',undefined,'td-chilis');chilis.setAttribute('aria-hidden','true');for(let i=0;i<levelOf(drawn.card);i++)chilis.append(chili());
         card.append(chilis,el('p',()=>t('game.td.'+drawn.kind)+' · '+t('game.td.level'+levelOf(drawn.card)),'td-tag'),el('p',()=>t(cardKey(drawn.card)),'title'));
@@ -58,5 +63,5 @@ export function createTruthDare({el,button,t,copy,me,person,partner,record,notif
   function chili(){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 40 60');
     s.innerHTML='<path d="M20 14 C8 22 6 40 14 56 C24 50 32 34 28 18 Z" fill="#E0201A"/><path d="M15 30 C14 38 15 46 17 52" stroke="#FF9A8A" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/><path d="M20 15 C20 8 25 4 30 4" stroke="#3E8A2A" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M15 16 C19 11 25 12 28 17" stroke="#3E8A2A" stroke-width="3" fill="none" stroke-linecap="round"/>';return s;}
   function clear(){snap=null;drawn=null;draft='';root.replaceChildren();}
-  return {element:root,render,clear};
+  return {element:root,render,clear,leave(){drawn=null;draft='';}};
 }

@@ -23,7 +23,7 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
 
   const speak=()=>{try{setExperience({language:gateLanguage(read(),navigator.languages??[navigator.language])});}catch{}};
   function show(){
-    clearTimers();appReady=false;logsDone=false;busy=false;resuming=false;gate.classList.remove('welcome');
+    clearTimers();appReady=false;logsDone=false;busy=false;resuming=false;gate.classList.remove('welcome','quiet');
     speak();
     gate.hidden=false;gate.classList.remove('leaving');if(shell)shell.inert=true;
     word.value='';copy(status,'');status.classList.remove('visible');log.replaceChildren();step('phrase');
@@ -58,11 +58,14 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
       if(known)runLog(who,[`gate.back.${who}`,`gate.log.${who}.1`,`gate.log.${who}.5`]);
       else{logsDone=true;finish();}},reducedMotion()?0:1300));
   }
+  // Already signed in on this phone: a quiet dusk screen while the app loads, no phrase, no log lines.
+  function quiet(){clearTimers();appReady=false;logsDone=true;busy=false;resuming=false;gate.hidden=false;gate.classList.remove('leaving');gate.classList.add('welcome','quiet');
+    if(shell)shell.inert=true;log.replaceChildren();for(const [,el] of [['phrase',phrase.parentElement],['word',form],['log',log]])el.hidden=true;gate.dataset.step='quiet';}
   function finish(){
     if(!appReady||!logsDone||gate.hidden)return;
     timers.push(setTimeout(()=>{gate.classList.add('leaving');timers.push(setTimeout(hide,reducedMotion()?0:620));},reducedMotion()?0:420));
   }
-  return {show,hide,resume,
+  return {show,hide,resume,quiet,isQuiet:()=>!gate.hidden&&gate.dataset.step==='quiet',
     open:()=>!gate.hidden,
     // signing out resets the app to English; the open gate keeps speaking this phone's language
     language:speak,

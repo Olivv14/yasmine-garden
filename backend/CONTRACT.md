@@ -184,6 +184,16 @@ The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and rea
 - `learn_review(p_card_key text, p_state jsonb) -> learn_state`: the card's new FSRS state after one review. `p_card_key` is a deck card (`it.amore`) or a taught word (`w:<message id>` of a `word` message in this pair). `reps` must grow by exactly one; the same state again returns the stored row (safe retry); otherwise `PT409`. Each review adds to today's `learn_days`; every 10 reviews in a day is a point.
 - A `word` message may carry one `audio/*` recording (your voice saying the word).
 
+### Planting where you drop the seed (backend/016)
+- `plant_flower_at(p_id uuid, p_flower_type text, p_x real, p_z real) -> flowers`: like `plant_flower`, and the flower keeps that spot on the island (`px`, `pz`, within 7 of the centre). A retry returns the same flower.
+
+### Talk media: videos, view once / twice, stickers (backend/017)
+- Message kinds add `video` (an upload of up to 25 MiB through `reserve_message_media`, mime `video/*`) and `sticker` (`payload.sticker` holds a sticker id).
+- A photo or video may carry `payload.view` = `once` or `twice`; a video may carry `payload.start`, `payload.end` (seconds) and `payload.filter`.
+- `view_media(p_message_id uuid) -> integer`: the receiver opening a photo or video; returns how many times they have now opened it (the sender always gets 0). Past the limit it raises `PT403`. Broadcasts `viewed {message_id, viewer_id, views}` on `pair:<id>:talk`. Read table: `message_views` (pair members).
+- `save_sticker(p_id uuid, p_image text) -> stickers`: a `data:image/(png|webp|jpeg);base64,` image of at most 280,000 characters; at most 80 per person; a retry returns the same row. `delete_sticker(p_id uuid)`: owner only. Read table: `stickers` (pair members, not deleted).
+- Calls carry no database writes: `call` broadcast events (`ring`, `accept`, `decline`, `busy`, `offer`, `answer`, `ice`, `hangup`) on the same private `pair:<id>:talk` room set up WebRTC between the two phones.
+
 ### Garden discoveries (backend/015)
 - `discover(p_spot text) -> garden_discoveries`: saves a culture spot you found; finding it again changes nothing.
 

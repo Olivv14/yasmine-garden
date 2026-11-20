@@ -90,24 +90,26 @@ const jasG=new THREE.ShapeGeometry(jasS,3);const jasM=new THREE.MeshStandardMate
 const jasmineAt=(parent,pos,dir)=>{const st=new THREE.Mesh(jasG,jasM);st.position.copy(pos);st.lookAt(pos.clone().add(dir));st.rotateZ(rnd()*6);parent.add(st);return st;};
 
 // ---------- island ----------
+// IR: the island's radius at the lawn (it was 6.2; now roomier). IK scales everything around the edge with it.
+const IR=7.0,IK=IR/6.2;
 const world=new THREE.Group();scene.add(world);
 { // cliff: irregular cylinder, wider at the bottom
- const g=new THREE.CylinderGeometry(6.2,7.2,2.4,72,6,false);const p=g.attributes.position;
+ const g=new THREE.CylinderGeometry(IR,7.2*IK,2.4,84,6,false);const p=g.attributes.position;
  for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const a=Math.atan2(z,x);const n=noise(a*3+7,y*1.3)*0.9+noise(a*9,y*3)*0.35;const k=1+(n-.5)*.16;if(Math.abs(y)<1.19){p.setX(i,x*k);p.setZ(i,z*k);}p.setY(i,y+(noise(a*5,3)-.5)*.25*(y<0?1:0));}
  g.computeVertexNormals();{const cols=[];const top=new THREE.Color('#E6C9A0'),mid=new THREE.Color('#C99A68'),low=new THREE.Color('#9C7350');for(let i=0;i<p.count;i++){const y=p.getY(i),a=Math.atan2(p.getZ(i),p.getX(i));const t=(y+1.2)/2.4+(noise(a*4,y*2)-.5)*.25;const c=t>.55?mid.clone().lerp(top,(t-.55)/.45):low.clone().lerp(mid,Math.max(0,t)/.55);cols.push(c.r,c.g,c.b);}g.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));}const cliff=mesh(g,new THREE.MeshStandardMaterial({vertexColors:true,flatShading:true,roughness:1}));cliff.position.y=-1.2;world.add(cliff);
  // strata band
- const band=mesh(new THREE.TorusGeometry(6.35,.12,6,72),mat.rockDark);band.rotation.x=Math.PI/2;band.position.y=-.7;world.add(band);
+ const band=mesh(new THREE.TorusGeometry(6.35*IK,.12,6,84),mat.rockDark);band.rotation.x=Math.PI/2;band.position.y=-.7;world.add(band);
  // lawn cap
- const lawn=mesh(new THREE.CylinderGeometry(6.05,6.15,.18,72),mat.grass);lawn.position.y=.0;world.add(lawn);
+ const lawn=mesh(new THREE.CylinderGeometry(6.05*IK,6.15*IK,.18,84),mat.grass);lawn.position.y=.0;world.add(lawn);
  // terracotta coping around the edge, gap at the front for the steps
- for(let i=0;i<150;i++){const a=i/150*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a),Math.cos(a))-Math.PI/2.6)<.16)continue;const c=mesh(new THREE.BoxGeometry(.27,.14,.3),i%5===0?mat.terraDark:mat.terra);c.position.set(Math.cos(a)*6.0,.14,Math.sin(a)*6.0);c.rotation.y=-a+Math.PI/2;world.add(c);}
+ for(let i=0;i<170;i++){const a=i/170*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a),Math.cos(a))-Math.PI/2.6)<.16)continue;const c=mesh(new THREE.BoxGeometry(.27,.14,.3),i%5===0?mat.terraDark:mat.terra);c.position.set(Math.cos(a)*6.0*IK,.14,Math.sin(a)*6.0*IK);c.rotation.y=-a+Math.PI/2;world.add(c);}
  // lawn variation and grass tufts
  {const lp=lawn.geometry.attributes.position;const cols=[];const g1=new THREE.Color('#78B652'),g2=new THREE.Color('#5E9E43');for(let i=0;i<lp.count;i++){const t=noise(lp.getX(i)*.6+3,lp.getZ(i)*.6);const c=g2.clone().lerp(g1,t);cols.push(c.r,c.g,c.b);}lawn.geometry.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));lawn.material=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1});}
- for(let i=0;i<220;i++){const a=rnd()*Math.PI*2,r=Math.sqrt(rnd())*5.6;const t=new THREE.Group();for(let k=0;k<3;k++){const bl=mesh(new THREE.ConeGeometry(.035,rr(.14,.26),4),rnd()>.5?mat.grassDark:mat.leafLight,{cast:false});bl.position.set(rr(-.05,.05),.1,rr(-.05,.05));bl.rotation.set(rr(-.3,.3),0,rr(-.3,.3));t.add(bl);}t.position.set(Math.cos(a)*r,0,Math.sin(a)*r);world.add(t);}
+ for(let i=0;i<220;i++){const a=rnd()*Math.PI*2,r=Math.sqrt(rnd())*5.6*IK;const t=new THREE.Group();for(let k=0;k<3;k++){const bl=mesh(new THREE.ConeGeometry(.035,rr(.14,.26),4),rnd()>.5?mat.grassDark:mat.leafLight,{cast:false});bl.position.set(rr(-.05,.05),.1,rr(-.05,.05));bl.rotation.set(rr(-.3,.3),0,rr(-.3,.3));t.add(bl);}t.position.set(Math.cos(a)*r,0,Math.sin(a)*r);world.add(t);}
  // ivy spilling over the cliff edge
- for(let i=0;i<26;i++){const a=rnd()*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a),Math.cos(a))-Math.PI/2.6)<.3)continue;const len=Math.floor(rr(3,8));for(let k=0;k<len;k++){const r=6.15+k*.04,b=foliage(rr(.1,.15));b.position.set(Math.cos(a+rr(-.03,.03))*r,.05-k*.2,Math.sin(a+rr(-.03,.03))*r);world.add(b);}}
+ for(let i=0;i<26;i++){const a=rnd()*Math.PI*2;if(Math.abs(Math.atan2(Math.sin(a),Math.cos(a))-Math.PI/2.6)<.3)continue;const len=Math.floor(rr(3,8));for(let k=0;k<len;k++){const r=6.15*IK+k*.04,b=foliage(rr(.1,.15));b.position.set(Math.cos(a+rr(-.03,.03))*r,.05-k*.2,Math.sin(a+rr(-.03,.03))*r);world.add(b);}}
  // little rocks at the waterline
- for(let i=0;i<46;i++){const a=rnd()*Math.PI*2,r=rr(7.2,8.3);const b=blob(rr(.25,.7),rnd()>.5?mat.rock:mat.rockDark,0);b.position.set(Math.cos(a)*r,-2.3+rr(-.1,.2),Math.sin(a)*r);b.rotation.set(rnd()*3,rnd()*3,rnd()*3);b.scale.y=.6;world.add(b);}
+ for(let i=0;i<46;i++){const a=rnd()*Math.PI*2,r=rr(7.2*IK,8.3*IK);const b=blob(rr(.25,.7),rnd()>.5?mat.rock:mat.rockDark,0);b.position.set(Math.cos(a)*r,-2.3+rr(-.1,.2),Math.sin(a)*r);b.rotation.set(rnd()*3,rnd()*3,rnd()*3);b.scale.y=.6;world.add(b);}
 }
 // sea: faceted low-poly water + foam ring
 {// tileable wave normal map, drawn in code (integer frequencies so it repeats seamlessly)
@@ -120,11 +122,11 @@ const world=new THREE.Group();scene.add(world);
  water.rotation.x=-Math.PI/2;water.position.y=-2.4;water.material.uniforms.size.value=2.2;water.material.uniforms.time.value=3.7;scene.add(water);G.water=water;
  // turquoise shallows fading out around the island
  const sc=document.createElement('canvas');sc.width=sc.height=256;const sx=sc.getContext('2d');G.drawShallows=L=>{const gr=sx.createRadialGradient(128,128,40,128,128,128);const sh=L==='night'?'30,80,110':L==='dusk'?'90,170,170':'60,200,190';gr.addColorStop(0,`rgba(${sh},.0)`);gr.addColorStop(.45,`rgba(${sh},${L==='night'?.35:.75})`);gr.addColorStop(.62,`rgba(${sh},.45)`);gr.addColorStop(1,`rgba(${sh},0)`);sx.clearRect(0,0,256,256);sx.fillStyle=gr;sx.fillRect(0,0,256,256);if(G.shallowTex)G.shallowTex.needsUpdate=true;};G.drawShallows(LIGHT);
- const shallow=new THREE.Mesh(new THREE.PlaneGeometry(26,26),new THREE.MeshBasicMaterial({map:(G.shallowTex=new THREE.CanvasTexture(sc)),transparent:true,depthWrite:false,fog:true}));shallow.rotation.x=-Math.PI/2;shallow.position.y=-2.37;scene.add(shallow);
- const fg=new THREE.TorusGeometry(7.55,.13,5,80);const fp=fg.attributes.position;for(let i=0;i<fp.count;i++){const a=Math.atan2(fp.getY(i),fp.getX(i));const k=1+(noise(a*6,1)-.5)*.08;fp.setX(i,fp.getX(i)*k);fp.setY(i,fp.getY(i)*k);}const foam=mesh(fg,mat.foam,{cast:false});foam.rotation.x=Math.PI/2;foam.position.y=-2.33;foam.scale.z=.3;scene.add(foam);}
+ const shallow=new THREE.Mesh(new THREE.PlaneGeometry(26*IK,26*IK),new THREE.MeshBasicMaterial({map:(G.shallowTex=new THREE.CanvasTexture(sc)),transparent:true,depthWrite:false,fog:true}));shallow.rotation.x=-Math.PI/2;shallow.position.y=-2.37;scene.add(shallow);
+ const fg=new THREE.TorusGeometry(7.55*IK,.13,5,80);const fp=fg.attributes.position;for(let i=0;i<fp.count;i++){const a=Math.atan2(fp.getY(i),fp.getX(i));const k=1+(noise(a*6,1)-.5)*.08;fp.setX(i,fp.getX(i)*k);fp.setY(i,fp.getY(i)*k);}const foam=mesh(fg,mat.foam,{cast:false});foam.rotation.x=Math.PI/2;foam.position.y=-2.33;foam.scale.z=.3;scene.add(foam);}
 
 // ---------- stone steps carved down the front-right cliff ----------
-{const a0=Math.PI/2.6;for(let i=0;i<9;i++){const a=a0+i*.035,r=6.15+i*.17;const s=mesh(new THREE.BoxGeometry(.9,.18,.36),mat.stone);s.position.set(Math.cos(a)*r,-.1-i*.25,Math.sin(a)*r);s.rotation.y=-a+Math.PI/2;world.add(s);}}
+{const a0=Math.PI/2.6;for(let i=0;i<9;i++){const a=a0+i*.035,r=6.15*IK+i*.17;const s=mesh(new THREE.BoxGeometry(.9,.18,.36),mat.stone);s.position.set(Math.cos(a)*r,-.1-i*.25,Math.sin(a)*r);s.rotation.y=-a+Math.PI/2;world.add(s);}}
 
 // ---------- rowboat moored at the steps ----------
 {const b=new THREE.Group();const hull=mesh(new THREE.SphereGeometry(1,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),M('#F4EFE6',{roughness:.6,side:THREE.DoubleSide}));const inner=mesh(new THREE.CircleGeometry(.98,24),mat.wood);inner.rotation.x=-Math.PI/2;inner.position.y=-.22;inner.scale.set(1,.9,1);b.add(inner);hull.scale.set(1.25,.42,.5);hull.rotation.x=0;b.add(hull);
@@ -132,7 +134,7 @@ const world=new THREE.Group();scene.add(world);
  const cols=[mat.green,mat.flagWhite,mat.red];for(let i=0;i<3;i++){const st=mesh(new THREE.TorusGeometry(1,.06,6,32,Math.PI*.9),cols[i]);st.rotation.x=Math.PI/2;st.scale.set(1.25-.0*i,.5,1);st.position.y=-.1-i*.1;st.rotation.z=.15;b.add(st);}
  for(const x of [-.4,.35]){const seat=mesh(new THREE.BoxGeometry(.12,.05,.85),mat.wood);seat.position.set(x,-.05,0);b.add(seat);}
  const oar=mesh(new THREE.CylinderGeometry(.025,.025,1.6,6),mat.woodDark);oar.rotation.z=1.2;oar.position.set(.2,0,.45);b.add(oar);
- b.position.set(Math.cos(Math.PI/2.6+.25)*8.7,-2.2,Math.sin(Math.PI/2.6+.25)*8.7);b.rotation.y=-.9;world.add(b);}
+ b.position.set(Math.cos(Math.PI/2.6+.25)*8.7*IK,-2.2,Math.sin(Math.PI/2.6+.25)*8.7*IK);b.rotation.y=-.9;world.add(b);}
 // ---------- path pavers ----------
 const paver=(x,z,rot=0,s=1)=>{const g=new THREE.CylinderGeometry(.34*s,.36*s,.08,7);const m=mesh(g,rnd()>.4?mat.stone:mat.stoneDark);m.position.set(x,.1,z);m.rotation.y=rot;m.scale.z=rr(.75,1);world.add(m);};
 for(let i=0;i<9;i++){const t=i/8;const x=THREE.MathUtils.lerp(2.2,0.2,t)+Math.sin(t*3)*.4,z=THREE.MathUtils.lerp(5.2,1.6,t);paver(x,z,rnd()*3);}
@@ -145,7 +147,7 @@ for(let i=0;i<5;i++){const t=i/4;paver(THREE.MathUtils.lerp(-.2,-.1,t)+rr(-.1,.1
  // arch above the door
  const sh=new THREE.Shape();sh.moveTo(-.75,0);sh.lineTo(-.75,1.05);sh.absarc(0,1.05,.75,Math.PI,0,true);sh.lineTo(.75,0);sh.lineTo(1.0,0);sh.lineTo(1.0,2.35);sh.lineTo(-1.0,2.35);sh.lineTo(-1.0,0);
  const hole=new THREE.Path();hole.moveTo(-.62,0);hole.lineTo(-.62,1.02);hole.absarc(0,1.02,.62,Math.PI,0,true);hole.lineTo(.62,0);
- const archG=new THREE.ExtrudeGeometry(sh,{depth:.32,bevelEnabled:false,curveSegments:24});const arch=mesh(archG,mat.stucco);arch.position.set(0,.08,-3.86);wall.add(arch);
+ const archG=new THREE.ExtrudeGeometry(sh,{depth:.37,bevelEnabled:false,curveSegments:24});const arch=mesh(archG,mat.stucco);arch.position.set(0,.08,-3.885);wall.add(arch);
  // door: arched blue panel with studs and a yellow ochre frame
  const ds=new THREE.Shape();ds.moveTo(-.62,0);ds.lineTo(-.62,1.02);ds.absarc(0,1.02,.62,Math.PI,0,true);ds.lineTo(.62,0);ds.lineTo(-.62,0);
  const door=mesh(new THREE.ExtrudeGeometry(ds,{depth:.08,bevelEnabled:true,bevelSize:.02,bevelThickness:.02,curveSegments:24}),mat.blue);door.position.set(0,.08,-3.72);wall.add(door);
@@ -157,7 +159,8 @@ for(let i=0;i<5;i++){const t=i/4;paver(THREE.MathUtils.lerp(-.2,-.1,t)+rr(-.1,.1
   for(const sx of [-1,1]){const sh2=mesh(new THREE.BoxGeometry(.28,.7,.04),x>0?M('#3E7B4C',{roughness:.6}):mat.blueLight);sh2.position.set(x+sx*.43,1.15,-3.49);sh2.rotation.y=sx*.35;wall.add(sh2);}
   const sill=mesh(new THREE.BoxGeometry(.75,.06,.18),mat.stuccoWarm);sill.position.set(x,.8,-3.47);wall.add(sill);
   for(let k=0;k<3;k++){const pot=mesh(new THREE.CylinderGeometry(.07,.05,.12,10),mat.terra);pot.position.set(x-.2+k*.2,.89,-3.45);wall.add(pot);const fl=blob(.08,k%2?mat.bougain:M('#F25F3A',{flatShading:true}),0);fl.position.set(x-.2+k*.2,1.0,-3.45);wall.add(fl);}}
- // side wall wrapping around the left
+ // the wall ends in proper pillars instead of stopping in the middle of the lawn
+ for(const x of [-3.42,4.32]){const pl=mesh(new THREE.BoxGeometry(.42,2.25,.5),mat.stuccoWarm);pl.position.set(x,1.205,-3.7);wall.add(pl);const pc=mesh(new THREE.BoxGeometry(.52,.1,.6),mat.stucco);pc.position.set(x,2.38,-3.7);wall.add(pc);const urn=mesh(new THREE.SphereGeometry(.16,12,8),mat.terra);urn.position.set(x,2.55,-3.7);wall.add(urn);}
 }
 // bougainvillea spilling over the right of the wall
 const bougWall=(x0,x1,n)=>{for(let i=0;i<n;i++){const x=rr(x0,x1),t=(x-x0)/(x1-x0),drop=Math.sin(t*Math.PI)*.9;const onTop=rnd()<.3;const b=foliage(rr(.11,.19),1,rnd()>.3?BOUG:undefined);
@@ -260,6 +263,9 @@ const lanterns=[];
 const lantern=(x,z)=>{const g=new THREE.Group();g.position.set(x,.08,z);world.add(g);g.add(at(mesh(new THREE.CylinderGeometry(.13,.15,.05,6),mat.ink),0,.02,0));
  g.add(at(mesh(new THREE.CylinderGeometry(.11,.11,.32,6,1,true),mat.lamp,{cast:false}),0,.22,0));for(let k=0;k<6;k++){const a=k/6*6.28;g.add(at(mesh(new THREE.BoxGeometry(.015,.34,.015),mat.ink),Math.cos(a)*.115,.22,Math.sin(a)*.115));}
  g.add(at(mesh(new THREE.ConeGeometry(.15,.16,6),mat.ink),0,.46,0));g.add(at(mesh(new THREE.TorusGeometry(.03,.008,6,12),mat.ink),0,.56,0));lanterns.push(g);};
+// behind the wall: a back terrace with lemon trees, pots and lanterns (seen when you turn the island around)
+for(const [x,z,sc,k] of [[-2.2,-5.0,1.05,'lemon'],[2.9,-5.0,1.0,'lemon'],[0.3,-5.55,.85,'flowers'],[-.9,-4.55,.7,'flowers'],[1.5,-4.5,.7,'flowers']])pot(x,z,sc,k);
+lantern(-.8,-5.6);lantern(1.4,-5.6);
 lantern(1.25,5.15);lantern(.6,2.6);lantern(.9,1.3);lantern(-1.2,-1.9);lantern(1.0,-2.4);lantern(-4.9,2.6);
 
 // ---------- Tunisian house: Dar Yasmine ----------
@@ -586,14 +592,17 @@ G.bake=bake(scene);
 // ---------- on the home screen: fingers, time of day, real flowers, taps ----------
 const [V0,V1]=VIEWS.night6;cam.position.set(...V0);
 const controls=new OrbitControls(cam,renderer.domElement);
-controls.target.set(...V1);controls.enableDamping=true;controls.dampingFactor=.08;controls.enablePan=false;
-controls.minDistance=11;controls.maxDistance=34;controls.minPolarAngle=.75;controls.maxPolarAngle=1.42;
-controls.touches={ONE:THREE.TOUCH.ROTATE,TWO:THREE.TOUCH.DOLLY_ROTATE};
+// free to turn all the way round, look from above, come close, and slide over the island with two fingers
+controls.target.set(...V1);controls.enableDamping=true;controls.dampingFactor=.08;controls.enablePan=true;controls.screenSpacePanning=false;controls.panSpeed=.8;
+controls.minDistance=5;controls.maxDistance=44;controls.minPolarAngle=.08;controls.maxPolarAngle=1.48;
+controls.touches={ONE:THREE.TOUCH.ROTATE,TWO:THREE.TOUCH.DOLLY_PAN};
 controls.update();
-const AZ0=controls.getAzimuthalAngle();controls.minAzimuthAngle=AZ0-1.25;controls.maxAzimuthAngle=AZ0+1.25;
+const AZ0=controls.getAzimuthalAngle();
+// the look-at point never leaves the island
+controls.addEventListener('change',()=>{const t=controls.target,d=Math.hypot(t.x,t.z),max=IR*.9;if(d>max){t.x*=max/d;t.z*=max/d;}t.y=THREE.MathUtils.clamp(t.y,0,3);});
 const SWAY=.42,SWAYV=.3;controls.autoRotate=!reduce;controls.autoRotateSpeed=SWAYV;
 let busy=false,lastActive=performance.now();
-controls.addEventListener('start',()=>{busy=true;});controls.addEventListener('end',()=>{busy=false;lastActive=performance.now();});
+controls.addEventListener('start',()=>{busy=true;controls.autoRotate=false;});controls.addEventListener('end',()=>{busy=false;lastActive=performance.now();});
 
 // sharp on every screen, stepping down only if the phone struggles
 const DPR=devicePixelRatio||1,LV=[Math.min(DPR,2),Math.min(DPR,1.6),Math.min(DPR,1.25)];let lvl=0;
@@ -608,8 +617,9 @@ let onScreen=true;const seenWatch=new IntersectionObserver(es=>{onScreen=es[es.l
 const OB=[[-4.15,-2.2,1.45],[-.17,-.5,1.2],[2.35,-.5,1.85],[3.35,-2.95,1.0],[4.5,-2.6,.6],[5.0,-1.2,.6],[-4.8,1.8,.5],[4.05,1.25,1.0],[5.55,.2,.6],[5.6,1.0,.6],[5.72,1.65,.35],[4.25,3.25,.45],[-5.05,-.45,.6],[-4.33,-.27,.4],[-4.53,-.96,.35],[-2.05,-1.2,.35],[-1.63,-1.2,.3],[-5.35,-1.55,.4],[-3.55,.25,.9],[-2.95,-.9,.5],[-2.55,1.35,.72],[-1.75,-2.75,.55],[1.35,-3.0,.45],[-1.45,-3.0,.45],[-1.9,4.7,.4],[.9,4.6,.35],[1.25,5.15,.3],[.6,2.6,.3],[.9,1.3,.3],[-1.2,-1.9,.3],[1.0,-2.4,.3],[-4.9,2.6,.3]];
 for(let k=0;k<4;k++)OB.push([-.95+k*.05,2.0+k*.72,.35]);
 for(const [bx,bz,rot,len] of [[-2.7,3.1,.35,3.3],[2.55,3.75,-.35,2.6]])for(let t=-.5;t<=.501;t+=.1)OB.push([bx+Math.cos(rot)*len*t,bz-Math.sin(rot)*len*t,.62]);
-const SLOTS=[];for(let x=-5.2;x<=5.2;x+=.62)for(let z=-3.0;z<=5.2;z+=.62){const jx=x+(hash(x,z)-.5)*.2,jz=z+(hash(z,x)-.5)*.2;if(Math.hypot(jx,jz)<5.4&&jz>-3.2&&!OB.some(([ox,oz,r])=>Math.hypot(jx-ox,jz-oz)<r+.12))SLOTS.push([jx,jz]);}
+const SLOTS=[];for(let x=-6.0;x<=6.0;x+=.62)for(let z=-3.0;z<=6.0;z+=.62){const jx=x+(hash(x,z)-.5)*.2,jz=z+(hash(z,x)-.5)*.2;if(Math.hypot(jx,jz)<5.4*IK&&jz>-3.2&&!OB.some(([ox,oz,r])=>Math.hypot(jx-ox,jz-oz)<r+.12))SLOTS.push([jx,jz]);}
 const idHash=id=>{let h=2166136261;for(const c of String(id))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
+const nearestSlot=(x,z,ok=()=>true)=>{let b=-1,bd=Infinity;SLOTS.forEach(([sx,sz],i)=>{if(!ok(i,sx,sz))return;const d=Math.hypot(sx-x,sz-z);if(d<bd){bd=d;b=i;}});return b;};
 const flowerRoot=new THREE.Group();flowerRoot.userData.dyn=true;scene.add(flowerRoot);
 const shown=new Map();
 function setFlowers(list){
@@ -618,21 +628,47 @@ function setFlowers(list){
  // oldest first, so a new flower never moves an older one
  const used=new Set([...shown.values()].map(o=>o.slot));
  for(const f of [...list].sort((a,b)=>String(a.created_at).localeCompare(String(b.created_at))||String(a.id).localeCompare(String(b.id)))){
-  const cur=shown.get(f.id);if(cur&&cur.type===f.type&&cur.stage===f.stage&&cur.droop===!!f.droop)continue;
-  let slot=cur?.slot;if(slot===undefined){slot=idHash(f.id)%SLOTS.length;for(let i=0;i<SLOTS.length&&used.has(slot);i++)slot=(slot+1)%SLOTS.length;used.add(slot);}
+  const cur=shown.get(f.id);if(cur&&cur.type===f.type&&cur.stage===f.stage&&cur.droop===!!f.droop&&cur.px===f.px)continue;
+  let slot=cur?.slot;if(slot===undefined&&f.px!=null&&f.pz!=null){slot=nearestSlot(f.px,f.pz);used.add(slot);}if(slot===undefined){slot=idHash(f.id)%SLOTS.length;for(let i=0;i<SLOTS.length&&used.has(slot);i++)slot=(slot+1)%SLOTS.length;used.add(slot);}
   if(cur)flowerRoot.remove(cur.g);
-  const g=flower(f.type,f.stage);const [x,z]=SLOTS[slot];g.position.set(x,.09,z);g.rotation.y=(idHash(f.id)%628)/100;g.scale.setScalar(1.9);
+  const g=flower(f.type,f.stage);const [x,z]=f.px!=null&&f.pz!=null?[f.px,f.pz]:SLOTS[slot];g.position.set(x,.09,z);g.rotation.y=(idHash(f.id)%628)/100;g.scale.setScalar(1.9);
   if(f.droop)g.rotation.z=.18;g.userData.flowerId=f.id;g.traverse(o=>{o.userData.flowerId=f.id;});
-  flowerRoot.add(g);shown.set(f.id,{g,slot,type:f.type,stage:f.stage,droop:!!f.droop});}
+  flowerRoot.add(g);shown.set(f.id,{g,slot,type:f.type,stage:f.stage,droop:!!f.droop,px:f.px});}
  renderer.shadowMap.needsUpdate=true;lastActive=performance.now();
 }
 
+// ---------- the watering can: rests on the edge of the island; drag it onto a flower to water it ----------
+const CAN_REST=new THREE.Vector3(4.6,.1,4.9);
+const can=new THREE.Group();can.userData.dyn=true;{const enamel=M('#5F86D8',{roughness:.35,metalness:.35}),rim=M('#D9A35C',{roughness:.3,metalness:.8});
+ const body=mesh(new THREE.CylinderGeometry(.42,.5,.8,32),enamel);body.position.y=.4;can.add(body);
+ const top=mesh(new THREE.SphereGeometry(.42,32,12,0,Math.PI*2,0,Math.PI/2),enamel);top.scale.y=.35;top.position.y=.8;can.add(top);
+ const band=mesh(new THREE.TorusGeometry(.5,.03,8,40),rim);band.rotation.x=Math.PI/2;band.position.y=.05;can.add(band);const band2=band.clone();band2.scale.setScalar(.86);band2.position.y=.8;can.add(band2);
+ can.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(.38,.25,0),new THREE.Vector3(.75,.6,0),new THREE.Vector3(1.05,1.0,0)]),24,.06,10,false),enamel));
+ const rose=mesh(new THREE.CylinderGeometry(.16,.07,.14,20),rim);rose.position.set(1.1,1.06,0);rose.rotation.z=-.9;can.add(rose);
+ can.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-.3,.9,0),new THREE.Vector3(-.15,1.35,0),new THREE.Vector3(.25,1.3,0),new THREE.Vector3(.3,.92,0)]),24,.05,10,false),rim));
+ can.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-.42,.7,0),new THREE.Vector3(-.75,.55,0),new THREE.Vector3(-.45,.18,0)]),20,.05,10,false),rim));}
+can.scale.setScalar(.62);can.position.copy(CAN_REST);can.rotation.y=-2.2;scene.add(can);G.can=can;
+const glowRing=new THREE.Mesh(new THREE.RingGeometry(.55,.7,32),new THREE.MeshBasicMaterial({color:'#FFD58A',transparent:true,opacity:.55,depthWrite:false}));glowRing.rotation.x=-Math.PI/2;glowRing.position.set(CAN_REST.x,.13,CAN_REST.z);glowRing.userData.dyn=true;scene.add(glowRing);
+const drops=[];const dropM=new THREE.MeshBasicMaterial({color:'#A9D6FF'});const dropG=new THREE.SphereGeometry(.035,6,4);
+let canDrag=null,waterCb=null,canHover=null;const dragPlane=new THREE.Plane(new THREE.Vector3(0,1,0),-1.2),_hit=new THREE.Vector3();
+function flowerNear(x,z,r=1.0){let best=null,bd=r;for(const [id,o] of shown){const d=Math.hypot(o.g.position.x-x,o.g.position.z-z);if(d<bd){bd=d;best=id;}}return best;}
+function canPointer(e){const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);}
 // taps: the toad, a flower, the moon, or something from Tunisia or Venezuela
 const ray=new THREE.Raycaster(),ndc=new THREE.Vector2(),_v=new THREE.Vector3(),_p=new THREE.Vector3();
 let tapCb=null,down=null;
 const moonMesh=(()=>{let m=null;nightG.traverse(o=>{if(o.isMesh&&o.geometry.type==='SphereGeometry'&&o.geometry.parameters.radius>3)m=o;});return m;})();
-const onDown=e=>{down=[e.clientX,e.clientY];};
-const onUp=e=>{if(!tapCb||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>7)return;down=null;
+const onDown=e=>{down=[e.clientX,e.clientY];canPointer(e);if(ray.intersectObject(can,true).length){canDrag={id:e.pointerId};controls.enabled=false;renderer.domElement.setPointerCapture?.(e.pointerId);down=null;lastActive=performance.now();}};
+const onMove=e=>{if(!canDrag)return;canPointer(e);if(ray.ray.intersectPlane(dragPlane,_hit)){const d=Math.hypot(_hit.x,_hit.z),max=IR*.95;if(d>max){_hit.x*=max/d;_hit.z*=max/d;}can.position.set(_hit.x-.45,1.2,_hit.z);
+  canHover=flowerNear(_hit.x,_hit.z);can.rotation.z=canHover?.75:.2;lastActive=performance.now();}};
+const onCanUp=()=>{if(!canDrag)return;const id=canHover;canDrag=null;canHover=null;controls.enabled=true;can.rotation.z=0;can.position.copy(CAN_REST);if(id)waterCb?.(id);};
+// double tap: fly to that spot; resetView(): back to the usual view
+let fly=null;const flyTo=(target,pos)=>{fly={t0:performance.now(),ft:controls.target.clone(),fp:cam.position.clone(),tt:target.clone(),tp:pos.clone()};lastActive=performance.now();};
+const onDbl=e=>{const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);
+ const hs=ray.intersectObjects(world.children,true).filter(h=>h.object.isMesh);if(!hs.length)return;const hp=hs[0].point.clone();hp.y=Math.max(0,Math.min(hp.y,2));
+ const dir=cam.position.clone().sub(controls.target).normalize();flyTo(hp,hp.clone().addScaledVector(dir,7));};
+let lastTap=null;
+const onUp=e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>7)return;down=null;
+ const tnow=performance.now();if(lastTap&&tnow-lastTap.t<320&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<30){lastTap=null;onDbl(e);return;}lastTap={t:tnow,x:e.clientX,y:e.clientY};if(!tapCb)return;
  const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);
  if(G.toadBody&&ray.intersectObject(G.toadBody,true).length){tapCb({kind:'toad'});return;}
  const fh=ray.intersectObject(flowerRoot,true);if(fh.length&&fh[0].object.userData.flowerId){tapCb({kind:'flower',id:fh[0].object.userData.flowerId});return;}
@@ -643,7 +679,7 @@ const onUp=e=>{if(!tapCb||!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])
   if(best){tapCb({kind:'spot',id:best});return;}
   if(hp.y<.4&&Math.hypot(hp.x,hp.z)<5.4){tapCb({kind:'soil'});return;}}
  tapCb({kind:'none'});};
-renderer.domElement.addEventListener('pointerdown',onDown);renderer.domElement.addEventListener('pointerup',onUp);
+renderer.domElement.addEventListener('pointerdown',onDown);renderer.domElement.addEventListener('pointermove',onMove);renderer.domElement.addEventListener('pointerup',onCanUp);renderer.domElement.addEventListener('pointercancel',onCanUp);renderer.domElement.addEventListener('pointerup',onUp);
 
 await renderer.compileAsync(scene,cam).catch(()=>{});
 const _sd=new THREE.Vector3(),_ss=new THREE.Vector3(),_up=new THREE.Vector3(0,1,0);let eventCb=null,fullMoonSaid=false;
@@ -655,7 +691,11 @@ renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.el
  if(idle&&frame%2)return;
  const step=idle?dt*2:dt;
  if(controls.autoRotate&&!busy){const az=controls.getAzimuthalAngle();if(az>AZ0+SWAY)controls.autoRotateSpeed=SWAYV;else if(az<AZ0-SWAY)controls.autoRotateSpeed=-SWAYV;}
+ if(fly){const k=Math.min(1,(performance.now()-fly.t0)/650),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;controls.target.lerpVectors(fly.ft,fly.tt,e);cam.position.lerpVectors(fly.fp,fly.tp,e);lastActive=performance.now();if(k>=1)fly=null;}
  controls.update(step);
+ glowRing.visible=!canDrag;glowRing.material.opacity=.35+.25*Math.sin(t*3);
+ if(canDrag&&canHover&&drops.length<40){const d=mesh(dropG,dropM,{cast:false});const sp=new THREE.Vector3(1.1,1.06,0).applyMatrix4(can.matrixWorld);d.position.copy(sp);d.userData.v=-.5;scene.add(d);drops.push(d);}
+ for(let i=drops.length-1;i>=0;i--){const d=drops[i];d.userData.v-=9.8*step;d.position.y+=d.userData.v*step;if(d.position.y<.12){scene.remove(d);drops.splice(i,1);}}
  const playing=toadPlaying;
  if(!reduce){const w=G.water;if(w)w.material.uniforms.time.value+=step*.45;if(G.fallTex)G.fallTex.offset.y+=step*1.1;
   if(nightG.visible){(G.ff||[]).forEach((f,i)=>{f.userData.o??=f.position.clone();f.position.set(f.userData.o.x+Math.sin(t*.5+i)*.3,f.userData.o.y+Math.sin(t*.9+i*2)*.15,f.userData.o.z+Math.cos(t*.4+i)*.3);f.scale.setScalar(.3+1.1*Math.max(0,Math.sin(t*1.6+i*1.9)));});
@@ -686,6 +726,16 @@ return {
  setPlaying(on){toadPlaying=!!on;lastActive=performance.now();},
  setFlowers,
  onTap(fn){tapCb=fn;},
+ onWater(fn){waterCb=fn;},
+ // where on the lawn a screen point lands, and the free spot nearest to it on one side (-1 left, 1 right)
+ groundAt(cx,cy){canPointer({clientX:cx,clientY:cy});const pl=new THREE.Plane(new THREE.Vector3(0,1,0),-.1);if(!ray.ray.intersectPlane(pl,_hit))return null;return Math.hypot(_hit.x,_hit.z)<IR*.95?{x:_hit.x,z:_hit.z}:null;},
+ freeSpot(x,z,side=0){const taken=new Set([...shown.values()].map(o=>o.slot));const i=nearestSlot(x,z,(k,sx)=>!taken.has(k)&&(!side||Math.sign(sx)===side));return i<0?null:{x:+SLOTS[i][0].toFixed(3),z:+SLOTS[i][1].toFixed(3)};},
+ flowerIcons(){const out={};const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});r.setSize(128,128);r.outputColorSpace=THREE.SRGBColorSpace;r.toneMapping=THREE.ACESFilmicToneMapping;
+  for(const t of ['rose','jasmine','orchid','marigold','lavender','lilium']){const sc=new THREE.Scene();sc.add(new THREE.HemisphereLight('#FFE6CC','#5A3A4A',1.6));const dl=new THREE.DirectionalLight('#FFD2A0',2.4);dl.position.set(3,5,4);sc.add(dl);
+   const f=flower(t,3);sc.add(f);const box=new THREE.Box3().setFromObject(f),c=box.getCenter(new THREE.Vector3()),sz=box.getSize(new THREE.Vector3());const dist=Math.max(sz.x,sz.y,sz.z)*1.25/Math.tan(15*Math.PI/180)/2;
+   const cm=new THREE.PerspectiveCamera(30,1,.01,100);cm.position.set(c.x,c.y+dist*.32,c.z+dist);cm.lookAt(c);r.render(sc,cm);out[t]=r.domElement.toDataURL('image/png');}
+  r.dispose();r.forceContextLoss?.();return out;},
+ resetView(){flyTo(new THREE.Vector3(...V1),new THREE.Vector3(...V0));},
  onEvent(fn){eventCb=fn;sayFullMoon();},
  onFrame(fn){frameCb=fn;},
  // screen position of a point in the garden, in CSS pixels inside the garden element

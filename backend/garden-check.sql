@@ -7,12 +7,16 @@ create or replace function pg_temp.as_user(p uuid) returns void language plpgsql
 begin perform set_config('request.jwt.claims',json_build_object('sub',p,'role','authenticated')::text,true); perform set_config('role','authenticated',true); end $$;
 create or replace function pg_temp.fails(p_sql text,p_state text) returns boolean language plpgsql as $$
 begin execute p_sql; return false; exception when others then return sqlstate=p_state; end $$;
-delete from public.garden_discoveries;
+delete from public.garden_discoveries; delete from public.flowers where id::text like 'ab000000%';
 select pg_temp.as_user(:'oliver');
 insert into results select 'a discovery is saved',(public.discover('harissa')).spot='harissa';
 insert into results select 'finding it again changes nothing',(public.discover('harissa')).found_at=(select found_at from public.garden_discoveries where spot='harissa');
 insert into results select 'odd names are refused',pg_temp.fails($q$select public.discover('DROP TABLE')$q$,'23514');
 insert into results select 'no direct writes',pg_temp.fails($q$insert into public.garden_discoveries(profile_id,pair_id,spot) values(app_private.my_id(),app_private.my_pair(),'x1')$q$,'42501');
+-- 016: plant where the seed was dropped
+insert into results select 'a flower remembers its spot',(select px=-3.5::real and pz=1.25::real from public.plant_flower_at('ab000000-0000-4000-8000-000000000001','rose',-3.5,1.25));
+insert into results select 'planting again is a safe retry',(public.plant_flower_at('ab000000-0000-4000-8000-000000000001','rose',-3.5,1.25)).id='ab000000-0000-4000-8000-000000000001';
+insert into results select 'only on the island',pg_temp.fails($q$select public.plant_flower_at('ab000000-0000-4000-8000-000000000002','rose',9,9)$q$,'22023');
 select pg_temp.as_user(:'yasmine');
 insert into results select 'she sees what he found',(select count(*) from public.garden_discoveries)=1;
 insert into results select 'her own discoveries are hers',(public.discover('angel')).spot='angel';

@@ -1,13 +1,21 @@
+/* Each theme from the shop paints the dusk its own way: the sky, the base and the accent (buttons, tabs, highlights). */
+html[data-ui=dusk]{--dk-sky1:#1F2148;--dk-sky2:#5A3C66;--dk-sky3:#C9765A;--dk-sky4:#3A262C;--dk-base:#1C1418;--dk-accent:#FFD58A;--dk-accent2:#F2B05A}
+html[data-ui=dusk][data-shop-theme=yasmine]{--dk-sky1:#0E2A24;--dk-sky2:#1D5A46;--dk-sky3:#4FA37A;--dk-sky4:#173A2E;--dk-base:#0F201A;--dk-accent:#9FE0B8;--dk-accent2:#5ED494}
+html[data-ui=dusk][data-shop-theme=oliver]{--dk-sky1:#2A0F16;--dk-sky2:#6A1E2C;--dk-sky3:#C9443A;--dk-sky4:#3A1A1E;--dk-base:#1C0F12;--dk-accent:#FFB0A0;--dk-accent2:#F07A6A}
+html[data-ui=dusk][data-shop-theme=sidi]{--dk-sky1:#0E1A36;--dk-sky2:#1E3A6E;--dk-sky3:#4A86D0;--dk-sky4:#142644;--dk-base:#0B1426;--dk-accent:#B5D2FF;--dk-accent2:#7FA8F0}
+html[data-ui=dusk][data-shop-theme=salto]{--dk-sky1:#0C1E1E;--dk-sky2:#14504A;--dk-sky3:#3FA88E;--dk-sky4:#12302C;--dk-base:#0A1A18;--dk-accent:#9FF0D6;--dk-accent2:#4FC9A6}
+html[data-ui=dusk][data-shop-theme=blaugrana]{--dk-sky1:#0E1434;--dk-sky2:#2A2A72;--dk-sky3:#8A1E4A;--dk-sky4:#241634;--dk-base:#120E24;--dk-accent:#FFD84A;--dk-accent2:#E8B820}
+html[data-ui=dusk][data-shop-theme=djerba]{--dk-sky1:#2A2050;--dk-sky2:#2E6AA8;--dk-sky3:#E8C27A;--dk-sky4:#3A2E22;--dk-base:#1E1810;--dk-accent:#FFE6A8;--dk-accent2:#F0C060}
 /* The approved dusk look on every page (html[data-ui=dusk], set by theme.js unless the phone chose Always light).
    Tokens first, so every component follows; then the few shapes that change (soft panels instead of stickers). */
 html[data-ui=dusk][data-garden-theme]{
   --bg:#1C1418;--surface:#2A1C26;--surface-2:#352430;--line:rgba(255,226,198,.18);--ink:#FFF4E6;--ink-soft:#FFE2C6;
-  --accent:#FFD58A;--on-accent:#2A1A10;--danger:#FF9A8A;--success:#9FE0B8;--info:#A9BCFF;--heart:#FF7FA6;
+  --accent:var(--dk-accent);--on-accent:#2A1A10;--danger:#FF9A8A;--success:#9FE0B8;--info:#A9BCFF;--heart:#FF7FA6;
   --glass:rgba(18,10,20,.82);--scrim:rgba(8,4,8,.6);
-  --edge:rgba(255,226,198,.22);--fill:#FFD58A;--on-fill:#2A1A10;--sun:#FFD58A;--flame:#FFB25A;--page:#1C1418;--note:#FFD58A;
+  --edge:rgba(255,226,198,.22);--fill:var(--dk-accent);--on-fill:#2A1A10;--sun:var(--dk-accent);--flame:#FFB25A;--page:#1C1418;--note:var(--dk-accent);
   --shadow-card:0 12px 26px rgba(0,0,0,.35);--shadow-float:0 16px 40px rgba(0,0,0,.5);color-scheme:dark;
 }
-html[data-ui=dusk] body{background:linear-gradient(180deg,#1F2148 0,#5A3C66 260px,#C9765A 520px,#3A262C 820px,#1C1418 1100px) no-repeat,#1C1418;background-attachment:fixed,scroll;color:var(--ink)}
+html[data-ui=dusk] body{background:linear-gradient(180deg,var(--dk-sky1) 0,var(--dk-sky2) 260px,var(--dk-sky3) 520px,var(--dk-sky4) 820px,var(--dk-base) 1100px) no-repeat,var(--dk-base);background-attachment:fixed,scroll;color:var(--ink)}
 /* the string of lights over the top of every page */
 html[data-ui=dusk] .shell::before{content:"";position:fixed;left:0;right:0;top:0;block-size:96px;pointer-events:none;z-index:0;opacity:.85;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 96'%3E%3Cdefs%3E%3CradialGradient id='b'%3E%3Cstop offset='0' stop-color='%23FFE4A0' stop-opacity='.95'/%3E%3Cstop offset='.4' stop-color='%23FFB86A' stop-opacity='.35'/%3E%3Cstop offset='1' stop-color='%23FFB86A' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M-10 22 Q 90 58 190 58 T 400 26' fill='none' stroke='%231A1018' stroke-width='1.4'/%3E%3Cg fill='url(%23b)'%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3Ccircle cx='88' cy='47' r='8'/%3E%3Ccircle cx='150' cy='56' r='8'/%3E%3Ccircle cx='214' cy='57' r='8'/%3E%3Ccircle cx='276' cy='50' r='8'/%3E%3Ccircle cx='336' cy='37' r='8'/%3E%3C/g%3E%3Cg fill='%23FFF0C8'%3E%3Cellipse cx='30' cy='31' rx='2.2' ry='3.2'/%3E%3Cellipse cx='88' cy='48' rx='2.2' ry='3.2'/%3E%3Cellipse cx='150' cy='57' rx='2.2' ry='3.2'/%3E%3Cellipse cx='214' cy='58' rx='2.2' ry='3.2'/%3E%3Cellipse cx='276' cy='51' rx='2.2' ry='3.2'/%3E%3Cellipse cx='336' cy='38' rx='2.2' ry='3.2'/%3E%3C/g%3E%3C/svg%3E") top center/100% 96px no-repeat}
@@ -15,28 +23,28 @@ html[data-ui=dusk] .shell>*{position:relative;z-index:1}
 /* the top bar */
 html[data-ui=dusk] .top .brand,html[data-ui=dusk] .top-actions>button,html[data-ui=dusk] .top-actions .round-button{background:rgba(18,10,20,.62);color:var(--ink);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 html[data-ui=dusk] .statusbar{color:rgba(255,226,198,.7)}
-html[data-ui=dusk] .eyebrow{color:#FFD58A}
+html[data-ui=dusk] .eyebrow{color:var(--dk-accent)}
 html[data-ui=dusk] .title,html[data-ui=dusk] h2,html[data-ui=dusk] h3{color:var(--ink)}
 html[data-ui=dusk] .muted,html[data-ui=dusk] .small,html[data-ui=dusk] .hint{color:var(--ink-soft)}
 /* panels: soft dusk glass instead of stickers */
 html[data-ui=dusk] :is(.card,.note,.play-tile,.play-turn,.inbox-row,.learn-card,.toad-card,.knowme-list>*,.entries>*,.pin):not(.us-shop){
   background:rgba(18,10,20,.62);border:1px solid var(--line);border-radius:18px;box-shadow:none;color:var(--ink);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 html[data-ui=dusk] .learn-card.hidden-word{background:rgba(18,10,20,.4);border-style:dashed}
-html[data-ui=dusk] .play-tile:hover,html[data-ui=dusk] .play-tile:focus-visible{border-color:#FFD58A;background:rgba(255,213,138,.1)}
-html[data-ui=dusk] .play-tile-icon{background:rgba(255,213,138,.14);color:#FFD58A;border:0;box-shadow:none}
-html[data-ui=dusk] .play-points{color:#FFD58A}
+html[data-ui=dusk] .play-tile:hover,html[data-ui=dusk] .play-tile:focus-visible{border-color:var(--dk-accent);background:rgba(255,213,138,.1)}
+html[data-ui=dusk] .play-tile-icon{background:rgba(255,213,138,.14);color:var(--dk-accent);border:0;box-shadow:none}
+html[data-ui=dusk] .play-points{color:var(--dk-accent)}
 html[data-ui=dusk] .play-bar{background:rgba(255,226,198,.15);border:0}
-html[data-ui=dusk] .play-face{border-color:#FFD58A}
+html[data-ui=dusk] .play-face{border-color:var(--dk-accent)}
 /* buttons */
 html[data-ui=dusk] button:not(.gate-go):not(.gate-phrase):not(.rival-card):not(.pool-spin):not([class*="ds-"]):not([class*="pn-"]):not([class*="ls-"]):not(.learn-deck):not(.shop-tab):not(.us-shop):not(.us-days):not(.us-cam){border-color:var(--line);box-shadow:none}
-html[data-ui=dusk] button.primary,html[data-ui=dusk] .primary-round{background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10;border:0}
+html[data-ui=dusk] button.primary,html[data-ui=dusk] .primary-round{background:linear-gradient(180deg,var(--dk-accent),var(--dk-accent2));color:#2A1A10;border:0}
 html[data-ui=dusk] button.quiet,html[data-ui=dusk] .round-button:not(.primary-round){background:rgba(18,10,20,.55);color:var(--ink);border:1px solid var(--line)}
-html[data-ui=dusk] button.link{color:#FFD58A}
-html[data-ui=dusk] .pill{background:rgba(255,213,138,.14);color:#FFD58A;border:1px solid rgba(255,213,138,.4);box-shadow:none}
+html[data-ui=dusk] button.link{color:var(--dk-accent)}
+html[data-ui=dusk] .pill{background:rgba(255,213,138,.14);color:var(--dk-accent);border:1px solid rgba(255,213,138,.4);box-shadow:none}
 /* tabs (Chat / Notes / Questions, and every segmented control) */
 html[data-ui=dusk] .segmented,html[data-ui=dusk] .seg{background:rgba(18,10,20,.55);border:1px solid var(--line);border-radius:14px;box-shadow:none;padding:4px;gap:4px}
 html[data-ui=dusk] .segmented button,html[data-ui=dusk] .seg button{background:transparent;color:var(--ink);border:0;border-radius:10px;box-shadow:none}
-html[data-ui=dusk] .segmented button[aria-selected="true"],html[data-ui=dusk] .segmented button[aria-pressed="true"],html[data-ui=dusk] .seg button[aria-pressed="true"]{background:#FFD58A;color:#2A1A10}
+html[data-ui=dusk] .segmented button[aria-selected="true"],html[data-ui=dusk] .segmented button[aria-pressed="true"],html[data-ui=dusk] .seg button[aria-pressed="true"]{background:var(--dk-accent);color:#2A1A10}
 /* fields */
 html[data-ui=dusk] :is(input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select){background:rgba(255,244,230,.06);color:var(--ink);border:1px solid rgba(255,226,198,.25);box-shadow:none}
 html[data-ui=dusk] :is(input,textarea)::placeholder{color:rgba(255,226,198,.5)}
@@ -52,7 +60,7 @@ html[data-ui=dusk] .greeting{color:var(--ink)}
 /* the bottom bar */
 html[data-ui=dusk] .bottom-nav{background:rgba(18,10,20,.86);border:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 html[data-ui=dusk] .bottom-nav button{color:rgba(255,226,198,.75);background:transparent;border:0;box-shadow:none}
-html[data-ui=dusk] .bottom-nav button[aria-current="page"]{color:#FFD58A}
+html[data-ui=dusk] .bottom-nav button[aria-current="page"]{color:var(--dk-accent)}
 html[data-ui=dusk] .nav-badge{background:#FF7FA6;color:#2A1A10;border-color:#1C1418}
 /* sheets */
 html[data-ui=dusk] dialog.sheet{background:linear-gradient(180deg,#2A1C2C,#1C1418 60%);color:var(--ink);border:0;border-top:1px solid rgba(255,213,138,.3)}
@@ -72,3 +80,60 @@ html.garden-full .bottom-nav,html.garden-full #affectionDock,html.garden-full .m
 .thought-fade{animation:thought-fade 6s ease forwards}
 @keyframes thought-fade{0%,70%{opacity:1}100%{opacity:0;visibility:hidden}}
 #thoughtReset{display:none!important}
+/* the technical sync line ("Authorized data checked · revision …") stays for screen readers only; real errors still show */
+#connectionStatus{position:absolute!important;inline-size:1px!important;block-size:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;margin:0!important;padding:0!important}
+/* garden controls: scores on/off and the usual view, next to full screen */
+.garden3d-tools{position:absolute;inset-inline-end:12px;inset-block-end:170px;z-index:6;display:grid;gap:8px}
+.garden3d.full .garden3d-tools{inset-block-start:calc(64px + env(safe-area-inset-top));inset-block-end:auto}
+button.garden3d-tool{inline-size:40px;block-size:40px;min-block-size:40px;padding:0;border-radius:50%;display:grid;place-items:center;background:rgba(18,10,20,.6);color:#FFF4E6;border:1px solid rgba(255,226,198,.3);box-shadow:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.garden3d:not(.full) button.garden3d-full{inset-block-end:120px}
+.garden3d.no-scores .pin.score{display:none!important}
+/* the seed tray: only in full screen */
+.garden3d-tray{display:none}
+.garden3d.full .garden3d-tray{display:block;position:absolute;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:6;padding:10px 12px;border-radius:22px;background:rgba(18,10,20,.82);border:1px solid rgba(255,226,198,.18);color:#FFF4E6;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.garden3d-tray-head{margin:0 0 6px;font:700 12px var(--font-sans);color:#FFE2C6}
+.garden3d-tray-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+button.garden3d-seed{display:grid;justify-items:center;gap:2px;padding:4px 0 6px;min-block-size:0;border-radius:14px;background:rgba(255,244,230,.06);border:1px solid rgba(255,226,198,.2);color:#FFF4E6;font:600 10px var(--font-sans);box-shadow:none;touch-action:none}
+button.garden3d-seed img{inline-size:46px;block-size:46px;pointer-events:none}
+button.garden3d-seed:disabled{opacity:.45}
+.garden3d-ghost{position:fixed;z-index:200;inline-size:64px;block-size:64px;margin:-48px 0 0 -32px;pointer-events:none;filter:drop-shadow(0 8px 12px rgba(0,0,0,.5))}
+/* ---------- Home (approved PolishHome): one row of round buttons; the old buttons, hint and doors step aside ---------- */
+#page-garden .quick-actions,#page-garden .garden-doors,#page-garden #gardenStatus,#page-garden .garden-hint{display:none!important}
+.home-quick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-block:10px}
+button.home-quick-btn{display:grid;justify-items:center;gap:5px;padding:10px 0;min-block-size:0;border-radius:16px;background:rgba(18,10,20,.62);border:1px solid var(--line);color:#FFF4E6;font:700 11px var(--font-sans);box-shadow:none}
+.home-quick-btn[data-tone=gold] svg{color:#FFD58A}.home-quick-btn[data-tone=rose] svg{color:#FF9EC2}.home-quick-btn[data-tone=mint] svg{color:#9FE0B8}.home-quick-btn[data-tone=blue] svg{color:#A9BCFF}.home-quick-btn[data-tone=amber] svg{color:#FFB25A}
+#page-garden .home-cards{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;align-items:stretch}
+#page-garden .home-cards>article{margin:0}
+#page-garden #moodPanel{display:none}
+/* ---------- How I am today (approved PolishMood): full screen at dusk ---------- */
+html.mood-open{overflow:hidden}
+html.mood-open .bottom-nav,html.mood-open #affectionDock{visibility:hidden}
+.mood-view{position:fixed;inset:0;z-index:90;overflow-y:auto;color:#FFF4E6;padding:calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 20px);
+  background:linear-gradient(180deg,var(--dk-sky1,#2A2250) 0%,var(--dk-sky2,#8A4A6A) 26%,var(--dk-sky3,#F08A5A) 44%,var(--dk-sky4,#3A262C) 62%,var(--dk-base,#1C1418) 80%)}
+.mood-view #moodPanel{display:grid!important;gap:10px;background:none;border:0;box-shadow:none;padding:0}
+.mood-view #moodPanel>h3{display:none}
+.mood-top{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;text-align:center;font:800 17px var(--font-display)}
+button.mood-back{inline-size:44px;block-size:44px;min-block-size:44px;padding:0;border-radius:50%;display:grid;place-items:center;background:rgba(18,10,20,.62);border:1px solid rgba(255,226,198,.25);color:#FFF4E6}
+.mood-glow{display:grid;justify-items:center;gap:8px;margin-block:18px 10px}
+.mood-glow-disc{inline-size:120px;block-size:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#FFF4C8,var(--mc,#FFD58A) 60%,color-mix(in srgb,var(--mc,#FFD58A),#000 18%));box-shadow:0 0 50px color-mix(in srgb,var(--mc,#FFD58A),transparent 40%)}
+.mood-glow[data-mood=calm]{--mc:#9FE0B8}.mood-glow[data-mood=hopeful]{--mc:#FFD58A}.mood-glow[data-mood=nostalgic]{--mc:#A9BCFF}.mood-glow[data-mood=hug]{--mc:#FF9EC2}.mood-glow[data-mood=difficult]{--mc:#FFB25A}.mood-glow[data-mood=none]{--mc:#C9B8A8}
+.mood-glow-name{margin:0;font:800 26px var(--font-display)}
+/* chips over the plain selects */
+.dress-hidden{position:absolute!important;inline-size:1px!important;block-size:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important;clip-path:inset(50%)!important}
+.dress-chips{display:flex;gap:6px;flex-wrap:wrap;margin-block:4px}
+button.dress-chip{display:flex;align-items:center;gap:6px;min-block-size:40px;padding:4px 10px 4px 4px;border-radius:99px;background:rgba(255,244,230,.06);border:1px solid rgba(255,226,198,.2);color:#FFF4E6;font:600 12px var(--font-sans);box-shadow:none}
+button.dress-chip[aria-checked=true]{background:rgba(255,213,138,.18);border-color:var(--dk-accent,#FFD58A)}
+.dress-dot{inline-size:30px;block-size:30px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#2A1A10}
+.dress-chips.big{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dress-chips.big button.dress-chip{flex-direction:column;justify-content:center;padding:12px 4px;border-radius:18px;min-block-size:96px;font-size:12px}
+.dress-chips.big .dress-dot{inline-size:44px;block-size:44px}
+button.dress-share{display:inline-flex;align-items:center;gap:8px;min-block-size:44px;padding:0 14px;border-radius:14px;background:rgba(18,10,20,.62);border:1px solid rgba(255,226,198,.2);color:#FFF4E6;font:700 13px var(--font-sans);box-shadow:none}
+button.dress-share[aria-checked=true]{border-color:#FF9EC2}button.dress-share[aria-checked=true] svg{color:#FF9EC2;fill:#FF9EC2}
+/* one line on paper */
+input.paper-line,.mood-view #moodNote{background:repeating-linear-gradient(180deg,transparent 0 29px,rgba(150,110,70,.22) 29px 30px),linear-gradient(180deg,#FBF3E4,#EFDDBA)!important;color:#3A2416!important;font:600 22px var(--font-hand)!important;border-radius:6px 16px 16px 6px!important;border:0!important;min-block-size:52px;padding:8px 14px!important}
+/* ---------- the diary page (approved PolishDiary) ---------- */
+.diary-page textarea{background:repeating-linear-gradient(180deg,transparent 0 33px,rgba(150,110,70,.22) 33px 34px),linear-gradient(180deg,#FBF3E4,#EFDDBA)!important;color:#3A2416!important;
+  border:0!important;border-radius:6px 18px 18px 6px!important;box-shadow:0 14px 28px rgba(0,0,0,.4),inset 10px 0 0 rgba(176,32,30,.12)!important;font:500 19px/34px var(--font-sans)!important;padding:8px 14px 8px 30px!important;min-block-size:240px}
+.diary-page[data-kind=poem] textarea{font:500 24px/34px var(--font-hand)!important}
+.diary-page textarea::placeholder{color:rgba(58,36,22,.45)!important}
+#journalOwner{display:none!important}

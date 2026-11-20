@@ -1,6 +1,7 @@
 // The app around the pages: Talk's two panes, Appearance (per phone), the time chip, the bell's count,
 // the toad's music card and the combo card on Home, and the words found in the garden on Learn.
 // Every word on screen comes from the catalog; names, song titles and notes are the people's own data.
+import {soundPlaying,stopAllSound,onSound} from './sound.js';
 import {icon} from './design/icons.js';
 import {appearance,setAppearance,onGardenTheme,gardenLight} from './design/theme.js';
 import {CULTURE} from './garden3d/culture.js';
@@ -81,9 +82,9 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
 
   const partnerName=()=>{const snap=getSnapshot(),id=snap?.members?.find(m=>m.profile_id!==me())?.profile_id;return id?person(id):'';};
   // ---- The toad's card on Home drives the music player; the toad in the garden plays along
-  const playIcon=()=>$('toadPlay').replaceChildren(icon(player.paused?'playTrack':'pause',18));
+  const playIcon=()=>$('toadPlay').replaceChildren(icon(player.paused&&!soundPlaying()?'playTrack':'pause',18));
   function paintToad(){
-    const playing=music.isPlaying()||(!player.paused&&!player.ended),title=music.nowTitle()||$('trackTitle')?.textContent?.trim()||'';
+    const playing=music.isPlaying()||(!player.paused&&!player.ended)||soundPlaying(),title=music.nowTitle()||$('trackTitle')?.textContent?.trim()||'';
     const partnerSong=!playing?music.partnerListening():null;
     if(partnerSong)copy($('toadLine'),()=>t('together.listening',{name:partnerName(),title:partnerSong.title}));else{copy($('toadLine'),'');$('toadLine').textContent=music.currentLine();}
     copy($('toadState'),()=>t(playing?'toad.playing':'toad.resting'));
@@ -93,7 +94,7 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
     garden3d()?.setPlaying(playing);garden3d()?.setSong(playing?title:null);
   }
   for(const ev of ['play','playing','pause','ended','emptied'])player.addEventListener(ev,paintToad);
-  $('toadPrev').onclick=()=>$('musicPrev').click();$('toadPlay').onclick=()=>$('musicPlay').click();$('toadNext').onclick=()=>$('musicNext').click();
+  $('toadPrev').onclick=()=>$('musicPrev').click();$('toadPlay').onclick=()=>{if(soundPlaying()){stopAllSound();if(!player.paused)$('musicPlay').click();paintToad();}else $('musicPlay').click();};onSound(()=>paintToad());$('toadNext').onclick=()=>$('musicNext').click();
   $('toadArt').onclick=()=>openMusic();
   // The stage: playlists, dedications and lyric cards (the old player stays in Us for uploads).
   function openMusic(){music.open();}

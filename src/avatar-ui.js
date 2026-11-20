@@ -3,13 +3,24 @@ import {createAvatarController} from './avatar.js';
 import {createAvatarContextAdapter} from './auth.js';
 
 // Files/URLs stay in memory. Only the controller can publish or remove bytes.
+// A phone photo is several MB and full of camera details: make it a 720 px square JPEG first (the face in the middle),
+// small enough to upload and with nothing but the picture inside.
+async function squarePhoto(file){
+  try{
+    const bmp=await createImageBitmap(file,{imageOrientation:'from-image'});const side=Math.min(bmp.width,bmp.height),size=Math.min(720,side);
+    const c=document.createElement('canvas');c.width=c.height=size;
+    c.getContext('2d').drawImage(bmp,(bmp.width-side)/2,(bmp.height-side)/2,side,side,0,0,size,size);bmp.close?.();
+    const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.86));
+    return blob?new File([blob],'photo.jpg',{type:'image/jpeg'}):file;
+  }catch{return file;}
+}
 export function createAvatarUI({$,el,button,client,getApi,getGeneration,onIdentityFailure,isFrozen=()=>false,beginHost=()=>()=>{}}){
  let serial=0,viewSerial=0,busy=false,error=null,message='avatar.empty',previewURL=null,recovery=[],ownId=null,photoId=null,loaded=false,scope=null;
  let partnerId=null,partnerPhotoId=null,partnerURL=null;const photoListeners=new Set();const photosChanged=()=>{for(const fn of photoListeners)try{fn();}catch{}};
  const adapter=createAvatarContextAdapter({client,getTransport:getApi,getGeneration,onIdentityFailure,onUnavailable:()=>unavailable()});
  const controller=createAvatarController({client,getVerifiedContext:adapter.getVerifiedContext,isCurrentContext:adapter.isCurrentContext});
  const root=$('avatarEditor'),title=el('h3',()=>t('avatar.title')),hint=el('p',()=>t('avatar.hint'),'hint');
- const input=el('input');input.id='avatarFile';input.type='file';input.accept='image/jpeg,image/png,image/webp,image/gif';
+ const input=el('input');input.id='avatarFile';input.type='file';input.accept='image/*';
  const label=el('label',()=>t('avatar.choose'));label.htmlFor=input.id;
  const preview=el('img');preview.id='avatarPreview';preview.className='avatar-preview';preview.hidden=true;copy(preview,()=>t('avatar.previewAlt'),'alt');
  const consent=el('input');consent.id='avatarConsent';consent.type='checkbox';
@@ -38,7 +49,7 @@ export function createAvatarUI({$,el,button,client,getApi,getGeneration,onIdenti
  let pickerBinding=null,selection=null;
  const hostBinding=()=>{const ctx=getApi()?.context;return ctx?[getGeneration(),ctx.user.id,ctx.me.id,ctx.pairId,scope].join(':'):null;};
  const bindPicker=()=>{pickerBinding=!isFrozen()&&input.isConnected?hostBinding():null;};input.onclick=bindPicker;input.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')bindPicker();};
- input.onchange=()=>{const file=input.files?.[0],binding=pickerBinding;input.value='';pickerBinding=null;if(isFrozen()||!file||!binding||binding!==hostBinding()||!input.isConnected)return;const request=selection={file,binding,token:serial};run(async()=>{try{if(request.binding!==hostBinding()||request.token!==serial||!request.file)return;await controller.select(request.file,{userSelected:true});if(request.binding!==hostBinding()||request.token!==serial||!request.file||!input.isConnected)return;clearPreview();previewURL=URL.createObjectURL(request.file);preview.src=previewURL;preview.hidden=false;consent.checked=false;message='avatar.selected';}finally{request.file=null;if(selection===request)selection=null;}});};
+ input.onchange=()=>{const file=input.files?.[0],binding=pickerBinding;input.value='';pickerBinding=null;if(isFrozen()||!file||!binding||binding!==hostBinding()||!input.isConnected)return;const request=selection={file,binding,token:serial};run(async()=>{try{if(request.binding!==hostBinding()||request.token!==serial||!request.file)return;request.file=await squarePhoto(request.file);await controller.select(request.file,{userSelected:true});if(request.binding!==hostBinding()||request.token!==serial||!request.file||!input.isConnected)return;clearPreview();previewURL=URL.createObjectURL(request.file);preview.src=previewURL;preview.hidden=false;consent.checked=false;message='avatar.selected';}finally{request.file=null;if(selection===request)selection=null;}});};
  consent.onchange=paint;
  function freeze(){serial++;pickerBinding=null;if(selection)selection.file=null;selection=null;controller.setUnavailable();adapter.markUnavailable();busy=false;releaseView();paint();}
  async function loadPartner(id,owner){const token=serial;try{const photo=await controller.loadPhoto(owner);if(token!==serial||owner!==partnerId||id!==partnerPhotoId)return;partnerURL=photo&&photo.id===id?photo.url:null;photosChanged();}catch{}}

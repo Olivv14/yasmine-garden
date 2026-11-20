@@ -2,6 +2,7 @@
 // song you uploaded (or the app's own song). Classic rules (piano-rules.js): tap the lowest tile, hold the long ones,
 // nothing at the bottom of the screen. The song's beats are found on the phone (onsets), so any song works.
 // A finished game is saved as a game event ('piano', backend/013): the score, the stars (a point each) and the song.
+import {trackContext} from '../sound.js';
 import {detectOnsets,gridBeats,chart,seeded,hashText,newRun,tap,release,advance,tileBox,stars,progress,LANES} from './piano-rules.js';
 import {icon} from '../design/icons.js';
 
@@ -55,7 +56,7 @@ export function createPiano({el,button,t,copy,me,getSnapshot,download,record}){
     if(loading)return;loading=true;song=s;saved=false;
     root.replaceChildren();const wait=el('div',undefined,'pn-loading');wait.append(el('p',()=>t('piano.listening'),'pn-intro'));root.append(wait);
     try{
-      ctx?.close?.().catch(()=>{});ctx=new (window.AudioContext||window.webkitAudioContext)();
+      ctx?.close?.().catch(()=>{});ctx=trackContext(new (window.AudioContext||window.webkitAudioContext)());
       const bytes=s.url?await (await fetch(new URL(s.url,document.baseURI))).arrayBuffer():await (await download(s.media)).arrayBuffer();
       const buffer=await ctx.decodeAudioData(bytes);
       let tiles=charts.get(s.id);
