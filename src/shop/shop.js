@@ -23,7 +23,9 @@ export function createShop({el,button,t,copy,getSnapshot,me,partner,person,rpc,n
     document.documentElement.dataset.shopTheme=mine.theme.split('.')[1];
     paintHeart(item(mine.heart)?.art??'heart');
     document.getElementById('profileBubble')?.classList.toggle('has-crown',beatChampion(snap,me()));
-    mascots.show([...mine.mascots.map(id=>({sheet:item(id).sheet,owner:'me'})),...(theirs?.mascots??[]).map(id=>({sheet:item(id).sheet,owner:'partner'}))]);
+    // the same pet chosen by both of you lives on the screen once
+    const own=mine.mascots.map(id=>item(id).sheet);
+    mascots.show([...own.map(sheet=>({sheet,owner:'me'})),...(theirs?.mascots??[]).map(id=>item(id).sheet).filter(sheet=>!own.includes(sheet)).map(sheet=>({sheet,owner:'partner'}))]);
     if(sheet?.open)paint();
   }
   function paintHeart(kind){

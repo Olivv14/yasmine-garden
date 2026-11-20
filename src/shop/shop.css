@@ -41,8 +41,9 @@ html.game-full .mascot-layer,html.sheet-open .mascot-layer{display:none}
 .heart-burst{position:fixed;z-index:200;pointer-events:none;inline-size:0;block-size:0}
 .heart-burst .heart-particle{position:absolute;left:-8px;top:-8px;opacity:0;animation:heart-fly 1.1s cubic-bezier(.2,.7,.3,1) both}
 @keyframes heart-fly{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(40deg)}}
-#profileBubble.has-crown{position:relative}
-#profileBubble.has-crown::after{content:'';position:absolute;inset-block-start:-9px;inset-inline-start:50%;inline-size:20px;block-size:12px;margin-inline-start:-10px;background:linear-gradient(180deg,#FFF4C8,#E8B83E 60%,#7A5410);clip-path:polygon(0 100%,0 20%,25% 60%,50% 0,75% 60%,100% 20%,100% 100%);filter:drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+#profileBubble.has-crown{position:relative;overflow:visible}
+#profileBubble.has-crown>img,#profileBubble.has-crown>span,#profileBubble.has-crown>picture{border-radius:50%;overflow:hidden}
+#profileBubble.has-crown::after{content:'';position:absolute;inset-block-start:-17px;inset-inline-start:50%;inline-size:30px;block-size:19px;margin-inline-start:-15px;transform:rotate(-12deg);z-index:2;background:linear-gradient(180deg,#FFF4C8,#E8B83E 60%,#7A5410);clip-path:polygon(0 100%,0 20%,25% 60%,50% 0,75% 60%,100% 20%,100% 100%);filter:drop-shadow(0 1px 1px rgba(0,0,0,.5)) drop-shadow(0 0 6px rgba(255,213,138,.7))}
 .shop-sheet .sheet-body{display:grid;gap:12px}
 .shop-coins{justify-self:end;display:inline-flex;align-items:center;gap:6px;background:rgba(18,10,20,.6);color:#FFF4E6;border:1px solid rgba(255,213,138,.5);border-radius:99px;padding:6px 12px;font:800 14px var(--font-sans)}
 .shop-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:rgba(18,10,20,.55);border:1px solid rgba(255,226,198,.14);border-radius:14px;padding:4px}

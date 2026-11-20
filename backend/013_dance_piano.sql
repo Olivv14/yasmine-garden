@@ -2,8 +2,8 @@
 -- Copy my step: a dance step is a Talk message of kind 'dance' carrying a short video (the existing media lifecycle:
 -- reserve_message_media -> upload -> finalize), payload {"role":"step"|"copy","style":"bachata|...","of":<step id>}.
 -- The one who filmed the step gives the copy 1 to 3 hearts. Piano tiles results are game events ('piano') that count
--- for the week: one point per star. A letter for later is a Talk message of kind 'letter' with the words and the day it
--- opens (payload {"opens_at":"YYYY-MM-DD"}); the app keeps it sealed until that day.
+-- for the week: one point per star. A letter for later is a Talk message of kind 'letter' (payload {"opens_at":"YYYY-MM-DD"},
+-- no body); its words live in sealed_letters, which the partner can only read from that day on (send_letter).
 -- Apply AFTER 012, as postgres, in this one transaction. Additive: checks get wider, one table and one function are
 -- new, reserve_message_media also accepts a video for a dance, and the points count piano stars.
 begin;
@@ -17,7 +17,7 @@ alter table public.messages add constraint messages_shape check (
   or (kind in ('song','game','word') and payload is not null)
   or (kind='dance' and payload is not null and coalesce(payload->>'role','') in ('step','copy')
       and (payload->>'role'='step' or (payload ? 'of')))
-  or (kind='letter' and body is not null and payload is not null and coalesce(payload->>'opens_at','') ~ '^\d{4}-\d{2}-\d{2}$'));
+  or (kind='letter' and body is null and payload is not null and coalesce(payload->>'opens_at','') ~ '^\d{4}-\d{2}-\d{2}$'));
 
 -- 2. A dance carries one short video (same quota and lifecycle as photos and voice notes)
 create or replace function public.reserve_message_media(p_id uuid,p_message_id uuid,p_filename text,p_mime_type text)
@@ -155,14 +155,46 @@ end $$;
 revoke all on function public.set_together_since(date) from public, anon, authenticated, service_role;
 grant execute on function public.set_together_since(date) to authenticated;
 
+-- 7. Letters for later: the words stay sealed on the server until the day (the writer can always read them)
+create table if not exists public.sealed_letters (
+  id uuid primary key references public.messages(id),
+  pair_id uuid not null references public.pairs(id),
+  sender_id uuid not null references public.users_profiles(id),
+  opens_at date not null,
+  body text not null check (length(body) between 1 and 4000),
+  foreign key (pair_id,sender_id) references public.pair_members(pair_id,profile_id)
+);
+alter table public.sealed_letters enable row level security;
+drop policy if exists sealed_letters_read on public.sealed_letters;
+create policy sealed_letters_read on public.sealed_letters for select to authenticated using (
+  pair_id=(select app_private.my_pair())
+  and exists(select 1 from public.messages m where m.id=sealed_letters.id and m.deleted_at is null)
+  and (sender_id=(select app_private.my_id()) or opens_at<=(now() at time zone 'utc')::date));
+revoke all on public.sealed_letters from public, anon, authenticated;
+grant select on public.sealed_letters to authenticated;
+create or replace function public.send_letter(p_id uuid,p_body text,p_opens_at date)
+returns public.messages language plpgsql security definer set search_path='' as $$
+declare v_me uuid:=app_private.begin_write(); v_msg public.messages; v_body text:=nullif(btrim(p_body),''); v_old public.sealed_letters;
+begin
+  if v_body is null or length(v_body)>4000 then raise exception 'Write a few words' using errcode='22023'; end if;
+  if p_opens_at is null or p_opens_at<=current_date or p_opens_at>current_date+3660 then raise exception 'A day to come' using errcode='22023'; end if;
+  select * into v_old from public.sealed_letters where id=p_id;
+  if found and (v_old.sender_id<>v_me or v_old.body<>v_body or v_old.opens_at<>p_opens_at) then raise exception 'Letter ID conflict' using errcode='23505'; end if;
+  v_msg:=public.send_message(p_id,'letter',null,jsonb_build_object('opens_at',to_char(p_opens_at,'YYYY-MM-DD')),null);
+  if not found then insert into public.sealed_letters(id,pair_id,sender_id,opens_at,body) values(p_id,v_msg.pair_id,v_me,p_opens_at,v_body) on conflict (id) do nothing; end if;
+  return v_msg;
+end $$;
+revoke all on function public.send_letter(uuid,text,date) from public, anon, authenticated, service_role;
+grant execute on function public.send_letter(uuid,text,date) to authenticated;
+
 do $verify$
 begin
   if not exists(select 1 from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname='dance_ratings' and c.relrowsecurity) then
     raise exception '013: dance_ratings needs RLS'; end if;
-  if has_table_privilege('authenticated','public.pair_story','INSERT') or has_table_privilege('authenticated','public.dance_ratings','INSERT') then raise exception '013: unsafe table grant'; end if;
+  if has_table_privilege('authenticated','public.sealed_letters','INSERT') or has_table_privilege('authenticated','public.pair_story','INSERT') or has_table_privilege('authenticated','public.dance_ratings','INSERT') then raise exception '013: unsafe table grant'; end if;
   if has_function_privilege('anon','public.rate_dance(uuid,smallint)','EXECUTE') then raise exception '013: unsafe function grant'; end if;
   if exists(select 1 from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-    where n.nspname='public' and p.proname in ('rate_dance','reserve_message_media','set_together_since')
+    where n.nspname='public' and p.proname in ('rate_dance','reserve_message_media','set_together_since','send_letter')
     and (not p.prosecdef or not ('search_path=""'=any(coalesce(p.proconfig,array[]::text[]))))) then
     raise exception '013: functions need security definer with empty search_path'; end if;
 end $verify$;

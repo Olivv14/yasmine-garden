@@ -46,7 +46,7 @@ export function createMascots({t,copy}){
     else if(r<.8)setAct(p,'sleep',rand(6,12));
     else if(r<.86)setAct(p,'dangle',rand(3,6));
     else if(r<.92){setAct(p,'jump',1);p.air=true;p.vy=-260;}
-    else{p.climb={side:p.x<innerWidth/2?-1:1,up:true,top:rand(160,innerHeight*.5)};p.x=p.climb.side<0?-8:innerWidth-W+8;setAct(p,'walk',99);}
+    else{p.climb={side:p.x<innerWidth/2?-1:1,up:true,top:ground()-rand(70,130)};p.x=p.climb.side<0?-8:innerWidth-W+8;setAct(p,'walk',99);}
   }
   function tick(now){
     raf=requestAnimationFrame(tick);const dt=Math.min(.05,(now-(last||now))/1000);last=now;if(!pets.length)return;
