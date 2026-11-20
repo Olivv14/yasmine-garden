@@ -60,3 +60,11 @@ html[data-ui=dusk] dialog.sheet{background:linear-gradient(180deg,#2A1C2C,#1C141
 html[data-ui=dusk] #page-us{background:transparent}
 html[data-ui=dusk] #page-us::before{display:none}
 html[data-ui=dusk] .learn-home{background:rgba(18,10,20,.45)}
+/* the garden, full screen if you want it */
+button.garden3d-full{position:absolute;inset-block-start:calc(12px + env(safe-area-inset-top));inset-inline-end:12px;z-index:6;inline-size:44px;block-size:44px;min-block-size:44px;padding:0;border-radius:50%;
+  display:grid;place-items:center;background:rgba(18,10,20,.6);color:#FFF4E6;border:1px solid rgba(255,226,198,.3);box-shadow:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.garden3d:not(.full) button.garden3d-full{inset-block-start:auto;inset-block-end:120px}
+.garden3d.full{position:fixed;inset:0;block-size:100dvh;z-index:95;border-radius:0}
+.garden3d.full::after{display:none}
+html.garden-full{overflow:hidden}
+html.garden-full .bottom-nav,html.garden-full #affectionDock,html.garden-full .mascot-layer{visibility:hidden}
