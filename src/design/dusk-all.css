@@ -68,3 +68,7 @@ button.garden3d-full{position:absolute;inset-block-start:calc(12px + env(safe-ar
 .garden3d.full::after{display:none}
 html.garden-full{overflow:hidden}
 html.garden-full .bottom-nav,html.garden-full #affectionDock,html.garden-full .mascot-layer{visibility:hidden}
+/* the heart's little notes fade away by themselves */
+.thought-fade{animation:thought-fade 6s ease forwards}
+@keyframes thought-fade{0%,70%{opacity:1}100%{opacity:0;visibility:hidden}}
+#thoughtReset{display:none!important}
