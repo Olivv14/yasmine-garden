@@ -1419,3 +1419,74 @@ guide.statusOn	This phone: notifications on ✓	Este teléfono: notificaciones a
 home.moodShort	Mood	Ánimo	Humeur	Umore	المزاج
 dress.sharedWith	For {{name}} too	También para {{name}}	Pour {{name}} aussi	Anche per {{name}}	لـ{{name}} زادة
 dress.onlyMe	Only for me	Solo para mí	Rien que pour moi	Solo per me	ليا أنا برك
+editor.label	Edit before sending	Editar antes de enviar	Modifier avant d'envoyer	Modifica prima di inviare	بدّل قبل ما تبعث
+editor.crop	Crop and rotate	Recortar y girar	Recadrer et pivoter	Ritaglia e ruota	قصّ و دوّر
+editor.draw	Draw	Dibujar	Dessiner	Disegna	ارسم
+editor.text	Text	Texto	Texte	Testo	كتيبة
+editor.stickers	Stickers	Stickers	Autocollants	Sticker	ستيكرز
+editor.filters	Filters	Filtros	Filtres	Filtri	فيلترات
+editor.trim	Trim the video	Recortar el vídeo	Couper la vidéo	Taglia il video	قصّ الفيديو
+editor.crop.full	Whole	Entera	Entière	Intera	كاملة
+editor.crop.square	Square	Cuadrada	Carrée	Quadrata	مربّعة
+editor.crop.portrait	Portrait	Vertical	Portrait	Verticale	طولية
+editor.rotate	Rotate	Girar	Pivoter	Ruota	دوّر
+editor.color	Colour	Color	Couleur	Colore	لون
+editor.addText	Add words	Añadir texto	Ajouter du texte	Aggiungi testo	زيد كلام
+editor.textPrompt	What do you want to write?	¿Qué quieres escribir?	Qu'est-ce que tu veux écrire ?	Cosa vuoi scrivere?	شنوّة تحبّ تكتب؟
+editor.undoAll	Clear the drawing	Borrar el dibujo	Effacer le dessin	Cancella il disegno	امسح الرسمة
+editor.filter.none	Natural	Natural	Naturel	Naturale	طبيعي
+editor.filter.warm	Warm	Cálido	Chaud	Caldo	دافي
+editor.filter.dusk	Dusk	Atardecer	Crépuscule	Tramonto	مغرب
+editor.filter.mono	Black and white	Blanco y negro	Noir et blanc	Bianco e nero	أبيض و أكحل
+editor.filter.soft	Soft	Suave	Doux	Morbido	ناعم
+editor.start	Start {{s}} s	Inicio {{s}} s	Début {{s}} s	Inizio {{s}} s	البداية {{s}} ث
+editor.end	End {{s}} s	Final {{s}} s	Fin {{s}} s	Fine {{s}} s	النهاية {{s}} ث
+editor.view.once	View once	Ver una vez	Voir une fois	Vedi una volta	تتشاف مرّة
+editor.view.twice	View twice	Ver dos veces	Voir deux fois	Vedi due volte	تتشاف مرّتين
+editor.view.keep	Keep in chat	Guardar en el chat	Garder dans le chat	Tieni nella chat	تقعد في الشات
+talk.fullScreen	Full screen	Pantalla completa	Plein écran	Schermo intero	الشاشة الكاملة
+talk.kind.photo	Photo	Foto	Photo	Foto	تصويرة
+talk.kind.video	Video	Vídeo	Vidéo	Video	فيديو
+talk.kind.voice	Voice note	Nota de voz	Message vocal	Nota vocale	فوكال
+talk.kind.sticker	Sticker	Sticker	Autocollant	Sticker	ستيكر
+talk.opened	Opened	Abierta	Ouvert	Aperto	تحلّت
+talk.oneLeft	once more	una vez más	encore une fois	ancora una volta	مرّة أخرى
+talk.photoOnce.once	Photo · view once	Foto · ver una vez	Photo · une seule fois	Foto · una volta	تصويرة · مرّة برك
+talk.photoOnce.twice	Photo · view twice	Foto · ver dos veces	Photo · deux fois	Foto · due volte	تصويرة · مرّتين
+talk.videoOnce.once	Video · view once	Vídeo · ver una vez	Vidéo · une seule fois	Video · una volta	فيديو · مرّة برك
+talk.videoOnce.twice	Video · view twice	Vídeo · ver dos veces	Vidéo · deux fois	Video · due volte	فيديو · مرّتين
+talk.view.once	View once	Ver una vez	Une seule fois	Una volta	مرّة برك
+talk.view.twice	View twice	Ver dos veces	Deux fois	Due volte	مرّتين
+talk.videoTooBig	That video is too big (25 MB at most). Try a shorter one.	Ese vídeo es demasiado grande (25 MB como máximo). Prueba uno más corto.	Cette vidéo est trop lourde (25 Mo maximum). Essaie plus court.	Il video è troppo grande (massimo 25 MB). Provane uno più corto.	الفيديو كبير برشا (25 ميغا أقصى حاجة). جرّب واحد أقصر.
+talk.voicePreview	Your voice note	Tu nota de voz	Ton message vocal	La tua nota vocale	الفوكال متاعك
+talk.voiceDelete	Delete the voice note	Borrar la nota de voz	Supprimer le message vocal	Elimina la nota vocale	امسح الفوكال
+talk.voiceAgain	Record again	Grabar de nuevo	Réenregistrer	Registra di nuovo	سجّل من جديد
+talk.voiceSend	Send the voice note	Enviar la nota de voz	Envoyer le message vocal	Invia la nota vocale	ابعث الفوكال
+talk.stickers	Stickers	Stickers	Autocollants	Sticker	ستيكرز
+talk.stickersEmpty	No stickers yet. Make one from a photo of you two.	Aún no hay stickers. Haz uno con una foto de los dos.	Pas encore d'autocollants. Fais-en un avec une photo de vous deux.	Ancora nessuno sticker. Creane uno da una vostra foto.	ماثمّاش ستيكرز. اعمل واحد من تصويرة ليكم الزوز.
+talk.stickerMake	Make one from a photo	Crear uno con una foto	En créer un avec une photo	Creane uno da una foto	اعمل واحد من تصويرة
+talk.stickerEdit	Remove mine	Quitar los míos	Retirer les miens	Togli i miei	نحّي متاعي
+talk.stickerRemove	Remove this sticker	Quitar este sticker	Retirer cet autocollant	Togli questo sticker	نحّي الستيكر هذا
+talk.stickerSend	Send this sticker	Enviar este sticker	Envoyer cet autocollant	Invia questo sticker	ابعث الستيكر هذا
+talk.stickerFrom	Sticker from {{name}}	Sticker de {{name}}	Autocollant de {{name}}	Sticker di {{name}}	ستيكر من {{name}}
+talk.stickerGone	This sticker was removed	Este sticker se quitó	Cet autocollant a été retiré	Questo sticker è stato tolto	الستيكر هذا تنحّى
+talk.stickerFailed	The sticker could not be saved. Try another photo.	No se pudo guardar el sticker. Prueba otra foto.	L'autocollant n'a pas pu être enregistré. Essaie une autre photo.	Non è stato possibile salvare lo sticker. Prova un'altra foto.	الستيكر ما تسجّلش. جرّب تصويرة أخرى.
+call.voice	Voice call	Llamada de voz	Appel vocal	Chiamata vocale	عيّط
+call.video	Video call	Videollamada	Appel vidéo	Videochiamata	عيّط بالفيديو
+call.calling	Calling…	Llamando…	Appel en cours…	Sto chiamando…	قاعد نعيّط…
+call.connecting	Connecting…	Conectando…	Connexion…	Connessione…	قاعد يتّصل…
+call.incomingVoice	is calling you	te está llamando	t'appelle	ti sta chiamando	يعيّطلك
+call.incomingVideo	wants to see you (video call)	quiere verte (videollamada)	veut te voir (appel vidéo)	vuole vederti (videochiamata)	يحبّ يشوفك (فيديو)
+call.accept	Answer	Contestar	Répondre	Rispondi	ردّ
+call.decline	Decline	Rechazar	Refuser	Rifiuta	ما تردّش
+call.end	Hang up	Colgar	Raccrocher	Riaggancia	سكّر
+call.mute	Mute	Silenciar	Couper le micro	Disattiva microfono	سكّت الميكرو
+call.unmute	Unmute	Activar sonido	Réactiver le micro	Riattiva microfono	شعّل الميكرو
+call.cameraOff	Turn camera off	Apagar la cámara	Couper la caméra	Spegni la fotocamera	طفّي الكاميرا
+call.cameraOn	Turn camera on	Encender la cámara	Allumer la caméra	Accendi la fotocamera	شعّل الكاميرا
+call.noDevice	Could not use the microphone or camera. Allow them in your phone's settings.	No se pudo usar el micrófono o la cámara. Permítelos en los ajustes del teléfono.	Impossible d'utiliser le micro ou la caméra. Autorise-les dans les réglages du téléphone.	Impossibile usare microfono o fotocamera. Consentili nelle impostazioni del telefono.	ما نجّمش نستعمل الميكرو ولا الكاميرا. سمّحلهم في الإعدادات.
+call.noAnswer	No answer	Sin respuesta	Pas de réponse	Nessuna risposta	ما ردّش حدّ
+call.declined	Call declined	Llamada rechazada	Appel refusé	Chiamata rifiutata	ما حبّش يردّ
+call.busy	Already on a call	Ya está en una llamada	Déjà en appel	Già in chiamata	في مكالمة أخرى
+call.missed	Missed call	Llamada perdida	Appel manqué	Chiamata persa	مكالمة فايتة
+call.ended	Call ended	Llamada terminada	Appel terminé	Chiamata terminata	المكالمة وفات
