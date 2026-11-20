@@ -7,6 +7,8 @@ import {createTranslator} from '../experience/i18n.mjs';
 import {QUESTIONS,questionKey,optionKey,pickQuestions,matches} from '../src/games/knowme.js';
 import {weekStart,pointEvents,pointsBy,seeds,waitingForMe,waitingForThem,finishedRounds} from '../src/games/score.js';
 import {toadMove,TOAD_LEVELS,crossing} from '../src/games/bot.js';
+import {POOL,rack,strike,runShot,newGame,applyShot,tableKey,groupOf,freeSpot} from '../src/games/pool-rules.js';
+import {toadShot,candidateShots} from '../src/games/pool-bot.js';
 import {parseDecks} from '../experience/build-decks.mjs';
 
 const at=i=>new Date(Date.UTC(2026,10,15,10,i)).toISOString();
@@ -182,4 +184,48 @@ test('every duel outcome has words in every language with exactly its parameters
   const catalogs={};for(const l of ['en','es','fr','it','aeb-TN'])catalogs[l]=JSON.parse(await readFile(new URL(`../experience/locales/${l}.json`,import.meta.url),'utf8'));
   for(const l of Object.keys(catalogs)){const tr=createTranslator(l,catalogs);
     for(const o of ['won','lost','tieYou','tieThem','tie'])assert.ok(tr.t(...outcomeText(o,{score:3},{score:2},'Yasmine')).length>3,l+' '+o);}
+});
+
+// ---- pool
+const seq=seed=>()=>(seed=(seed*16807)%2147483647)/2147483647;
+test('pool: the rack has fifteen balls, the 8 in the middle, a solid and a stripe in the back corners',()=>{
+  const b=rack(seq(5));assert.equal(b.length,16);assert.equal(new Set(b.map(x=>x.n)).size,16);
+  const back=b.slice(11,16),eight=b.find(x=>x.n===8),row3=b.slice(4,7);
+  assert.ok(row3.some(x=>x.n===8)&&Math.abs(eight.x-.5)<1e-9,'8 in the middle of the third row');
+  assert.notEqual(groupOf(back[0].n),groupOf(back[4].n),'corners differ');
+});
+test('pool: a shot is deterministic, balls never overlap or leave the table, and they all come to rest',()=>{
+  const g=newGame(seq(9));const a=runShot(strike(g.balls,[.02,-1],1,0)),b=runShot(strike(g.balls,[.02,-1],1,0));
+  assert.equal(tableKey(a.balls),tableKey(b.balls));
+  const live=a.balls.filter(x=>!x.in);
+  for(const x of live){assert.ok(x.x>=POOL.r-1e-9&&x.x<=POOL.w-POOL.r+1e-9&&x.y>=POOL.r-1e-9&&x.y<=POOL.h-POOL.r+1e-9);
+    for(const y of live)if(x!==y)assert.ok(Math.hypot(x.x-y.x,x.y-y.y)>=2*POOL.r-2e-3);}
+  assert.ok(a.balls.every(x=>x.vx===0&&x.vy===0));assert.ok(a.first!==null,'the break hits the rack');
+});
+test('pool rules: scratch and miss are fouls with ball in hand; the 8 too early loses; the 8 last wins',()=>{
+  let g={...newGame(seq(2)),broken:true,groups:['solids','stripes']};
+  let next=applyShot(g,{balls:g.balls,first:3,potted:[0],cushionAfter:true});assert.equal(next.foul,'scratch');assert.equal(next.turn,1);assert.ok(next.ballInHand);
+  assert.ok(!next.balls.find(b=>b.n===0).in,'the white comes back');
+  next=applyShot(g,{balls:g.balls,first:null,potted:[],cushionAfter:false});assert.equal(next.foul,'miss');
+  next=applyShot(g,{balls:g.balls,first:9,potted:[],cushionAfter:true});assert.equal(next.foul,'wrongBall');
+  next=applyShot(g,{balls:g.balls,first:3,potted:[3],cushionAfter:true});assert.equal(next.turn,0,'potting your own keeps the turn');
+  next=applyShot(g,{balls:g.balls.map(b=>b.n===8?{...b,in:true}:b),first:3,potted:[8],cushionAfter:true});assert.equal(next.winner,1,'8 too early loses');
+  const cleared=g.balls.map(b=>b.n>=1&&b.n<=7?{...b,in:true}:b);
+  next=applyShot({...g,balls:cleared},{balls:cleared.map(b=>b.n===8?{...b,in:true}:b),first:8,potted:[8],cushionAfter:true});assert.equal(next.winner,0,'8 last wins');
+  // open table: the first group potted becomes yours
+  const open={...newGame(seq(4)),broken:true};next=applyShot(open,{balls:open.balls,first:12,potted:[12],cushionAfter:true});
+  assert.deepEqual(next.groups,['stripes','solids']);
+});
+test('pool toad: finds clean pots, places the white with ball in hand, and the Champion pots more than the Dreamer',()=>{
+  const r=seq(21);let g=newGame(r);g=applyShot(g,runShot(strike(g.balls,[0,-1],1,0)));
+  const shots=candidateShots(g);assert.ok(shots.every(c=>Math.abs(Math.hypot(...c.dir)-1)<1e-9));
+  const hand=toadShot({...g,ballInHand:true},'hard',r);assert.ok(hand.place&&freeSpot(g.balls,...hand.place));
+  const rate=level=>{const rr=seq(77);let pots=0,tries=0;for(let k=0;k<4;k++){let st=newGame(rr);st=applyShot(st,runShot(strike(st.balls,[0,-1],1,0)));
+    for(let i=0;i<20&&st.winner===null;i++){const sh=toadShot(st,level,rr);if(sh.place)st={...st,balls:st.balls.map(b=>b.n===0?{...b,x:sh.place[0],y:sh.place[1],in:false}:b)};
+      const res=runShot(strike(st.balls,sh.dir,sh.power,0));tries++;if(res.potted.some(n=>n!==0))pots++;st=applyShot(st,res);}}return pots/tries;};
+  const hard=rate('hard'),easy=rate('easy');assert.ok(hard>easy,`hard ${hard} > easy ${easy}`);
+});
+test('pool counts for the week like hockey',()=>{
+  const O='o',Y='y',snap={members:[{profile_id:O},{profile_id:Y}],gameEvents:[{game:'pool',kind:'finish',profile_id:O,score_me:1,score_partner:0,created_at:'2026-01-01'},{game:'pool_bot',kind:'finish',profile_id:Y,score_me:0,score_partner:1,created_at:'2026-01-01'}],playRounds:[],playAnswers:[]};
+  const p=pointsBy(snap);assert.equal(p.get(O),3);assert.equal(p.get(Y),1+1);
 });

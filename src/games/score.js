@@ -11,18 +11,18 @@ export function weekStart(now=Date.now()){const d=new Date(now);d.setHours(0,0,0
 export const answersOf=(snap,roundId)=>(snap?.playAnswers??[]).filter(a=>a.round_id===roundId);
 
 // Every point with who earned it and when:
-// a truth or dare turn 1; a hockey game 1 each and 2 more for the winner; against the toad 1, and 2 more for a win;
+// a truth or dare turn 1; a hockey or pool game 1 each and 2 more for the winner; against the toad 1, and 2 more for a win;
 // a word duel 1 per right word and 2 more for the winner; know me 1 for answering about yourself, 1 per right guess.
 export function pointEvents(snap){
   const out=[],members=(snap?.members??[]).map(m=>m.profile_id);
   const add=(who,points,at)=>{if(who&&points>0)out.push({who,points,at:typeof at==='number'?at:time(at)});};
   for(const e of snap?.gameEvents??[]){
     if(e.game==='truth_dare'&&e.kind!=='finish')add(e.profile_id,1,e.created_at);
-    if(e.game==='hockey'&&e.kind==='finish'){
+    if((e.game==='hockey'||e.game==='pool')&&e.kind==='finish'){
       const other=members.find(id=>id!==e.profile_id);
       add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);add(other,1+(e.score_partner>e.score_me?2:0),e.created_at);
     }
-    if(e.game==='hockey_bot'&&e.kind==='finish')add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);
+    if((e.game==='hockey_bot'||e.game==='pool_bot')&&e.kind==='finish')add(e.profile_id,1+(e.score_me>e.score_partner?2:0),e.created_at);
   }
   for(const r of snap?.playRounds??[]){
     const answers=answersOf(snap,r.id);

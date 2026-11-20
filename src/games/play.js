@@ -3,6 +3,7 @@
 // played in turns (backend/010). Every label comes from the catalog.
 import {createTruthDare} from './truth-dare.js';
 import {createHockey} from './hockey.js';
+import {createPool} from './pool.js';
 import {createDuel} from './duel-ui.js';
 import {createKnowMe} from './knowme-ui.js';
 import {pointsBy,weekStart,seeds,waitingForMe,answersOf} from './score.js';
@@ -34,8 +35,9 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer};
   const td=createTruthDare({el,button,t,copy,me,person,partner,record,notify});
   const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:who=>who===me()?document.getElementById('profilePhoto')?.getAttribute('src')||null:null});
+  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:who=>who===me()?document.getElementById('profilePhoto')?.getAttribute('src')||null:null});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
-  const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},
+  const GAMES={td:{icon:'dice',title:'game.td.title',hint:'play.td.hint',game:td},hockey:{icon:'live',title:'game.hockey.title',hint:'play.hockey.hint',game:hockey},pool:{icon:'pool',title:'pool.title',hint:'play.pool.hint',game:pool},
     duel:{icon:'duel',title:'duel.title',hint:'play.duel.hint',game:duel},knowme:{icon:'knowme',title:'knowme.title',hint:'play.knowme.hint',game:knowme}};
 
   const board=el('section',undefined,'card play-board');board.id='playBoard';
@@ -62,7 +64,7 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     if(then)then();else GAMES[id].game.render?.(getSnapshot());
     stage.scrollIntoView?.({block:'start'});
   }
-  function stopGames(){hockey.stop();duel.stop();knowme.stop();}
+  function stopGames(){hockey.stop();pool.stop();duel.stop();knowme.stop();}
   // A round from the bell or a "Your turn" card: play it if it waits for you, otherwise show its result.
   function openRound(roundId){
     const snap=getSnapshot(),r=snap?.playRounds?.find(x=>x.id===roundId);if(!r)return false;

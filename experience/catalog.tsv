@@ -1091,3 +1091,33 @@ game.hockey.level.hard.desc	Fast, reads every bounce, aims for the corners.	Ráp
 game.hockey.stat.speed	Speed	Velocidad	Vitesse	Velocità	السرعة
 game.hockey.stat.read	Reading	Lectura	Lecture	Lettura	القراية
 game.hockey.stat.attack	Attack	Ataque	Attaque	Attacco	الهجوم
+pool.title	Pool	Billar	Billard	Biliardo	بيار
+play.pool.hint	8-ball with your finger: aim, pull, shoot	Bola 8 con el dedo: apunta, tira y dispara	Billard 8 au doigt : vise, tire, frappe	Palla 8 col dito: mira, tira, colpisci	الكورة 8 بصبعك: صوّب، اسحب، اضرب
+pool.intro	8-ball. Drag on the table to aim, pull the cue down and let go to shoot. Pot your group, then the 8.	Bola 8. Arrastra sobre la mesa para apuntar, baja el taco y suéltalo para tirar. Mete tu grupo y luego la 8.	Billard 8. Glisse sur la table pour viser, tire la queue vers le bas et lâche pour frapper. Empoche ton groupe, puis la 8.	Palla 8. Trascina sul tavolo per mirare, tira giù la stecca e lasciala per colpire. Imbuca il tuo gruppo, poi la 8.	الكورة 8. اسحب على الطاولة باش تصوّب، هبّط العصا وسيّبها باش تضرب. دخّل مجموعتك، ومن بعد الـ8.
+pool.canvas	Pool table. Drag to aim; arrow keys turn the cue.	Mesa de billar. Arrastra para apuntar; las flechas giran el taco.	Table de billard. Glisse pour viser ; les flèches tournent la queue.	Tavolo da biliardo. Trascina per mirare; le frecce ruotano la stecca.	طاولة البيار. اسحب باش تصوّب؛ الفلاش يدوّرو العصا.
+pool.pull	Cue power: pull down, let go to shoot	Fuerza del taco: tira hacia abajo y suelta para tirar	Puissance : tire vers le bas, lâche pour frapper	Potenza: tira giù, lascia per colpire	قوة العصا: اسحب للتحت وسيّب باش تضرب
+pool.spin	Spin	Efecto	Effet	Effetto	الإفي
+pool.spin.follow	follow	hacia delante	coulé	in avanti	للقدّام
+pool.spin.draw	draw	hacia atrás	rétro	all’indietro	للتالي
+pool.spin.center	centre	al centro	centre	al centro	في الوسط
+pool.shoot	Shoot	Tirar	Frapper	Colpisci	اضرب
+pool.join	Play live together	Jugar en vivo juntos	Jouer en direct ensemble	Gioca dal vivo insieme	العبو مع بعضكم مباشر
+pool.bot	Play against the toad	Jugar contra el sapo	Jouer contre le crapaud	Gioca contro il rospo	العب ضد الجرانة
+pool.leave	Leave the table	Salir de la mesa	Quitter la table	Lascia il tavolo	اخرج من الطاولة
+pool.again	New rack	Otra partida	Nouvelle partie	Nuova partita	طرح جديد
+pool.offline	The live table is unavailable right now. Check your connection and try again.	La mesa en vivo no está disponible ahora. Revisa tu conexión y vuelve a intentarlo.	La table en direct n’est pas disponible. Vérifie ta connexion et réessaie.	Il tavolo dal vivo non è disponibile ora. Controlla la connessione e riprova.	الطاولة المباشرة مش متوفرة توّا. ثبّت في الكونكسيون وعاود.
+pool.waiting	Waiting for {{name}} to come to the table…	Esperando a que {{name}} llegue a la mesa…	On attend que {{name}} arrive à la table…	Aspettando che {{name}} arrivi al tavolo…	نستناو في {{name}} يجي للطاولة…
+pool.yourTurn	Your shot.	Te toca tirar.	À toi de jouer.	Tocca a te.	دورك تضرب.
+pool.ballInHand	Ball in hand: drag the white ball anywhere, then shoot.	Bola en mano: arrastra la blanca a donde quieras y tira.	Bille en main : place la blanche où tu veux, puis frappe.	Palla in mano: sposta la bianca dove vuoi, poi colpisci.	الكورة في يدك: حط البيضا وين تحب ومن بعد اضرب.
+pool.toadTurn	The toad is lining up a shot…	El sapo está preparando su tiro…	Le crapaud prépare son coup…	Il rospo prepara il tiro…	الجرانة قاعدة تحضّر في الضربة…
+pool.theirTurn	{{name}} is shooting…	{{name}} está tirando…	{{name}} joue…	{{name}} sta tirando…	{{name}} قاعد يضرب…
+pool.foul.scratch	Foul: the white went in.	Falta: entró la blanca.	Faute : la blanche est tombée.	Fallo: è entrata la bianca.	فاول: دخلت البيضا.
+pool.foul.miss	Foul: no ball was hit.	Falta: no tocó ninguna bola.	Faute : aucune bille touchée.	Fallo: nessuna palla colpita.	فاول: ما لمست حتى كورة.
+pool.foul.wrongBall	Foul: the wrong ball was hit first.	Falta: tocó primero la bola equivocada.	Faute : mauvaise bille touchée en premier.	Fallo: colpita prima la palla sbagliata.	فاول: لمس الكورة الغالطة الأولى.
+pool.won	You won the rack!	¡Ganaste la partida!	Tu as gagné la partie !	Hai vinto la partita!	ربحت الطرح!
+pool.toadWon	The toad wins this one. Another rack?	Gana el sapo esta vez. ¿Otra?	Le crapaud gagne celle-ci. Une autre ?	Vince il rospo stavolta. Un’altra?	الجرانة ربحت هالمرة. نعاودو؟
+pool.lost	{{name}} wins this one.	{{name}} gana esta vez.	{{name}} gagne celle-ci.	{{name}} vince stavolta.	{{name}} ربح هالمرة.
+pool.you	You	Tú	Toi	Tu	إنت
+pool.group.solids	Solids	Lisas	Pleines	Piene	الكاملين
+pool.group.stripes	Stripes	Rayadas	Rayées	Rigate	المخططين
+pool.open	Open table	Mesa abierta	Table ouverte	Tavolo aperto	الطاولة محلولة
