@@ -32,7 +32,8 @@ export function createEggs({el,t,copy,notify,me,person,partner,isMusicPlaying,pa
 
   // ---- the toad dances bachata
   function toadTapped(){
-    if(!isMusicPlaying())return false;const now=Date.now();toadTaps=toadTaps.filter(x=>now-x<2500);toadTaps.push(now);
+    // five quick taps: he dances (with or without a song playing)
+    void isMusicPlaying;const now=Date.now();toadTaps=toadTaps.filter(x=>now-x<3000);toadTaps.push(now);
     if(toadTaps.length<5)return false;toadTaps=[];
     document.documentElement.classList.add('toad-bachata');setTimeout(()=>document.documentElement.classList.remove('toad-bachata'),8000);
     if(!reduced()){const n=layer('egg-bachata',8000);for(let i=0;i<14;i++){const s=el('i');s.style.setProperty('--x',(Math.random()*100).toFixed(1)+'%');s.style.animationDelay=(i*.35).toFixed(2)+'s';s.textContent=['♪','♫','♬'][i%3];n.append(s);}}

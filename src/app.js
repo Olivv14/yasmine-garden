@@ -55,9 +55,9 @@ const gate=createGate({$,signInWithWord:word=>signInWithWord(word),reducedMotion
 // iPhone: this page is Spotify's return inside the separate sign-in browser. Hand the code to the Home Screen app.
 if(spotifyHandoff){const box=el('div',undefined,'spotify-handoff');box.setAttribute('role','status');const msg=el('p',()=>t('spotify.handoffWorking'),'spotify-handoff-text');box.append(msg);document.body.append(box);
   leaveSpotifyCode(spotifyHandoff).then(()=>copy(msg,()=>t('spotify.handoffDone'))).catch(()=>copy(msg,()=>t('spotify.handoffFailed')));}
-const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),seeds:()=>seedsFor(snapshot,state.profile),plant:(type,spot)=>plantFlower(type,spot),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>{clearTimeout(toadTimer);if(eggs.toadTapped())return;toadTimer=setTimeout(()=>shell.openMusic(),450);},onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
+const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),seeds:()=>seedsFor(snapshot,state.profile),plant:(type,spot)=>plantFlower(type,spot),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>toadTap(),onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
 // Music: playlists, dedications and lyric cards. Void RPCs (delete, remove) pass voidResult=true.
-const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad(),spotify:createSpotify({onChange:()=>{try{music?.render();}catch{}},rpc:(name,args)=>api?.context?api.rpc(name,args,true):Promise.reject(new Error('not ready'))})});
+const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad(),spotify:createSpotify({onChange:()=>{try{music?.spotifyChanged();}catch{}},rpc:(name,args)=>api?.context?api.rpc(name,args,true):Promise.reject(new Error('not ready'))})});
 // Talk: the chat. It reads and writes its own way (live room, pages, outbox), never through a full refresh.
 const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=>api,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),onUnread:n=>{shell?.unread(n);if(typeof shop!=='undefined')shop.messageWaiting(n>0);},playlistSongs:()=>(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at),photoOf:id=>avatarUI?.photo(id)??null,onCallButton:kind=>calls.start(kind)});
 const calls=createCalls({el,button,t,copy,me:()=>state.profile,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,photoOf:id=>avatarUI?.photo(id)??null,signal:p=>chat.callSignal(p),onSignal:fn=>chat.onCall(fn),iceServers:()=>client?.connectionPublicConfig?.iceServers??[]});
@@ -237,7 +237,7 @@ async function activate(){if(!client)return;const g=epoch;copy($('authStatus'),(
     const again=()=>{authSerial=authSerial.then(activate).catch(showError);};
     if(retryable(e)){setTimeout(again,3000);return;}
     try{const {data,error}=await client.auth.refreshSession();if(data?.session){await client.realtime.setAuth(data.session.access_token).catch(()=>{});again();return;}if(error&&retryable(error)){setTimeout(again,3000);return;}}catch{setTimeout(again,3000);return;}}
-  activateTries=0;$('authPanel').hidden=false;copy($('authStatus'),()=>(failure(e)));gate.failed(()=>failure(e));$('retryActivation').hidden=!authUser;$('setupPassword').hidden=!authUser;$('loginForm').hidden=!!authUser;copy($('identity'),()=>(authUser?t('auth.pending'):t('auth.noSession')));$('logout').hidden=!authUser;}}
+  activateTries=0;activeFor=null;$('authPanel').hidden=false;copy($('authStatus'),()=>(failure(e)));gate.failed(()=>failure(e));$('retryActivation').hidden=!authUser;$('setupPassword').hidden=!authUser;$('loginForm').hidden=!!authUser;copy($('identity'),()=>(authUser?t('auth.pending'):t('auth.noSession')));$('logout').hidden=!authUser;}}
 // Coming back to the app (after minutes or hours): the sign-in renews itself first. Only a sign-in that is really
 // gone asks for the secret word; a weak network or a slow wake-up just tries again a little later.
 const retryable=e=>e?.name==='AuthRetryableFetchError'||e instanceof TypeError||['NETWORK','FETCH_ERROR'].includes(e?.code)||e?.status===0||(e?.status>=500);
@@ -262,15 +262,20 @@ function recoverSession(e){
 function backToGate(){client?.auth.signOut({scope:'local'}).catch(()=>{});if(!gate.open()||gate.isQuiet())gate.show();}
 // an action interrupted because the session was renewed or changed stops on purpose: nothing to show for it
 addEventListener('unhandledrejection',e=>{if(e.reason?.uiKey==='sync.changedSession')e.preventDefault();});
-let coldTries=0,activateTries=0,toadTimer=null;
+let coldTries=0,activateTries=0,toadTimer=null,activeFor=null;
+// one tap on the toad (in the garden or on his card) opens the music; five quick taps make him dance
+function toadTap(){clearTimeout(toadTimer);if(document.documentElement.classList.contains('toad-bachata'))return;if(eggs.toadTapped())return;toadTimer=setTimeout(()=>shell.openMusic(),450);}
+$('toadArt').onclick=()=>toadTap();
 function authEvent(event,session){
  // waking up with a saved sign-in but no answer yet (no network for a moment): stay on the quiet screen and try again
  if(event==='INITIAL_SESSION'&&!session&&hasSavedSession()&&coldTries<5){coldTries++;setTimeout(()=>client.auth.getSession().then(({data})=>{if(data?.session)authEvent('INITIAL_SESSION',data.session);else if(!hasSavedSession())authEvent('SIGNED_OUT',null);else authEvent('INITIAL_SESSION',null);}).catch(()=>authEvent('INITIAL_SESSION',null)),2500);return;}
- if(event==='SIGNED_OUT'||!session){authUser=null;clearPrivate();api.disconnect().catch(showError);$('authPanel').hidden=false;$('loginForm').hidden=false;$('passwordForm').hidden=true;$('setupPassword').hidden=true;$('retryActivation').hidden=true;copy($('connectionStatus'),()=>(t('sync.noSession')));forgetPlace();if(!gate.open()||gate.isQuiet())gate.show();else gate.language();return;}const changed=authUser?.id!==session.user.id;if(changed){clearPrivate();authUser=session.user;}$('logout').hidden=false;$('accountPassword').hidden=false;$('setupPassword').hidden=false;
+ if(event==='SIGNED_OUT'||!session){authUser=null;activeFor=null;clearPrivate();api.disconnect().catch(showError);$('authPanel').hidden=false;$('loginForm').hidden=false;$('passwordForm').hidden=true;$('setupPassword').hidden=true;$('retryActivation').hidden=true;copy($('connectionStatus'),()=>(t('sync.noSession')));forgetPlace();if(!gate.open()||gate.isQuiet())gate.show();else gate.language();return;}const changed=authUser?.id!==session.user.id;if(changed){clearPrivate();authUser=session.user;}$('logout').hidden=false;$('accountPassword').hidden=false;$('setupPassword').hidden=false;
  if(event==='PASSWORD_RECOVERY'||new URLSearchParams(location.search).get('setup')==='1'){authUser=session.user;gate.hide();$('authPanel').hidden=false;$('loginForm').hidden=true;$('passwordForm').hidden=false;copy($('authStatus'),()=>(t('auth.linkAccepted')));return;}
  if(event==='TOKEN_REFRESHED'){client.realtime.setAuth(session.access_token).then(()=>api.schedule()).catch(showError);return;}
  if(event==='INITIAL_SESSION'&&gate.open()&&!gate.isQuiet())gate.resume(whoIs(session.user));
- if(changed||event==='INITIAL_SESSION'||event==='SIGNED_IN')authSerial=authSerial.then(activate).catch(showError);
+ // Supabase says SIGNED_IN and then INITIAL_SESSION for the same saved sign-in when the app opens (and SIGNED_IN
+ // again when it comes back to the front): connect once for this person, not once per message
+ if(changed||event==='INITIAL_SESSION'||event==='SIGNED_IN'){if(!changed&&activeFor===session.user.id)return;activeFor=session.user.id;authSerial=authSerial.then(activate).catch(e=>{activeFor=null;showError(e);});}
 }
 // Which of you this phone belongs to, from the account's address and the public login aliases.
 function whoIs(user){const mail=String(user?.email??'').toLowerCase();for(const [who,email] of Object.entries(client?.connectionPublicConfig?.loginAliases??{}))if(String(email).toLowerCase()===mail)return who.toLowerCase();return '';}

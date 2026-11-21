@@ -98,7 +98,8 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     if(now.source!=='upload'&&!inApp)box.append(el('p',()=>t('music.listeningTimer'),'lyric-note'));
     return box;
   }
-  function paintLyric(){const slot=sheet?.body.querySelector('.lyric-slot');if(slot)slot.replaceChildren(lyricCard());paintSeek();onNowPlaying?.();}
+  // the lyric card is swapped only when its words change (not every 0.4 s)
+  function paintLyric(){const slot=sheet?.body.querySelector('.lyric-slot');if(slot){const c=lyricCard(),key=c.textContent+'|'+c.childElementCount;if(slot.dataset.key!==key){slot.dataset.key=key;slot.replaceChildren(c);}}paintSeek();paintControls();onNowPlaying?.();}
   // the song's timeline: drag to go back or forward (your uploads, Spotify in the app, and the timer that follows Spotify outside)
   const length=()=>{if(!now)return 0;if(now.source==='upload')return isFinite(player.duration)?player.duration:0;if(inApp)return (spotify.duration()||now.duration_ms||0)/1000;return (listen?.length??now.duration_ms??0)/1000;};
   const clock=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
@@ -167,16 +168,33 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     if(!cover.src)cover.append(icon('music',28));
     const name=el('p',undefined,'title now-title');name.textContent=now.title;name.dir='auto';
     const by=el('p',undefined,'muted now-artist');by.textContent=now.artist??'';by.dir='auto';
-    const controls=el('div',undefined,'row now-controls');
-    if(now.source==='upload')controls.append(button(()=>player.paused?t('music.play'):t('music.pause'),()=>player.paused?playUpload(now.ref):player.pause(),'primary'));
-    else if(inApp){const on=spotify.playing();controls.append(button(()=>on?t('music.pause'):t('music.play'),async()=>{on?await spotify.pause():await spotify.resume();paint();onNowPlaying?.();},'primary'));
-      if(spotify.mode()==='device')controls.append(el('p',()=>t('spotify.onDevice',{device:spotify.deviceName()??'Spotify'}),'tiny'));}
-    else{controls.append(button(()=>t(spotify?.connected()?'music.play':'music.openSpotify'),()=>play(now),'primary'));if(listen)controls.append(button(()=>t('music.stopFollowing'),()=>stopListening(),'quiet'));}
+    const controls=nowControls();
     const head=el('div',undefined,'now-head');head.append(cover,el('div',undefined,'now-text'));head.lastChild.append(name,by);
     const seek=seekBar();
     const slot=el('div',undefined,'lyric-slot');slot.append(lyricCard());
     card.append(head,seek,controls,slot,el('p',()=>t('music.lyricsSource'),'tiny'));
     return card;
+  }
+  // Spotify sends short "paused" blips while a song loads or jumps: the button follows only a state that holds 0.45 s
+  let seenOn=null,seenAt=0,steadyOn=false;
+  const steadyPlaying=()=>{const on=spotify.playing();if(on!==seenOn){seenOn=on;seenAt=Date.now();}if(Date.now()-seenAt>=450)steadyOn=on;return steadyOn;};
+  const controlsKey=()=>[now?.id,now?.source,inApp,inApp&&steadyPlaying(),inApp&&spotify.mode(),now?.source==='upload'&&player.paused,!!listen,spotify?.connected()].join('|');
+  function nowControls(){
+    const controls=el('div',undefined,'row now-controls');controls.dataset.key=controlsKey();
+    if(now.source==='upload')controls.append(button(()=>player.paused?t('music.play'):t('music.pause'),()=>player.paused?playUpload(now.ref):player.pause(),'primary'));
+    else if(inApp){const on=steadyPlaying();controls.append(button(()=>on?t('music.pause'):t('music.play'),async()=>{on?await spotify.pause():await spotify.resume();seenOn=steadyOn=spotify.playing();paint();onNowPlaying?.();},'primary'));
+      if(spotify.mode()==='device')controls.append(el('p',()=>t('spotify.onDevice',{device:spotify.deviceName()??'Spotify'}),'tiny'));}
+    else{controls.append(button(()=>t(spotify?.connected()?'music.play':'music.openSpotify'),()=>play(now),'primary'));if(listen)controls.append(button(()=>t('music.stopFollowing'),()=>stopListening(),'quiet'));}
+    return controls;
+  }
+  // only the play/pause buttons change when the song starts or stops (not the whole stage)
+  function paintControls(){const c=sheet?.body.querySelector('.now-controls');if(c&&now&&c.dataset.key!==controlsKey())c.replaceWith(nowControls());}
+  // Spotify tells us about every small change while a song plays: the stage is rebuilt only when the
+  // account itself changes (connected, name, Premium, error, where it plays)
+  let spotSig=null;
+  function spotifyChanged(){
+    const sig=spotify?[spotify.connected(),spotify.name(),spotify.premium(),spotify.error(),spotify.mode(),spotify.deviceName()].join('|'):'';
+    if(sig!==spotSig){spotSig=sig;paint();}else paintControls();
   }
   function playlistView(list){
     const box=el('section',undefined,'playlist-view');
@@ -293,6 +311,6 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
   const partnerListening=()=>{const p=together.partner();return p?.playing?{title:p.item.title}:null;};
   return {playQueue,next:()=>step(1),prev:()=>step(-1),toggle,seek:sec=>seekTo(sec),addSearched,
     current:()=>({item:now,playing:isPlaying(),position:position(),duration:length(),index:qi,queueIds:queue.map(x=>x.id)}),
-    spotify,open,render:paint,isPlaying,currentLine,partnerListening,nowTitle:()=>isPlaying()?now?.title??'':'',playing:()=>now,
+    spotify,open,render:paint,spotifyChanged,isPlaying,currentLine,partnerListening,nowTitle:()=>isPlaying()?now?.title??'':'',playing:()=>now,
     clear(){together.disconnect();now=null;listen=null;following=false;lyrics=null;lyricsFor='';selected=null;sheet?.close();}};
 }

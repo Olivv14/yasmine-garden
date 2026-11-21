@@ -53,29 +53,41 @@ export class Transport{
     // Later features arrive with later migrations (005 games, 006 inbox, 007 music): before one is
     // applied its tables are simply absent, and the app shows that feature as not available yet.
     const optional=async(read)=>{try{return await read();}catch(e){if(['42P01','PGRST205','PGRST200'].includes(e?.code))return null;throw e;}};
-    const gameEvents=(await optional(()=>all('game_events',q=>q.eq('pair_id',pairId))))??[];
-    const playlists=await optional(()=>all('playlists',q=>q.eq('pair_id',pairId)));
-    const playlistItems=playlists?(await optional(()=>all('playlist_items',q=>q.eq('pair_id',pairId).is('deleted_at',null))))??[]:null;
-    // 010 play: rounds in turns (word duel, know me), newest 200, with their answers.
-    const playRounds=await optional(()=>this.client.from('play_rounds').select('*').eq('pair_id',pairId).order('created_at',{ascending:false}).order('id').limit(200).then(checked));
-    const playAnswers=playRounds?.length?(await optional(()=>this.client.from('play_answers').select('*').in('round_id',playRounds.map(r=>r.id)).order('created_at').then(checked)))??[]:[];
-    // the shop (backend/012): optional, so the app still opens before the migration is applied
-    const shopPurchases=await optional(()=>this.client.from('shop_purchases').select('*').eq('pair_id',pairId).order('created_at').then(checked));
-    const shopChoices=await optional(()=>this.client.from('shop_choices').select('*').eq('pair_id',pairId).then(checked));
-    const learnState=await optional(()=>pages(()=>this.client.from('learn_state').select('*').eq('pair_id',pairId).order('profile_id').order('card_key')));
-    const learnDays=await optional(()=>this.client.from('learn_days').select('*').eq('pair_id',pairId).then(checked));
-    const gardenDiscoveries=await optional(()=>this.client.from('garden_discoveries').select('*').eq('pair_id',pairId).then(checked));
-    const bottlePrizes=await optional(()=>this.client.from('bottle_prizes').select('*').eq('pair_id',pairId).then(checked));
-    const pairStory=await optional(()=>this.client.from('pair_story').select('*').eq('pair_id',pairId).then(checked));
-    const notifications=await optional(()=>this.client.from('notifications').select('*').eq('recipient_id',me.id).order('created_at',{ascending:false}).order('id').limit(200).then(checked));
-    const answers=[];for(const r of rounds)answers.push(...await pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').eq('round_id',r.id).order('owner_id')));
+    // everything below is read at the same time (one wait instead of fifteen in a row): opening the app is quicker
+    const roundIds=rounds.map(r=>r.id);
+    const [gameEventsRaw,playlists,playlistItemsRaw,playRounds,shopPurchases,shopChoices,learnState,learnDays,gardenDiscoveries,bottlePrizes,pairStory,notifications,playAnswersRaw,answers]=await Promise.all([
+      optional(()=>all('game_events',q=>q.eq('pair_id',pairId))),
+      optional(()=>all('playlists',q=>q.eq('pair_id',pairId))),
+      optional(()=>all('playlist_items',q=>q.eq('pair_id',pairId).is('deleted_at',null))),
+      // 010 play: rounds in turns (word duel, know me), newest 200, with their answers.
+      optional(()=>this.client.from('play_rounds').select('*').eq('pair_id',pairId).order('created_at',{ascending:false}).order('id').limit(200).then(checked)),
+      // the shop (backend/012): optional, so the app still opens before the migration is applied
+      optional(()=>this.client.from('shop_purchases').select('*').eq('pair_id',pairId).order('created_at').then(checked)),
+      optional(()=>this.client.from('shop_choices').select('*').eq('pair_id',pairId).then(checked)),
+      optional(()=>pages(()=>this.client.from('learn_state').select('*').eq('pair_id',pairId).order('profile_id').order('card_key'))),
+      optional(()=>this.client.from('learn_days').select('*').eq('pair_id',pairId).then(checked)),
+      optional(()=>this.client.from('garden_discoveries').select('*').eq('pair_id',pairId).then(checked)),
+      optional(()=>this.client.from('bottle_prizes').select('*').eq('pair_id',pairId).then(checked)),
+      optional(()=>this.client.from('pair_story').select('*').eq('pair_id',pairId).then(checked)),
+      optional(()=>this.client.from('notifications').select('*').eq('recipient_id',me.id).order('created_at',{ascending:false}).order('id').limit(200).then(checked)),
+      // the answers of the play rounds (by pair, kept for the 200 newest rounds below)
+      optional(()=>pages(()=>this.client.from('play_answers').select('*').eq('pair_id',pairId).order('created_at').order('id'))),
+      // all the round answers in one read (not one per round)
+      roundIds.length?pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').in('round_id',roundIds).order('round_id').order('owner_id')):Promise.resolve([])]);
+    const gameEvents=gameEventsRaw??[];
+    const playlistItems=playlists?(playlistItemsRaw??[]):null;
+    const playIds=new Set((playRounds??[]).map(r=>r.id)),playAnswers=(playAnswersRaw??[]).filter(a=>playIds.has(a.round_id));
     const currentMe=profiles.find(p=>p.id===me.id);if(!currentMe||currentMe.auth_user_id!==me.auth_user_id)throw uiError('sync.changedSession');
     return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,learnState:learnState??[],bottlePrizes:bottlePrizes??[],learnDays:learnDays??[],gardenDiscoveries:gardenDiscoveries??[],playlists,playlistItems,notifications,me:currentMe,pairId};
   }
-  schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh().catch(this.onFailure),120);}
-  refresh(){if(this.inflight){this.again=true;return this.inflight;}const g=this.generation;this.inflight=(async()=>{try{let attempts=0;do{this.again=false;this.guard(g);const r0=await this.revision();const data=await this.snapshot();const r1=await this.revision();this.guard(g);if(r0!==r1||this.again){if(++attempts>=6)throw uiError('errors.changedDuringRead');continue;}this.context.members=data.members;this.onSnapshot({...data,revision:r1});this.onStatus(()=>t('sync.revision',{revision:r1}));return;}while(true)}finally{if(g===this.generation){this.inflight=null;if(this.again)this.schedule();}}})();return this.inflight;}
+  schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh(true).catch(this.onFailure),120);}
+  // soft (the background checks): skips the full read when the pair's revision has not moved for a moment
+  refresh(soft=false){if(this.inflight){this.again=(!soft||this.again==='hard')?'hard':true;return this.inflight;}const g=this.generation;this.inflight=(async()=>{try{let attempts=0;do{this.again=false;this.guard(g);const r0=await this.revision();
+      // nothing changed since the last full read a moment ago: no need to read everything again
+      if(soft&&!attempts&&r0===this.lastRevision&&Date.now()-this.lastReadAt<25000){this.guard(g);return;}
+      const data=await this.snapshot();const r1=await this.revision();this.guard(g);if(r0!==r1||this.again==='hard'){if(++attempts>=6)throw uiError('errors.changedDuringRead');continue;}this.lastRevision=r1;this.lastReadAt=Date.now();this.context.members=data.members;this.onSnapshot({...data,revision:r1});this.onStatus(()=>t('sync.revision',{revision:r1}));return;}while(true)}finally{if(g===this.generation){this.inflight=null;if(this.again)this.schedule();}}})();return this.inflight;}
   async connect(){await this.disconnect();const g=this.generation;await this.identify();this.guard(g);this.channel=this.client.channel('connection-sync-'+this.context.me.id).on('postgres_changes',{event:'UPDATE',schema:'public',table:'sync_signals',filter:'profile_id=eq.'+this.context.me.id},()=>this.schedule()).subscribe(status=>{if(g!==this.generation)return;if(status==='SUBSCRIBED'){this.onStatus(()=>t('sync.transportConnected'));this.schedule();}else this.onStatus(()=>t('sync.stale'));});this.poll=setInterval(()=>{if(!document.hidden)this.schedule();},30000);await this.refresh();}
-  async disconnect(clear=true){this.generation++;clearTimeout(this.timer);clearInterval(this.poll);this.timer=this.poll=null;this.again=false;this.inflight=null;const ch=this.channel;this.channel=null;if(ch)await this.client.removeChannel(ch);if(clear)this.context=null;}
+  async disconnect(clear=true){this.generation++;this.lastRevision=null;this.lastReadAt=0;clearTimeout(this.timer);clearInterval(this.poll);this.timer=this.poll=null;this.again=false;this.inflight=null;const ch=this.channel;this.channel=null;if(ch)await this.client.removeChannel(ch);if(clear)this.context=null;}
   async verifyActor(){const g=this.generation,ctx=this.context;if(!ctx)throw uiError('sync.notReady');const user=checked(await this.client.auth.getUser())?.user;this.guard(g);if(!user||user.id!==ctx.me.auth_user_id)throw uiError('sync.changedSession');const me=checked(await this.client.from('users_profiles').select('id,auth_user_id,display_name,created_at').eq('auth_user_id',user.id).maybeSingle());this.guard(g);if(!me||me.id!==ctx.me.id||me.auth_user_id!==user.id)throw uiError('sync.changedSession');return {...ctx,me};}
   async readOwnAccount(){const g=this.generation,{me,pairId}=this.context;
     // R0/R1 protects the combined name/details/preferences authoritative read.

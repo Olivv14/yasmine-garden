@@ -668,9 +668,10 @@ const onDbl=e=>{const r=renderer.domElement.getBoundingClientRect();ndc.set((e.c
  const dir=cam.position.clone().sub(controls.target).normalize();flyTo(hp,hp.clone().addScaledVector(dir,7));};
 let lastTap=null;
 const onUp=e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>7)return;down=null;
- const tnow=performance.now();if(lastTap&&tnow-lastTap.t<320&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<30){lastTap=null;onDbl(e);return;}lastTap={t:tnow,x:e.clientX,y:e.clientY};if(!tapCb)return;
  const r=renderer.domElement.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,cam);
- if(G.toadBody&&ray.intersectObject(G.toadBody,true).length){tapCb({kind:'toad'});return;}
+ // the toad counts every tap (quick taps make him dance), so a tap on him is never a double tap to fly
+ if(G.toadBody&&ray.intersectObject(G.toadBody,true).length){lastTap=null;tapCb?.({kind:'toad'});return;}
+ const tnow=performance.now();if(lastTap&&tnow-lastTap.t<320&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<30){lastTap=null;onDbl(e);return;}lastTap={t:tnow,x:e.clientX,y:e.clientY};if(!tapCb)return;
  const fh=ray.intersectObject(flowerRoot,true);if(fh.length&&fh[0].object.userData.flowerId){tapCb({kind:'flower',id:fh[0].object.userData.flowerId});return;}
  if(LIGHT==='night'&&moonMesh&&ray.intersectObject(moonMesh,false).length){tapCb({kind:'moon'});return;}
  const hs=ray.intersectObjects(scene.children,true).filter(h=>h.object.isMesh&&h.distance<120);

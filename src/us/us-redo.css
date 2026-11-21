@@ -155,3 +155,4 @@ button.pu-song.on{border-color:var(--dk-accent,#FFD58A);background:rgba(255,213,
 .pu-eq i{transform-origin:bottom}
 @media (prefers-reduced-motion:reduce){.pu-eq i{animation:none}}
 button.pu-ctrl:disabled{opacity:.35}
+.pu-eq[hidden]{display:none}
