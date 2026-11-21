@@ -83,7 +83,7 @@ export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,p
   const allowed=()=>typeof Notification!=='undefined'&&Notification.permission==='granted';
   const notifState=()=>allowed()?t('pu.notifOn'):standalone()?t('pu.notifOneStep'):t('pu.notifSteps');
   const langName=()=>$('languageSelect')?.selectedOptions?.[0]?.textContent??'';
-  const songs=()=>(getSnapshot()?.playlistItems??[]).filter(i=>!i.deleted_at).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
+  const songs=()=>music?.allSongs?.()??(getSnapshot()?.playlistItems??[]).filter(i=>!i.deleted_at).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
   const musicSub=()=>{const n=songs().length;return n?t('pu.musicSub',{count:n}):t('pu.musicEmpty');};
 
   // ---- Look and language
