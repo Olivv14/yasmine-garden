@@ -132,7 +132,7 @@ function closeReception(){ $('receptionPanel').hidden=true;$('receptionToggle').
 const inbox=createInbox({el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,
   markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true)),markThought:e=>api.markThoughtRead(e).then(()=>api.refresh()),
   actions:{sendThought:()=>$('affectionButton').click(),openTalk:()=>{navigate('talk');shell.talkPane('chat');},openRound:id=>{navigate('play');play.openRound(id);},
-    openGame:g=>{navigate('play');play.show(g);},openLearn:()=>navigate('learn'),water:()=>{navigate('garden');scrollTo({top:0});setTimeout(()=>$('waterAll').click(),300);},
+    openGame:g=>{navigate('play');play.show(g);},openPlay:()=>navigate('play'),openLearn:()=>navigate('learn'),water:()=>{navigate('garden');scrollTo({top:0});setTimeout(()=>$('waterAll').click(),300);},
     playSong:item=>{const all=(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at);if(item&&all.length)music.playQueue(all,Math.max(0,all.findIndex(i=>i.id===item.id)));else music.open();},
     openSettings:()=>openReception()}});
 $('receptionToggle').onclick=()=>{$('incomingToast').hidden=true;inbox.isOpen()?inbox.close():inbox.open();};

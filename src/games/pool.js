@@ -17,7 +17,7 @@ const COLORS={1:'#D9A520',2:'#1F3E8C',3:'#A3271F',4:'#5A2D7A',5:'#C25418',6:'#1E
 const CLOTH=homography([[86,74],[284,74],[312,476],[58,476]]),ART_W=370,ART_H=590;
 const colorOf=n=>COLORS[n>8?n-8:n]??'#FFFFFF';
 
-export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,photo=()=>null,getSnapshot=()=>null,partnerOnline=()=>false,rpc=null,dispatch=()=>{}}){
+export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,notify,photo=()=>null,getSnapshot=()=>null,partnerOnline=()=>false,invite=null}){
   const root=el('article',undefined,'card game-card pool-card');root.id='pool';
   // home: title, the two ways to play, the toad cards
   const home=el('div',undefined,'pl-home');
@@ -25,7 +25,7 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
   // the start screen (mockup): the table and the rack, play together or against the toad, your record
   const hero=pic('pool','gs-hero gs-pool');
   const what=el('div',undefined,'gs-what');what.append(el('b',()=>t('gs.pool.title')),el('span',()=>t('gs.pool.sub')));
-  const join=button(()=>'',()=>partnerOnline()||!rpc||!getSnapshot()?.hasPoolTurns?startLive():startTurns(),'gs-square main');join.id='poolJoin';
+  const join=button(()=>'',()=>{if(!partnerOnline())sendInvite();startLive();},'gs-square main');join.id='poolJoin';
   const joinFaces=el('span',undefined,'gs-faces small'),joinState=el('span',undefined,'gs-way-hint');
   join.append(joinFaces,el('b',()=>t('gs.pool.together')),joinState);
   const bot=button(()=>'',()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'gs-square');bot.id='poolBot';
@@ -33,13 +33,16 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
   const picker=createToadPicker({el,button,t,copy,choose:l=>startBot(l),game:'pool'});picker.hidden=true;
   const starts=el('div',undefined,'gs-squares');starts.append(join,bot);
   const recordLine=el('p',undefined,'gs-record');
-  const waitingBanner=button(()=>'',()=>startTurns(),'pool-waiting');waitingBanner.hidden=true;
-  function paintHome(){const og=openGame();waitingBanner.hidden=!og;if(og){const mine=og.turn===(og.seat0===me()?0:1);waitingBanner.replaceChildren(el('span','8','pool-waiting-ball'),el('span',()=>mine?t('gs.pool.yourShot'):t('gs.pool.theirShot',{name:person(partner())})));waitingBanner.classList.toggle('mine',mine);}
+  // she isn't here: tapping "Play together" also invites her (her bell and her phone), once a minute at most
+  let invitedAt=0;
+  async function sendInvite(){if(!invite||Date.now()-invitedAt<60000)return;invitedAt=Date.now();
+    try{await invite();notify?.(()=>t('gs.invited',{name:person(partner())}));}catch{invitedAt=0;}}
+  function paintHome(){
     joinFaces.replaceChildren(faceOf(el,me(),{photo,person}),faceOf(el,partner(),{photo,person}));
     const on=partnerOnline();join.classList.toggle('online',on);copy(joinState,()=>on?t('gs.pool.here',{name:person(partner())}):t('gs.pool.notHere',{name:person(partner())}));
     const w=wins(getSnapshot(),'pool',me(),partner());recordLine.hidden=!(w.me||w.them);copy(recordLine,()=>t('gs.record',{me:w.me,name:person(partner()),them:w.them}));}
   document.addEventListener('partner-presence',()=>{if(root.isConnected)paintHome();});
-  home.append(head,hero,what,starts,waitingBanner,picker,recordLine);
+  home.append(head,hero,what,starts,picker,recordLine);
   // the match (approved PoolDusk / PoolAim): chip, scoreboard, the table, the pull bar
   const match=el('div',undefined,'pl-match');match.hidden=true;
   const chip=el('span',undefined,'game-chip in-bar');
@@ -61,7 +64,7 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
   const shoot=button(()=>t('pool.shoot'),()=>fire(),'pool-shoot primary');
   controls.append(spinPad,handle,shoot);
   const leave=button(()=>t('pool.leave'),()=>stop(),'quiet');
-  const again=button(()=>t('pool.again'),()=>{if(mode==='bot')newRack();else if(mode==='turns')startTurns();else{newRack();send('state',{state:game});}},'primary');again.hidden=true;
+  const again=button(()=>t('pool.again'),()=>{if(mode==='bot')newRack();else{newRack();send('state',{state:game});}},'primary');again.hidden=true;
   const foot=el('div',undefined,'game-actions hk-foot');foot.append(again,leave);
   match.append(chip,board,stageBox,status,controls,foot);
   root.append(home,match);
@@ -110,7 +113,7 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
     if(!myTurn()||power<.03)return;
     const shot={dir:aim,power,spin,place:game.ballInHand?cuePos():null};
     if(mode==='live'){const before=tableKey(game.balls);const after=preview(shot);send('shot',{before,shot,after});}
-    lastShot=shot;power=0;paintPower();play(shot,true);
+    power=0;paintPower();play(shot,true);
   }
   const cuePos=()=>{const c=game.balls.find(b=>b.n===0);return [c.x,c.y];};
   function withPlace(state,place){return place?{...state,balls:state.balls.map(b=>b.n===0?{...b,x:place[0],y:place[1],in:false}:b)}:state;}
@@ -120,8 +123,7 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
     if(expected&&tableKey(r.balls)!==expected){send('sync',{});}
     anim={frames:r.frames,i:0,done:()=>{game=finalState?structuredClone(finalState):applyShot(s,r);anim=null;afterShot(mine);}};
   }
-  function afterShot(mine){
-    if(mode==='turns'&&mine)saveTurn();
+  function afterShot(){
     paint();canvas.dataset.k=tableKey(game.balls).length+':'+hash(tableKey(game.balls));
     if(game.winner!==null){finished();return;}
     if(game.turn===mySeat)aimAtNearest();
@@ -133,9 +135,8 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
     if(!game)return;
     if(game.winner!==null)return;
     const foulKey=game.foul?'pool.foul.'+game.foul:null;
-    if(game.turn===mySeat){if(mode==='turns')controls.hidden=false;say(()=>(foulKey?t(foulKey)+' ':'')+(game.ballInHand?t('pool.ballInHand'):t('pool.yourTurn')));}
+    if(game.turn===mySeat){say(()=>(foulKey?t(foulKey)+' ':'')+(game.ballInHand?t('pool.ballInHand'):t('pool.yourTurn')));}
     else if(mode==='bot'){say(()=>(foulKey?t(foulKey)+' ':'')+t('pool.toadTurn'));busy=true;setTimeout(toadTurn,900);}
-    else if(mode==='turns'){controls.hidden=true;say(()=>(foulKey?t(foulKey)+' ':'')+t('gs.pool.waitTurn',{name:person(partner())}));}
     else say(()=>(foulKey?t(foulKey)+' ':'')+t('pool.theirTurn',{name:person(partner())}));
   }
   function toadTurn(){
@@ -148,9 +149,9 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
   let toadPull=0;
   function finished(){
     const won=game.winner===mySeat;again.hidden=false;
-    say(()=>won?t('pool.won'):mode==='bot'?t('pool.toadWon'):t('pool.lost',{name:person(partner())}));if(mode==='turns')controls.hidden=true;
-    if(!recorded&&(mode==='bot'||(mode==='live'&&mySeat===0)||(mode==='turns'&&turnRow?.last_by===me()))){recorded=crypto.randomUUID();
-      const meWon=mode==='bot'||mode==='turns'?won:game.winner===0;record({id:recorded,game:mode==='bot'?'pool_bot':'pool',kind:'finish',card:mode==='bot'?LEVEL_CARD[level]:null,scoreMe:meWon?1:0,scorePartner:meWon?0:1});}
+    say(()=>won?t('pool.won'):mode==='bot'?t('pool.toadWon'):t('pool.lost',{name:person(partner())}));
+    if(!recorded&&(mode==='bot'||mySeat===0)){recorded=crypto.randomUUID();
+      const meWon=mode==='bot'?won:game.winner===0;record({id:recorded,game:mode==='bot'?'pool_bot':'pool',kind:'finish',card:mode==='bot'?LEVEL_CARD[level]:null,scoreMe:meWon?1:0,scorePartner:meWon?0:1});}
   }
 
   // The scoreboard: faces, who plays which group, the balls each still has, and the balls each has potted.
@@ -258,31 +259,5 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
     return {at:[cue.x+dir[0]*tt,cue.y+dir[1]*tt],ball:null};}
   function hash(str){let h=0;for(let i=0;i<str.length;i++)h=(h*31+str.charCodeAt(i))|0;return (h>>>0).toString(16);}
   function norm([x,y]){const n=Math.sqrt(x*x+y*y)||1;return [x/n,y/n];}
-  // ---- turn by turn, any time (backend/021): one open game per pair, the table saved after every shot
-  let turnRow=null,lastShot=null;
-  function openGame(){return (getSnapshot()?.poolGames??[]).find(g=>!g.finished_at)??null;}
-  async function startTurns(){
-    if(!rpc)return startLive();
-    stop(false);mode='turns';live=true;playing(true);controls.hidden=true;resize();loop();
-    const g=openGame();
-    if(g){loadTurn(g);return;}
-    mySeat=0;game=null;newRack();const id=crypto.randomUUID();say(()=>t('common.loading'));
-    try{turnRow=await rpc('pool_turn_start',{p_id:id,p_state:game});turnPrompt();}catch{say(()=>t('pool.offline'));}
-  }
-  // the table as saved; if your partner just shot, their shot is played again for you first
-  function loadTurn(g){
-    turnRow=g;mySeat=g.seat0===me()?0:1;recorded=g.finished_at?'seen':null;
-    if(g.last_by&&g.last_by!==me()&&g.before_state&&g.last_shot){game=structuredClone(g.before_state);paint();draw();say(()=>t('gs.pool.replay',{name:person(partner())}));
-      setTimeout(()=>{if(mode==='turns'&&turnRow===g)play(g.last_shot,false,null,g.state);},700);}
-    else{game=structuredClone(g.state);paint();draw();if(game.winner!==null)finished();else turnPrompt();}
-  }
-  async function saveTurn(){
-    if(!turnRow||!lastShot)return;const shot=lastShot;lastShot=null;const nid=crypto.randomUUID();
-    try{turnRow=await rpc('pool_turn_shot',{p_id:turnRow.id,p_expected_version:turnRow.version,p_shot:shot,p_state:game,p_notify_id:nid});dispatch(nid);}
-    catch{say(()=>t('gs.pool.saveFailed'));const g=openGame();if(g)loadTurn(g);}
-  }
-  return {element:root,stop,render(){paintHome();
-      // a new shot from your partner while you look at the table
-      if(mode==='turns'&&turnRow&&!anim){const g=(getSnapshot()?.poolGames??[]).find(x=>x.id===turnRow.id);if(g&&g.version>turnRow.version&&g.last_by!==me())loadTurn(g);}},
-    openTurns:()=>startTurns(),get live(){return live;}};
+  return {element:root,stop,render(){paintHome();},get live(){return live;}};
 }
