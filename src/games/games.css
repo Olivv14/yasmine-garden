@@ -195,3 +195,6 @@ html.game-full #playStage .duel-options,html.game-full #playStage .duel-choices{
 html.game-full #playStage .game-card{gap:8px}
 html.game-full #playStage .game-draw .title{font-size:clamp(20px,3.2dvh,26px)}
 html.game-full #playStage #tdResponse{min-block-size:60px;max-block-size:16dvh}
+/* word duel: the result line and Next keep their place from the start, so answering does not shake the page */
+.duel-feedback{min-block-size:2.9em;margin-block:4px}
+button.duel-waiting{visibility:hidden}

@@ -30,7 +30,7 @@ export function createDuel({el,button,t,copy,locale,me,person,partner,getSnapsho
       b.setAttribute('role','radio');b.setAttribute('aria-checked',String(d===deck));b.dataset.deck=d;row.append(b);}
     root.append(row);
     const go=button(()=>t('duel.start'),()=>begin(null),'primary');go.id='duelStart';root.append(go);
-    for(const r of waitingForThem(snap,me()).filter(r=>r.game==='word_duel').slice(0,2))root.append(el('p',()=>t('duel.waiting',{name:name()}),'small muted'));
+    for(const r of waitingForThem(snap,me()).filter(r=>r.game==='word_duel').slice(0,1))root.append(el('p',()=>t('duel.waiting',{name:name()}),'small muted'));
     const last=finishedRounds(snap).find(f=>f.round.game==='word_duel');if(last)root.append(result(last.round));
   }
   function result(round){
@@ -73,12 +73,13 @@ export function createDuel({el,button,t,copy,locale,me,person,partner,getSnapsho
       for(const [i,b] of [...opts.children].entries()){b.disabled=true;if(list[i].correct)b.classList.add('right');else if(i===pick)b.classList.add('wrong');}
       copy(feedback,()=>pick===-1?t('duel.late',{meaning:right}):list[pick].correct?t('duel.right'):t('duel.wrong',{meaning:right}));
       feedback.dataset.ok=String(pick!==-1&&list[pick].correct);
-      const last=run.idx===run.cards.length-1;
-      const next=button(()=>t(last?'duel.finish':'duel.next'),()=>{if(last)save();else{run.idx++;run.picked=null;word();}},'primary');next.id='duelNext';
-      root.append(next);next.focus({preventScroll:true});
+      // the Next button was already there (invisible): showing it moves nothing on the page
+      next.classList.remove('duel-waiting');next.disabled=false;next.focus({preventScroll:true});
     };
+    const last=run.idx===run.cards.length-1;
+    const next=button(()=>t(last?'duel.finish':'duel.next'),()=>{if(run.picked===null)return;if(last)save();else{run.idx++;run.picked=null;word();}},'primary duel-waiting');next.id='duelNext';next.disabled=true;
     list.forEach((o,i)=>{const b=button(()=>'',()=>finish(i),'duel-option');b.textContent=o.text;b.dir='auto';opts.append(b);});
-    root.append(opts,feedback);
+    root.append(opts,feedback,next);
     run.shownAt=performance.now();run.picked=null;opts.firstChild?.focus({preventScroll:true});
     const paint=()=>{const left=Math.max(0,DUEL_SECONDS-(performance.now()-run.shownAt)/1000);fill.style.inlineSize=(left/DUEL_SECONDS*100)+'%';
       bar.setAttribute('aria-valuenow',String(Math.ceil(left)));copy(bar,()=>t('duel.timeLeft',{seconds:Math.ceil(left)}),'aria-label');
