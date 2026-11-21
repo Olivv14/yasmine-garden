@@ -137,3 +137,13 @@ input.paper-line,.mood-view #moodNote{background:repeating-linear-gradient(180de
 .diary-page[data-kind=poem] textarea{font:500 24px/34px var(--font-hand)!important}
 .diary-page textarea::placeholder{color:rgba(58,36,22,.45)!important}
 #journalOwner{display:none!important}
+/* Home: the music card shares its row with the combo card; the picture sits by the title and the three buttons
+   get their own full-width row, so they always fit on one line */
+#page-garden .toad-card{grid-template-columns:48px minmax(0,1fr);grid-template-areas:"art state" "art song" "line line" "ctrl ctrl";column-gap:10px;row-gap:2px;align-items:center}
+#page-garden .toad-body{display:contents}
+#page-garden .toad-art{grid-area:art;inline-size:48px;block-size:48px;border-radius:12px;align-self:start}
+#page-garden #toadState{grid-area:state;align-self:end}
+#page-garden #toadSong{grid-area:song;align-self:start}
+#page-garden #toadLine{grid-area:line;margin-block-start:4px}
+#page-garden .toad-controls{grid-area:ctrl;display:flex;flex-wrap:nowrap;justify-content:space-between;gap:6px;margin-block-start:8px}
+#page-garden .toad-controls .round-button{flex:1 1 0;max-inline-size:52px;inline-size:auto;block-size:40px;min-block-size:40px;border-radius:20px}

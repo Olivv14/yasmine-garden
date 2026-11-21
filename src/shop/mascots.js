@@ -15,7 +15,7 @@ export function createMascots({t,copy}){
   function ensureLayer(){if(layer)return layer;layer=document.createElement('div');layer.className='mascot-layer';layer.setAttribute('aria-hidden','true');
     const nav=document.querySelector('.bottom-nav');if(nav){layer.classList.add('on-nav');nav.append(layer);}else document.body.append(layer);return layer;}
   let navTop=0;
-  function frame(){if(!layer?.classList.contains('on-nav'))return;const r=layer.parentElement.getBoundingClientRect();navTop=r.top;
+  function frame(){if(!layer?.classList.contains('on-nav')||!layer.parentElement)return;const r=layer.parentElement.getBoundingClientRect();navTop=r.top;
     const left=-Math.round(r.left)+'px',w=innerWidth+'px';if(layer.style.left!==left)layer.style.left=left;if(layer.style.width!==w)layer.style.width=w;}
   // the ground: the top edge of the bottom bar (or the bottom of the screen)
   const ground=()=>{const nav=document.querySelector('.bottom-nav');const r=nav?.getBoundingClientRect();return r&&r.height?r.top+6:innerHeight-8;};

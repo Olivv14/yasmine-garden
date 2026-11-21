@@ -26,3 +26,5 @@
 /* iPhone: no grey flash on every tap (it made the garden blink when tapped again and again), no double-tap zoom */
 html{-webkit-tap-highlight-color:transparent}
 body{touch-action:manipulation}
+/* the page stays put: nothing wider than the screen can slide it sideways, and no rubber-band drift */
+html,body{overflow-x:clip;overscroll-behavior:none}
