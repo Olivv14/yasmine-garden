@@ -25,7 +25,7 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
     g3=createGarden3D({t,copy,onEvent:e=>skyEvent(e),
       onWater:async id=>{const f=(getSnapshot()?.flowers??[]).find(x=>x.id===id&&!x.deleted_at);if(f&&await water(f))notify(()=>t('garden3d.watered',{flower:t('flowers.'+f.flower_type)}));},
       onPlant:async(type,spot)=>{try{const id=await plant(type,spot);if(id)notify(()=>t('garden3d.planted',{flower:t('flowers.'+type)}));}catch(err){notify(()=>err?.gardenKey?t(err.gardenKey):t('common.unknownError'));}},
-      seedsLeft:()=>seeds()?.left??0,
+      seedsLeft:()=>seeds()?.left??0,goldenLeft:()=>seeds()?.golden??0,
       mySide:()=>{const snap=getSnapshot();if(!snap)return 0;return authorTone(me(),snap.members,snap.profiles)==='yasmine'?-1:1;},onFlower:id=>openFlower(id),onMoon:()=>openTerminal(),onSpot:id=>openCulture(id),onToad:()=>onToad?.(),
       onFail:()=>{g3?.destroy();g3=null;garden.element.hidden=false;$('gardenMount').classList.remove('is-3d');render();}});
     $('gardenMount').append(g3.element);

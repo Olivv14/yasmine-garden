@@ -15,13 +15,13 @@ const VOICE={it:['it-IT','it'],ve:['es-VE','es-419','es-US','es'],tn:['ar-TN','a
 const readDeck=()=>{try{const v=localStorage.getItem(KEY);return DECKS.includes(v)?v:'it';}catch{return 'it';}};
 const voiceFor=deck=>{try{const vs=speechSynthesis.getVoices();return (VOICE[deck]??[]).map(l=>vs.find(v=>v.lang?.toLowerCase().startsWith(l.toLowerCase()))).find(Boolean)??null;}catch{return null;}};
 
-export function createLearn({$,el,button,t,copy,locale,getSnapshot,getClient,getApi,me,person,notify,showInGarden}){
+export function createLearn({$,el,button,t,copy,locale,getSnapshot,getClient,getApi,me,person,notify,showInGarden,prizes,openChest}){
   const page=$('page-learn');if(!page)return {render(){},clear(){}};
   const home=el('section',undefined,'learn-home');page.querySelector('.section-head')?.after(home);
   let deck=readDeck(),all=null,teachMsgs=[],voices=new Map(),urls=new Map(),overlay=null,run=null,loadedAt=0;
   const partner=()=>getSnapshot()?.members?.find(m=>m.profile_id!==me())?.profile_id??null;
   // the discovery shelf: what you found in the garden, under the decks
-  const shelf=createShelf({el,button,t,copy,locale,getSnapshot,me,partner,person,showInGarden});home.after(shelf.element);
+  const shelf=createShelf({el,button,t,copy,locale,getSnapshot,me,partner,person,showInGarden,prizes,openChest});home.after(shelf.element);
   const lang=()=>locale();
 
   async function data(){

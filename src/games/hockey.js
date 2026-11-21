@@ -19,7 +19,7 @@ const SURFACE=homography([[70,64],[300,64],[334,470],[36,470]]),ART_W=370,ART_H=
 const MALLET={oliver:['#FFC9C0','#E0473C','#8A1A14','#4A0C08'],yasmine:['#D8FFE6','#2FB070','#0E5A34','#06301A'],toad:['#D9F2C2','#8CC06A','#3F7A30','#1F4418']};
 const SCORE_TINT={oliver:'#FFB4A8',yasmine:'#C6EDA8',toad:'#C6EDA8'};
 
-export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,notify,photo=()=>null,getSnapshot=()=>null,partnerOnline=()=>false}){
+export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,notify,photo=()=>null,getSnapshot=()=>null,partnerOnline=()=>false,invite=null}){
   const root=el('article',undefined,'card game-card hockey-card');root.id='airHockey';
   // home: title, the two ways to play, and the toad cards
   const home=el('div',undefined,'hk-home');
@@ -27,7 +27,7 @@ export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partne
   // the start screen (mockup): the table from above, first to 7, play live or train against the toad, your record
   const hero=pic('hockey','gs-hero gs-hockey');
   const what=el('div',undefined,'gs-what');what.append(el('b',()=>t('gs.hockey.firstTo',{win:WIN})),el('span',()=>t('gs.hockey.sub')));
-  const join=button(()=>'',()=>start(),'gs-way main');join.id='hockeyJoin';
+  const join=button(()=>'',()=>{if(!partnerOnline())sendInvite();start();},'gs-way main');join.id='hockeyJoin';
   const joinFaces=el('span',undefined,'gs-faces'),joinWords=el('span',undefined,'gs-way-words'),joinState=el('span',undefined,'gs-way-hint');
   joinWords.append(el('b',()=>t('gs.live',{name:person(partner())})),joinState);join.append(joinFaces,joinWords);
   const bot=button(()=>'',()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'gs-way');bot.id='hockeyBot';
@@ -39,6 +39,10 @@ export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partne
     const on=partnerOnline();join.classList.toggle('online',on);copy(joinState,()=>on?t('gs.online',{name:person(partner())}):t('gs.offline',{name:person(partner())}));
     const w=wins(getSnapshot(),'hockey',me(),partner());recordLine.hidden=!(w.me||w.them);copy(recordLine,()=>t('gs.record',{me:w.me,name:person(partner()),them:w.them}));}
   document.addEventListener('partner-presence',()=>{if(root.isConnected)paintHome();});
+  // she isn't here: tapping "Play live" also invites her (her bell and her phone), once a minute at most
+  let invitedAt=0;
+  async function sendInvite(){if(!invite||Date.now()-invitedAt<60000)return;invitedAt=Date.now();
+    try{await invite();notify?.(()=>t('gs.invited',{name:person(partner())}));}catch{invitedAt=0;}}
   home.append(head,hero,what,starts,picker,recordLine);
   // the match: chip, scoreboard, table, status
   const match=el('div',undefined,'hk-match');match.hidden=true;

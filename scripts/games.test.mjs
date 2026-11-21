@@ -127,8 +127,13 @@ test('points: turns, hockey, the toad, duels with the faster winner, know me',()
   assert.ok(pointEvents(snap).every(e=>e.points>0&&e.at>0));
 });
 test('seeds: three to start, one per ten points, one per flower planted',()=>{
-  assert.deepEqual(seeds(snap,O),{earned:4,used:2,left:2});assert.deepEqual(seeds(snap,Y),{earned:4,used:0,left:4});
-  assert.deepEqual(seeds({members:[{profile_id:O}],flowers:[1,2,3,4,5].map(()=>({planted_by:O}))},O),{earned:3,used:5,left:0});
+  assert.deepEqual(seeds(snap,O),{earned:4,used:2,left:2,golden:0});assert.deepEqual(seeds(snap,Y),{earned:4,used:0,left:4,golden:0});
+  assert.deepEqual(seeds({members:[{profile_id:O}],flowers:[1,2,3,4,5].map(()=>({planted_by:O}))},O),{earned:3,used:5,left:0,golden:0});
+});
+test('seeds: a seed packet is one more seed; a golden jasmine is its own seed, used by the golden flower only',()=>{
+  const s={members:[{profile_id:O}],bottlePrizes:[{owner_id:O,points:0,item:'seed'},{owner_id:O,points:0,item:'golden'}],rewardBoxes:[{owner_id:O,points:0,item:'golden'}],
+    flowers:[{planted_by:O,flower_type:'rose'},{planted_by:O,flower_type:'golden'}]};
+  assert.deepEqual(seeds(s,O),{earned:4,used:1,left:3,golden:1});
 });
 test('turns: what waits for me, what waits for them, what is finished',()=>{
   const now=new Date(2026,10,20).getTime();

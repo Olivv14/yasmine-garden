@@ -53,6 +53,7 @@ const BLOOM={
 };
 
 export function flowerArt(type,stage){
+  if(type==='golden')type='jasmine'; // the golden jasmine (backend/020) is drawn as a jasmine here, the 3D garden gilds it
   if(!FLOWER_TYPES.includes(type))throw new RangeError('Unknown flower '+type);
   const st=typeof stage==='number'?stage:STAGES.indexOf(stage);
   const parts=st===0?[mound(),tag(type)]:st===1?[mound(),sprout(),tag(type)]:st===2?[mound(),bud(type),tag(type)]:[mound(),BLOOM[type]()];

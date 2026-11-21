@@ -1,0 +1,49 @@
+/* The bell's page: "Under the arch" (mockup NArch5, option 1) */
+html.arch-open{overflow:hidden}
+.arch-inbox{position:fixed;inset:0;z-index:90;overflow-y:auto;overscroll-behavior:contain;color:#FFF4E6;font-family:var(--font-sans);
+  background:linear-gradient(180deg,#10243A 0%,#173A4E 45%,#0E1A22 100%);padding:calc(env(safe-area-inset-top) + 58px) 0 calc(env(safe-area-inset-bottom) + 18px);animation:arch-in .22s ease-out}
+@keyframes arch-in{from{opacity:0;transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){.arch-inbox{animation:none}}
+.arch-bg{position:fixed;inset:calc(env(safe-area-inset-top) + 0px) 0 0;inline-size:100%;block-size:100%;pointer-events:none;max-inline-size:520px;margin-inline:auto}
+.arch-inbox>*:not(.arch-bg){position:relative}
+.arch-close{position:fixed!important;inset-inline-end:14px;top:calc(env(safe-area-inset-top) + 14px);z-index:2;inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;padding:0;
+  background:rgba(0,0,0,.35);border:1px solid rgba(207,228,255,.3);color:#FFF4E6}
+.arch-head{text-align:center;padding-inline:80px}
+.arch-h{margin:0;font:800 22px/1.15 var(--font-display);color:#FFF4E6}
+.arch-sub-head{margin:2px 0 0;font:600 12px var(--font-sans);color:#CFE4FF}
+.arch-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:18px 34px 4px;max-inline-size:520px;margin-inline:auto}
+.arch-tabs::-webkit-scrollbar{display:none}
+.arch-inbox button.arch-tab{flex:none;min-block-size:34px;padding:0 12px;border-radius:99px;border:1px solid rgba(207,228,255,.35);background:rgba(0,0,0,.3);color:#FFF4E6;font:700 12px var(--font-sans)}
+.arch-inbox button.arch-tab[aria-selected=true]{background:#FBF3E4;color:#1F5FA8;border-color:#FBF3E4}
+.arch-body{display:grid;gap:8px;padding:10px 34px 16px;max-inline-size:520px;margin-inline:auto}
+.arch-sec{display:flex;align-items:center;gap:8px;margin-block-start:6px}
+.arch-sec-name{font:800 11px var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:#CFE4FF}
+.arch-sec:first-child .arch-sec-name{color:#FFD58A}
+.arch-count{min-inline-size:20px;block-size:20px;padding:0 6px;border-radius:99px;background:#FFD58A;color:#2A1A10;font:800 11px var(--font-sans);display:inline-grid;place-items:center}
+.arch-rule{flex:1;block-size:1px;background:rgba(207,228,255,.25)}
+.arch-inbox button.arch-mark{border:0;background:none;color:#FFD58A;font:700 12px var(--font-sans);min-block-size:32px;padding:0 2px}
+.arch-card{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:4px 16px 16px 16px;background:#FBF3E4;color:#3A2416;box-shadow:0 8px 16px rgba(0,0,0,.3)}
+.arch-card.seen{background:rgba(251,243,228,.74)}
+.arch-flower{inline-size:22px;block-size:22px;flex:none}
+.arch-words{flex:1;min-inline-size:0}
+.arch-top{display:flex;justify-content:space-between;gap:6px;align-items:baseline}
+.arch-title{font:800 13px/1.2 var(--font-display);color:#3A2416}
+.arch-time{flex:none;font:600 10px var(--font-sans);color:#8A6A4A}
+.arch-sub{margin:1px 0 0;font:500 12px/1.3 var(--font-sans);color:#6A4A2A;overflow-wrap:anywhere}
+.arch-sub.hand{font:600 18px/1.1 var(--font-hand);color:#3A2416}
+.arch-inbox button.arch-act{flex:none;min-block-size:34px;padding:0 12px;border:0;border-radius:99px;font:700 12px var(--font-sans);background:#1F5FA8;color:#FFF4E6}
+.arch-inbox button.arch-act.gold{background:#FFD58A;color:#2A1A10}
+.arch-inbox button.arch-act.green{background:#2E6A44;color:#FFF4E6}
+.arch-inbox button.arch-act.lilac{background:#A9BCFF;color:#1A1A3A}
+.arch-inbox button.arch-done{display:flex;gap:8px;align-items:center;justify-content:flex-start;inline-size:100%;padding:8px 12px;border-radius:12px;border:0;background:rgba(0,0,0,.28);color:#CFE4FF;font:600 12px var(--font-sans);text-align:start;min-block-size:36px}
+.arch-done svg{color:#9FE0B8;flex:none}
+.arch-empty{display:grid;justify-items:center;gap:8px;padding:40px 10px;text-align:center;font:600 20px var(--font-hand);color:#CFE4FF}
+.arch-empty-flower{inline-size:48px;block-size:48px}
+.arch-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 16px 0;padding:10px 14px;border-radius:16px;background:rgba(0,0,0,.4);font:600 12px var(--font-sans);color:#CFE4FF;max-inline-size:488px;margin-inline:auto}
+.arch-inbox button.arch-settings{flex:none;border:1px solid rgba(207,228,255,.35);background:transparent;color:#FFF4E6;border-radius:99px;min-block-size:32px;padding:0 12px;font:700 12px var(--font-sans)}
+/* the bell on Home, over the garden */
+#page-garden{position:relative}
+button.home-bell{position:absolute;inset-inline-end:14px;top:calc(env(safe-area-inset-top) + 12px);z-index:7;inline-size:44px;block-size:44px;min-block-size:44px;padding:0;border-radius:50%;display:grid;place-items:center;
+  background:rgba(18,10,20,.55);color:#FFF4E6;border:1px solid rgba(255,226,198,.3);box-shadow:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+html.garden-full button.home-bell{display:none}
+.home-bell-count{position:absolute;top:-3px;inset-inline-end:-3px;min-inline-size:18px;block-size:18px;padding:0 5px;border-radius:99px;background:#FF6B6B;color:#fff;font:800 11px/18px var(--font-sans);text-align:center}

@@ -403,6 +403,8 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     callSignal(payload){if(!channel)connect();return roomSend('call',payload);},
     onCall(fn){callHandlers.add(fn);return()=>callHandlers.delete(fn);},
     partnerOnline:()=>online,
+    // a short text from elsewhere in the app ("Show Yasmine" on a prize)
+    async sendText(body){if(available===null)await load();if(!available)return false;await send('text',String(body).slice(0,4000));return true;},
     // the chat pane became visible (or not): load once, mark as read while it is on screen
     shown(on){visible=on;if(!on)document.documentElement.classList.remove('chat-full');if(on){if(available===null)load();else{render(true);scheduleRead();}}else paintUnread();},
     refresh(){if(available===null||!api()?.context)return;if(!channel)connect();},

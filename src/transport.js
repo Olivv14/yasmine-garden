@@ -55,7 +55,7 @@ export class Transport{
     const optional=async(read)=>{try{return await read();}catch(e){if(['42P01','PGRST205','PGRST200'].includes(e?.code))return null;throw e;}};
     // everything below is read at the same time (one wait instead of fifteen in a row): opening the app is quicker
     const roundIds=rounds.map(r=>r.id);
-    const [gameEventsRaw,playlists,playlistItemsRaw,playRounds,shopPurchases,shopChoices,learnState,learnDays,gardenDiscoveries,bottlePrizes,pairStory,notifications,playAnswersRaw,answers]=await Promise.all([
+    const [gameEventsRaw,playlists,playlistItemsRaw,playRounds,shopPurchases,shopChoices,learnState,learnDays,gardenDiscoveries,bottlePrizes,pairStory,notifications,playAnswersRaw,answers,rewardBoxes,poolGames]=await Promise.all([
       optional(()=>all('game_events',q=>q.eq('pair_id',pairId))),
       optional(()=>all('playlists',q=>q.eq('pair_id',pairId))),
       optional(()=>all('playlist_items',q=>q.eq('pair_id',pairId).is('deleted_at',null))),
@@ -73,12 +73,16 @@ export class Transport{
       // the answers of the play rounds (by pair, kept for the 200 newest rounds below)
       optional(()=>pages(()=>this.client.from('play_answers').select('*').eq('pair_id',pairId).order('created_at').order('id'))),
       // all the round answers in one read (not one per round)
-      roundIds.length?pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').in('round_id',roundIds).order('round_id').order('owner_id')):Promise.resolve([])]);
+      roundIds.length?pages(()=>this.client.from('round_answers').select('round_id,owner_id,body,submitted_at').in('round_id',roundIds).order('round_id').order('owner_id')):Promise.resolve([]),
+      // boxes from the stamp album and the shelf (backend/020)
+      optional(()=>this.client.from('reward_boxes').select('*').eq('pair_id',pairId).then(checked)),
+      // pool turn by turn (backend/021): the open game and the last few
+      optional(()=>this.client.from('pool_games').select('*').eq('pair_id',pairId).order('updated_at',{ascending:false}).limit(10).then(checked))]);
     const gameEvents=gameEventsRaw??[];
     const playlistItems=playlists?(playlistItemsRaw??[]):null;
     const playIds=new Set((playRounds??[]).map(r=>r.id)),playAnswers=(playAnswersRaw??[]).filter(a=>playIds.has(a.round_id));
     const currentMe=profiles.find(p=>p.id===me.id);if(!currentMe||currentMe.auth_user_id!==me.auth_user_id)throw uiError('sync.changedSession');
-    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,learnState:learnState??[],bottlePrizes:bottlePrizes??[],learnDays:learnDays??[],gardenDiscoveries:gardenDiscoveries??[],playlists,playlistItems,notifications,me:currentMe,pairId};
+    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,learnState:learnState??[],bottlePrizes:bottlePrizes??[],rewardBoxes:rewardBoxes??[],poolGames:poolGames??[],hasRewards:rewardBoxes!==null,hasPoolTurns:poolGames!==null,learnDays:learnDays??[],gardenDiscoveries:gardenDiscoveries??[],playlists,playlistItems,notifications,me:currentMe,pairId};
   }
   schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh(true).catch(this.onFailure),120);}
   // soft (the background checks): skips the full read when the pair's revision has not moved for a moment
