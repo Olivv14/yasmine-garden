@@ -730,11 +730,18 @@ return {
  // where on the lawn a screen point lands, and the free spot nearest to it on one side (-1 left, 1 right)
  groundAt(cx,cy){canPointer({clientX:cx,clientY:cy});const pl=new THREE.Plane(new THREE.Vector3(0,1,0),-.1);if(!ray.ray.intersectPlane(pl,_hit))return null;return Math.hypot(_hit.x,_hit.z)<IR*.95?{x:_hit.x,z:_hit.z}:null;},
  freeSpot(x,z,side=0){const taken=new Set([...shown.values()].map(o=>o.slot));const i=nearestSlot(x,z,(k,sx)=>!taken.has(k)&&(!side||Math.sign(sx)===side));return i<0?null:{x:+SLOTS[i][0].toFixed(3),z:+SLOTS[i][1].toFixed(3)};},
- flowerIcons(){const out={};const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});r.setSize(128,128);r.outputColorSpace=THREE.SRGBColorSpace;r.toneMapping=THREE.ACESFilmicToneMapping;
-  for(const t of ['rose','jasmine','orchid','marigold','lavender','lilium']){const sc=new THREE.Scene();sc.add(new THREE.HemisphereLight('#FFE6CC','#5A3A4A',1.6));const dl=new THREE.DirectionalLight('#FFD2A0',2.4);dl.position.set(3,5,4);sc.add(dl);
+ // the seed tray's pictures: drawn once with the garden's own renderer into a small offscreen picture (a second 3D
+ // canvas can make an iPhone drop the garden's own, and the garden would go blank)
+ flowerIcons(){const out={},S=128,rt=new THREE.WebGLRenderTarget(S,S,{colorSpace:THREE.SRGBColorSpace}),px=new Uint8Array(S*S*4),cv=document.createElement('canvas');cv.width=cv.height=S;const g=cv.getContext('2d'),img=g.createImageData(S,S);
+  const prevT=renderer.getRenderTarget(),prevC=renderer.getClearColor(new THREE.Color()),prevA=renderer.getClearAlpha();renderer.setClearColor(0x000000,0);
+  try{for(const t of ['rose','jasmine','orchid','marigold','lavender','lilium']){const sc=new THREE.Scene();sc.add(new THREE.HemisphereLight('#FFE6CC','#5A3A4A',1.6));const dl=new THREE.DirectionalLight('#FFD2A0',2.4);dl.position.set(3,5,4);sc.add(dl);
    const f=flower(t,3);sc.add(f);const box=new THREE.Box3().setFromObject(f),c=box.getCenter(new THREE.Vector3()),sz=box.getSize(new THREE.Vector3());const dist=Math.max(sz.x,sz.y,sz.z)*1.25/Math.tan(15*Math.PI/180)/2;
-   const cm=new THREE.PerspectiveCamera(30,1,.01,100);cm.position.set(c.x,c.y+dist*.32,c.z+dist);cm.lookAt(c);r.render(sc,cm);out[t]=r.domElement.toDataURL('image/png');}
-  r.dispose();r.forceContextLoss?.();return out;},
+   const cm=new THREE.PerspectiveCamera(30,1,.01,100);cm.position.set(c.x,c.y+dist*.32,c.z+dist);cm.lookAt(c);
+   renderer.setRenderTarget(rt);renderer.clear();renderer.render(sc,cm);renderer.readRenderTargetPixels(rt,0,0,S,S,px);
+   // the picture comes out upside down: flip the rows
+   for(let y=0;y<S;y++)img.data.set(px.subarray((S-1-y)*S*4,(S-y)*S*4),y*S*4);g.putImageData(img,0,0);out[t]=cv.toDataURL('image/png');}}
+  finally{renderer.setRenderTarget(prevT);renderer.setClearColor(prevC,prevA);rt.dispose();}
+  return out;},
  resetView(){flyTo(new THREE.Vector3(...V1),new THREE.Vector3(...V0));},
  onEvent(fn){eventCb=fn;sayFullMoon();},
  onFrame(fn){frameCb=fn;},

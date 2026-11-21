@@ -110,6 +110,8 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
     setSong(title){song.n.hidden=!title;song.label.textContent=title??'';},
     setPlaying(on){playing=!!on;api?.setPlaying(playing);},
     exitFull(){setFull(false);},
+    // straight to full screen with the watering can glowing (the only way to water now)
+    openFull(){setFull(true);api?.pulseCan?.();},
     refreshTray(){if(element.classList.contains('full'))paintTray();},
     destroy(){setFull(false);destroyed=true;clearInterval(timer);api?.destroy();api=null;element.remove();},
   };
