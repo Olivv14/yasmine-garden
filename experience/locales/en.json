@@ -1574,5 +1574,11 @@
   "spotify.noResults": "Nothing found",
   "spotify.handoffWorking": "Connecting Spotify…",
   "spotify.handoffDone": "Spotify is connected. Tap Done (top left) to go back to Between us.",
-  "spotify.handoffFailed": "Spotify could not be connected. Go back to Between us and try again."
+  "spotify.handoffFailed": "Spotify could not be connected. Go back to Between us and try again.",
+  "editor.loading": "Loading…",
+  "editor.undo": "Undo",
+  "editor.redo": "Redo",
+  "editor.binHint": "Drag a sticker or a word onto the bin to remove it",
+  "pu.pets": "Show the pets",
+  "pu.petsSub": "Emmy and friends walking on the screen"
 }

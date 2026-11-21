@@ -1574,5 +1574,11 @@
   "spotify.noResults": "ما لقيت شي",
   "spotify.handoffWorking": "قاعد نربط سبوتيفاي…",
   "spotify.handoffDone": "سبوتيفاي تربط. انقر Done (فوق على اليسار) باش ترجع لـ Between us.",
-  "spotify.handoffFailed": "سبوتيفاي ما تربطش. ارجع لـ Between us و عاود."
+  "spotify.handoffFailed": "سبوتيفاي ما تربطش. ارجع لـ Between us و عاود.",
+  "editor.loading": "قاعد يحمّل…",
+  "editor.undo": "ارجع",
+  "editor.redo": "عاود",
+  "editor.binHint": "جرّ الستيكر ولا الكلام للبوبالة باش تنحّيه",
+  "pu.pets": "ورّي الحيوانات",
+  "pu.petsSub": "Emmy و صحابها يتمشّاو في الشاشة"
 }

@@ -743,6 +743,8 @@ return {
   finally{renderer.setRenderTarget(prevT);renderer.setClearColor(prevC,prevA);rt.dispose();}
   return out;},
  resetView(){flyTo(new THREE.Vector3(...V1),new THREE.Vector3(...V0));},
+ // a small picture of the garden as it is now (shown at once next time the app opens, while the 3D wakes up)
+ snapshot(maxW=720){renderer.render(scene,cam);const c=renderer.domElement;if(!c.width)return null;const k=Math.min(1,maxW/c.width),o=document.createElement('canvas');o.width=Math.round(c.width*k);o.height=Math.round(c.height*k);o.getContext('2d').drawImage(c,0,0,o.width,o.height);return o.toDataURL('image/jpeg',.72);},
  onEvent(fn){eventCb=fn;sayFullMoon();},
  onFrame(fn){frameCb=fn;},
  // screen position of a point in the garden, in CSS pixels inside the garden element
