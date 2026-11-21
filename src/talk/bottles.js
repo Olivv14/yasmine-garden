@@ -118,7 +118,7 @@ export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,p
     const next=el('div',undefined,'bt-next');next.append(icon('sparkles',16),el('span',()=>t('bt.nextShell',{count:toNext})));
     if(prizes){const inside=button(()=>t('prize.inside'),()=>prizes.catalog(id=>owned(id)),'bt-inside');next.append(inside);}
     opened.append(next);
-    paintAlbum(order);
+    if(getSnapshot()?.hasRewards)paintAlbum(order);
     if(!done.length)return;
     opened.append(el('h3',()=>t('bt.opened',{count:done.length}),'bt-h'));const row=el('div',undefined,'bt-shelf');
     for(const r of done){const mineP=won.find(p=>p.round_id===r.id&&p.owner_id===me()),hasShell=shell.has(r.id);

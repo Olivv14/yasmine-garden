@@ -25,7 +25,7 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
   // the start screen (mockup): the table and the rack, play together or against the toad, your record
   const hero=pic('pool','gs-hero gs-pool');
   const what=el('div',undefined,'gs-what');what.append(el('b',()=>t('gs.pool.title')),el('span',()=>t('gs.pool.sub')));
-  const join=button(()=>'',()=>partnerOnline()||!rpc?startLive():startTurns(),'gs-square main');join.id='poolJoin';
+  const join=button(()=>'',()=>partnerOnline()||!rpc||!getSnapshot()?.hasPoolTurns?startLive():startTurns(),'gs-square main');join.id='poolJoin';
   const joinFaces=el('span',undefined,'gs-faces small'),joinState=el('span',undefined,'gs-way-hint');
   join.append(joinFaces,el('b',()=>t('gs.pool.together')),joinState);
   const bot=button(()=>'',()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'gs-square');bot.id='poolBot';

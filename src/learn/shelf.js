@@ -43,7 +43,7 @@ export function createShelf({el,button,t,copy,locale,getSnapshot,me,partner,pers
       if(full){root.append(el('p',()=>t('shelf.full.'+sh.from),'shelf-full'));
         // the country's legendary chest (backend/020): opened once, by you
         const got=(snap.rewardBoxes??[]).find(b=>b.owner_id===me()&&b.source==='chest:'+sh.from);
-        if(prizes&&openChest){const c=button(()=>got?t('shelf.chestOpened',{item:prizes.name(got.item??'points')}):t('shelf.openChest'),()=>got?prizes.view(got):prizes.open(()=>t('shelf.chestTitle.'+sh.from),()=>openChest(sh.from)),'shelf-chest'+(got?' got':''));
+        if(prizes&&openChest&&snap.hasRewards){const c=button(()=>got?t('shelf.chestOpened',{item:prizes.name(got.item??'points')}):t('shelf.openChest'),()=>got?prizes.view(got):prizes.open(()=>t('shelf.chestTitle.'+sh.from),()=>openChest(sh.from)),'shelf-chest'+(got?' got':''));
           c.prepend(icon('box',18));root.append(c);}}
     }
     if(picked)root.append(card(CULTURE.find(c=>c.id===picked),mine,theirs,when));

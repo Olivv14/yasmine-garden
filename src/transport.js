@@ -82,7 +82,7 @@ export class Transport{
     const playlistItems=playlists?(playlistItemsRaw??[]):null;
     const playIds=new Set((playRounds??[]).map(r=>r.id)),playAnswers=(playAnswersRaw??[]).filter(a=>playIds.has(a.round_id));
     const currentMe=profiles.find(p=>p.id===me.id);if(!currentMe||currentMe.auth_user_id!==me.auth_user_id)throw uiError('sync.changedSession');
-    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,learnState:learnState??[],bottlePrizes:bottlePrizes??[],rewardBoxes:rewardBoxes??[],poolGames:poolGames??[],learnDays:learnDays??[],gardenDiscoveries:gardenDiscoveries??[],playlists,playlistItems,notifications,me:currentMe,pairId};
+    return {profiles,members,questions,content,moods,flowers,rounds,media,answers,details,preferences,thoughts,avatars,gameEvents,playRounds:playRounds??[],playAnswers,shopPurchases:shopPurchases??[],shopChoices:shopChoices??[],pairStory:pairStory?.[0]??null,learnState:learnState??[],bottlePrizes:bottlePrizes??[],rewardBoxes:rewardBoxes??[],poolGames:poolGames??[],hasRewards:rewardBoxes!==null,hasPoolTurns:poolGames!==null,learnDays:learnDays??[],gardenDiscoveries:gardenDiscoveries??[],playlists,playlistItems,notifications,me:currentMe,pairId};
   }
   schedule(){clearTimeout(this.timer);this.timer=setTimeout(()=>this.refresh(true).catch(this.onFailure),120);}
   // soft (the background checks): skips the full read when the pair's revision has not moved for a moment
