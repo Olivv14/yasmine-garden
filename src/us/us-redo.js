@@ -111,7 +111,8 @@ export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,p
     const v=openView('pu.music','pu-music');const player=$('musicPlayer');
     const info=button(()=>'',()=>credits(),'pu-round');info.append(icon('info',18));copy(info,()=>t('music.credits'),'aria-label');v.right.append(info);
     const disc=el('div',undefined,'pu-record');disc.append(el('span',undefined,'pu-record-label'));
-    const title=el('b',undefined,'pu-track');const bar=el('div',undefined,'pu-progress');const fill=el('i');bar.append(fill);const times=el('div',undefined,'pu-times');const a=el('span'),b=el('span');times.append(a,b);
+    const title=el('b',undefined,'pu-track');const bar=document.createElement('input');bar.type='range';bar.min='0';bar.step='1';bar.value='0';bar.className='pu-progress seek-range';copy(bar,()=>t('music.seek'),'aria-label');let drag=false;
+    bar.addEventListener('input',()=>{drag=true;a.textContent=fmt(+bar.value);});bar.addEventListener('change',()=>{drag=false;if(isFinite(player.duration))player.currentTime=+bar.value;paint();});const times=el('div',undefined,'pu-times');const a=el('span'),b=el('span');times.append(a,b);
     const ctr=el('div',undefined,'pu-controls');
     const prev=button(()=>'',()=>$('musicPrev').click(),'pu-ctrl');prev.append(icon('prev',24));copy(prev,()=>t('music.previous'),'aria-label');
     const play=button(()=>'',()=>{$('musicPlay').click();setTimeout(paint,80);},'pu-ctrl big');
@@ -128,7 +129,7 @@ export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,p
     v.body.append(list,acts);
     const fmt=s=>!isFinite(s)?'0:00':Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
     function paint(){const on=!player.paused;disc.classList.toggle('spin',on);play.replaceChildren(icon(on?'pause':'playTrack',28));copy(play,()=>t(on?'music.pause':'music.play'),'aria-label');
-      title.textContent=$('trackTitle')?.textContent||'';title.dir='auto';const d=player.duration||0,c=player.currentTime||0;fill.style.inlineSize=(d?c/d*100:0)+'%';a.textContent=fmt(c);b.textContent=fmt(d);}
+      title.textContent=$('trackTitle')?.textContent||'';title.dir='auto';const d=isFinite(player.duration)?player.duration:0,c=player.currentTime||0;bar.max=String(Math.round(d)||1);bar.disabled=!d;b.textContent=fmt(d);if(!drag){bar.value=String(Math.round(c));a.textContent=fmt(c);bar.style.setProperty('--fill',(d?c/d*100:0)+'%');}}
     for(const e of ['play','pause','timeupdate','loadedmetadata','ended'])player.addEventListener(e,paint);v.cleanup.push(()=>{for(const e of ['play','pause','timeupdate','loadedmetadata','ended'])player.removeEventListener(e,paint);});
     paint();
   }

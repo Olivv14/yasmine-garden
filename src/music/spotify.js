@@ -105,12 +105,13 @@ export function createSpotify({onChange}={}){
   const cur=()=>mode==='app'?sdkState:mode==='device'?remote:null;
   function position(){const s=cur();if(!s)return 0;return s.paused?s.position:s.position+(Date.now()-s.at);}
   const playingNow=()=>{const s=cur();return !!s&&!s.paused;};
+  const duration=()=>cur()?.duration||0;
 
   // search (development mode allows up to 10 results)
   async function search(q){if(!q.trim())return [];const j=await call('/search?type=track&limit=10&q='+encodeURIComponent(q));
     return (j?.tracks?.items??[]).map(x=>({uri:x.uri,title:x.name,artist:(x.artists??[]).map(a=>a.name).join(', '),cover:(x.album?.images??[]).slice(-2)[0]?.url??null,duration_ms:x.duration_ms??null}));}
 
   finishReturn().then(()=>{if(auth&&!profile)me();});
-  return {connected:()=>!!auth,connect,disconnect,play,pause,resume,seek,stop,search,position,playing:playingNow,mode:()=>mode,
+  return {connected:()=>!!auth,connect,disconnect,play,pause,resume,seek,stop,search,position,duration,playing:playingNow,mode:()=>mode,
     deviceName:()=>remote?.device??null,error:()=>lastError,name:()=>profile?.display_name??null,premium:()=>profile?profile.product==='premium':null};
 }
