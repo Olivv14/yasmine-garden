@@ -1559,3 +1559,16 @@ pu.usePhoto	Use this photo	Usar esta foto	Utiliser cette photo	Usa questa foto	�
 pu.sending	Sending…	Enviando…	Envoi…	Invio…	قاعد يتبعث…
 pu.photoSaved	Your new photo is up	Tu foto nueva ya está	Ta nouvelle photo est en place	La tua nuova foto è pronta	التصويرة الجديدة تحطّت
 pu.photoFailed	The photo could not be sent. Try again.	No se pudo enviar la foto. Inténtalo otra vez.	La photo n'a pas pu être envoyée. Réessaie.	Non è stato possibile inviare la foto. Riprova.	التصويرة ما تبعثتش. عاود.
+spotify.connectTitle	Play Spotify songs here	Escucha Spotify aquí	Écoute Spotify ici	Ascolta Spotify qui	اسمع سبوتيفاي هوني
+spotify.connectHint	Sign in to Spotify once on this phone. With Premium, songs play right here in Between us.	Inicia sesión en Spotify una vez en este teléfono. Con Premium, las canciones suenan aquí mismo.	Connecte-toi à Spotify une fois sur ce téléphone. Avec Premium, les chansons jouent ici même.	Accedi a Spotify una volta su questo telefono. Con Premium, le canzoni suonano proprio qui.	ادخل لسبوتيفاي مرّة وحدة في التليفون هذا. مع بريميوم، الغناني تخدم هوني.
+spotify.connect	Connect Spotify	Conectar Spotify	Connecter Spotify	Collega Spotify	اربط سبوتيفاي
+spotify.connectedAs	Spotify: {{name}}	Spotify: {{name}}	Spotify : {{name}}	Spotify: {{name}}	سبوتيفاي: {{name}}
+spotify.disconnect	Disconnect	Desconectar	Déconnecter	Scollega	افصل
+spotify.needsPremium	Playing here needs Spotify Premium. Songs open in the Spotify app instead.	Para escuchar aquí hace falta Spotify Premium. Las canciones se abren en la app de Spotify.	Écouter ici demande Spotify Premium. Les chansons s'ouvrent dans l'app Spotify.	Per ascoltare qui serve Spotify Premium. Le canzoni si aprono nell'app Spotify.	باش تسمع هوني لازمك سبوتيفاي بريميوم. الغناني تتحلّ في تطبيق سبوتيفاي.
+spotify.openApp	Open the Spotify app once, then tap play again.	Abre la app de Spotify una vez y vuelve a tocar reproducir.	Ouvre l'app Spotify une fois, puis touche lecture à nouveau.	Apri l'app Spotify una volta, poi tocca di nuovo play.	حلّ تطبيق سبوتيفاي مرّة، و انقر شغّل من جديد.
+spotify.denied	Spotify was not connected. You can try again any time.	Spotify no se conectó. Puedes intentarlo cuando quieras.	Spotify n'a pas été connecté. Tu peux réessayer quand tu veux.	Spotify non è stato collegato. Puoi riprovare quando vuoi.	سبوتيفاي ما تربطش. تنجّم تعاود وقتلي تحب.
+spotify.failed	Spotify did not answer. Try again in a moment.	Spotify no respondió. Inténtalo en un momento.	Spotify n'a pas répondu. Réessaie dans un instant.	Spotify non ha risposto. Riprova tra poco.	سبوتيفاي ما جاوبش. عاود بعد شوية.
+spotify.onDevice	Playing on {{device}}	Sonando en {{device}}	Lecture sur {{device}}	In riproduzione su {{device}}	يخدم على {{device}}
+spotify.search	Search Spotify	Buscar en Spotify	Chercher sur Spotify	Cerca su Spotify	لوّج في سبوتيفاي
+spotify.searchPlaceholder	A song or an artist	Una canción o un artista	Une chanson ou un artiste	Una canzone o un artista	غناية ولا فنّان
+spotify.noResults	Nothing found	No se encontró nada	Rien trouvé	Nessun risultato	ما لقيت شي

@@ -1558,5 +1558,18 @@
   "pu.usePhoto": "استعمل التصويرة هاذي",
   "pu.sending": "قاعد يتبعث…",
   "pu.photoSaved": "التصويرة الجديدة تحطّت",
-  "pu.photoFailed": "التصويرة ما تبعثتش. عاود."
+  "pu.photoFailed": "التصويرة ما تبعثتش. عاود.",
+  "spotify.connectTitle": "اسمع سبوتيفاي هوني",
+  "spotify.connectHint": "ادخل لسبوتيفاي مرّة وحدة في التليفون هذا. مع بريميوم، الغناني تخدم هوني.",
+  "spotify.connect": "اربط سبوتيفاي",
+  "spotify.connectedAs": "سبوتيفاي: {{name}}",
+  "spotify.disconnect": "افصل",
+  "spotify.needsPremium": "باش تسمع هوني لازمك سبوتيفاي بريميوم. الغناني تتحلّ في تطبيق سبوتيفاي.",
+  "spotify.openApp": "حلّ تطبيق سبوتيفاي مرّة، و انقر شغّل من جديد.",
+  "spotify.denied": "سبوتيفاي ما تربطش. تنجّم تعاود وقتلي تحب.",
+  "spotify.failed": "سبوتيفاي ما جاوبش. عاود بعد شوية.",
+  "spotify.onDevice": "يخدم على {{device}}",
+  "spotify.search": "لوّج في سبوتيفاي",
+  "spotify.searchPlaceholder": "غناية ولا فنّان",
+  "spotify.noResults": "ما لقيت شي"
 }
