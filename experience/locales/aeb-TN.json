@@ -1742,5 +1742,13 @@
   "shelf.chestTitle.ve": "الصندوق الفنزويلي",
   "shelf.goalChest": "عمّر رفّ كامل: الصندوق الأسطوري متاع بلادو",
   "flowers.golden": "ياسمينة ذهبية",
-  "garden3d.goldenDrag": "الياسمينة الذهبية حاضرة: إسحبها لجيهتك"
+  "garden3d.goldenDrag": "الياسمينة الذهبية حاضرة: إسحبها لجيهتك",
+  "gs.pool.yourShot": "فمّا طرح يستنّى: دورك تضرب",
+  "gs.pool.theirShot": "الطرح يستنّى ضربة {{name}}",
+  "gs.pool.waitTurn": "توّا دور {{name}}. توصلك نوتيفيكاسيون كي يجي دورك.",
+  "gs.pool.replay": "آخر ضربة متاع {{name}}…",
+  "gs.pool.saveFailed": "الضربة ما تسجّلتش. الطاولة رجعت كيما كانت.",
+  "gs.invited": "عرضت {{name}}: باش توصلو نوتيفيكاسيون",
+  "arch.poolTurn": "{{name}} لعب في البيار",
+  "arch.poolTurnSub": "دورك تضرب"
 }

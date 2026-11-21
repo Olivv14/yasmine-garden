@@ -213,6 +213,11 @@ The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and rea
 - `plant_flower` also accepts `golden`, only while your golden prizes outnumber your golden flowers (42501 otherwise).
 - `invite_game(p_id uuid) -> notifications`: a `game_invite` for your partner (bell and push), at most one a minute (54000); a retry with the same id returns the same row.
 
+### Pool turn by turn (backend/021)
+- One open game per pair (`pool_games`, read by pair members). `pool_turn_start(p_id uuid, p_state jsonb) -> pool_games`: you are seat 0 and break; refused (23505) while another game is open; the same id returns it.
+- `pool_turn_shot(p_id uuid, p_expected_version bigint, p_shot jsonb, p_state jsonb, p_notify_id uuid) -> pool_games`: only the seat whose turn it is (42501), only on the current version (40001). Saves the table before and after the shot; when the turn passes or the game is won, the partner gets a `game_turn` (ref = the game id, id = `p_notify_id`). A retry of the same shot returns the saved row.
+- `pool_turn_leave(p_id uuid) -> pool_games`: ends the game without a winner.
+
 ### Garden discoveries (backend/015)
 - `discover(p_spot text) -> garden_discoveries`: saves a culture spot you found; finding it again changes nothing.
 

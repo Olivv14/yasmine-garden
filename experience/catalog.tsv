@@ -1743,3 +1743,11 @@ shelf.chestTitle.ve	The Venezuelan chest	El cofre de Venezuela	Le coffre vénéz
 shelf.goalChest	Fill a whole shelf: its country's legendary chest	Llena una repisa entera: el cofre legendario de su país	Remplis toute une étagère : le coffre légendaire de son pays	Riempi un intero scaffale: lo scrigno leggendario del suo paese	عمّر رفّ كامل: الصندوق الأسطوري متاع بلادو
 flowers.golden	Golden jasmine	Jazmín dorado	Jasmin doré	Gelsomino d'oro	ياسمينة ذهبية
 garden3d.goldenDrag	Your golden jasmine is ready: drag it onto your side	Tu jazmín dorado está listo: arrástralo a tu lado	Ton jasmin doré est prêt : glisse-le sur ton côté	Il tuo gelsomino d'oro è pronto: trascinalo sul tuo lato	الياسمينة الذهبية حاضرة: إسحبها لجيهتك
+gs.pool.yourShot	A game is waiting: it's your shot	Hay una partida esperando: te toca tirar	Une partie t'attend : à toi de tirer	Una partita ti aspetta: tocca a te tirare	فمّا طرح يستنّى: دورك تضرب
+gs.pool.theirShot	Your game is waiting for {{name}}'s shot	Tu partida espera el tiro de {{name}}	Ta partie attend le coup de {{name}}	La partita aspetta il tiro di {{name}}	الطرح يستنّى ضربة {{name}}
+gs.pool.waitTurn	{{name}}'s shot now. You'll get a notification when it's yours.	Ahora tira {{name}}. Te avisaremos cuando te toque.	Au tour de {{name}}. Tu seras prévenu quand ce sera le tien.	Ora tira {{name}}. Ti avviseremo quando tocca a te.	توّا دور {{name}}. توصلك نوتيفيكاسيون كي يجي دورك.
+gs.pool.replay	{{name}}'s last shot…	El último tiro de {{name}}…	Le dernier coup de {{name}}…	L'ultimo tiro di {{name}}…	آخر ضربة متاع {{name}}…
+gs.pool.saveFailed	Your shot wasn't saved. The table is back as it was.	Tu tiro no se guardó. La mesa volvió a como estaba.	Ton coup n'a pas été enregistré. La table est revenue comme avant.	Il tuo tiro non è stato salvato. Il tavolo è tornato com'era.	الضربة ما تسجّلتش. الطاولة رجعت كيما كانت.
+gs.invited	{{name}} was invited: they'll get a notification	Invitaste a {{name}}: le llegará un aviso	{{name}} est invité : une notification arrive	{{name}} è invitato: gli arriverà un avviso	عرضت {{name}}: باش توصلو نوتيفيكاسيون
+arch.poolTurn	{{name}} played in pool	{{name}} tiró en el pool	{{name}} a joué au billard	{{name}} ha tirato a biliardo	{{name}} لعب في البيار
+arch.poolTurnSub	Your shot	Te toca tirar	À toi de tirer	Tocca a te	دورك تضرب

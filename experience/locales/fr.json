@@ -1742,5 +1742,13 @@
   "shelf.chestTitle.ve": "Le coffre vénézuélien",
   "shelf.goalChest": "Remplis toute une étagère : le coffre légendaire de son pays",
   "flowers.golden": "Jasmin doré",
-  "garden3d.goldenDrag": "Ton jasmin doré est prêt : glisse-le sur ton côté"
+  "garden3d.goldenDrag": "Ton jasmin doré est prêt : glisse-le sur ton côté",
+  "gs.pool.yourShot": "Une partie t'attend : à toi de tirer",
+  "gs.pool.theirShot": "Ta partie attend le coup de {{name}}",
+  "gs.pool.waitTurn": "Au tour de {{name}}. Tu seras prévenu quand ce sera le tien.",
+  "gs.pool.replay": "Le dernier coup de {{name}}…",
+  "gs.pool.saveFailed": "Ton coup n'a pas été enregistré. La table est revenue comme avant.",
+  "gs.invited": "{{name}} est invité : une notification arrive",
+  "arch.poolTurn": "{{name}} a joué au billard",
+  "arch.poolTurnSub": "À toi de tirer"
 }

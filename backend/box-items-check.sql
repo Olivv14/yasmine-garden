@@ -7,6 +7,7 @@ create temp table who as select u.id me,u.auth_user_id uid,m.pair_id pair from p
 grant select on who to authenticated;
 delete from public.reward_boxes; delete from public.bottle_prizes; delete from public.round_answers; delete from public.question_rounds;
 delete from public.shop_purchases where profile_id=(select me from who);
+delete from public.flowers where flower_type='golden'; delete from public.garden_discoveries where profile_id=(select me from who);
 insert into public.question_rounds(id,pair_id,question_id,started_by,created_at,revealed_at)
 select ('00000000-0000-4000-8000-0000000000'||lpad(n::text,2,'0'))::uuid,(select pair from who),'q1',(select me from who),now()-(20-n)*interval '1 hour',now()-(20-n)*interval '1 hour'
 from generate_series(1,7) n;

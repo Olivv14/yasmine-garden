@@ -1742,5 +1742,13 @@
   "shelf.chestTitle.ve": "The Venezuelan chest",
   "shelf.goalChest": "Fill a whole shelf: its country's legendary chest",
   "flowers.golden": "Golden jasmine",
-  "garden3d.goldenDrag": "Your golden jasmine is ready: drag it onto your side"
+  "garden3d.goldenDrag": "Your golden jasmine is ready: drag it onto your side",
+  "gs.pool.yourShot": "A game is waiting: it's your shot",
+  "gs.pool.theirShot": "Your game is waiting for {{name}}'s shot",
+  "gs.pool.waitTurn": "{{name}}'s shot now. You'll get a notification when it's yours.",
+  "gs.pool.replay": "{{name}}'s last shot…",
+  "gs.pool.saveFailed": "Your shot wasn't saved. The table is back as it was.",
+  "gs.invited": "{{name}} was invited: they'll get a notification",
+  "arch.poolTurn": "{{name}} played in pool",
+  "arch.poolTurnSub": "Your shot"
 }

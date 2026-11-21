@@ -1742,5 +1742,13 @@
   "shelf.chestTitle.ve": "Lo scrigno venezuelano",
   "shelf.goalChest": "Riempi un intero scaffale: lo scrigno leggendario del suo paese",
   "flowers.golden": "Gelsomino d'oro",
-  "garden3d.goldenDrag": "Il tuo gelsomino d'oro è pronto: trascinalo sul tuo lato"
+  "garden3d.goldenDrag": "Il tuo gelsomino d'oro è pronto: trascinalo sul tuo lato",
+  "gs.pool.yourShot": "Una partita ti aspetta: tocca a te tirare",
+  "gs.pool.theirShot": "La partita aspetta il tiro di {{name}}",
+  "gs.pool.waitTurn": "Ora tira {{name}}. Ti avviseremo quando tocca a te.",
+  "gs.pool.replay": "L'ultimo tiro di {{name}}…",
+  "gs.pool.saveFailed": "Il tuo tiro non è stato salvato. Il tavolo è tornato com'era.",
+  "gs.invited": "{{name}} è invitato: gli arriverà un avviso",
+  "arch.poolTurn": "{{name}} ha tirato a biliardo",
+  "arch.poolTurnSub": "Tocca a te"
 }

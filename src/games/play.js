@@ -37,8 +37,10 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   }
   const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer,photo:photoOf};
   const td=createTruthDare({el,button,t,copy,me,person,partner,record,notify});
-  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf,getSnapshot,partnerOnline});
-  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf,getSnapshot,partnerOnline});
+  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf,getSnapshot,partnerOnline,
+    // "Play live" while your partner is away: an invite in their bell and a push (backend/020)
+    invite:async()=>{const id=crypto.randomUUID();await rpc('invite_game',{p_id:id});dispatch(id);}});
+  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf,getSnapshot,partnerOnline,rpc,dispatch});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
   const piano=createPiano({el,button,t,copy,me,getSnapshot,download:m=>getApi().download(m),record});
   const dance=createDance({el,button,t,copy,me,person,partner,getSnapshot,getClient,getApi,notify});
@@ -80,7 +82,8 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
   function stopGames(){td.leave?.();hockey.stop();pool.stop();duel.stop();knowme.stop();piano.stop();dance.stop();}
   // A round from the bell or a "Your turn" card: play it if it waits for you, otherwise show its result.
   function openRound(roundId){
-    const snap=getSnapshot(),r=snap?.playRounds?.find(x=>x.id===roundId);if(!r)return false;
+    const snap=getSnapshot();if((snap?.poolGames??[]).some(g=>g.id===roundId)){show('pool',()=>pool.openTurns());return true;}
+    const r=snap?.playRounds?.find(x=>x.id===roundId);if(!r)return false;
     const id=r.game==='word_duel'?'duel':'knowme',g=GAMES[id].game,mine=answersOf(snap,r.id).some(a=>a.profile_id===me());
     show(id,()=>mine?g.showResult(r):g.open(r));onRound?.(r.id);return true;
   }

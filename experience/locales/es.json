@@ -1742,5 +1742,13 @@
   "shelf.chestTitle.ve": "El cofre de Venezuela",
   "shelf.goalChest": "Llena una repisa entera: el cofre legendario de su país",
   "flowers.golden": "Jazmín dorado",
-  "garden3d.goldenDrag": "Tu jazmín dorado está listo: arrástralo a tu lado"
+  "garden3d.goldenDrag": "Tu jazmín dorado está listo: arrástralo a tu lado",
+  "gs.pool.yourShot": "Hay una partida esperando: te toca tirar",
+  "gs.pool.theirShot": "Tu partida espera el tiro de {{name}}",
+  "gs.pool.waitTurn": "Ahora tira {{name}}. Te avisaremos cuando te toque.",
+  "gs.pool.replay": "El último tiro de {{name}}…",
+  "gs.pool.saveFailed": "Tu tiro no se guardó. La mesa volvió a como estaba.",
+  "gs.invited": "Invitaste a {{name}}: le llegará un aviso",
+  "arch.poolTurn": "{{name}} tiró en el pool",
+  "arch.poolTurnSub": "Te toca tirar"
 }

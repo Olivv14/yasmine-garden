@@ -292,3 +292,7 @@ html #playStage .game-card button.td-big.dare{background:#C9443A;color:#FFD58A}
 html #playStage .game-card button.km-guess{flex:1;min-block-size:60px;border-radius:20px;border:1px solid rgba(255,226,198,.3);background:rgba(18,10,20,.55);color:#FFF4E6;font:700 13px var(--font-sans)}
 html #playStage .game-card button.km-guess:disabled{opacity:.55}
 html #playStage .game-card button.km-answer{flex:1.3;min-block-size:60px;border:0;border-radius:20px;background:#FFD58A;color:#2A1A10;font:800 17px var(--font-display)}
+/* pool turn by turn: the banner on the start screen */
+html #playStage .game-card button.pool-waiting{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:18px;background:rgba(18,10,20,.55);border:1px solid rgba(255,213,138,.35);color:#FFF4E6;font:600 13px var(--font-sans);text-align:start;min-block-size:48px}
+html #playStage .game-card button.pool-waiting.mine{border-color:#FFD58A;box-shadow:0 0 0 2px rgba(255,213,138,.25)}
+.pool-waiting-ball{inline-size:24px;block-size:24px;border-radius:50%;background:#111;display:grid;place-items:center;color:#fff;font:800 11px var(--font-sans);flex:none}
