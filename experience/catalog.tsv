@@ -1572,3 +1572,6 @@ spotify.onDevice	Playing on {{device}}	Sonando en {{device}}	Lecture sur {{devic
 spotify.search	Search Spotify	Buscar en Spotify	Chercher sur Spotify	Cerca su Spotify	لوّج في سبوتيفاي
 spotify.searchPlaceholder	A song or an artist	Una canción o un artista	Une chanson ou un artiste	Una canzone o un artista	غناية ولا فنّان
 spotify.noResults	Nothing found	No se encontró nada	Rien trouvé	Nessun risultato	ما لقيت شي
+spotify.handoffWorking	Connecting Spotify…	Conectando Spotify…	Connexion à Spotify…	Collegamento a Spotify…	قاعد نربط سبوتيفاي…
+spotify.handoffDone	Spotify is connected. Tap Done (top left) to go back to Between us.	Spotify está conectado. Toca OK (arriba a la izquierda) para volver a Between us.	Spotify est connecté. Touche OK (en haut à gauche) pour revenir à Between us.	Spotify è collegato. Tocca Fine (in alto a sinistra) per tornare a Between us.	سبوتيفاي تربط. انقر Done (فوق على اليسار) باش ترجع لـ Between us.
+spotify.handoffFailed	Spotify could not be connected. Go back to Between us and try again.	No se pudo conectar Spotify. Vuelve a Between us e inténtalo otra vez.	Spotify n'a pas pu être connecté. Reviens dans Between us et réessaie.	Non è stato possibile collegare Spotify. Torna a Between us e riprova.	سبوتيفاي ما تربطش. ارجع لـ Between us و عاود.

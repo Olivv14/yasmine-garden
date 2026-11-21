@@ -34,7 +34,7 @@ const SKY={
   light:[['rect',{width:96,height:112,rx:12,fill:'#BFE0FF'}],['circle',{cx:48,cy:34,r:12,fill:'#FFF4C8'}],['circle',{cx:48,cy:34,r:17,fill:'none',stroke:'#FFE08A','stroke-width':2,'stroke-dasharray':'3 4'}],['path',{d:'M0 84q48-24 96 0v28H0z',fill:'#5FA77A'}]],
 };
 
-export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,partner,partnerOnline=()=>false,music,notify}){
+export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,partner,partnerOnline=()=>false,music,notify,tidyPhotos=async()=>{}}){
   const page=$('page-us');if(!page)return {render(){},clear(){}};
   let view=null,homes=[];
   const hide=n=>n?.classList.add('pu-gone');
@@ -209,12 +209,15 @@ export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,p
     v.body.append(stage,picks,facts,status,end,pickG,pickC);
     async function send(){
       if(!file)return;use.disabled=true;copy(status,()=>t('pu.sending'));
-      try{const out=await frame();const input=$('avatarFile');input.onclick?.();const dt=new DataTransfer();dt.items.add(out);input.files=dt.files;input.dispatchEvent(new Event('change',{bubbles:true}));
-        const up=await until(()=>{const u=$('avatarUpload');return u&&!u.hidden&&!u.disabled?u:null;},15000);if(!up)throw new Error('no upload');
+      try{await tidyPhotos();const out=await frame();const input=$('avatarFile');
+        // hand the framed photo to the private upload; it only takes it when nothing else is saving, so try a few times
+        let up=null;for(let i=0;i<6&&!up;i++){input.onclick?.();const dt=new DataTransfer();dt.items.add(out);input.files=dt.files;input.dispatchEvent(new Event('change',{bubbles:true}));
+          up=await until(()=>{const u=$('avatarUpload');return u&&!u.hidden&&!u.disabled?u:null;},2500);}
+        if(!up)throw new Error('no upload');
         $('avatarConsent').checked=true;up.click();
-        const ok=await until(()=>$('avatarUpload')?.hidden?true:null,30000);if(!ok)throw new Error('not saved');
+        const ok=await until(()=>$('avatarUpload')?.hidden?true:null,90000);if(!ok)throw new Error('not saved');
         notify(()=>t('pu.photoSaved'));closeView();}
-      catch{copy(status,()=>$('avatarStatus')?.textContent||t('pu.photoFailed'));use.disabled=false;}
+      catch{copy(status,()=>t('pu.photoFailed'));use.disabled=false;}
     }
     // the part inside the circle, as a 720 px square
     async function frame(){const bmp=await createImageBitmap(file);const r=stage.getBoundingClientRect(),ringR=ring.getBoundingClientRect(),ir=img.getBoundingClientRect();

@@ -126,3 +126,6 @@ input.seek-range:disabled{opacity:.5}
 .seek[hidden]{display:none}
 .seek-time{font:600 12px var(--font-sans);font-variant-numeric:tabular-nums;color:inherit;opacity:.8;min-inline-size:34px;text-align:center}
 .pu-music input.pu-progress{block-size:28px;background:transparent;overflow:visible}
+/* iPhone: the page Spotify's sign-in comes back to, inside its separate browser */
+.spotify-handoff{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:24px;text-align:center;color:#FFF4E6;background:linear-gradient(180deg,#1F2148,#5A3C66 45%,#1C1418)}
+.spotify-handoff-text{max-inline-size:320px;font:700 20px/1.4 var(--font-display,'Bricolage Grotesque',sans-serif)}

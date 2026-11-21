@@ -194,6 +194,12 @@ The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and rea
 - `save_sticker(p_id uuid, p_image text) -> stickers`: a `data:image/(png|webp|jpeg);base64,` image of at most 280,000 characters; at most 80 per person; a retry returns the same row. `delete_sticker(p_id uuid)`: owner only. Read table: `stickers` (pair members, not deleted).
 - Calls carry no database writes: `call` broadcast events (`ring`, `accept`, `decline`, `busy`, `offer`, `answer`, `ice`, `hangup`) on the same private `pair:<id>:talk` room set up WebRTC between the two phones.
 
+### Spotify sign-in hand-off (backend/018)
+- On iPhone a Home Screen app opens Spotify's sign-in in a separate browser that returns to the site without the PKCE verifier.
+- `put_spotify_code(p_state text, p_code text)` (anon or signed in): leaves the one-time code under its random state (16–64 chars), kept at most 10 minutes, at most 50 waiting.
+- `take_spotify_code(p_state text) -> text` (signed-in member): returns the code once and deletes it; null when there is none.
+- The code is useless without the verifier, which never leaves the Home Screen app. Table `app_private.spotify_handoffs` has no direct access.
+
 ### Garden discoveries (backend/015)
 - `discover(p_spot text) -> garden_discoveries`: saves a culture spot you found; finding it again changes nothing.
 

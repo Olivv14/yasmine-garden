@@ -15,14 +15,23 @@ const randomText=n=>b64url(crypto.getRandomValues(new Uint8Array(n))).slice(0,n)
 // Coming back from Spotify's sign-in page: take the code out of the address straight away (before anything else
 // reads the address) and keep it for the exchange.
 let pendingCode=null;
+// Returns {state,code} when this page is Spotify's return inside the iPhone's separate sign-in browser (it has
+// the code but not the verifier): that page hands the code over to the Home Screen app (leaveSpotifyCode).
 export function takeSpotifyReturn(){
   try{const u=new URL(location.href),code=u.searchParams.get('code'),state=u.searchParams.get('state'),err=u.searchParams.get('error');
-    const saved=read(PKCE);if(!saved||state!==saved.state||!(code||err))return;
+    if(!state||!(code||err)||!/^[A-Za-z0-9_-]{16,64}$/.test(state))return null;
     for(const k of ['code','state','error'])u.searchParams.delete(k);history.replaceState(history.state,'',u.pathname+u.search+u.hash);
-    pendingCode=code?{code,verifier:saved.verifier}:{error:err};write(PKCE,null);}catch{}
+    const saved=read(PKCE);
+    if(saved&&state===saved.state){pendingCode=code?{code,verifier:saved.verifier}:{error:err};write(PKCE,null);return null;}
+    return code?{state,code}:null;}catch{return null;}
+}
+export async function leaveSpotifyCode({state,code}){
+  const r=await fetch(new URL('./public-config.json',document.baseURI),{cache:'no-store'});const c=await r.json();
+  const res=await fetch(new URL('/rest/v1/rpc/put_spotify_code',c.supabaseUrl).href,{method:'POST',headers:{'Content-Type':'application/json',apikey:c.publishableKey},body:JSON.stringify({p_state:state,p_code:code})});
+  if(!res.ok)throw new Error('handoff '+res.status);
 }
 
-export function createSpotify({onChange}={}){
+export function createSpotify({onChange,rpc}={}){
   let auth=read(KEY),player=null,deviceId=null,sdkState=null,sdkBroken=false,loading=null,mode=null,remote=null,profile=null,lastError=null;
   const changed=()=>{try{onChange?.();}catch{}};
 
@@ -111,7 +120,16 @@ export function createSpotify({onChange}={}){
   async function search(q){if(!q.trim())return [];const j=await call('/search?type=track&limit=10&q='+encodeURIComponent(q));
     return (j?.tracks?.items??[]).map(x=>({uri:x.uri,title:x.name,artist:(x.artists??[]).map(a=>a.name).join(', '),cover:(x.album?.images??[]).slice(-2)[0]?.url??null,duration_ms:x.duration_ms??null}));}
 
-  finishReturn().then(()=>{if(auth&&!profile)me();});
-  return {connected:()=>!!auth,connect,disconnect,play,pause,resume,seek,stop,search,position,duration,playing:playingNow,mode:()=>mode,
+  // The Home Screen app waits for the code left by the sign-in browser (up to 10 minutes after "Connect Spotify").
+  let waiting=null;
+  async function pickUp(){
+    const saved=read(PKCE);if(!saved||auth||!rpc)return;if(Date.now()-(saved.at||0)>600000){write(PKCE,null);return;}
+    try{const code=await rpc('take_spotify_code',{p_state:saved.state});
+      if(code){write(PKCE,null);pendingCode={code,verifier:saved.verifier};await finishReturn();return;}}catch{}
+    clearTimeout(waiting);if(!document.hidden)waiting=setTimeout(pickUp,2500);
+  }
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)pickUp();});
+  finishReturn().then(()=>{if(auth&&!profile)me();pickUp();});
+  return {connected:()=>!!auth,pickUp,connect,disconnect,play,pause,resume,seek,stop,search,position,duration,playing:playingNow,mode:()=>mode,
     deviceName:()=>remote?.device??null,error:()=>lastError,name:()=>profile?.display_name??null,premium:()=>profile?profile.product==='premium':null};
 }
