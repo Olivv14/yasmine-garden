@@ -1696,8 +1696,8 @@ arch.played	You played it	Ya jugaste	Tu as joué	Hai giocato	لعبتها
 arch.gameResult	{{name}} played your game	{{name}} jugó tu juego	{{name}} a joué ta partie	{{name}} ha giocato la tua partita	{{name}} لعب اللعبة متاعك
 arch.gameResultSub	The result is in	Ya está el resultado	Le résultat est là	Ecco il risultato	النتيجة وصلت
 arch.see	See	Ver	Voir	Vedi	شوف
-arch.invite	{{name}} wants to play hockey	{{name}} quiere jugar hockey	{{name}} veut jouer au hockey	{{name}} vuole giocare a hockey	{{name}} يحبّ يلعب هوكي
-arch.inviteSub	Live, right now	En vivo, ahora mismo	En direct, maintenant	Dal vivo, adesso	مباشر، توّا
+arch.invite	{{name}} wants to play live	{{name}} quiere jugar en vivo	{{name}} veut jouer en direct	{{name}} vuole giocare dal vivo	{{name}} يحبّ يلعب مباشر
+arch.inviteSub	Air hockey or pool, while you are both here	Hockey o pool, mientras estén los dos	Hockey ou billard, pendant que vous êtes là tous les deux	Hockey o biliardo, finché ci siete entrambi	هوكي ولا بيار، كي تكونو الزوز هوني
 arch.join	Join	Unirme	Rejoindre	Entra	أدخل
 arch.teach	{{name}} taught you a word	{{name}} te enseñó una palabra	{{name}} t'a appris un mot	{{name}} ti ha insegnato una parola	{{name}} علّمك كلمة
 arch.teachSub	With their own voice	Con su propia voz	Avec sa propre voix	Con la sua voce	بصوتو

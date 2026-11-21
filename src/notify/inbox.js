@@ -41,7 +41,7 @@ export function createInbox({el,button,t,copy,locale,getSnapshot,me,person,markR
         const still=pool?(!pool.finished_at&&pool.turn===(pool.seat0===id?0:1)&&pool.version===Math.max(...(snap.poolGames??[]).filter(g=>g.id===pool.id).map(g=>g.version))):waiting.has(n.ref_id);
         out.push({...base,open:still,title:()=>pool?t('arch.poolTurn',{name:person(n.sender_id)}):t('arch.gameTurn',{name:person(n.sender_id)}),sub:()=>still?(pool?t('arch.poolTurnSub'):t('arch.gameTurnSub')):t('arch.played'),action:{label:()=>still?t('arch.play'):t('arch.see'),cls:'gold',run:()=>actions.openRound(n.ref_id)}});}
       else if(n.kind==='game_result')out.push({...base,title:()=>t('arch.gameResult',{name:person(n.sender_id)}),sub:()=>t('arch.gameResultSub'),action:{label:()=>t('arch.see'),cls:'gold',run:()=>actions.openRound(n.ref_id)}});
-      else if(n.kind==='game_invite')out.push({...base,open:!n.read_at&&Date.now()-Date.parse(n.created_at)<600000,title:()=>t('arch.invite',{name:person(n.sender_id)}),sub:()=>t('arch.inviteSub'),action:{label:()=>t('arch.join'),cls:'gold',run:()=>actions.openGame('hockey')}});
+      else if(n.kind==='game_invite')out.push({...base,open:!n.read_at&&Date.now()-Date.parse(n.created_at)<600000,title:()=>t('arch.invite',{name:person(n.sender_id)}),sub:()=>t('arch.inviteSub'),action:{label:()=>t('arch.join'),cls:'gold',run:()=>actions.openPlay()}});
       else if(n.kind==='teach_card')out.push({...base,title:()=>t('arch.teach',{name:person(n.sender_id)}),sub:()=>t('arch.teachSub'),action:{label:()=>t('arch.practise'),cls:'lilac',run:()=>actions.openLearn()}});
     }
     // the garden: flowers that droop (not watered for three days) wait for the can
