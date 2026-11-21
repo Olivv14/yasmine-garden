@@ -1612,5 +1612,14 @@
   "bt.throw": "Lanzar la botella",
   "bt.opened": "Botellas abiertas · {{count}}",
   "bt.openedTitle": "Una botella abierta",
-  "bt.you": "Tú"
+  "bt.you": "Tú",
+  "bt.nextShell": "{{count}} botellas abiertas más para la próxima concha",
+  "bt.openShell": "Hay una concha · ábrela",
+  "bt.shellTitle": "Una concha en la botella",
+  "bt.opening": "Abriendo…",
+  "bt.prize.small": "Un premio pequeño",
+  "bt.prize.big": "¡Un premio grande!",
+  "bt.prize.legendary": "¡Legendario!",
+  "bt.prizeHint": "Puntos para la tienda y semillas nuevas para el jardín",
+  "bt.prizeToast": "+{{points}} puntos del mar"
 }

@@ -200,6 +200,11 @@ The lyrics cache (`music_lyrics`, `music_lyric_translations`) is written and rea
 - `take_spotify_code(p_state text) -> text` (signed-in member): returns the code once and deletes it; null when there is none.
 - The code is useless without the verifier, which never leaves the Home Screen app. Table `app_private.spotify_handoffs` has no direct access.
 
+### Bottle prizes (backend/019)
+- Every third revealed question round of the pair (ordered by `revealed_at`, then `id`) holds a shell for each member.
+- `open_bottle_prize(p_round_id uuid) -> bottle_prizes`: draws once (small 5 points ~70%, big 15 ~25%, legendary 40 ~5%) and returns the same row on every later call. It fails with 42501 if the round is not revealed in your pair, and with 22023 if that bottle has no shell.
+- Read table `bottle_prizes` (pair members). The points are added to `app_private.points_earned`.
+
 ### Garden discoveries (backend/015)
 - `discover(p_spot text) -> garden_discoveries`: saves a culture spot you found; finding it again changes nothing.
 

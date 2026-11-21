@@ -30,6 +30,8 @@ export function pointEvents(snap){
     // piano tiles: one point per star
     if(e.game==='piano'&&e.kind==='finish')add(e.profile_id,Math.max(0,Math.min(3,e.score_partner??0)),e.created_at);
   }
+  // shells found in the bottles (Questions): the prize's points
+  for(const b of snap?.bottlePrizes??[])add(b.owner_id,b.points??0,b.created_at);
   // learning: every 10 reviews in a day is a point
   for(const d of snap?.learnDays??[])add(d.profile_id,Math.floor((d.reviews??0)/10),String(d.day)+'T12:00:00Z');
   for(const r of snap?.playRounds??[]){

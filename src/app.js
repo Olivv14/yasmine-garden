@@ -71,7 +71,8 @@ const usRedo=createUsRedo({$,el,button,t,copy,getSnapshot:()=>snapshot,me:()=>st
 // Questions as messages in a bottle: throwing one starts a blind round with your answer; throwing it back answers it
 const bottles=createBottles({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,notify:x=>notify(x),
   throwBottle:async(qid,body)=>{const id=operations.id('round:'+qid);try{await task(()=>api.rpc('start_round',{p_id:id,p_question_id:qid}));}catch(e){if(e.code!=='23505')throw e;}operations.done('round:'+qid);await task(()=>api.rpc('submit_round_answer',{p_round_id:id,p_body:body}));},
-  answerBottle:(roundId,body)=>task(()=>api.rpc('submit_round_answer',{p_round_id:roundId,p_body:body}))});
+  answerBottle:(roundId,body)=>task(()=>api.rpc('submit_round_answer',{p_round_id:roundId,p_body:body})),
+  openPrize:roundId=>task(()=>api.rpc('open_bottle_prize',{p_round_id:roundId}))});
 document.addEventListener('chat-words',e=>eggs.chatWords(e.detail));
 let eggsStarted=false;
 let composerTabs=null;

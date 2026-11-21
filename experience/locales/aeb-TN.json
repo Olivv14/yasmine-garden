@@ -1612,5 +1612,14 @@
   "bt.throw": "ارمي القرعة",
   "bt.opened": "قراعي محلولة · {{count}}",
   "bt.openedTitle": "قرعة محلولة",
-  "bt.you": "إنت"
+  "bt.you": "إنت",
+  "bt.nextShell": "مازال {{count}} قراعي محلولين للصدفة الجاية",
+  "bt.openShell": "فيها صدفة · حلّها",
+  "bt.shellTitle": "صدفة في القرعة",
+  "bt.opening": "قاعد يتحل…",
+  "bt.prize.small": "هدية صغيرة",
+  "bt.prize.big": "هدية كبيرة!",
+  "bt.prize.legendary": "أسطورية!",
+  "bt.prizeHint": "نقاط للحانوت و زريعة جديدة للجنينة",
+  "bt.prizeToast": "+{{points}} نقطة من البحر"
 }

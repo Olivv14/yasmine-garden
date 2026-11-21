@@ -9,7 +9,7 @@ import {openSheet} from '../design/sheet.js';
 import {icon} from '../design/icons.js';
 import {QUESTION_BANK} from '../../experience/questions.mjs';
 
-export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,partner,throwBottle,answerBottle,notify}){
+export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,partner,throwBottle,answerBottle,openPrize,notify}){
   const page=$('page-questions');if(!page)return {render(){},clear(){}};
   const root=el('section',undefined,'bt');page.prepend(root);page.classList.add('bt-on');
   const canvas=document.createElement('canvas');canvas.className='bt-sea';canvas.setAttribute('role','img');copy(canvas,()=>t('bt.seaLabel'),'aria-label');
@@ -110,14 +110,36 @@ export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,p
   }
   function throwAnim(){state='thrown';sea.throwAt=Date.now();Object.assign(sea.bottle,{x:.5,y:.8,s:1.1,a:1,glow:.6});run();setTimeout(render,1500);}
   function paintOpened(){
-    opened.replaceChildren();const {rs,as}=rounds();const done=rs.filter(r=>r.revealed_at).sort((a,b)=>String(b.revealed_at).localeCompare(String(a.revealed_at)));if(!done.length)return;
+    opened.replaceChildren();const {rs,as}=rounds();const order=rs.filter(r=>r.revealed_at).sort((a,b)=>String(a.revealed_at).localeCompare(String(b.revealed_at))||String(a.id).localeCompare(String(b.id)));
+    // every third opened bottle holds a shell for each of you (backend/019)
+    const shell=new Set(order.filter((r,i)=>(i+1)%3===0).map(r=>r.id)),prizes=getSnapshot()?.bottlePrizes??[];
+    const done=[...order].reverse();
+    const toNext=3-(order.length%3);
+    opened.append(el('div',undefined,'bt-next'));opened.lastChild.append(icon('sparkles',16),el('span',()=>t('bt.nextShell',{count:toNext})));
+    if(!done.length)return;
     opened.append(el('h3',()=>t('bt.opened',{count:done.length}),'bt-h'));const row=el('div',undefined,'bt-shelf');
-    for(const r of done){const b=button(()=>'',()=>read(r),'bt-done');const q=el('span',undefined,'bt-done-q');q.textContent=prompt(r.question_id);q.dir='auto';
-      const art=el('span',undefined,'bt-done-art');art.append(icon('mail',18));b.append(art,q,el('span',dateFmt(r.revealed_at),'bt-done-date'));row.append(b);}
+    for(const r of done){const mineP=prizes.find(p=>p.round_id===r.id&&p.owner_id===me()),hasShell=shell.has(r.id);
+      const b=button(()=>'',()=>{if(hasShell&&!mineP)openShell(r);else read(r);},'bt-done'+(hasShell&&!mineP?' bt-has-shell':''));const q=el('span',undefined,'bt-done-q');q.textContent=prompt(r.question_id);q.dir='auto';
+      const art=el('span',undefined,'bt-done-art'+(hasShell?' bt-has-shell':''));art.append(hasShell?shellIcon():icon('mail',18));
+      const end=hasShell&&!mineP?el('span',()=>t('bt.openShell'),'bt-done-cta'):mineP?el('span',()=>t('bt.prize.'+mineP.tier)+' · +'+mineP.points,'bt-done-prize '+mineP.tier):el('span',dateFmt(r.revealed_at),'bt-done-date');
+      b.append(art,q,end);row.append(b);}
     opened.append(row);
     function read(r){const s=openSheet({title:h=>copy(h,()=>t('bt.openedTitle')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'bt-read'});
       const q=el('b',undefined,'bt-question');q.textContent=prompt(r.question_id);q.dir='auto';s.body.append(q);
       for(const a of as.filter(a=>a.round_id===r.id).sort((x)=>x.owner_id===me()?-1:1)){const p=el('div',undefined,'bt-paper');p.append(el('span',()=>a.owner_id===me()?t('bt.you'):person(a.owner_id),'bt-kicker'));const body=el('p',undefined,'bt-answer');body.textContent=a.body;body.dir='auto';p.append(body);s.body.append(p);}}
+  }
+  function shellIcon(){const NS='http://www.w3.org/2000/svg',sv=document.createElementNS(NS,'svg');sv.setAttribute('viewBox','0 0 24 24');sv.setAttribute('width','22');sv.setAttribute('height','22');sv.setAttribute('aria-hidden','true');
+    for(const [tag,at] of [['path',{d:'M12 3c5 0 9 4 9 9 0 3-2 6-9 9C5 18 3 15 3 12c0-5 4-9 9-9z',fill:'#FFC9A8'}],['path',{d:'M12 4v16M7 6l5 14M17 6l-5 14M4 10l8 10M20 10l-8 10',stroke:'#C98A6A','stroke-width':'1.2',fill:'none'}]]){const n=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(at))n.setAttribute(k,v);sv.append(n);}return sv;}
+  // opening your shell: the box shakes, opens, and shows what was inside
+  async function openShell(r){
+    const s=openSheet({title:h=>copy(h,()=>t('bt.shellTitle')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'bt-prize-sheet'});
+    const stage=el('div',undefined,'bt-prize shaking');const box=el('div',undefined,'bt-box');box.append(el('span',undefined,'bt-box-lid'),el('span',undefined,'bt-box-body'),el('span',undefined,'bt-box-ribbon'));
+    const label=el('p',()=>t('bt.opening'),'bt-prize-label');stage.append(el('span',undefined,'bt-rays'),box);s.body.append(stage,label);
+    try{const [prize]=await Promise.all([openPrize(r.id),new Promise(res=>setTimeout(res,1100))]);
+      stage.classList.remove('shaking');stage.classList.add('open',prize.tier);
+      copy(label,()=>t('bt.prize.'+prize.tier));const pts=el('p',undefined,'bt-prize-points');pts.textContent='+'+prize.points;s.body.append(pts,el('p',()=>t('bt.prizeHint'),'bt-hint'));
+      notify(()=>t('bt.prizeToast',{points:prize.points}));}
+    catch{stage.classList.remove('shaking');copy(label,()=>t('bt.failed'));}
   }
   return {render,clear(){card.replaceChildren();opened.replaceChildren();state='none';draft='';chosen=null;}};
 }

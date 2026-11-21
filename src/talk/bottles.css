@@ -37,3 +37,32 @@ button.bt-done{display:flex;align-items:center;gap:12px;padding:10px 12px;border
 button.bt-notes-link{justify-self:center;background:none;border:0;color:#FFD58A;font:700 13px var(--font-sans);text-decoration:underline;box-shadow:none;min-block-size:44px}
 .bt-read .bt-paper{margin-block:8px}
 .bt-read .bt-question{color:#FFF4E6;display:block;margin-block:4px 6px}
+/* shells in the bottles (backend/019) */
+.bt-next{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,213,138,.12);border:1px dashed rgba(255,213,138,.5);color:#FFE7B8;font:600 12px var(--font-sans)}
+.bt-done-art.bt-has-shell{background:rgba(255,201,168,.2)}
+button.bt-done.bt-has-shell{border-color:#FFD58A;background:rgba(255,213,138,.1);animation:bt-glow 2s ease-in-out infinite alternate}
+@keyframes bt-glow{to{box-shadow:0 0 18px rgba(255,213,138,.35)}}
+.bt-done-cta{flex:none;padding:6px 10px;border-radius:999px;background:#FFD58A;color:#2A1A10;font:800 11px var(--font-sans)}
+.bt-done-prize{flex:none;font:800 12px var(--font-sans)}
+.bt-done-prize.small{color:#9FE0B8}.bt-done-prize.big{color:#A9BCFF}.bt-done-prize.legendary{color:#F2C14E}
+.bt-prize{position:relative;block-size:220px;display:grid;place-items:center;overflow:hidden}
+.bt-rays{position:absolute;inset:-40%;opacity:0;-webkit-mask:radial-gradient(circle,#000 20%,transparent 62%);mask:radial-gradient(circle,#000 20%,transparent 62%);background:repeating-conic-gradient(from 0deg,rgba(255,213,138,.35) 0 10deg,transparent 10deg 22deg);transition:opacity .4s ease}
+.bt-prize.open .bt-rays{opacity:1;animation:bt-spin 8s linear infinite}
+.bt-prize.small .bt-rays{background:repeating-conic-gradient(from 0deg,rgba(159,224,184,.35) 0 10deg,transparent 10deg 22deg)}
+.bt-prize.big .bt-rays{background:repeating-conic-gradient(from 0deg,rgba(169,188,255,.4) 0 10deg,transparent 10deg 22deg)}
+.bt-prize.legendary .bt-rays{background:repeating-conic-gradient(from 0deg,rgba(242,193,78,.55) 0 8deg,transparent 8deg 18deg)}
+@keyframes bt-spin{to{transform:rotate(360deg)}}
+.bt-box{position:relative;inline-size:120px;block-size:110px}
+.bt-box-body{position:absolute;left:8px;right:8px;bottom:0;block-size:72px;border-radius:10px;background:linear-gradient(180deg,#E8644A,#C9443A);box-shadow:0 10px 20px rgba(0,0,0,.4)}
+.bt-box-lid{position:absolute;left:0;right:0;top:12px;block-size:26px;border-radius:8px;background:linear-gradient(180deg,#FF8A6A,#E8644A);z-index:2;transition:transform .5s cubic-bezier(.2,1.6,.4,1),opacity .5s}
+.bt-box-ribbon{position:absolute;left:50%;top:12px;bottom:0;inline-size:18px;margin-left:-9px;background:#FFD58A;z-index:3}
+.bt-prize.shaking .bt-box{animation:bt-shake .18s ease-in-out infinite alternate}
+@keyframes bt-shake{from{transform:rotate(-6deg)}to{transform:rotate(6deg) translateY(-3px)}}
+.bt-prize.open .bt-box-lid{transform:translateY(-70px) rotate(-25deg);opacity:0}
+.bt-prize.open .bt-box-ribbon{opacity:.0;transition:opacity .3s}
+.bt-prize.legendary .bt-box-body{background:linear-gradient(180deg,#F2C14E,#C98A3A)}
+.bt-prize.big .bt-box-body{background:linear-gradient(180deg,#A9BCFF,#5A6AC8)}
+.bt-prize.small .bt-box-body{background:linear-gradient(180deg,#9FE0B8,#3F8A5E)}
+@media (prefers-reduced-motion:reduce){.bt-prize.shaking .bt-box,.bt-prize.open .bt-rays,button.bt-done.bt-has-shell{animation:none}}
+.bt-prize-label{margin:0;text-align:center;font:800 22px var(--font-display,'Bricolage Grotesque',sans-serif)}
+.bt-prize-points{margin:4px 0 0;text-align:center;font:800 44px var(--font-display,'Bricolage Grotesque',sans-serif);color:#FFD58A}
