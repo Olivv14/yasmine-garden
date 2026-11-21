@@ -3,6 +3,7 @@
 import {DUEL_SIZE,DUEL_SECONDS,DUEL_DECKS,pickItems,choices,duelOutcome,outcomeText} from './duel.js';
 import {answersOf,waitingForThem,finishedRounds} from './score.js';
 import {icon} from '../design/icons.js';
+import {flagIcon} from '../flags.js';
 
 let decksJob=null;
 // The decks load on first use, in their own file, so the app starts without them.
@@ -29,7 +30,8 @@ export function createDuel({el,button,t,copy,locale,me,person,partner,getSnapsho
     for(const d of DUEL_DECKS){const b=button(()=>'',()=>{deck=d;try{localStorage.setItem(DECK_KEY,d);}catch{}home();},'duel-pass');
       b.setAttribute('role','radio');b.setAttribute('aria-checked',String(d===deck));b.dataset.deck=d;
       const info=el('span',undefined,'duel-pass-info');info.append(el('small',()=>t('duel.from'),'duel-pass-from'),el('b',()=>t('duel.code.'+d),'duel-pass-code'),el('span',()=>t('duel.deck.'+d),'duel-pass-name'));
-      const stub=el('span',undefined,'duel-pass-stub');stub.append(icon('plane',26));b.append(info,el('span',undefined,'duel-pass-tear'),stub);passes.append(b);}
+      // the real flags (Venezuela with its eight stars), the plane on top
+      const stub=el('span',undefined,'duel-pass-stub'),flag=flagIcon({it:'it',ve:'es',tn:'aeb-TN'}[d]);flag.setAttribute('preserveAspectRatio','xMidYMid slice');flag.classList.add('duel-pass-flag');const plane=el('span',undefined,'duel-pass-plane');plane.append(icon('plane',14));stub.append(flag,plane);b.append(info,el('span',undefined,'duel-pass-tear'),stub);passes.append(b);}
     root.append(passes);
     const waiting=waitingForThem(snap,me()).some(r=>r.game==='word_duel');
     const strip=el('div',undefined,'duel-gate');strip.append(el('span',()=>t('duel.gate')),el('span',()=>waiting?t('duel.waiting',{name:name()}):t('duel.boardsNext',{name:name()}),waiting?'duel-gate-wait':'duel-gate-next'));root.append(strip);
