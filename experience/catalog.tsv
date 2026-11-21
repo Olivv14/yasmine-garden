@@ -1665,3 +1665,44 @@ shelf.partnerHint	{{name}} found this one. Find it in the garden to keep it too.
 shelf.hiddenHint	Something from here is hidden in the garden. Tap around to find it.	Algo de aquí está escondido en el jardín. Toca por ahí para encontrarlo.	Quelque chose d'ici est caché dans le jardin. Touche partout pour le trouver.	Qualcosa di qui è nascosto nel giardino. Tocca in giro per trovarlo.	فمّا حاجة من هوني مخبّية في الجنينة. إنقر هنا وهناك باش تلقاها.
 shelf.hear	Hear it	Escúchala	L'écouter	Ascoltala	إسمعها
 shelf.see	See it in the garden	Verlo en el jardín	Le voir dans le jardin	Vedilo nel giardino	شوفو في الجنينة
+arch.title	Under the arch	Bajo el arco	Sous l'arche	Sotto l'arco	تحت القوس
+arch.subNew	{{count}} jasmines · {{fresh}} new	{{count}} jazmines · {{fresh}} nuevos	{{count}} jasmins · {{fresh}} nouveaux	{{count}} gelsomini · {{fresh}} nuovi	{{count}} ياسمينات · {{fresh}} جداد
+arch.subNone	{{count}} jasmines · all read	{{count}} jazmines · todo leído	{{count}} jasmins · tout est lu	{{count}} gelsomini · tutto letto	{{count}} ياسمينات · الكلّ مقري
+arch.show	Show	Mostrar	Afficher	Mostra	ورّي
+arch.tab.all	All	Todo	Tout	Tutto	الكلّ
+arch.tab.love	Love	Amor	Amour	Amore	حبّ
+arch.tab.play	Play	Jugar	Jeux	Giochi	لعب
+arch.tab.garden	Garden	Jardín	Jardin	Giardino	جنينة
+arch.tab.learn	Learn	Aprender	Apprendre	Imparare	تعلّم
+arch.new	New	Nuevo	Nouveau	Nuovo	جديد
+arch.today	Earlier today	Hoy más temprano	Plus tôt aujourd'hui	Prima, oggi	اليوم بكري
+arch.yesterday	Yesterday	Ayer	Hier	Ieri	البارح
+arch.week	This week	Esta semana	Cette semaine	Questa settimana	الجمعة هذي
+arch.markAll	Mark all read	Marcar todo leído	Tout marquer lu	Segna tutto letto	علّم الكلّ مقري
+arch.older	Older than a week? It's in Talk and Play	¿Más de una semana? Está en Hablar y Jugar	Plus d'une semaine ? C'est dans Parler et Jeux	Più di una settimana? È in Parla e Giochi	أكثر من جمعة؟ تلقاه في الحكي واللعب
+arch.settings	Settings	Ajustes	Réglages	Impostazioni	الإعدادات
+arch.empty	Nothing new under the arch. Send {{name}} a thought?	Nada nuevo bajo el arco. ¿Le mandas un pensamiento a {{name}}?	Rien de neuf sous l'arche. Envoyer une pensée à {{name}} ?	Niente di nuovo sotto l'arco. Mandi un pensiero a {{name}}?	ما فمّا شي جديد تحت القوس. تبعث فكرة لـ{{name}}؟
+arch.thought	{{name}} thought of you	{{name}} pensó en ti	{{name}} a pensé à toi	{{name}} ha pensato a te	{{name}} خمّم فيك
+arch.sendBack	Send one back	Devolverle uno	En renvoyer une	Ricambia	رجّعلو وحدة
+arch.dedication	{{name}} dedicated a song to you	{{name}} te dedicó una canción	{{name}} t'a dédié une chanson	{{name}} ti ha dedicato una canzone	{{name}} هداك غنية
+arch.songAdded	{{name}} added a song	{{name}} agregó una canción	{{name}} a ajouté une chanson	{{name}} ha aggiunto una canzone	{{name}} زاد غنية
+arch.play	Play	Jugar	Jouer	Gioca	إلعب
+arch.message	{{name}} wrote to you	{{name}} te escribió	{{name}} t'a écrit	{{name}} ti ha scritto	{{name}} كتبلك
+arch.messageSub	A new message in Talk	Un mensaje nuevo en Hablar	Un nouveau message dans Parler	Un nuovo messaggio in Parla	ميساج جديد في الحكي
+arch.reply	Reply	Responder	Répondre	Rispondi	جاوب
+arch.gameTurn	{{name}} started a game	{{name}} empezó un juego	{{name}} a lancé une partie	{{name}} ha iniziato una partita	{{name}} بدا لعبة
+arch.gameTurnSub	Your turn	Te toca	À toi de jouer	Tocca a te	دورك
+arch.played	You played it	Ya jugaste	Tu as joué	Hai giocato	لعبتها
+arch.gameResult	{{name}} played your game	{{name}} jugó tu juego	{{name}} a joué ta partie	{{name}} ha giocato la tua partita	{{name}} لعب اللعبة متاعك
+arch.gameResultSub	The result is in	Ya está el resultado	Le résultat est là	Ecco il risultato	النتيجة وصلت
+arch.see	See	Ver	Voir	Vedi	شوف
+arch.invite	{{name}} wants to play hockey	{{name}} quiere jugar hockey	{{name}} veut jouer au hockey	{{name}} vuole giocare a hockey	{{name}} يحبّ يلعب هوكي
+arch.inviteSub	Live, right now	En vivo, ahora mismo	En direct, maintenant	Dal vivo, adesso	مباشر، توّا
+arch.join	Join	Unirme	Rejoindre	Entra	أدخل
+arch.teach	{{name}} taught you a word	{{name}} te enseñó una palabra	{{name}} t'a appris un mot	{{name}} ti ha insegnato una parola	{{name}} علّمك كلمة
+arch.teachSub	With their own voice	Con su propia voz	Avec sa propre voix	Con la sua voce	بصوتو
+arch.practise	Practise	Practicar	S'entraîner	Esercitati	تمرّن
+arch.thirsty	The {{flower}} is thirsty	{{flower}} tiene sed	{{flower}} a soif	{{flower}} ha sete	{{flower}} عطشانة
+arch.yourSide	Your side of the garden	Tu lado del jardín	Ton côté du jardin	Il tuo lato del giardino	جيهتك من الجنينة
+arch.herSide	{{name}}'s side of the garden	El lado de {{name}} del jardín	Le côté de {{name}} dans le jardin	Il lato di {{name}} del giardino	جيهة {{name}} من الجنينة
+arch.water	Water it	Regarla	L'arroser	Annaffiala	أسقيها

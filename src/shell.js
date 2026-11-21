@@ -45,7 +45,8 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
   function paintBell(snap){
     const id=me(),mineOf=kinds=>(snap?.notifications??[]).filter(n=>n.recipient_id===id&&kinds.includes(n.kind));
     const songs=mineOf(['dedication','song_added']),games=mineOf(['game_turn','game_result']);
-    const unread=(snap?.thoughts??[]).filter(x=>x.recipient_id===id&&!x.read_at).length+songs.filter(n=>!n.read_at).length+games.filter(n=>!n.read_at).length;
+    // the bell counts what is new under the arch (messages have their own count on Talk)
+    const unread=(snap?.thoughts??[]).filter(x=>x.recipient_id===id&&!x.read_at).length+(snap?.notifications??[]).filter(n=>n.recipient_id===id&&!n.read_at&&n.kind!=='message').length;
     paintSongInbox(snap,songs);paintGameInbox(games);
     $('bellCount').hidden=!unread;$('bellCount').textContent=unread>9?'9+':String(unread);
     copy($('receptionToggle'),()=>unread?t('shell.bellUnread',{count:unread}):t('notifications.title'),'aria-label');
