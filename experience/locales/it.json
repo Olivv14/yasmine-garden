@@ -1571,5 +1571,8 @@
   "spotify.onDevice": "In riproduzione su {{device}}",
   "spotify.search": "Cerca su Spotify",
   "spotify.searchPlaceholder": "Una canzone o un artista",
-  "spotify.noResults": "Nessun risultato"
+  "spotify.noResults": "Nessun risultato",
+  "spotify.handoffWorking": "Collegamento a Spotify…",
+  "spotify.handoffDone": "Spotify è collegato. Tocca Fine (in alto a sinistra) per tornare a Between us.",
+  "spotify.handoffFailed": "Non è stato possibile collegare Spotify. Torna a Between us e riprova."
 }

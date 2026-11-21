@@ -1571,5 +1571,8 @@
   "spotify.onDevice": "يخدم على {{device}}",
   "spotify.search": "لوّج في سبوتيفاي",
   "spotify.searchPlaceholder": "غناية ولا فنّان",
-  "spotify.noResults": "ما لقيت شي"
+  "spotify.noResults": "ما لقيت شي",
+  "spotify.handoffWorking": "قاعد نربط سبوتيفاي…",
+  "spotify.handoffDone": "سبوتيفاي تربط. انقر Done (فوق على اليسار) باش ترجع لـ Between us.",
+  "spotify.handoffFailed": "سبوتيفاي ما تربطش. ارجع لـ Between us و عاود."
 }

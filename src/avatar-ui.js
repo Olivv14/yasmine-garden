@@ -64,6 +64,10 @@ export function createAvatarUI({$,el,button,client,getApi,getGeneration,onIdenti
    if(theirId!==partnerId||theirNext!==partnerPhotoId){dropPartner();partnerId=theirId;partnerPhotoId=theirNext;if(theirNext)loadPartner(theirNext,theirId);}paint();},
   clear(){serial++;pickerBinding=null;if(selection)selection.file=null;selection=null;adapter.reset();controller.clear();busy=false;error=null;message='avatar.empty';input.value='';consent.checked=false;clearPreview();releaseView();ownId=photoId=null;partnerId=partnerPhotoId=partnerURL=null;photosChanged();scope=null;recovery=[];paint();},
   unavailable,freeze,
+  // before a new photo: finish old photos left half-deleted or half-uploaded (each person keeps at most 3 on the server)
+  async tidy(){if(isFrozen()||busy)return;const current=controller.getState()?.id;let did=false;
+   for(const r of recovery){if(r.id===current||r.id===photoId)continue;if(r.status==='deleting'||r.status==='pending'){try{await controller.cleanup(r.id);did=true;}catch{}}}
+   if(did){try{recovery=await controller.listRecovery();}catch{}await refresh().catch(()=>{});paint();}},
   // photos for the games and the scoreboard: your own and your partner's (object URLs, released on sign-out)
   photo(id){if(id&&id===ownId)return header.getAttribute('src')||null;if(id&&id===partnerId)return partnerURL;return null;},
   onPhotos(fn){photoListeners.add(fn);return()=>photoListeners.delete(fn);},
