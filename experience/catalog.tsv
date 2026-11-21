@@ -1593,3 +1593,23 @@ duel.code.tn	TUN	TUN	TUN	TUN	TUN
 duel.gate	7 words · 10 seconds each	7 palabras · 10 segundos cada una	7 mots · 10 secondes chacun	7 parole · 10 secondi ciascuna	7 كلمات · 10 ثواني لكل وحدة
 duel.boardsNext	{{name}} flies the same words after you	{{name}} vuela las mismas palabras después	{{name}} prend le même vol après toi	{{name}} vola le stesse parole dopo di te	{{name}} تطير بنفس الكلمات بعدك
 duel.takeoff	Take off	Despegar	Décoller	Decolla	طير
+bt.seaLabel	The sea at night, with your bottles	El mar de noche, con vuestras botellas	La mer la nuit, avec vos bouteilles	Il mare di notte, con le vostre bottiglie	البحر في الليل، و القراعي متاعكم
+bt.notes	Longer notes with photos	Notas largas con fotos	Notes plus longues avec photos	Note più lunghe con foto	كتابات أطول بالتصاور
+bt.from	from {{name}}	de {{name}}	de {{name}}	da {{name}}	من {{name}}
+bt.yourOwn	the one you threw	la que lanzaste	celle que tu as lancée	quella che hai lanciato	اللي انت رميتها
+bt.washedUp	Washed up	Llegó a la orilla	Échouée sur la plage	Arrivata a riva	وصلت للشط
+bt.writeBack	Write your answer…	Escribe tu respuesta…	Écris ta réponse…	Scrivi la tua risposta…	اكتب جوابك…
+bt.blindHint	{{name}}'s answer stays rolled up until you both have written	La respuesta de {{name}} sigue enrollada hasta que los dos escribáis	La réponse de {{name}} reste roulée jusqu'à ce que vous ayez écrit tous les deux	La risposta di {{name}} resta arrotolata finché non avete scritto entrambi	جواب {{name}} يقعد مطوي لين تكتبو الزوز
+bt.throwBack	Throw it back	Lánzala de vuelta	Relance-la	Rilanciala	ارميها لغادي
+bt.thrown	Your bottle is on its way	Tu botella va en camino	Ta bouteille est en route	La tua bottiglia è in viaggio	القرعة متاعك ماشية
+bt.failed	The bottle didn't leave. Try again.	La botella no salió. Inténtalo otra vez.	La bouteille n'est pas partie. Réessaie.	La bottiglia non è partita. Riprova.	القرعة ما خرجتش. عاود.
+bt.onTheSea	Your bottle is on the sea	Tu botella está en el mar	Ta bouteille est en mer	La tua bottiglia è in mare	القرعة متاعك في البحر
+bt.waiting	It opens when {{name}} writes back	Se abre cuando {{name}} conteste	Elle s'ouvre quand {{name}} répond	Si apre quando {{name}} risponde	تتحل كي {{name}} يكتب
+bt.choose	Choose a question to send	Elige una pregunta para enviar	Choisis une question à envoyer	Scegli una domanda da inviare	اختار سؤال تبعثو
+bt.sentTimes	sent {{count}} ×	enviada {{count}} ×	envoyée {{count}} ×	inviata {{count}} ×	تبعث {{count}} ×
+bt.writeFirst	Write your answer first…	Escribe primero tu respuesta…	Écris d'abord ta réponse…	Scrivi prima la tua risposta…	اكتب جوابك قبل…
+bt.yourBottle	Your bottle	Tu botella	Ta bouteille	La tua bottiglia	القرعة متاعك
+bt.throw	Throw the bottle	Lanzar la botella	Lancer la bouteille	Lancia la bottiglia	ارمي القرعة
+bt.opened	Opened bottles · {{count}}	Botellas abiertas · {{count}}	Bouteilles ouvertes · {{count}}	Bottiglie aperte · {{count}}	قراعي محلولة · {{count}}
+bt.openedTitle	An opened bottle	Una botella abierta	Une bouteille ouverte	Una bottiglia aperta	قرعة محلولة
+bt.you	You	Tú	Toi	Tu	إنت
