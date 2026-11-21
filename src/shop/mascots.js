@@ -10,7 +10,13 @@ const rand=(a,b)=>a+Math.random()*(b-a);
 
 export function createMascots({t,copy}){
   let layer=null,pets=[],raf=0,last=0;
-  function ensureLayer(){if(layer)return layer;layer=document.createElement('div');layer.className='mascot-layer';layer.setAttribute('aria-hidden','true');document.body.append(layer);return layer;}
+  // The mascots live inside the bottom bar and are placed from its top edge: wherever the phone draws the bar
+  // (iPhone can report it a little off), they stand on it. Without a bar they use the whole screen.
+  function ensureLayer(){if(layer)return layer;layer=document.createElement('div');layer.className='mascot-layer';layer.setAttribute('aria-hidden','true');
+    const nav=document.querySelector('.bottom-nav');if(nav){layer.classList.add('on-nav');nav.append(layer);}else document.body.append(layer);return layer;}
+  let navTop=0;
+  function frame(){if(!layer?.classList.contains('on-nav'))return;const r=layer.parentElement.getBoundingClientRect();navTop=r.top;
+    const left=-Math.round(r.left)+'px',w=innerWidth+'px';if(layer.style.left!==left)layer.style.left=left;if(layer.style.width!==w)layer.style.width=w;}
   // the ground: the top edge of the bottom bar (or the bottom of the screen)
   const ground=()=>{const nav=document.querySelector('.bottom-nav');const r=nav?.getBoundingClientRect();return r&&r.height?r.top+6:innerHeight-8;};
 
@@ -32,7 +38,7 @@ export function createMascots({t,copy}){
   }
   function setAct(p,act,seconds){p.act=act;p.until=performance.now()+seconds*1000;p.spr.dataset.act=act;p.node.dataset.act=act;}
   function pet(p){setAct(p,'pet',1.6);p.fx.replaceChildren();for(let i=0;i<3;i++){const h=document.createElement('i');h.className='mascot-heart';h.style.setProperty('--x',(i-1)*10+'px');h.style.animationDelay=(i*.25)+'s';p.fx.append(h);}}
-  function place(p){p.node.style.transform=`translate(${Math.round(p.x)}px,${Math.round(p.y-H)}px)`;
+  function place(p){p.node.style.transform=`translate(${Math.round(p.x)}px,${Math.round(p.y-H-(layer?.classList.contains('on-nav')?navTop:0))}px)`;
     const right=FACES_RIGHT[p.sheet]?p.dir>0:p.dir<0;p.flip.style.transform=(p.climb?`rotate(${p.climb.side>0?-90:90}deg) `:'')+(right?'':'scaleX(-1)');}
   // choose what to do next, a bit like a cat: mostly walk and sit, sometimes run, nap, stretch or climb
   function next(p){
@@ -53,7 +59,7 @@ export function createMascots({t,copy}){
   function talkX(){const b=document.getElementById('nav-talk');const r=b?.getBoundingClientRect();return r&&r.width?r.left+r.width/2-W/2:null;}
   function tick(now){
     raf=requestAnimationFrame(tick);const dt=Math.min(.05,(now-(last||now))/1000);last=now;if(!pets.length)return;
-    const g=ground();
+    frame();const g=ground();
     for(const p of pets){
       if(p.held){place(p);continue;}
       if(waitingAt!==null&&p===pets[0]&&!p.air&&!p.climb){const x=talkX();if(x!==null){p.y=g;const d=x-p.x;

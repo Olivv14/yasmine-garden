@@ -1,5 +1,6 @@
 /* the shop: mascots living on the app, the shop sheet, themes, heart buttons (approved Shop*, MascotShimeji) */
 .mascot-layer{position:fixed;inset:0;pointer-events:none;z-index:45}
+.mascot-layer.on-nav{position:absolute;inset:auto;top:0;left:0;block-size:0;overflow:visible;z-index:5}
 html.game-full .mascot-layer,html.sheet-open .mascot-layer{display:none}
 .mascot{position:absolute;left:0;top:0;inline-size:64px;block-size:66px;pointer-events:auto;touch-action:none;cursor:grab;will-change:transform}
 .mascot.theirs{filter:saturate(.9)}
