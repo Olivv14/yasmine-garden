@@ -75,8 +75,8 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
       .on('broadcast',{event:'viewed'},({payload})=>{if(payload?.message_id){views.set(payload.message_id+':'+payload.viewer_id,payload.views);render();}})
       .on('broadcast',{event:'sticker'},()=>{loadStickers();})
       .on('broadcast',{event:'media'},({payload})=>{if(payload?.message_id)loadMedia([payload.message_id]);})
-      .on('presence',{event:'sync'},()=>{online=Object.keys(channel.presenceState()).some(k=>k!==me());paintStatus();})
-      .subscribe(async st=>{joining=false;if(st==='SUBSCRIBED')await channel.track({at:Date.now()}).catch(()=>{});
+      .on('presence',{event:'sync'},()=>{const was=online;online=Object.keys(channel.presenceState()).some(k=>k!==me());paintStatus();if(was!==online)document.dispatchEvent(new CustomEvent('partner-presence',{detail:online}));})
+      .subscribe(async st=>{joining=false;if(st==='SUBSCRIBED'&&!document.hidden)await channel.track({at:Date.now()}).catch(()=>{});
         else if(st==='CHANNEL_ERROR'||st==='TIMED_OUT'){const c=channel;channel=null;if(c)client()?.removeChannel(c);}});
     clearInterval(tick);tick=setInterval(paintStatus,1500);
   }
@@ -228,7 +228,10 @@ export function createChat({$,el,button,t,copy,locale,getClient,getApi,getSnapsh
     if(!last||Date.parse(last.created_at)<=Date.parse(reads[me()]??0))return;
     readTimer=setTimeout(async()=>{try{const r=await api().rpc('mark_chat_read',{p_until:last.created_at});reads[me()]=r.last_read_at;render();}catch{}},900);
   }
-  document.addEventListener('visibilitychange',()=>{scheduleRead();paintUnread();});
+  // "here" means the app is open on screen: leaving it (another app, locked phone) stops showing you as here at once
+  const showHere=on=>{if(!channel)return;(on?channel.track({at:Date.now()}):channel.untrack()).catch(()=>{});};
+  document.addEventListener('visibilitychange',()=>{scheduleRead();paintUnread();showHere(!document.hidden);});
+  addEventListener('pagehide',()=>showHere(false));addEventListener('pageshow',()=>showHere(!document.hidden));
 
   // ---- drawing
   function paintStatus(){

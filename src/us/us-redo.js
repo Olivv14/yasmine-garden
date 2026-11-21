@@ -55,6 +55,8 @@ export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,p
   function closeView(){if(!view)return;for(const fn of view.cleanup)try{fn();}catch{}for(const [n,c] of homes)if(c.parentNode)c.replaceWith(n);homes=[];view.root.remove();view=null;document.documentElement.classList.remove('pu-open');}
   const borrow=(node,into)=>{if(!node)return;const c=document.createComment('pu');node.replaceWith(c);homes.push([node,c]);into.append(node);};
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&view)closeView();});
+  // the partner opens or leaves the app: the "is here" line follows right away
+  document.addEventListener('partner-presence',()=>page.querySelector('.pu-here')?.toggleAttribute('hidden',!partnerOnline()));
   const saved=(key='pu.saved')=>{const s=el('span',()=>t(key),'pu-saved');s.prepend(icon('check',14));return s;};
   const row=(ic,tone,titleKey,sub,onClick,end)=>{const b=onClick?button(()=>'',onClick,'pu-row'):el('div',undefined,'pu-row');const d=el('span',undefined,'pu-dot '+tone);d.append(icon(ic,20));
     const w=el('span',undefined,'pu-row-words');w.append(el('b',typeof titleKey==='function'?titleKey:()=>t(titleKey)),el('small',sub));b.append(d,w);if(end)b.append(end);return b;};
