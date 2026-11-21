@@ -1490,3 +1490,72 @@ call.declined	Call declined	Llamada rechazada	Appel refusé	Chiamata rifiutata	�
 call.busy	Already on a call	Ya está en una llamada	Déjà en appel	Già in chiamata	في مكالمة أخرى
 call.missed	Missed call	Llamada perdida	Appel manqué	Chiamata persa	مكالمة فايتة
 call.ended	Call ended	Llamada terminada	Appel terminé	Chiamata terminata	المكالمة وفات
+garden3d.useCan	Get the watering can	Coger la regadera	Prendre l'arrosoir	Prendi l'annaffiatoio	خوذ المرشّة
+garden3d.dragCan	Drag the watering can onto a flower	Arrastra la regadera hasta una flor	Glisse l'arrosoir sur une fleur	Trascina l'annaffiatoio su un fiore	جرّ المرشّة لين توصل لنوّارة
+pu.saved	Saved	Guardado	Enregistré	Salvato	تسجّل
+pu.saving	Saving…	Guardando…	Enregistrement…	Salvataggio…	قاعد يتسجّل…
+pu.savesItself	Changes save by themselves	Los cambios se guardan solos	Les changements s'enregistrent tout seuls	Le modifiche si salvano da sole	التبديلات تتسجّل وحدها
+pu.tapToFix	Changed on the other phone · tap	Cambiado en el otro teléfono · toca	Modifié sur l'autre téléphone · touche	Cambiato sull'altro telefono · tocca	تبدّل في التليفون الآخر · انقر
+pu.here	{{name}} is here	{{name}} está aquí	{{name}} est là	{{name}} è qui	{{name}} هوني
+pu.shopSub	Themes, pets, hearts	Temas, mascotas, corazones	Thèmes, compagnons, cœurs	Temi, mascotte, cuori	ثيمات، حيوانات، قلوب
+pu.notifications	Notifications	Notificaciones	Notifications	Notifiche	الإشعارات
+pu.notifOn	On for this phone	Activadas en este teléfono	Activées sur ce téléphone	Attive su questo telefono	مشعولين في التليفون هذا
+pu.notifOneStep	1 step left	Falta 1 paso	Encore 1 étape	Manca 1 passo	باقية خطوة وحدة
+pu.notifSteps	4 quick steps	4 pasos rápidos	4 petites étapes	4 passi veloci	4 خطوات صغار
+pu.look	Look & language	Aspecto e idioma	Apparence et langue	Aspetto e lingua	الشكل و اللغة
+pu.lookSub	Your sky · {{language}}	Tu cielo · {{language}}	Ton ciel · {{language}}	Il tuo cielo · {{language}}	السما متاعك · {{language}}
+pu.music	Music	Música	Musique	Musica	موسيقى
+pu.musicSub	{{count}} songs for each other	{{count}} canciones el uno para el otro	{{count}} chansons l'un pour l'autre	{{count}} canzoni l'uno per l'altra	{{count}} غناية لبعضكم
+pu.musicEmpty	Dedicate your first song	Dedica tu primera canción	Dédie ta première chanson	Dedica la tua prima canzone	اهدي أوّل غناية
+pu.account	Account and privacy	Cuenta y privacidad	Compte et confidentialité	Account e privacy	الحساب و الخصوصية
+pu.accountSub	Secret word, your copy, sign out	Palabra secreta, tu copia, salir	Mot secret, ta copie, déconnexion	Parola segreta, la tua copia, esci	الكلمة السرّية، نسختك، الخروج
+pu.howLooks	How the app looks	Cómo se ve la app	L'allure de l'app	Come appare l'app	كيفاش يبان التطبيق
+pu.skyNow	The sky in the garden now	El cielo del jardín ahora	Le ciel du jardin maintenant	Il cielo del giardino ora	السما في الجنينة توّا
+pu.skyHint	Only on this phone	Solo en este teléfono	Seulement sur ce téléphone	Solo su questo telefono	في التليفون هذا برك
+pu.derjaNote	Tunisian words are a first draft. Spot a wrong one? Say it in Talk.	Las palabras en tunecino son un primer borrador. ¿Ves una mal? Dilo en Talk.	Les mots en tunisien sont un premier jet. Une erreur ? Dis-le dans Talk.	Le parole in tunisino sono una prima bozza. Ne vedi una sbagliata? Dillo in Talk.	الكلام بالتونسي مازال مسودّة. لقيت غلطة؟ قولها في Talk.
+pu.songsForEach	Songs for each other	Canciones el uno para el otro	Chansons l'un pour l'autre	Canzoni l'uno per l'altra	غناني لبعضكم
+pu.fromPhone	From my phone	Desde mi teléfono	Depuis mon téléphone	Dal mio telefono	من التليفون متاعي
+pu.dedicate	Dedicate a song	Dedicar una canción	Dédier une chanson	Dedica una canzone	اهدي غناية
+pu.onlyTwo	Only the two of you	Solo vosotros dos	Rien que vous deux	Solo voi due	انتوما الزوز برك
+pu.onlyTwoSub	No one else can join or read anything here.	Nadie más puede entrar ni leer nada aquí.	Personne d'autre ne peut entrer ni rien lire ici.	Nessun altro può entrare o leggere nulla qui.	حتى حد آخر ما ينجّم يدخل ولا يقرا حاجة هوني.
+pu.secretWord	Your secret word	Tu palabra secreta	Ton mot secret	La tua parola segreta	الكلمة السرّية متاعك
+pu.secretWordSub	The one you type at the stars	La que escribes bajo las estrellas	Celui que tu tapes sous les étoiles	Quella che scrivi sotto le stelle	اللي تكتبها تحت النجوم
+pu.change	Change	Cambiar	Changer	Cambia	بدّل
+pu.keepCopy	Keep a copy of everything	Guardar una copia de todo	Garder une copie de tout	Tieni una copia di tutto	خلّي نسخة من كل شي
+pu.keepCopySub	Notes, photos and voice notes in one file	Notas, fotos y notas de voz en un archivo	Notes, photos et vocaux dans un fichier	Note, foto e note vocali in un file	الكتابات، التصاور و الفوكالات في فيشي واحد
+pu.uploads	Uploads	Subidas	Envois	Caricamenti	الحاجات المبعوثة
+pu.uploadsDone	All sent	Todo enviado	Tout est envoyé	Tutto inviato	كل شي تبعث
+pu.uploadsWaiting	{{count}} waiting · tap to finish	{{count}} esperando · toca para terminar	{{count}} en attente · touche pour finir	{{count}} in attesa · tocca per finire	{{count}} يستنّاو · انقر باش تكمّل
+pu.thisPhone	This phone	Este teléfono	Ce téléphone	Questo telefono	التليفون هذا
+pu.thisPhoneSub	Stays signed in · {{state}}	Sigue conectado · {{state}}	Reste connecté · {{state}}	Resta connesso · {{state}}	يقعد مكونكتي · {{state}}
+pu.notifOnShort	notifications on	notificaciones activadas	notifications activées	notifiche attive	الإشعارات مشعولة
+pu.notifOffShort	notifications off	notificaciones desactivadas	notifications désactivées	notifiche spente	الإشعارات مطفيّة
+pu.goodToKnow	Good to know	Bueno saberlo	Bon à savoir	Buono a sapersi	باهي تعرف
+pu.know1	Nothing ever plays or posts by itself.	Nada suena ni se publica solo.	Rien ne joue ni ne se publie tout seul.	Niente suona o si pubblica da solo.	حتى حاجة ما تخدم ولا تتنشر وحدها.
+pu.know2	What you keep private stays private.	Lo que guardas en privado, privado se queda.	Ce que tu gardes privé reste privé.	Ciò che tieni privato resta privato.	اللي تخلّيه ليك يقعد ليك.
+pu.know3	A lost upload waits here until you retry.	Una subida perdida espera aquí hasta que lo intentes otra vez.	Un envoi perdu attend ici que tu réessaies.	Un caricamento perso aspetta qui finché riprovi.	الحاجة اللي ما تبعثتش تستنّى هوني لين تعاود.
+pu.signOut	Sign out on this phone	Salir en este teléfono	Se déconnecter sur ce téléphone	Esci su questo telefono	اخرج من التليفون هذا
+pu.you	You	Tú	Toi	Tu	انتي/انت
+pu.seesThis	{{name}} sees your name, photo and line	{{name}} ve tu nombre, tu foto y tu frase	{{name}} voit ton nom, ta photo et ta phrase	{{name}} vede il tuo nome, la foto e la frase	{{name}} يشوف اسمك، تصويرتك و الجملة متاعك
+pu.aboutYou	A line about you	Una frase sobre ti	Une phrase sur toi	Una frase su di te	جملة عليك
+pu.animal	Your little animal	Tu animalito	Ton petit animal	Il tuo animaletto	الحيوان الصغير متاعك
+pu.animal.none	No animal	Sin animal	Pas d'animal	Nessun animale	بلاش حيوان
+pu.animal.calm	Calm turtle	Tortuga tranquila	Tortue calme	Tartaruga calma	فكرونة هادية
+pu.animal.hopeful	Hopeful butterfly	Mariposa esperanzada	Papillon plein d'espoir	Farfalla speranzosa	فرططو متفائل
+pu.animal.nostalgic	Nostalgic elephant	Elefante nostálgico	Éléphant nostalgique	Elefante nostalgico	فيل حنين
+pu.animal.hug	Bear for a hug	Oso para un abrazo	Ours pour un câlin	Orso da abbracciare	دبّ يحبّ عنقة
+pu.animal.difficult	Hedgehog day	Día de erizo	Journée hérisson	Giornata da riccio	نهار قنفود
+pu.animalNote	Your animal is just for fun. Your mood of the day stays separate.	Tu animal es solo por diversión. Tu estado de ánimo del día va aparte.	Ton animal, c'est pour le plaisir. Ton humeur du jour reste à part.	Il tuo animale è solo per gioco. L'umore del giorno resta a parte.	الحيوان للضحك برك. المود متاع النهار وحدو.
+pu.photo	Your photo	Tu foto	Ta photo	La tua foto	التصويرة متاعك
+pu.frameTip	Drag and pinch to frame it	Arrastra y pellizca para encuadrarla	Glisse et pince pour la cadrer	Trascina e pizzica per inquadrarla	جرّ و كبّر باش تظبطها
+pu.gallery	Gallery	Galería	Galerie	Galleria	الغاليري
+pu.camera	Camera	Cámara	Appareil photo	Fotocamera	الكاميرا
+pu.onlyPartner	Only {{name}} sees it	Solo {{name}} la ve	Seul·e {{name}} la voit	Solo {{name}} la vede	{{name}} برك يشوفها
+pu.onlyPartnerSub	Private between the two of you	Privada entre vosotros dos	Privée entre vous deux	Privata tra voi due	بيناتكم انتوما الزوز
+pu.noPlace	Where it was taken: removed	Dónde se hizo: borrado	Lieu de la prise : retiré	Dove è stata scattata: rimosso	وين تصوّرت: تنحّى
+pu.noPlaceSub	The photo is re-made on your phone first	La foto se rehace primero en tu teléfono	La photo est refaite d'abord sur ton téléphone	La foto viene rifatta prima sul tuo telefono	التصويرة تتعاود في التليفون متاعك قبل
+pu.removePhoto	Remove my photo	Quitar mi foto	Retirer ma photo	Togli la mia foto	نحّي التصويرة متاعي
+pu.usePhoto	Use this photo	Usar esta foto	Utiliser cette photo	Usa questa foto	استعمل التصويرة هاذي
+pu.sending	Sending…	Enviando…	Envoi…	Invio…	قاعد يتبعث…
+pu.photoSaved	Your new photo is up	Tu foto nueva ya está	Ta nouvelle photo est en place	La tua nuova foto è pronta	التصويرة الجديدة تحطّت
+pu.photoFailed	The photo could not be sent. Try again.	No se pudo enviar la foto. Inténtalo otra vez.	La photo n'a pas pu être envoyée. Réessaie.	Non è stato possibile inviare la foto. Riprova.	التصويرة ما تبعثتش. عاود.

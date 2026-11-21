@@ -100,8 +100,11 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
     const drops=el('div',undefined,'drops');drops.setAttribute('role','img');copy(drops,()=>t('garden.waterLevel',{count:f.water}),'aria-label');
     for(let i=0;i<9;i++){const d=icon('droplet',20);if(i<f.water)d.classList.add('filled');drops.append(d);}
     const actions=el('div',undefined,'sheet-actions');
-    const w=button(()=>f.water>=9?t('garden.fullWater'):t('garden.water'),async e=>{const b=e.currentTarget;b.disabled=true;try{if(await water(f))garden.watered(f.id);}finally{if(b.isConnected)b.disabled=false;}},'primary');
-    w.prepend(icon('droplet'));if(f.water>=9)w.disabled=true;actions.append(w);
+    // no water button here: the watering can in the garden does it (drag it onto the flower)
+    if(g3&&f.water<9){const w=button(()=>t('garden3d.useCan'),()=>{flowerSheet?.close();g3.openFull();notify(()=>t('garden3d.dragCan'));},'primary');w.prepend(icon('droplet'));actions.append(w);}
+    else if(f.water>=9)actions.append(el('p',()=>t('garden.fullWater'),'small'));
+    // phones without 3D keep the simple button
+    else if(!g3){const w=button(()=>t('garden.water'),async e=>{const b=e.currentTarget;b.disabled=true;try{if(await water(f))garden.watered(f.id);}finally{if(b.isConnected)b.disabled=false;}},'primary');w.prepend(icon('droplet'));actions.append(w);}
     if(f.planted_by===me())actions.append(button(()=>t('garden.remove'),async()=>{if(await remove(f))flowerSheet?.close();},'quiet danger'));
     body.append(art,stageText,meta,drops,el('p',()=>t('garden.growthHint'),'small'),actions);
   }
