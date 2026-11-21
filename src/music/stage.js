@@ -81,7 +81,26 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     if(now.source!=='upload'&&!inApp)box.append(el('p',()=>t('music.listeningTimer'),'lyric-note'));
     return box;
   }
-  function paintLyric(){const slot=sheet?.body.querySelector('.lyric-slot');if(slot)slot.replaceChildren(lyricCard());onNowPlaying?.();}
+  function paintLyric(){const slot=sheet?.body.querySelector('.lyric-slot');if(slot)slot.replaceChildren(lyricCard());paintSeek();onNowPlaying?.();}
+  // the song's timeline: drag to go back or forward (your uploads, Spotify in the app, and the timer that follows Spotify outside)
+  const length=()=>{if(!now)return 0;if(now.source==='upload')return isFinite(player.duration)?player.duration:0;if(inApp)return (spotify.duration()||now.duration_ms||0)/1000;return (listen?.length??now.duration_ms??0)/1000;};
+  const clock=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+  let dragging=false;
+  function seekTo(sec){if(!now)return;
+    if(now.source==='upload'){player.currentTime=sec;}
+    else if(inApp){spotify.seek(sec*1000);together.share({item:now,playing:spotify.playing(),position:sec});}
+    else if(listen){listen.started=Date.now()-sec*1000;together.share({item:now,playing:true,position:sec});}
+    paintLyric();}
+  function seekBar(){
+    const box=el('div',undefined,'seek');const range=document.createElement('input');range.type='range';range.min='0';range.step='1';range.className='seek-range';copy(range,()=>t('music.seek'),'aria-label');
+    const a=el('span',undefined,'seek-time'),b=el('span',undefined,'seek-time');
+    range.addEventListener('input',()=>{dragging=true;a.textContent=clock(+range.value);});
+    range.addEventListener('change',()=>{dragging=false;seekTo(+range.value);});
+    range.addEventListener('pointerup',()=>{if(dragging){dragging=false;seekTo(+range.value);}});
+    box.append(a,range,b);return box;}
+  function paintSeek(){const box=sheet?.body.querySelector('.seek');if(!box)return;const [a,range,b]=box.children,len=length();
+    box.hidden=!now||!len;if(box.hidden)return;range.max=String(Math.round(len));b.textContent=clock(len);
+    if(!dragging){const pos=Math.min(len,position());range.value=String(Math.round(pos));a.textContent=clock(pos);range.style.setProperty('--fill',(len?pos/len*100:0)+'%');}}
   // The current lyric line, for the toad card on Home.
   const currentLine=()=>{if(!isPlaying()||lyrics?.state!=='synced')return '';return lyrics.synced[lineAt(lyrics.synced,position())]?.text??'';};
 
@@ -137,8 +156,9 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
       if(spotify.mode()==='device')controls.append(el('p',()=>t('spotify.onDevice',{device:spotify.deviceName()??'Spotify'}),'tiny'));}
     else{controls.append(button(()=>t(spotify?.connected()?'music.play':'music.openSpotify'),()=>play(now),'primary'));if(listen)controls.append(button(()=>t('music.stopFollowing'),()=>stopListening(),'quiet'));}
     const head=el('div',undefined,'now-head');head.append(cover,el('div',undefined,'now-text'));head.lastChild.append(name,by);
+    const seek=seekBar();
     const slot=el('div',undefined,'lyric-slot');slot.append(lyricCard());
-    card.append(head,controls,slot,el('p',()=>t('music.lyricsSource'),'tiny'));
+    card.append(head,seek,controls,slot,el('p',()=>t('music.lyricsSource'),'tiny'));
     return card;
   }
   function playlistView(list){

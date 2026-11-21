@@ -114,3 +114,15 @@ button.pu-animal.none{border-style:dashed;color:#FFE2C6}
 /* the profile's name and line are handwriting, not form boxes */
 html .pu-view input.pu-name{border:0!important;border-bottom:2px dashed rgba(255,226,198,.35)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;min-block-size:0}
 html .pu-view .pu-bio textarea{border:0!important;background:transparent!important;box-shadow:none!important;outline:none}
+/* the song's timeline: a range you can drag (music page and the record player) */
+input.seek-range{-webkit-appearance:none;appearance:none;inline-size:100%;block-size:28px;background:transparent;margin:0;padding:0;border:0;box-shadow:none;min-block-size:0;touch-action:pan-y}
+input.seek-range::-webkit-slider-runnable-track{block-size:6px;border-radius:3px;background:linear-gradient(90deg,var(--dk-accent,#FFD58A) var(--fill,0%),rgba(255,226,198,.22) var(--fill,0%))}
+input.seek-range::-moz-range-track{block-size:6px;border-radius:3px;background:rgba(255,226,198,.22)}
+input.seek-range::-moz-range-progress{block-size:6px;border-radius:3px;background:var(--dk-accent,#FFD58A)}
+input.seek-range::-webkit-slider-thumb{-webkit-appearance:none;inline-size:20px;block-size:20px;margin-top:-7px;border-radius:50%;background:#FFF4E6;border:3px solid var(--dk-accent,#FFD58A);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+input.seek-range::-moz-range-thumb{inline-size:16px;block-size:16px;border-radius:50%;background:#FFF4E6;border:3px solid var(--dk-accent,#FFD58A)}
+input.seek-range:disabled{opacity:.5}
+.seek{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+.seek[hidden]{display:none}
+.seek-time{font:600 12px var(--font-sans);font-variant-numeric:tabular-nums;color:inherit;opacity:.8;min-inline-size:34px;text-align:center}
+.pu-music input.pu-progress{block-size:28px;background:transparent;overflow:visible}
