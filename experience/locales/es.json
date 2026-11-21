@@ -1558,5 +1558,18 @@
   "pu.usePhoto": "Usar esta foto",
   "pu.sending": "Enviando…",
   "pu.photoSaved": "Tu foto nueva ya está",
-  "pu.photoFailed": "No se pudo enviar la foto. Inténtalo otra vez."
+  "pu.photoFailed": "No se pudo enviar la foto. Inténtalo otra vez.",
+  "spotify.connectTitle": "Escucha Spotify aquí",
+  "spotify.connectHint": "Inicia sesión en Spotify una vez en este teléfono. Con Premium, las canciones suenan aquí mismo.",
+  "spotify.connect": "Conectar Spotify",
+  "spotify.connectedAs": "Spotify: {{name}}",
+  "spotify.disconnect": "Desconectar",
+  "spotify.needsPremium": "Para escuchar aquí hace falta Spotify Premium. Las canciones se abren en la app de Spotify.",
+  "spotify.openApp": "Abre la app de Spotify una vez y vuelve a tocar reproducir.",
+  "spotify.denied": "Spotify no se conectó. Puedes intentarlo cuando quieras.",
+  "spotify.failed": "Spotify no respondió. Inténtalo en un momento.",
+  "spotify.onDevice": "Sonando en {{device}}",
+  "spotify.search": "Buscar en Spotify",
+  "spotify.searchPlaceholder": "Una canción o un artista",
+  "spotify.noResults": "No se encontró nada"
 }

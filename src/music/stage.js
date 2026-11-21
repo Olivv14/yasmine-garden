@@ -10,8 +10,8 @@ import {createTogether,partnerPosition,needsSeek} from './together.js';
 const uid=()=>crypto.randomUUID();
 const DEFAULT_LISTEN_MS=4*60*1000;
 
-export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,rpc,notify,playUpload,player,onNowPlaying}){
-  let sheet=null,selected=null,now=null,listen=null,lyrics=null,lyricsFor='',tick=null,ensuring=null,following=false;
+export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,rpc,notify,playUpload,player,onNowPlaying,spotify=null}){
+  let inApp=false,sheet=null,selected=null,now=null,listen=null,lyrics=null,lyricsFor='',tick=null,ensuring=null,following=false;
   const together=createTogether({getClient,getPairId:()=>getSnapshot()?.pairId,me,onChange:()=>{paintTogether();onNowPlaying?.();}});
   const snap=()=>getSnapshot();
   const available=()=>Array.isArray(snap()?.playlists);
@@ -28,12 +28,17 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
   }
 
   // ---- what is playing: an uploaded song in the app, or a Spotify song followed by a timer
-  const position=()=>{if(!now)return 0;if(now.source==='upload')return player.currentTime||0;return listen?(Date.now()-listen.started)/1000:0;};
-  const isPlaying=()=>!!now&&(now.source==='upload'?!player.paused&&!player.ended:!!listen&&Date.now()-listen.started<listen.length);
-  function play(item){
-    now=item;listen=null;
+  const position=()=>{if(!now)return 0;if(now.source==='upload')return player.currentTime||0;if(inApp)return spotify.position()/1000;return listen?(Date.now()-listen.started)/1000:0;};
+  const isPlaying=()=>!!now&&(now.source==='upload'?!player.paused&&!player.ended:inApp?spotify.playing():!!listen&&Date.now()-listen.started<listen.length);
+  function openOutside(item){const url=spotifyOpenUrl(item);if(url)window.open(url,'_blank','noopener,noreferrer');listen={started:Date.now(),length:item.duration_ms||DEFAULT_LISTEN_MS};}
+  function play(item,startAt=0){
+    if(inApp&&now?.source!=='upload')spotify.stop();inApp=false;now=item;listen=null;
     if(item.source==='upload'){playUpload(item.ref);}
-    else{const url=spotifyOpenUrl(item);if(url)window.open(url,'_blank','noopener,noreferrer');listen={started:Date.now(),length:item.duration_ms||DEFAULT_LISTEN_MS};}
+    else if(spotify?.connected()&&/^spotify:track:/.test(item.ref??'')){
+      // inside the app (or on your Spotify app, controlled from here); only if neither works does Spotify open
+      inApp=true;if(!player.paused)player.pause();paint();
+      spotify.play(item.ref,startAt*1000).then(where=>{if(now!==item)return;if(!where){inApp=false;openOutside(item);}paint();onNowPlaying?.();});}
+    else openOutside(item);
     if(item.source!=='upload')together.share({item,playing:true,position:0});
     loadLyrics(item);startTick();onNowPlaying?.();paint();
   }
@@ -42,17 +47,17 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
   function join(){
     const p=together.partner();if(!p)return;
     const item=(getSnapshot()?.playlistItems??[]).find(i=>i.id===p.item.id)??p.item;
-    following=true;play(item);
+    following=true;play(item,item.source==='upload'?0:partnerPosition(p));
     if(item.source==='upload'){const seek=()=>{player.currentTime=partnerPosition(p);};if(player.readyState>=1)seek();else player.addEventListener('loadedmetadata',seek,{once:true});}
     else if(listen)listen.started=Date.now()-partnerPosition(p)*1000;
   }
-  function stopListening(){listen=null;following=false;together.share({playing:false});onNowPlaying?.();paint();}
+  function stopListening(){if(inApp){spotify.stop();inApp=false;}listen=null;following=false;together.share({playing:false});onNowPlaying?.();paint();}
   function startTick(){clearInterval(tick);tick=setInterval(()=>{if(!isPlaying()&&listen){listen=null;together.share({playing:false});onNowPlaying?.();}
     const p=together.partner();
     if(following&&now?.source==='upload'&&p?.playing&&p.item.id===now.id&&!player.paused){const target=partnerPosition(p);if(needsSeek(player.currentTime,target))player.currentTime=target;}
     paintLyric();if(!isPlaying()&&!sheet)clearInterval(tick);},400);}
   for(const ev of ['play','pause','seeked','ended'])player.addEventListener(ev,()=>{if(now?.source==='upload')together.share({item:now,playing:!player.paused&&!player.ended,position:player.currentTime||0});});
-  player.addEventListener('play',()=>{if(now?.source!=='upload'){now=null;lyrics=null;}onNowPlaying?.();});
+  player.addEventListener('play',()=>{if(now?.source!=='upload'){if(inApp)spotify.stop();inApp=false;now=null;lyrics=null;}onNowPlaying?.();});
 
   async function loadLyrics(item){
     const song={title:item.title,artist:item.artist??'',durationMs:item.duration_ms??null},key=lyricsKey(song);
@@ -73,7 +78,7 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     const line=el('p',undefined,'lyric-line');line.textContent=cur?.text||'♪';line.dir='auto';
     const after=el('p',undefined,'lyric-next');after.textContent=next?.text??'';after.dir='auto';
     box.append(line,after);
-    if(now.source!=='upload')box.append(el('p',()=>t('music.listeningTimer'),'lyric-note'));
+    if(now.source!=='upload'&&!inApp)box.append(el('p',()=>t('music.listeningTimer'),'lyric-note'));
     return box;
   }
   function paintLyric(){const slot=sheet?.body.querySelector('.lyric-slot');if(slot)slot.replaceChildren(lyricCard());onNowPlaying?.();}
@@ -99,7 +104,7 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
   function paint(){
     together.connect();
     if(!sheet)return;const body=sheet.body;body.replaceChildren();
-    body.append(togetherCard(),nowCard());
+    body.append(togetherCard(),spotifyCard(),nowCard());
     if(!available()){body.append(el('p',()=>t('music.needsUpdate'),'small'));return;}
     const all=lists();if(!all.some(p=>p.id===selected))selected=all[0]?.id??null;
     const chips=el('div',undefined,'chip-row');chips.setAttribute('role','tablist');copy(chips,()=>t('music.playlists'),'aria-label');
@@ -108,6 +113,16 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     body.append(chips);
     const list=all.find(p=>p.id===selected);
     if(list)body.append(playlistView(list));
+  }
+  // Spotify on this phone: connect once, then songs play here
+  function spotifyCard(){
+    const box=el('section',undefined,'card spotify-card');if(!spotify)return box;
+    const err=spotify.error(),hint=err==='premium'?'spotify.needsPremium':err==='no_device'?'spotify.openApp':err==='access_denied'?'spotify.denied':err?'spotify.failed':null;
+    if(!spotify.connected()){box.append(el('p',()=>t('spotify.connectTitle'),'title'),el('p',()=>t('spotify.connectHint'),'small'),button(()=>t('spotify.connect'),()=>spotify.connect(),'primary'));
+      if(hint)box.append(el('p',()=>t(hint),'small warn'));return box;}
+    const row=el('div',undefined,'row between');row.append(el('p',()=>t('spotify.connectedAs',{name:spotify.name()??'Spotify'}),'small'),button(()=>t('spotify.disconnect'),()=>{spotify.disconnect();paint();},'link'));box.append(row);
+    if(spotify.premium()===false)box.append(el('p',()=>t('spotify.needsPremium'),'small warn'));else if(hint)box.append(el('p',()=>t(hint),'small warn'));
+    return box;
   }
   function nowCard(){
     const card=el('section',undefined,'card now-card');
@@ -118,7 +133,9 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     const by=el('p',undefined,'muted now-artist');by.textContent=now.artist??'';by.dir='auto';
     const controls=el('div',undefined,'row now-controls');
     if(now.source==='upload')controls.append(button(()=>player.paused?t('music.play'):t('music.pause'),()=>player.paused?playUpload(now.ref):player.pause(),'primary'));
-    else{controls.append(button(()=>t('music.openSpotify'),()=>play(now),'primary'));if(listen)controls.append(button(()=>t('music.stopFollowing'),()=>stopListening(),'quiet'));}
+    else if(inApp){const on=spotify.playing();controls.append(button(()=>on?t('music.pause'):t('music.play'),async()=>{on?await spotify.pause():await spotify.resume();paint();onNowPlaying?.();},'primary'));
+      if(spotify.mode()==='device')controls.append(el('p',()=>t('spotify.onDevice',{device:spotify.deviceName()??'Spotify'}),'tiny'));}
+    else{controls.append(button(()=>t(spotify?.connected()?'music.play':'music.openSpotify'),()=>play(now),'primary'));if(listen)controls.append(button(()=>t('music.stopFollowing'),()=>stopListening(),'quiet'));}
     const head=el('div',undefined,'now-head');head.append(cover,el('div',undefined,'now-text'));head.lastChild.append(name,by);
     const slot=el('div',undefined,'lyric-slot');slot.append(lyricCard());
     card.append(head,controls,slot,el('p',()=>t('music.lyricsSource'),'tiny'));
@@ -149,7 +166,7 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     text.append(name,meta,who);
     if(s.note){const n=el('p',undefined,'song-note hand');n.textContent=s.note;n.dir='auto';text.append(n);}
     const acts=el('div',undefined,'song-actions');
-    const playB=button(()=>'',()=>play(s),'round-button primary-round');copy(playB,()=>t(s.source==='upload'?'music.play':'music.openSpotify'),'aria-label');playB.append(icon('playTrack',16));acts.append(playB);
+    const playB=button(()=>'',()=>play(s),'round-button primary-round');copy(playB,()=>t(s.source==='upload'||spotify?.connected()?'music.play':'music.openSpotify'),'aria-label');playB.append(icon('playTrack',16));acts.append(playB);
     if(prev){const up=button(()=>'',()=>rpc('move_playlist_item',{p_id:s.id,p_expected_version:s.version,p_after_id:beforePrev?.id??null}).catch(()=>{}),'round-button');copy(up,()=>t('music.moveUp'),'aria-label');up.append(icon('up',16));acts.append(up);}
     if(next){const down=button(()=>'',()=>rpc('move_playlist_item',{p_id:s.id,p_expected_version:s.version,p_after_id:next.id}).catch(()=>{}),'round-button');copy(down,()=>t('music.moveDown'),'aria-label');down.append(icon('down',16));acts.append(down);}
     const mine=s.added_by===me(),canRemove=mine||(list.kind==='custom'&&list.owner_id===me());
@@ -196,10 +213,24 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
       if(!name.value.trim()){name.focus();return;}
       e.currentTarget.disabled=true;
       try{await rpc('add_playlist_item',{p_id:id,p_playlist_id:list.id,p_source:found.kind==='spotify'?'spotify':'link',p_ref:found.kind==='spotify'?found.uri:found.url,
-        p_title:name.value.trim(),p_artist:artist.value.trim()||null,p_cover_url:cover,p_duration_ms:null,p_note:note.value.trim()||null});s.close();
+        p_title:name.value.trim(),p_artist:artist.value.trim()||null,p_cover_url:cover,p_duration_ms:duration,p_note:note.value.trim()||null});s.close();
         // a push for the partner when it went to a shared playlist (no bell row, no push otherwise)
         if(list.visibility==='shared')getClient()?.functions.invoke('dispatch-notification',{body:{event_id:id}}).catch(()=>{});}
       catch{}finally{if(e.currentTarget?.isConnected)e.currentTarget.disabled=false;}},'primary');
+    let duration=null;
+    if(spotify?.connected()){
+      const q=document.createElement('input');q.type='search';q.autocomplete='off';q.dir='auto';copy(q,()=>t('spotify.searchPlaceholder'),'placeholder');
+      const results=el('div',undefined,'spotify-results');let qn=0,qt=null;
+      q.oninput=()=>{clearTimeout(qt);qt=setTimeout(async()=>{const n=++qn;if(!q.value.trim()){results.replaceChildren();return;}
+        try{const found2=await spotify.search(q.value);if(n!==qn)return;results.replaceChildren();
+          for(const r of found2){const b=button(()=>'',()=>{found={kind:'spotify',uri:r.uri,url:'https://open.spotify.com/track/'+r.uri.split(':').pop()};name.value=r.title;artist.value=r.artist;cover=isCoverUrl(r.cover)?r.cover:null;duration=r.duration_ms;
+              for(const x of results.children)x.setAttribute('aria-pressed',String(x===b));note.focus();},'spotify-result');
+            const art=r.cover&&isCoverUrl(r.cover)?Object.assign(document.createElement('img'),{src:r.cover,alt:'',width:40,height:40,referrerPolicy:'no-referrer'}):el('span',undefined,'cover placeholder');
+            const w=el('span',undefined,'spotify-result-words');const ti=el('b');ti.textContent=r.title;ti.dir='auto';const ar=el('small');ar.textContent=r.artist;ar.dir='auto';w.append(ti,ar);b.append(art,w);results.append(b);}
+          if(!found2.length)results.append(el('p',()=>t('spotify.noResults'),'small'));}
+        catch{if(n===qn)results.replaceChildren(el('p',()=>t('spotify.failed'),'small'));}},350);};
+      s.body.append(field('spotify.search',q),results);
+    }
     s.body.append(field('music.linkLabel',link),el('p',()=>t('music.linkHint'),'small'),status,field('music.songTitle',name),field('music.songArtist',artist),field('music.noteLabel',note));
     if(list.kind==='dedicated')s.body.append(el('p',()=>t('music.dedicateHint'),'small'));
     s.body.append(save);

@@ -1558,5 +1558,18 @@
   "pu.usePhoto": "Use this photo",
   "pu.sending": "Sending…",
   "pu.photoSaved": "Your new photo is up",
-  "pu.photoFailed": "The photo could not be sent. Try again."
+  "pu.photoFailed": "The photo could not be sent. Try again.",
+  "spotify.connectTitle": "Play Spotify songs here",
+  "spotify.connectHint": "Sign in to Spotify once on this phone. With Premium, songs play right here in Between us.",
+  "spotify.connect": "Connect Spotify",
+  "spotify.connectedAs": "Spotify: {{name}}",
+  "spotify.disconnect": "Disconnect",
+  "spotify.needsPremium": "Playing here needs Spotify Premium. Songs open in the Spotify app instead.",
+  "spotify.openApp": "Open the Spotify app once, then tap play again.",
+  "spotify.denied": "Spotify was not connected. You can try again any time.",
+  "spotify.failed": "Spotify did not answer. Try again in a moment.",
+  "spotify.onDevice": "Playing on {{device}}",
+  "spotify.search": "Search Spotify",
+  "spotify.searchPlaceholder": "A song or an artist",
+  "spotify.noResults": "Nothing found"
 }

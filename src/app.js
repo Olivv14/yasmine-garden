@@ -18,6 +18,9 @@ import {hasSavedSession,rememberPlace,lastPlace,forgetPlace} from './resume.js';
 import {createChat} from './talk/chat.js';
 import {createCalls} from './talk/call.js';
 import {createUsRedo} from './us/us-redo.js';
+import {takeSpotifyReturn,createSpotify} from './music/spotify.js';
+// back from Spotify's sign-in: take the code out of the address before anything else reads it
+takeSpotifyReturn();
 import {FLOWER_TYPES} from './garden/model.js';
 import {createPlay} from './games/play.js';
 import {createEggs} from './eggs/eggs.js';
@@ -50,7 +53,7 @@ new MutationObserver(()=>{const v=document.documentElement.dataset.theme;if(v&&!
 const gate=createGate({$,signInWithWord:word=>signInWithWord(word),reducedMotion:()=>matchMedia('(prefers-reduced-motion: reduce)').matches,onHidden:()=>{if(snapshot)home.render();}});if(hasSavedSession())gate.quiet();else gate.show();
 const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),seeds:()=>seedsFor(snapshot,state.profile),plant:(type,spot)=>plantFlower(type,spot),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>{if(!eggs.toadTapped())shell.openMusic();},onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
 // Music: playlists, dedications and lyric cards. Void RPCs (delete, remove) pass voidResult=true.
-const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad()});
+const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad(),spotify:createSpotify({onChange:()=>{try{music?.render();}catch{}}})});
 // Talk: the chat. It reads and writes its own way (live room, pages, outbox), never through a full refresh.
 const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=>api,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),onUnread:n=>{shell?.unread(n);if(typeof shop!=='undefined')shop.messageWaiting(n>0);},playlistSongs:()=>(snapshot?.playlistItems??[]).filter(i=>!i.deleted_at),photoOf:id=>avatarUI?.photo(id)??null,onCallButton:kind=>calls.start(kind)});
 const calls=createCalls({el,button,t,copy,me:()=>state.profile,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,photoOf:id=>avatarUI?.photo(id)??null,signal:p=>chat.callSignal(p),onSignal:fn=>chat.onCall(fn),iceServers:()=>client?.connectionPublicConfig?.iceServers??[]});
