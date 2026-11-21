@@ -1580,5 +1580,9 @@
   "editor.redo": "Redo",
   "editor.binHint": "Drag a sticker or a word onto the bin to remove it",
   "pu.pets": "Show the pets",
-  "pu.petsSub": "Emmy and friends walking on the screen"
+  "pu.petsSub": "Emmy and friends walking on the screen",
+  "pu.searchSong": "Search a song",
+  "pu.added": "Added and playing: {{title}}",
+  "pu.connectToSearch": "Connect Spotify to search songs",
+  "pu.allPlaylists": "All playlists"
 }

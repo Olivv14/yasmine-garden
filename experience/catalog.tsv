@@ -1581,3 +1581,7 @@ editor.redo	Redo	Rehacer	Rétablir	Ripeti	عاود
 editor.binHint	Drag a sticker or a word onto the bin to remove it	Arrastra un sticker o un texto a la papelera para quitarlo	Glisse un autocollant ou un texte sur la corbeille pour le retirer	Trascina uno sticker o un testo nel cestino per toglierlo	جرّ الستيكر ولا الكلام للبوبالة باش تنحّيه
 pu.pets	Show the pets	Mostrar las mascotas	Montrer les compagnons	Mostra le mascotte	ورّي الحيوانات
 pu.petsSub	Emmy and friends walking on the screen	Emmy y sus amigos caminando por la pantalla	Emmy et ses amis qui se promènent à l'écran	Emmy e i suoi amici che camminano sullo schermo	Emmy و صحابها يتمشّاو في الشاشة
+pu.searchSong	Search a song	Busca una canción	Cherche une chanson	Cerca una canzone	لوّج على غناية
+pu.added	Added and playing: {{title}}	Añadida y sonando: {{title}}	Ajoutée et en lecture : {{title}}	Aggiunta e in riproduzione: {{title}}	تزادت و تخدم: {{title}}
+pu.connectToSearch	Connect Spotify to search songs	Conecta Spotify para buscar canciones	Connecte Spotify pour chercher des chansons	Collega Spotify per cercare canzoni	اربط سبوتيفاي باش تلوّج على الغناني
+pu.allPlaylists	All playlists	Todas las listas	Toutes les listes	Tutte le playlist	الليستات الكل

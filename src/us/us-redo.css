@@ -134,3 +134,24 @@ input.seek-range:disabled{opacity:.5}
 .pu-switch[aria-checked=true] .pu-knob{background:var(--dk-accent,#FFD58A)}
 .pu-switch[aria-checked=true] .pu-knob::after{transform:translateX(20px)}
 html[dir=rtl] .pu-switch[aria-checked=true] .pu-knob::after{transform:translateX(-20px)}
+/* the music player: search at the top, the playing song on the record, the list plays on */
+.pu-find{display:flex;align-items:center;gap:8px;position:relative}
+.pu-search-icon{position:absolute;inset-inline-start:14px;color:#FFE2C6;display:grid;pointer-events:none}
+html .pu-view input.pu-search{inline-size:100%;min-block-size:48px;padding:0 14px 0 42px;border-radius:999px;border:1px solid rgba(255,226,198,.3)!important;background:rgba(18,10,20,.62)!important;color:#FFF4E6;font:600 15px var(--font-sans);box-shadow:none}
+.pu-results{display:grid;gap:6px}
+.pu-results:empty{display:none}
+button.pu-result{display:flex;align-items:center;gap:12px;inline-size:100%;justify-content:flex-start;padding:8px 10px;border-radius:14px;border:1px solid rgba(255,226,198,.16);background:rgba(18,10,20,.8);color:#FFF4E6;text-align:start;box-shadow:none}
+.pu-result-artist{font:500 12px var(--font-sans);color:#FFE2C6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pu-result-add{margin-inline-start:auto;inline-size:34px;block-size:34px;border-radius:50%;display:grid;place-items:center;background:var(--dk-accent,#FFD58A);color:#2A1A10;flex:none}
+.pu-record-label{overflow:hidden;display:grid;place-items:center}
+.pu-record-label img{inline-size:100%;block-size:100%;object-fit:cover;border-radius:50%}
+.pu-track-artist{text-align:center;margin-top:-10px;font:600 13px var(--font-sans);color:#FFE2C6;min-block-size:1em}
+button.pu-song.on{border-color:var(--dk-accent,#FFD58A);background:rgba(255,213,138,.12)}
+.pu-song-art{position:relative}
+.pu-eq{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:3px;padding-bottom:9px;background:rgba(0,0,0,.45)}
+.pu-eq i{inline-size:4px;border-radius:2px;background:var(--dk-accent,#FFD58A);animation:pu-eq .9s ease-in-out infinite alternate}
+.pu-eq i:nth-child(1){block-size:10px}.pu-eq i:nth-child(2){block-size:18px;animation-delay:.2s}.pu-eq i:nth-child(3){block-size:13px;animation-delay:.4s}
+@keyframes pu-eq{to{transform:scaleY(.35)}}
+.pu-eq i{transform-origin:bottom}
+@media (prefers-reduced-motion:reduce){.pu-eq i{animation:none}}
+button.pu-ctrl:disabled{opacity:.35}

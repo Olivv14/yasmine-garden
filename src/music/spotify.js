@@ -32,7 +32,7 @@ export async function leaveSpotifyCode({state,code}){
 }
 
 export function createSpotify({onChange,rpc}={}){
-  let auth=read(KEY),player=null,deviceId=null,sdkState=null,sdkBroken=false,loading=null,mode=null,remote=null,profile=null,lastError=null;
+  let playSeq=0,startedUris=new Set(),auth=read(KEY),player=null,deviceId=null,sdkState=null,sdkBroken=false,loading=null,mode=null,remote=null,profile=null,lastError=null;
   const changed=()=>{try{onChange?.();}catch{}};
 
   async function tokenRequest(body){
@@ -82,7 +82,7 @@ export function createSpotify({onChange,rpc}={}){
       player=new window.Spotify.Player({name:'Between us',getOAuthToken:cb=>{token().then(tk=>cb(tk||''));},volume:.85});
       player.addListener('ready',({device_id})=>{deviceId=device_id;changed();});
       player.addListener('not_ready',()=>{deviceId=null;changed();});
-      player.addListener('player_state_changed',s=>{sdkState=s?{paused:s.paused,position:s.position,duration:s.duration,at:Date.now(),uri:s.track_window?.current_track?.uri}:null;changed();});
+      player.addListener('player_state_changed',s=>{sdkState=s?{paused:s.paused,position:s.position,duration:s.duration,at:Date.now(),uri:s.track_window?.current_track?.uri}:null;if(sdkState&&!sdkState.paused&&sdkState.uri)startedUris.add(sdkState.uri);changed();});
       for(const ev of ['initialization_error','account_error','playback_error'])player.addListener(ev,({message})=>{lastError=ev;if(ev!=='playback_error')sdkBroken=true;void message;changed();});
       player.addListener('authentication_error',()=>{lastError='auth';changed();});
       const ok=await player.connect().catch(()=>false);if(!ok){sdkBroken=true;return null;}
@@ -97,9 +97,12 @@ export function createSpotify({onChange,rpc}={}){
     if(!auth)return null;lastError=null;
     try{player?.activateElement?.();}catch{}
     const id=await ensurePlayer();
-    if(id){try{await call('/me/player/play?device_id='+encodeURIComponent(id),{method:'PUT',body:{uris:[uri],position_ms:Math.max(0,Math.round(positionMs))}});mode='app';remote=null;
+    const token=++playSeq;
+    if(id){startedUris.delete(uri);try{await call('/me/player/play?device_id='+encodeURIComponent(id),{method:'PUT',body:{uris:[uri],position_ms:Math.max(0,Math.round(positionMs))}});mode='app';remote=null;
         // some phones never actually make sound: if nothing starts within 4 s, use the Spotify app instead
-        await new Promise(r=>setTimeout(r,4000));if(sdkState&&!sdkState.paused&&sdkState.uri===uri){changed();return 'app';}
+        // it counts as working if the song started at any moment (you may pause or skip within these seconds)
+        for(let i=0;i<40&&!startedUris.has(uri);i++)await new Promise(r=>setTimeout(r,100));if(startedUris.has(uri)){changed();return 'app';}
+        if(token!==playSeq)return 'app';
         sdkBroken=true;}catch(e){if(e.reason==='PREMIUM_REQUIRED'){lastError='premium';changed();return null;}}}
     try{const d=await call('/me/player/devices');const dev=(d?.devices??[]).find(x=>x.is_active)??(d?.devices??[]).find(x=>x.type==='Smartphone')??d?.devices?.[0];
       if(!dev){lastError='no_device';changed();return null;}
@@ -130,6 +133,6 @@ export function createSpotify({onChange,rpc}={}){
   }
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)pickUp();});
   finishReturn().then(()=>{if(auth&&!profile)me();pickUp();});
-  return {connected:()=>!!auth,pickUp,connect,disconnect,play,pause,resume,seek,stop,search,position,duration,playing:playingNow,mode:()=>mode,
+  return {connected:()=>!!auth,warm:()=>{if(auth)ensurePlayer().catch(()=>{});},pickUp,connect,disconnect,play,pause,resume,seek,stop,search,position,duration,playing:playingNow,mode:()=>mode,
     deviceName:()=>remote?.device??null,error:()=>lastError,name:()=>profile?.display_name??null,premium:()=>profile?profile.product==='premium':null};
 }
