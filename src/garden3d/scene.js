@@ -664,6 +664,16 @@ const OB=[[-4.15,-2.2,1.45],[-.17,-.5,1.2],[2.35,-.5,1.85],[3.35,-2.95,1.0],[4.5
 for(let k=0;k<4;k++)OB.push([-.95+k*.05,2.0+k*.72,.35]);
 for(const [bx,bz,rot,len] of [[-2.7,3.1,.35,3.3],[2.55,3.75,-.35,2.6]])for(let t=-.5;t<=.501;t+=.1)OB.push([bx+Math.cos(rot)*len*t,bz-Math.sin(rot)*len*t,.62]);
 const SLOTS=[];for(let x=-6.0;x<=6.0;x+=.62)for(let z=-3.0;z<=6.0;z+=.62){const jx=x+(hash(x,z)-.5)*.2,jz=z+(hash(z,x)-.5)*.2;if(Math.hypot(jx,jz)<5.4*IK&&jz>-3.2&&!OB.some(([ox,oz,r])=>Math.hypot(jx-ox,jz-oz)<r+.12))SLOTS.push([jx,jz]);}
+// more room to plant (added after the first spots, so flowers placed from the first list never move):
+// the outer ring of lawn up to the brick border, and the back terrace behind the wall, around its pots and lanterns
+const LEGACY_SLOTS=SLOTS.length;
+{const OB2=[...OB,[-2.2,-5.0,.75],[2.9,-5.0,.75],[0.3,-5.55,.6],[-.9,-4.55,.55],[1.5,-4.5,.55],[-.8,-5.6,.35],[1.4,-5.6,.35]];
+ const free=(x,z)=>!OB2.some(([ox,oz,r])=>Math.hypot(x-ox,z-oz)<r+.12)&&!SLOTS.some(([sx,sz])=>Math.hypot(sx-x,sz-z)<.5);
+ const stairs=a=>Math.abs(Math.atan2(Math.sin(a-Math.PI/2.6),Math.cos(a-Math.PI/2.6)))<.32;
+ for(let x=-6.6;x<=6.6;x+=.62)for(let z=-6.6;z<=6.6;z+=.62){const jx=x+(hash(x,z)-.5)*.2,jz=z+(hash(z,x)-.5)*.2,r=Math.hypot(jx,jz);
+  const ring=r>=5.4*IK&&r<5.72*IK&&jz>-3.2&&!stairs(Math.atan2(jz,jx));
+  const back=jz<-3.98&&r<5.72*IK;
+  if((ring||back)&&free(jx,jz))SLOTS.push([jx,jz]);}}
 const idHash=id=>{let h=2166136261;for(const c of String(id))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
 const nearestSlot=(x,z,ok=()=>true)=>{let b=-1,bd=Infinity;SLOTS.forEach(([sx,sz],i)=>{if(!ok(i,sx,sz))return;const d=Math.hypot(sx-x,sz-z);if(d<bd){bd=d;b=i;}});return b;};
 const flowerRoot=new THREE.Group();flowerRoot.userData.dyn=true;scene.add(flowerRoot);
@@ -675,7 +685,7 @@ function setFlowers(list){
  const used=new Set([...shown.values()].map(o=>o.slot));
  for(const f of [...list].sort((a,b)=>String(a.created_at).localeCompare(String(b.created_at))||String(a.id).localeCompare(String(b.id)))){
   const cur=shown.get(f.id);if(cur&&cur.type===f.type&&cur.stage===f.stage&&cur.droop===!!f.droop&&cur.px===f.px)continue;
-  let slot=cur?.slot;if(slot===undefined&&f.px!=null&&f.pz!=null){slot=nearestSlot(f.px,f.pz);used.add(slot);}if(slot===undefined){slot=idHash(f.id)%SLOTS.length;for(let i=0;i<SLOTS.length&&used.has(slot);i++)slot=(slot+1)%SLOTS.length;used.add(slot);}
+  let slot=cur?.slot;if(slot===undefined&&f.px!=null&&f.pz!=null){slot=nearestSlot(f.px,f.pz);used.add(slot);}if(slot===undefined){slot=idHash(f.id)%LEGACY_SLOTS;for(let i=0;i<LEGACY_SLOTS&&used.has(slot);i++)slot=(slot+1)%LEGACY_SLOTS;used.add(slot);}
   if(cur)flowerRoot.remove(cur.g);
   const g=flower(f.type,f.stage);const [x,z]=f.px!=null&&f.pz!=null?[f.px,f.pz]:SLOTS[slot];g.position.set(x,.09,z);g.rotation.y=(idHash(f.id)%628)/100;g.scale.setScalar(1.9);
   if(f.droop)g.rotation.z=.18;g.userData.flowerId=f.id;g.traverse(o=>{o.userData.flowerId=f.id;});
