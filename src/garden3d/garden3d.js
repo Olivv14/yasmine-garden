@@ -60,7 +60,12 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
       await onPlant?.(type,spot);paintTray();};
     addEventListener('pointermove',move);addEventListener('pointerup',up);addEventListener('pointercancel',up);
   }
+  // the last picture of the garden (per light: day, dusk, night), shown at once while the 3D wakes up
+  const SNAP='garden.snap.';const snapImg=new Image();snapImg.className='garden3d-snap';snapImg.alt='';snapImg.decoding='async';
+  const lastSnap=L=>{try{return localStorage.getItem(SNAP+L);}catch{return null;}};
+  function saveSnap(){if(!api?.snapshot||document.hidden||element.classList.contains('full')||!element.isConnected)return;try{const d=api.snapshot();if(d&&d.length<900000)localStorage.setItem(SNAP+api.light,d);}catch{}}
   element.append(stage,loading,pins,full,tools,tray);
+  {const d=lastSnap(gardenLight());if(d){snapImg.src=d;element.prepend(snapImg);element.classList.add('has-snap');}}
 
   const pin=(cls,at,{side=false,only=null,dx=0,dy=0}={})=>{const n=document.createElement('div');n.className='pin '+cls;pins.append(n);return {n,at,side,only,dx,dy};};
   const score=who=>{const p=pin('score '+who,AT[who],{side:who==='oliver'});const b=document.createElement('b'),initial=document.createElement('em'),name=document.createElement('small'),count=document.createElement('span');b.append(initial,name,count);p.n.append(b,document.createElement('i'));p.parts={initial,name,count};p.n.hidden=true;return p;};
@@ -70,7 +75,7 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
   const falls=pin('landmark falls',AT.angel,{only:['day','dusk']});copy(falls.n,()=>t('culture.angel.title'));
   const all=[scores.yasmine,scores.oliver,song,storm,falls];
 
-  let api=null,preview=null,harissa=false,timer=null,lastFlowers=[],playing=false,destroyed=false;
+  let snapTimer=null,api=null,preview=null,harissa=false,timer=null,lastFlowers=[],playing=false,destroyed=false;
   const light=()=>preview??(harissa?'dusk':gardenLight());
   function place(){
     if(!api)return;const w=element.clientWidth,h=element.clientHeight,L=api.light;
@@ -97,6 +102,9 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
       api.setPlaying(playing);sendFlowers();
       timer=setInterval(()=>api?.setLight(light()),60000);
       element.classList.add('loaded');onReady?.();
+      // keep the picture fresh: a few seconds after start, then every few minutes and when you leave the app
+      setTimeout(saveSnap,4000);snapTimer=setInterval(saveSnap,180000);
+      addEventListener('pagehide',saveSnap);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&api?.snapshot){try{const d=api.snapshot();if(d&&d.length<900000)localStorage.setItem(SNAP+api.light,d);}catch{}}});
     }catch(error){element.classList.add('failed');onFail?.(error);}
   }
 
@@ -113,6 +121,6 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
     // straight to full screen with the watering can glowing (the only way to water now)
     openFull(){setFull(true);api?.pulseCan?.();},
     refreshTray(){if(element.classList.contains('full'))paintTray();},
-    destroy(){setFull(false);destroyed=true;clearInterval(timer);api?.destroy();api=null;element.remove();},
+    destroy(){setFull(false);destroyed=true;clearInterval(timer);clearInterval(snapTimer);api?.destroy();api=null;element.remove();},
   };
 }

@@ -1574,5 +1574,11 @@
   "spotify.noResults": "Nessun risultato",
   "spotify.handoffWorking": "Collegamento a Spotify…",
   "spotify.handoffDone": "Spotify è collegato. Tocca Fine (in alto a sinistra) per tornare a Between us.",
-  "spotify.handoffFailed": "Non è stato possibile collegare Spotify. Torna a Between us e riprova."
+  "spotify.handoffFailed": "Non è stato possibile collegare Spotify. Torna a Between us e riprova.",
+  "editor.loading": "Caricamento…",
+  "editor.undo": "Annulla",
+  "editor.redo": "Ripeti",
+  "editor.binHint": "Trascina uno sticker o un testo nel cestino per toglierlo",
+  "pu.pets": "Mostra le mascotte",
+  "pu.petsSub": "Emmy e i suoi amici che camminano sullo schermo"
 }

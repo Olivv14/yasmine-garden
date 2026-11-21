@@ -1574,5 +1574,11 @@
   "spotify.noResults": "Rien trouvé",
   "spotify.handoffWorking": "Connexion à Spotify…",
   "spotify.handoffDone": "Spotify est connecté. Touche OK (en haut à gauche) pour revenir à Between us.",
-  "spotify.handoffFailed": "Spotify n'a pas pu être connecté. Reviens dans Between us et réessaie."
+  "spotify.handoffFailed": "Spotify n'a pas pu être connecté. Reviens dans Between us et réessaie.",
+  "editor.loading": "Chargement…",
+  "editor.undo": "Annuler",
+  "editor.redo": "Rétablir",
+  "editor.binHint": "Glisse un autocollant ou un texte sur la corbeille pour le retirer",
+  "pu.pets": "Montrer les compagnons",
+  "pu.petsSub": "Emmy et ses amis qui se promènent à l'écran"
 }

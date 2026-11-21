@@ -36,6 +36,10 @@ const SKY={
 
 export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,partner,partnerOnline=()=>false,music,notify,tidyPhotos=async()=>{}}){
   const page=$('page-us');if(!page)return {render(){},clear(){}};
+  // pets shown or hidden: remembered on this phone
+  const PETS='pets.hidden';const petsOn=()=>{try{return localStorage.getItem(PETS)!=='1';}catch{return true;}};
+  const setPets=on=>{try{localStorage.setItem(PETS,on?'0':'1');}catch{}document.documentElement.classList.toggle('pets-hidden',!on);};
+  document.documentElement.classList.toggle('pets-hidden',!petsOn());
   let view=null,homes=[];
   const hide=n=>n?.classList.add('pu-gone');
 
@@ -97,7 +101,12 @@ export function createUsRedo({$,el,button,t,copy,getSnapshot,me,person,photoOf,p
       const b=button(()=>'',()=>{if(sel.value===o.value)return;sel.value=o.value;sel.dispatchEvent(new Event('change',{bubbles:true}));autoSavePrefs();paint();},'pu-lang');b.setAttribute('role','radio');b.dataset.value=o.value;
       b.append(svg(34,22,FLAG[code]??FLAG.en),el('span',undefined));b.lastChild.textContent=o.textContent;b.lastChild.lang=o.lang;b.lastChild.dir=o.dir;langs.append(b);}
     const note=el('div',undefined,'pu-note');const nd=el('span',undefined,'pu-dot amber');nd.append(icon('pen',18));note.append(nd,el('span',()=>t('pu.derjaNote')));
-    v.body.append(langs,note,saved('pu.savesItself'));
+    // the pets (Emmy and friends): shown or hidden on this phone
+    const pets=button(()=>'',()=>{setPets(!petsOn());paintPets();},'pu-row pu-switch');pets.setAttribute('role','switch');
+    const pd=el('span',undefined,'pu-dot rose');pd.append(icon('heart',20));const pw=el('span',undefined,'pu-row-words');pw.append(el('b',()=>t('pu.pets')),el('small',()=>t('pu.petsSub')));
+    const knob=el('span',undefined,'pu-knob');pets.append(pd,pw,knob);
+    const paintPets=()=>pets.setAttribute('aria-checked',String(petsOn()));paintPets();
+    v.body.append(langs,note,pets,saved('pu.savesItself'));
     function paint(){const on=card?.querySelector('.opt[aria-checked="true"]')?.dataset.mode;for(const b of looks.children)b.setAttribute('aria-checked',String(b.dataset.mode===on));
       const now=card?.querySelector('.seg button[aria-pressed="true"]')?.dataset.time;for(const b of sky.children)b.setAttribute('aria-checked',String(b.dataset.time===now));
       for(const b of langs.children)b.setAttribute('aria-checked',String(b.dataset.value===sel?.value));}

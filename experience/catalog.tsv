@@ -1575,3 +1575,9 @@ spotify.noResults	Nothing found	No se encontró nada	Rien trouvé	Nessun risulta
 spotify.handoffWorking	Connecting Spotify…	Conectando Spotify…	Connexion à Spotify…	Collegamento a Spotify…	قاعد نربط سبوتيفاي…
 spotify.handoffDone	Spotify is connected. Tap Done (top left) to go back to Between us.	Spotify está conectado. Toca OK (arriba a la izquierda) para volver a Between us.	Spotify est connecté. Touche OK (en haut à gauche) pour revenir à Between us.	Spotify è collegato. Tocca Fine (in alto a sinistra) per tornare a Between us.	سبوتيفاي تربط. انقر Done (فوق على اليسار) باش ترجع لـ Between us.
 spotify.handoffFailed	Spotify could not be connected. Go back to Between us and try again.	No se pudo conectar Spotify. Vuelve a Between us e inténtalo otra vez.	Spotify n'a pas pu être connecté. Reviens dans Between us et réessaie.	Non è stato possibile collegare Spotify. Torna a Between us e riprova.	سبوتيفاي ما تربطش. ارجع لـ Between us و عاود.
+editor.loading	Loading…	Cargando…	Chargement…	Caricamento…	قاعد يحمّل…
+editor.undo	Undo	Deshacer	Annuler	Annulla	ارجع
+editor.redo	Redo	Rehacer	Rétablir	Ripeti	عاود
+editor.binHint	Drag a sticker or a word onto the bin to remove it	Arrastra un sticker o un texto a la papelera para quitarlo	Glisse un autocollant ou un texte sur la corbeille pour le retirer	Trascina uno sticker o un testo nel cestino per toglierlo	جرّ الستيكر ولا الكلام للبوبالة باش تنحّيه
+pu.pets	Show the pets	Mostrar las mascotas	Montrer les compagnons	Mostra le mascotte	ورّي الحيوانات
+pu.petsSub	Emmy and friends walking on the screen	Emmy y sus amigos caminando por la pantalla	Emmy et ses amis qui se promènent à l'écran	Emmy e i suoi amici che camminano sullo schermo	Emmy و صحابها يتمشّاو في الشاشة

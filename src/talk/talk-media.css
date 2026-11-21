@@ -106,3 +106,31 @@ html.chat-full .chat-composer{position:static;bottom:auto}
 .call-btn.end{background:#E8443A}
 .call-btn.yes{background:#3DBE6E}
 .call-toast{position:fixed;left:50%;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 90px);transform:translateX(-50%);z-index:80;padding:10px 16px;border-radius:999px;background:rgba(20,14,22,.92);color:#fff;font:600 14px var(--font-sans);max-inline-size:calc(100vw - 32px);text-align:center}
+/* editor: loading, undo/redo, the bin, filters as pictures */
+.ed-top{gap:8px}
+.ed-history{position:absolute;inset-block-start:8px;inset-inline-start:8px;z-index:4;display:flex;gap:6px}
+.ed-round:disabled{opacity:.35}
+.ed-loading{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;background:rgba(18,12,20,.55);color:#FFF4E6;font:600 13px var(--font-sans);z-index:3}
+.ed-loading[hidden]{display:none}
+.ed-spin{inline-size:34px;block-size:34px;border-radius:50%;border:3px solid rgba(255,244,230,.25);border-top-color:var(--tm-accent);animation:ed-spin .8s linear infinite}
+@keyframes ed-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.ed-spin{animation-duration:2.4s}}
+.ed-panel-loading{display:flex;align-items:center;gap:10px;font:600 13px var(--font-sans)}
+.ed-panel-loading .ed-spin{inline-size:22px;block-size:22px}
+.ed-bin{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);inline-size:64px;block-size:64px;border-radius:50%;display:grid;place-items:center;background:rgba(18,12,20,.75);color:#FFF4E6;border:2px solid rgba(255,244,230,.4);z-index:4;transition:transform .15s ease,background .15s ease}
+.ed-bin[hidden]{display:none}
+.ed-bin.hot{background:#E8443A;border-color:#E8443A;transform:translateX(-50%) scale(1.2)}
+.ed-hint{flex-basis:100%;margin:2px 0 0;text-align:center;font:600 11px var(--font-sans);color:var(--tm-soft)}
+.ed-filters{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 6px;max-inline-size:100%;scroll-snap-type:x mandatory}
+button.ed-filter{flex:none;display:grid;justify-items:center;gap:4px;padding:0;border:0;background:none;color:var(--tm-ink);font:600 11px var(--font-sans);scroll-snap-align:center;box-shadow:none;min-block-size:0}
+button.ed-filter img{inline-size:64px;block-size:64px;border-radius:14px;object-fit:cover;border:2px solid transparent;background:rgba(255,244,230,.08)}
+button.ed-filter[aria-pressed=true] img{border-color:var(--tm-accent);box-shadow:0 0 0 2px rgba(255,213,138,.35)}
+button.ed-filter[aria-pressed=true]{color:var(--tm-accent)}
+.ed-thumb-wait{animation:ed-pulse 1s ease-in-out infinite alternate}
+@keyframes ed-pulse{to{opacity:.4}}
+/* pets can be hidden (Look & language) */
+html.pets-hidden .mascot,html.pets-hidden .mascot-bang{display:none!important}
+/* the garden shows its last picture at once while the 3D wakes up */
+.garden3d-snap{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover;z-index:1;pointer-events:none;transition:opacity .6s ease}
+.garden3d.loaded .garden3d-snap{opacity:0}
+.garden3d.has-snap .garden3d-loading{opacity:0}

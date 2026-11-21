@@ -254,6 +254,8 @@ function recoverSession(e){
 }
 // A sign-in that expired or was refused: forget it on this phone and ask for the secret word again.
 function backToGate(){client?.auth.signOut({scope:'local'}).catch(()=>{});if(!gate.open()||gate.isQuiet())gate.show();}
+// an action interrupted because the session was renewed or changed stops on purpose: nothing to show for it
+addEventListener('unhandledrejection',e=>{if(e.reason?.uiKey==='sync.changedSession')e.preventDefault();});
 let coldTries=0,activateTries=0;
 function authEvent(event,session){
  // waking up with a saved sign-in but no answer yet (no network for a moment): stay on the quiet screen and try again

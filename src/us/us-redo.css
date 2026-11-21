@@ -129,3 +129,8 @@ input.seek-range:disabled{opacity:.5}
 /* iPhone: the page Spotify's sign-in comes back to, inside its separate browser */
 .spotify-handoff{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:24px;text-align:center;color:#FFF4E6;background:linear-gradient(180deg,#1F2148,#5A3C66 45%,#1C1418)}
 .spotify-handoff-text{max-inline-size:320px;font:700 20px/1.4 var(--font-display,'Bricolage Grotesque',sans-serif)}
+.pu-switch .pu-knob{flex:none;inline-size:48px;block-size:28px;border-radius:999px;background:rgba(255,226,198,.22);position:relative;transition:background .2s ease}
+.pu-switch .pu-knob::after{content:'';position:absolute;inset-block-start:3px;inset-inline-start:3px;inline-size:22px;block-size:22px;border-radius:50%;background:#FFF4E6;transition:transform .2s ease}
+.pu-switch[aria-checked=true] .pu-knob{background:var(--dk-accent,#FFD58A)}
+.pu-switch[aria-checked=true] .pu-knob::after{transform:translateX(20px)}
+html[dir=rtl] .pu-switch[aria-checked=true] .pu-knob::after{transform:translateX(-20px)}
