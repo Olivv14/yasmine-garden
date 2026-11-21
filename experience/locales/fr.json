@@ -1750,5 +1750,12 @@
   "gs.pool.saveFailed": "Ton coup n'a pas été enregistré. La table est revenue comme avant.",
   "gs.invited": "{{name}} est invité : une notification arrive",
   "arch.poolTurn": "{{name}} a joué au billard",
-  "arch.poolTurnSub": "À toi de tirer"
+  "arch.poolTurnSub": "À toi de tirer",
+  "egg.cat": "Bsissa la chatte se réveille une seconde… ronron, puis se rendort",
+  "egg.fountain": "Une pièce dans la fontaine : que la prochaine visite arrive vite",
+  "egg.lantern": "Des lucioles ! Elles ne sortent que pour vous deux",
+  "egg.lanternDay": "Les lanternes dorment. Reviens ce soir…",
+  "egg.shell": "Approche-le de ton oreille : la même mer de Tunis à Caracas",
+  "egg.boat": "La barque est prête. Un jour, tous les deux, en mer",
+  "egg.petals": "Il pleut des pétales sur votre jardin"
 }

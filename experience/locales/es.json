@@ -1750,5 +1750,12 @@
   "gs.pool.saveFailed": "Tu tiro no se guardó. La mesa volvió a como estaba.",
   "gs.invited": "Invitaste a {{name}}: le llegará un aviso",
   "arch.poolTurn": "{{name}} tiró en el pool",
-  "arch.poolTurnSub": "Te toca tirar"
+  "arch.poolTurnSub": "Te toca tirar",
+  "egg.cat": "La gata Bsissa se despierta un segundo… ronronea y vuelve a dormir",
+  "egg.fountain": "Una moneda en la fuente: que la próxima visita llegue pronto",
+  "egg.lantern": "¡Luciérnagas! Solo salen para ustedes dos",
+  "egg.lanternDay": "Los faroles duermen. Vuelve esta noche…",
+  "egg.shell": "Acércala al oído: el mismo mar de Túnez a Caracas",
+  "egg.boat": "El bote está listo. Algún día, los dos, en el mar",
+  "egg.petals": "Llueven pétalos sobre su jardín"
 }

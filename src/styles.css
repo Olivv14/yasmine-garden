@@ -23,3 +23,6 @@
 @media(max-width:420px){#affectionDock{inset-inline-end:12px;inset-block-end:max(12px,env(safe-area-inset-bottom))}#affectionButton{padding:8px 12px}.garden-doors button,.quick-actions button{flex-basis:42%}}
 
 .auth{max-width:620px;margin:24px auto}.error{color:var(--error)}.feed-filter{max-width:280px}.round{margin-top:28px}.entry{overflow-wrap:anywhere}audio,video{max-width:100%}.statusbar{overflow-wrap:anywhere}.session-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.readonly{opacity:.8}
+/* iPhone: no grey flash on every tap (it made the garden blink when tapped again and again), no double-tap zoom */
+html{-webkit-tap-highlight-color:transparent}
+body{touch-action:manipulation}

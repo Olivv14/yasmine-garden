@@ -1750,5 +1750,12 @@
   "gs.pool.saveFailed": "Your shot wasn't saved. The table is back as it was.",
   "gs.invited": "{{name}} was invited: they'll get a notification",
   "arch.poolTurn": "{{name}} played in pool",
-  "arch.poolTurnSub": "Your shot"
+  "arch.poolTurnSub": "Your shot",
+  "egg.cat": "Bsissa the cat wakes up for a second… purr, then back to sleep",
+  "egg.fountain": "A coin in the fountain: may the next visit come soon",
+  "egg.lantern": "Fireflies! They only come out for the two of you",
+  "egg.lanternDay": "The lanterns are asleep. Come back tonight…",
+  "egg.shell": "Hold it to your ear: the same sea from Tunis to Caracas",
+  "egg.boat": "The boat is ready. One day, the two of you, at sea",
+  "egg.petals": "It's raining petals on your garden"
 }

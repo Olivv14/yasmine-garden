@@ -1750,5 +1750,12 @@
   "gs.pool.saveFailed": "Il tuo tiro non è stato salvato. Il tavolo è tornato com'era.",
   "gs.invited": "{{name}} è invitato: gli arriverà un avviso",
   "arch.poolTurn": "{{name}} ha tirato a biliardo",
-  "arch.poolTurnSub": "Tocca a te"
+  "arch.poolTurnSub": "Tocca a te",
+  "egg.cat": "La gatta Bsissa si sveglia un attimo… fa le fusa e torna a dormire",
+  "egg.fountain": "Una moneta nella fontana: che la prossima visita arrivi presto",
+  "egg.lantern": "Lucciole! Escono solo per voi due",
+  "egg.lanternDay": "Le lanterne dormono. Torna stasera…",
+  "egg.shell": "Avvicinala all'orecchio: lo stesso mare da Tunisi a Caracas",
+  "egg.boat": "La barca è pronta. Un giorno, voi due, in mare",
+  "egg.petals": "Piovono petali sul vostro giardino"
 }
