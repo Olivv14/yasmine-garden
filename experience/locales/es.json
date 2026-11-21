@@ -1580,5 +1580,9 @@
   "editor.redo": "Rehacer",
   "editor.binHint": "Arrastra un sticker o un texto a la papelera para quitarlo",
   "pu.pets": "Mostrar las mascotas",
-  "pu.petsSub": "Emmy y sus amigos caminando por la pantalla"
+  "pu.petsSub": "Emmy y sus amigos caminando por la pantalla",
+  "pu.searchSong": "Busca una canción",
+  "pu.added": "Añadida y sonando: {{title}}",
+  "pu.connectToSearch": "Conecta Spotify para buscar canciones",
+  "pu.allPlaylists": "Todas las listas"
 }

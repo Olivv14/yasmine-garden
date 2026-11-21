@@ -1580,5 +1580,9 @@
   "editor.redo": "عاود",
   "editor.binHint": "جرّ الستيكر ولا الكلام للبوبالة باش تنحّيه",
   "pu.pets": "ورّي الحيوانات",
-  "pu.petsSub": "Emmy و صحابها يتمشّاو في الشاشة"
+  "pu.petsSub": "Emmy و صحابها يتمشّاو في الشاشة",
+  "pu.searchSong": "لوّج على غناية",
+  "pu.added": "تزادت و تخدم: {{title}}",
+  "pu.connectToSearch": "اربط سبوتيفاي باش تلوّج على الغناني",
+  "pu.allPlaylists": "الليستات الكل"
 }

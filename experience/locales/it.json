@@ -1580,5 +1580,9 @@
   "editor.redo": "Ripeti",
   "editor.binHint": "Trascina uno sticker o un testo nel cestino per toglierlo",
   "pu.pets": "Mostra le mascotte",
-  "pu.petsSub": "Emmy e i suoi amici che camminano sullo schermo"
+  "pu.petsSub": "Emmy e i suoi amici che camminano sullo schermo",
+  "pu.searchSong": "Cerca una canzone",
+  "pu.added": "Aggiunta e in riproduzione: {{title}}",
+  "pu.connectToSearch": "Collega Spotify per cercare canzoni",
+  "pu.allPlaylists": "Tutte le playlist"
 }

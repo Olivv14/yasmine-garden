@@ -1580,5 +1580,9 @@
   "editor.redo": "Rétablir",
   "editor.binHint": "Glisse un autocollant ou un texte sur la corbeille pour le retirer",
   "pu.pets": "Montrer les compagnons",
-  "pu.petsSub": "Emmy et ses amis qui se promènent à l'écran"
+  "pu.petsSub": "Emmy et ses amis qui se promènent à l'écran",
+  "pu.searchSong": "Cherche une chanson",
+  "pu.added": "Ajoutée et en lecture : {{title}}",
+  "pu.connectToSearch": "Connecte Spotify pour chercher des chansons",
+  "pu.allPlaylists": "Toutes les listes"
 }
