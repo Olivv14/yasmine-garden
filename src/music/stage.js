@@ -309,7 +309,9 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     return item;}
   // For the toad card on Home: what your partner is listening to, if anything.
   const partnerListening=()=>{const p=together.partner();return p?.playing?{title:p.item.title}:null;};
-  return {playQueue,next:()=>step(1),prev:()=>step(-1),toggle,seek:sec=>seekTo(sec),addSearched,
+  // every song, newest first: the one list the Us player and the Home card both play from
+  const allSongs=()=>(getSnapshot()?.playlistItems??[]).filter(i=>!i.deleted_at).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
+  return {allSongs,playQueue,next:()=>step(1),prev:()=>step(-1),toggle,seek:sec=>seekTo(sec),addSearched,
     current:()=>({item:now,playing:isPlaying(),position:position(),duration:length(),index:qi,queueIds:queue.map(x=>x.id)}),
     spotify,open,render:paint,spotifyChanged,isPlaying,currentLine,partnerListening,nowTitle:()=>isPlaying()?now?.title??'':'',playing:()=>now,
     clear(){together.disconnect();now=null;listen=null;following=false;lyrics=null;lyricsFor='';selected=null;sheet?.close();}};

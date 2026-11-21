@@ -84,18 +84,34 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
   const partnerName=()=>{const snap=getSnapshot(),id=snap?.members?.find(m=>m.profile_id!==me())?.profile_id;return id?person(id):'';};
   // ---- The toad's card on Home drives the music player; the toad in the garden plays along
   let toadIcon=null;const playIcon=(on=!(player.paused&&!soundPlaying()))=>{if(toadIcon===on&&$('toadPlay').firstChild)return;toadIcon=on;$('toadPlay').replaceChildren(icon(on?'pause':'playTrack',18));};
-  function paintToad(){
-    const playing=music.isPlaying()||(!player.paused&&!player.ended)||soundPlaying(),title=music.nowTitle()||$('trackTitle')?.textContent?.trim()||'';
+  // The same player as the one in Us (music.current): the same song, the same play/pause, the same queue.
+  // "Playing" changes only once it holds for half a second (Spotify sends short paused blips), or at once after a tap.
+  let seenOn=null,seenAt=0,steadyOn=false;
+  function nowPlaying(force=false){const cur=music.current?.()??{};const on=!!cur.playing;
+    if(on!==seenOn){seenOn=on;seenAt=Date.now();}if(force||Date.now()-seenAt>=450)steadyOn=on;return {cur,on:steadyOn};}
+  function paintToad(force){
+    const {cur,on}=nowPlaying(force===true);
+    const playing=on||(!cur.item&&((!player.paused&&!player.ended)||soundPlaying()));
+    const title=cur.item?.title??(music.nowTitle()||$('trackTitle')?.textContent?.trim()||'');
     const partnerSong=!playing?music.partnerListening():null;
     if(partnerSong)copy($('toadLine'),()=>t('together.listening',{name:partnerName(),title:partnerSong.title}));else{const line=music.currentLine();if($('toadLine').textContent!==line){copy($('toadLine'),'');$('toadLine').textContent=line;}}
     copy($('toadState'),()=>t(playing?'toad.playing':'toad.resting'));
     if($('toadSong').textContent!==title)$('toadSong').textContent=title;
     copy($('toadPlay'),()=>t(playing?'music.pause':'music.play'),'aria-label');playIcon(playing);
+    $('toadPrev').disabled=!cur.item||cur.index<=0;$('toadNext').disabled=!!cur.item&&(cur.index<0||cur.index>=(cur.queueIds?.length??0)-1);
     $('toadCard').classList.toggle('on',playing);
     garden3d()?.setPlaying(playing);garden3d()?.setSong(playing?title:null);
   }
-  for(const ev of ['play','playing','pause','ended','emptied'])player.addEventListener(ev,paintToad);
-  $('toadPrev').onclick=()=>$('musicPrev').click();$('toadPlay').onclick=()=>{if(soundPlaying()){stopAllSound();if(!player.paused)$('musicPlay').click();paintToad();}else $('musicPlay').click();};onSound(()=>paintToad());$('toadNext').onclick=()=>$('musicNext').click();
+  for(const ev of ['play','playing','pause','ended','emptied'])player.addEventListener(ev,()=>paintToad());
+  // the buttons drive the shared queue; with nothing chosen yet, play starts the songs from the top (as in Us)
+  const startAll=()=>{const all=music.allSongs?.()??[];if(all.length)music.playQueue(all,0);else openMusic();};
+  $('toadPrev').onclick=()=>{if(music.current?.().item)music.prev();paintToad(true);};
+  $('toadPlay').onclick=async()=>{if(soundPlaying()&&!music.current?.().item){stopAllSound();paintToad(true);return;}
+    if(music.current?.().item)await music.toggle();else startAll();paintToad(true);};
+  $('toadNext').onclick=()=>{if(music.current?.().item)music.next();else startAll();paintToad(true);};
+  onSound(()=>paintToad());
+  // keep the card in step with the player while the app is open (cheap: it only touches what changed)
+  setInterval(()=>{if(!document.hidden)paintToad();},500);
   $('toadArt').onclick=()=>openMusic();
   // The stage: playlists, dedications and lyric cards (the old player stays in Us for uploads).
   function openMusic(){music.open();}
