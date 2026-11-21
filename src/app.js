@@ -54,7 +54,7 @@ const gate=createGate({$,signInWithWord:word=>signInWithWord(word),reducedMotion
 // iPhone: this page is Spotify's return inside the separate sign-in browser. Hand the code to the Home Screen app.
 if(spotifyHandoff){const box=el('div',undefined,'spotify-handoff');box.setAttribute('role','status');const msg=el('p',()=>t('spotify.handoffWorking'),'spotify-handoff-text');box.append(msg);document.body.append(box);
   leaveSpotifyCode(spotifyHandoff).then(()=>copy(msg,()=>t('spotify.handoffDone'))).catch(()=>copy(msg,()=>t('spotify.handoffFailed')));}
-const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),seeds:()=>seedsFor(snapshot,state.profile),plant:(type,spot)=>plantFlower(type,spot),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>{if(!eggs.toadTapped())shell.openMusic();},onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
+const home=createGardenHome({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,navigate:next=>navigate(next),seeds:()=>seedsFor(snapshot,state.profile),plant:(type,spot)=>plantFlower(type,spot),water:f=>waterFlower(f),remove:f=>removeFlower(f),notify:x=>notify(x),onToad:()=>{clearTimeout(toadTimer);if(eggs.toadTapped())return;toadTimer=setTimeout(()=>shell.openMusic(),450);},onDiscover:()=>shell.renderLearn(),canStart3D:()=>!gate.open()});
 // Music: playlists, dedications and lyric cards. Void RPCs (delete, remove) pass voidResult=true.
 const music=createMusic({$,el,button,t,copy,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,rpc:(name,args,voidResult=false)=>task(()=>api.rpc(name,args,voidResult)),notify:x=>notify(x),playUpload:id=>playTrackById(id),player,onNowPlaying:()=>shell.paintToad(),spotify:createSpotify({onChange:()=>{try{music?.render();}catch{}},rpc:(name,args)=>api?.context?api.rpc(name,args,true):Promise.reject(new Error('not ready'))})});
 // Talk: the chat. It reads and writes its own way (live room, pages, outbox), never through a full refresh.
@@ -256,7 +256,7 @@ function recoverSession(e){
 function backToGate(){client?.auth.signOut({scope:'local'}).catch(()=>{});if(!gate.open()||gate.isQuiet())gate.show();}
 // an action interrupted because the session was renewed or changed stops on purpose: nothing to show for it
 addEventListener('unhandledrejection',e=>{if(e.reason?.uiKey==='sync.changedSession')e.preventDefault();});
-let coldTries=0,activateTries=0;
+let coldTries=0,activateTries=0,toadTimer=null;
 function authEvent(event,session){
  // waking up with a saved sign-in but no answer yet (no network for a moment): stay on the quiet screen and try again
  if(event==='INITIAL_SESSION'&&!session&&hasSavedSession()&&coldTries<5){coldTries++;setTimeout(()=>client.auth.getSession().then(({data})=>{if(data?.session)authEvent('INITIAL_SESSION',data.session);else if(!hasSavedSession())authEvent('SIGNED_OUT',null);else authEvent('INITIAL_SESSION',null);}).catch(()=>authEvent('INITIAL_SESSION',null)),2500);return;}

@@ -1584,5 +1584,13 @@
   "pu.searchSong": "Cerca una canzone",
   "pu.added": "Aggiunta e in riproduzione: {{title}}",
   "pu.connectToSearch": "Collega Spotify per cercare canzoni",
-  "pu.allPlaylists": "Tutte le playlist"
+  "pu.allPlaylists": "Tutte le playlist",
+  "duel.fly": "Da dove volano le parole?",
+  "duel.from": "Da",
+  "duel.code.it": "ROM",
+  "duel.code.ve": "CCS",
+  "duel.code.tn": "TUN",
+  "duel.gate": "7 parole · 10 secondi ciascuna",
+  "duel.boardsNext": "{{name}} vola le stesse parole dopo di te",
+  "duel.takeoff": "Decolla"
 }

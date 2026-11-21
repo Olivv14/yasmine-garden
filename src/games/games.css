@@ -198,3 +198,26 @@ html.game-full #playStage #tdResponse{min-block-size:60px;max-block-size:16dvh}
 /* word duel: the result line and Next keep their place from the start, so answering does not shake the page */
 .duel-feedback{min-block-size:2.9em;margin-block:4px}
 button.duel-waiting{visibility:hidden}
+/* word duel start (approved DuelStart #3): boarding passes */
+.duel-fly{margin:4px 0 2px;font:800 21px var(--font-display,'Bricolage Grotesque',sans-serif)}
+.duel-passes{display:grid;gap:12px}
+.play-stage .game-card button.duel-pass:not(.rival-card):not(.pool-spin),html #playStage .game-card button.duel-pass,button.duel-pass{display:flex;align-items:stretch;min-block-size:92px;padding:0;border:0;border-radius:16px;background:#FBF3E4;color:#1C1418;text-align:start;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.3);transition:transform .15s ease,box-shadow .15s ease}
+.play-stage .game-card button.duel-pass[aria-checked=true]:not(.rival-card):not(.pool-spin),html #playStage .game-card button.duel-pass[aria-checked=true],button.duel-pass[aria-checked=true]{box-shadow:0 0 0 4px var(--dk-accent,#FFD58A),0 12px 24px rgba(0,0,0,.4);transform:scale(1.02)}
+.duel-pass-info{flex:1;display:grid;align-content:space-between;padding:10px 14px}
+.duel-pass-from{font:700 10px var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:#8A6A4A}
+.duel-pass-code{font:800 28px/1 var(--font-display,'Bricolage Grotesque',sans-serif);letter-spacing:.02em}
+.duel-pass-name{font:600 12px var(--font-sans)}
+.duel-pass-tear{inline-size:2px;background:repeating-linear-gradient(180deg,#D8C4A0 0 6px,transparent 6px 12px)}
+.duel-pass-stub{inline-size:92px;display:grid;place-items:center;color:#FBF3E4}
+.duel-pass[data-deck=it] .duel-pass-stub{background:linear-gradient(90deg,#009246 33.3%,#fff 33.3% 66.6%,#CE2B37 66.6%);color:#1C1418}
+.duel-pass[data-deck=ve] .duel-pass-stub{background:linear-gradient(180deg,#FFCC00 33.3%,#00247D 33.3% 66.6%,#CF142B 66.6%)}
+.duel-pass[data-deck=tn] .duel-pass-stub{background:#E70013}
+.duel-gate{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 14px;border-radius:16px;background:rgba(18,10,20,.5);border:1px solid rgba(255,226,198,.2);font:600 12px var(--font-sans)}
+.duel-gate-next{color:#9FE0B8}.duel-gate-wait{color:#FFD58A}
+.play-stage .game-card button.duel-takeoff,button.duel-takeoff{display:flex;align-items:center;justify-content:center;gap:10px;min-block-size:60px;font:800 19px var(--font-display,'Bricolage Grotesque',sans-serif)}
+html[dir=rtl] .duel-takeoff svg{transform:scaleX(-1)}
+html #playStage .game-card.duel{align-content:start}
+html #playStage .game-card.duel .duel-takeoff{margin-block-start:6px}
+#playStage[data-game="duel"] .game-backdrop{background:linear-gradient(180deg,#0E2A44 0%,#1E3A6E 42%,#1C1418 100%)}
+#playStage[data-game="duel"] .game-backdrop>svg{display:none}
+html #playStage .game-card.duel .duel-fly{margin-block:6px 8px}

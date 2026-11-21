@@ -23,15 +23,18 @@ export function createDuel({el,button,t,copy,locale,me,person,partner,getSnapsho
 
   // ---- home: pick a deck and start; what waits for your partner; your last result
   function home(){
-    view='home';shownResult=null;const snap=getSnapshot();root.replaceChildren(head(),el('p',()=>t('duel.intro',{name:name()}),'small'));
-    root.append(el('p',()=>t('duel.deckLabel'),'eyebrow'));
-    const row=el('div',undefined,'spice-picker');row.setAttribute('role','radiogroup');copy(row,()=>t('duel.deckLabel'),'aria-label');
-    for(const d of DUEL_DECKS){const b=button(()=>t('duel.deck.'+d),()=>{deck=d;try{localStorage.setItem(DECK_KEY,d);}catch{}home();},'spice');
-      b.setAttribute('role','radio');b.setAttribute('aria-checked',String(d===deck));b.dataset.deck=d;row.append(b);}
-    root.append(row);
-    const go=button(()=>t('duel.start'),()=>begin(null),'primary');go.id='duelStart';root.append(go);
-    for(const r of waitingForThem(snap,me()).filter(r=>r.game==='word_duel').slice(0,1))root.append(el('p',()=>t('duel.waiting',{name:name()}),'small muted'));
+    // approved DuelStart #3: each deck is a boarding pass; the words "fly" from Rome, Caracas or Tunis
+    view='home';shownResult=null;const snap=getSnapshot();root.replaceChildren(head(),el('p',()=>t('duel.fly'),'duel-fly'));
+    const passes=el('div',undefined,'duel-passes');passes.setAttribute('role','radiogroup');copy(passes,()=>t('duel.deckLabel'),'aria-label');
+    for(const d of DUEL_DECKS){const b=button(()=>'',()=>{deck=d;try{localStorage.setItem(DECK_KEY,d);}catch{}home();},'duel-pass');
+      b.setAttribute('role','radio');b.setAttribute('aria-checked',String(d===deck));b.dataset.deck=d;
+      const info=el('span',undefined,'duel-pass-info');info.append(el('small',()=>t('duel.from'),'duel-pass-from'),el('b',()=>t('duel.code.'+d),'duel-pass-code'),el('span',()=>t('duel.deck.'+d),'duel-pass-name'));
+      const stub=el('span',undefined,'duel-pass-stub');stub.append(icon('plane',26));b.append(info,el('span',undefined,'duel-pass-tear'),stub);passes.append(b);}
+    root.append(passes);
+    const waiting=waitingForThem(snap,me()).some(r=>r.game==='word_duel');
+    const strip=el('div',undefined,'duel-gate');strip.append(el('span',()=>t('duel.gate')),el('span',()=>waiting?t('duel.waiting',{name:name()}):t('duel.boardsNext',{name:name()}),waiting?'duel-gate-wait':'duel-gate-next'));root.append(strip);
     const last=finishedRounds(snap).find(f=>f.round.game==='word_duel');if(last)root.append(result(last.round));
+    const go=button(()=>t('duel.takeoff'),()=>begin(null),'primary duel-takeoff');go.id='duelStart';go.prepend(icon('plane',20));root.append(go);
   }
   function result(round){
     const snap=getSnapshot(),a=answersOf(snap,round.id),mine=a.find(x=>x.profile_id===me()),theirs=a.find(x=>x.profile_id!==me());
