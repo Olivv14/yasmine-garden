@@ -32,6 +32,8 @@ export function pointEvents(snap){
   }
   // shells found in the bottles (Questions): the prize's points
   for(const b of snap?.bottlePrizes??[])add(b.owner_id,b.points??0,b.created_at);
+  // boxes from a full row of stamps and from a full shelf (backend/020)
+  for(const b of snap?.rewardBoxes??[])add(b.owner_id,b.points??0,b.created_at);
   // learning: every 10 reviews in a day is a point
   for(const d of snap?.learnDays??[])add(d.profile_id,Math.floor((d.reviews??0)/10),String(d.day)+'T12:00:00Z');
   for(const r of snap?.playRounds??[]){
@@ -53,10 +55,14 @@ export function pointsBy(snap,since=0){
   return totals;
 }
 // Seeds: three to start, one more every 10 points; each flower you plant uses one.
+// Prize items (backend/020): a seed packet is one more seed; a golden jasmine is a seed for the golden flower only.
+export const prizeItems=(snap,me)=>[...(snap?.bottlePrizes??[]),...(snap?.rewardBoxes??[])].filter(p=>p.owner_id===me&&p.item).map(p=>p.item);
 export function seeds(snap,me){
-  const earned=STARTER_SEEDS+Math.floor((pointsBy(snap).get(me)??0)/SEED_POINTS);
-  const used=(snap?.flowers??[]).filter(f=>f.planted_by===me).length;
-  return {earned,used,left:Math.max(0,earned-used)};
+  const items=prizeItems(snap,me),mine=(snap?.flowers??[]).filter(f=>f.planted_by===me);
+  const earned=STARTER_SEEDS+Math.floor((pointsBy(snap).get(me)??0)/SEED_POINTS)+items.filter(i=>i==='seed').length;
+  const used=mine.filter(f=>f.flower_type!=='golden').length;
+  const golden=Math.max(0,items.filter(i=>i==='golden').length-mine.filter(f=>f.flower_type==='golden').length);
+  return {earned,used,left:Math.max(0,earned-used),golden};
 }
 // Rounds your partner started that wait for you (two weeks at most), newest first.
 export function waitingForMe(snap,me,now=Date.now()){

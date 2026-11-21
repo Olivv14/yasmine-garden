@@ -1,0 +1,50 @@
+/* What is inside the boxes (mockup QBox): the prize card, the list of everything a box can hold */
+.pz-card{display:grid;justify-items:center;gap:4px;padding:18px 16px 16px;border-radius:22px;text-align:center;color:#3A2416;
+  background:radial-gradient(120% 80% at 50% 0%,#FFF8EA,#F3E2C2);box-shadow:0 14px 28px rgba(0,0,0,.35);animation:pz-pop .45s cubic-bezier(.2,1.4,.4,1)}
+.pz-card.big{background:radial-gradient(120% 80% at 50% 0%,#EAF2FF,#C9DAF6)}
+.pz-card.legendary{background:radial-gradient(120% 80% at 50% 0%,#FFF2B8,#F2C14E);box-shadow:0 0 0 3px #FFD58A,0 18px 34px rgba(242,193,78,.45)}
+@keyframes pz-pop{from{transform:scale(.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.pz-card{animation:none}}
+.pz-banner{margin:0;font:800 11px var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:#8A6A4A}
+.pz-card.legendary .pz-banner{color:#7A4A0A}
+.pz-art{inline-size:110px;block-size:110px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.55)}
+.pz-art svg{inline-size:96px;block-size:96px}
+.pz-name{margin:4px 0 0;font:800 20px/1.15 var(--font-display);color:#3A2416}
+.pz-what{margin:0;font:600 18px/1.2 var(--font-hand);color:#5A3A24}
+.pz-points{margin:2px 0 0;font:800 14px var(--font-sans);color:#B5642A}
+.pz-acts{display:flex;gap:8px;margin-block-start:12px}
+.pz-sheet button.pz-btn{flex:1;min-block-size:48px;border-radius:14px;font:700 14px var(--font-sans);padding:0 12px}
+.pz-sheet button.pz-btn.main{border:0;background:linear-gradient(180deg,#FFD58A,#F2B05A);color:#2A1A10}
+.pz-sheet button.pz-btn.line{border:1px solid rgba(255,226,198,.45);background:transparent;color:inherit}
+.pz-tier{display:grid;gap:8px;margin-block-end:14px}
+.pz-tier-head{display:flex;justify-content:space-between;align-items:baseline}
+.pz-tier-head b{font:800 16px var(--font-display)}
+.pz-tier.big .pz-tier-head b{color:#A9BCFF}.pz-tier.legendary .pz-tier-head b{color:#FFD58A}
+.pz-odds{font:600 12px var(--font-sans);opacity:.8}
+.pz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px}
+.pz-cell{display:grid;justify-items:center;gap:4px;padding:8px 4px;border-radius:14px;border:1px dashed rgba(255,226,198,.3);text-align:center;font:600 11px/1.2 var(--font-sans)}
+.pz-cell svg{inline-size:44px;block-size:44px;filter:grayscale(1) brightness(.6);opacity:.55}
+.pz-cell.have{border-style:solid;border-color:rgba(255,213,138,.6);background:rgba(255,213,138,.08)}
+.pz-cell.have svg{filter:none;opacity:1}
+.pz-hint{font:600 13px var(--font-sans);opacity:.85;text-align:center}
+/* the bottles: "What can be inside", and the stamp album */
+.bt-next{flex-wrap:wrap}
+button.bt-inside{display:inline-flex;align-items:center;gap:6px;min-block-size:34px;padding:0 12px;border-radius:99px;border:1px solid rgba(255,213,138,.5);background:rgba(18,10,20,.45);color:#FFD58A;font:700 12px var(--font-sans);margin-inline-start:auto}
+.bt-album{display:grid;gap:8px;margin-block:10px 4px;padding:14px;border-radius:20px;background:linear-gradient(180deg,#FBF3E4,#EFDDBA);color:#3A2416;box-shadow:0 12px 24px rgba(0,0,0,.35)}
+.bt-album .bt-h{color:#3A2416;margin:0}
+.bt-album-head{display:flex;justify-content:space-between;align-items:baseline}
+.bt-album-count{font:600 18px var(--font-hand);color:#8A6A4A}
+.bt-album-row{display:grid;grid-template-columns:repeat(5,1fr) 52px;gap:6px;align-items:center}
+.bt-stamp{--stamp:#C9443A;position:relative;aspect-ratio:4/5;display:grid;place-items:center;color:#FFF4E6;
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--stamp) 70%,#fff),var(--stamp)) padding-box;border:4px dotted #F6EAD2;outline:2px solid #FFFDF6;outline-offset:-1px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.bt-stamp b{position:absolute;bottom:3px;inset-inline-end:5px;font:800 9px var(--font-sans);opacity:.85}
+.bt-stamp.empty{background:none;border:2px dashed rgba(138,106,74,.45);outline:0;box-shadow:none}
+.bt-album-box{display:grid;place-items:center}
+.bt-album button.bt-album-open{display:grid;place-items:center;gap:2px;min-block-size:44px;inline-size:52px;padding:4px 2px;border:0;border-radius:12px;background:#F2B05A;color:#2A1A10;font:800 9px/1.1 var(--font-sans);text-align:center}
+.bt-album button.bt-album-open.got{background:#3A2416;color:#FFD58A}
+.bt-album-lock{display:grid;place-items:center;inline-size:44px;block-size:44px;border-radius:12px;border:2px dashed rgba(138,106,74,.45);color:#8A6A4A}
+.bt-album .bt-hint{color:#6A4A2A;margin:0}
+/* the shelf's chest, and the golden seed in the garden tray */
+#learnShelf button.shelf-chest{justify-self:center;display:inline-flex;align-items:center;gap:8px;min-block-size:44px;padding:0 16px;border:0;border-radius:99px;background:linear-gradient(180deg,#FFE07A,#F2B05A);color:#2A1A10;font:800 14px var(--font-display);box-shadow:0 0 18px rgba(255,213,138,.55)}
+#learnShelf button.shelf-chest.got{background:rgba(18,10,20,.55);color:#FFD58A;box-shadow:none;border:1px solid rgba(255,213,138,.5)}
+.garden3d-seed.golden{background:radial-gradient(circle,#FFE07A55,transparent 70%)}

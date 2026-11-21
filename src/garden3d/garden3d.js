@@ -12,7 +12,7 @@ export function webglAvailable(){
 // Where the labels sit in the garden (x, y, z in scene units).
 const AT=Object.freeze({yasmine:[-4.15,2.85,-2.2],oliver:[3.35,4.45,-2.95],toad:[4.05,1.7,1.25],catatumbo:[34,12.5,-50],angel:[10.4,6.4,-4.8]});
 
-export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onReady,onFail,onWater,onPlant,seedsLeft=()=>0,mySide=()=>0}){
+export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onReady,onFail,onWater,onPlant,seedsLeft=()=>0,goldenLeft=()=>0,mySide=()=>0}){
   const element=document.createElement('div');element.className='garden3d';
   const stage=document.createElement('div');stage.className='garden3d-stage';
   const loading=document.createElement('p');loading.className='garden3d-loading';copy(loading,()=>t('garden3d.loading'));
@@ -43,15 +43,16 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
   const trayRow=document.createElement('div');trayRow.className='garden3d-tray-row';tray.append(trayHead,trayRow);
   let icons=null,ghost=null;
   function paintTray(){
-    const left=seedsLeft();copy(trayHead,()=>left?t('garden3d.seedsDrag',{count:left}):t('garden3d.noSeeds'));trayRow.replaceChildren();
-    for(const type of ['rose','jasmine','orchid','marigold','lavender','lilium']){
-      const b=document.createElement('button');b.type='button';b.className='garden3d-seed';b.dataset.type=type;b.disabled=!left;
+    const left=seedsLeft(),goldNow=goldenLeft();copy(trayHead,()=>left?t('garden3d.seedsDrag',{count:left}):goldNow?t('garden3d.goldenDrag'):t('garden3d.noSeeds'));trayRow.replaceChildren();
+    const gold=goldenLeft();
+    for(const type of ['rose','jasmine','orchid','marigold','lavender','lilium',...(gold?['golden']:[])]){
+      const b=document.createElement('button');b.type='button';b.className='garden3d-seed'+(type==='golden'?' golden':'');b.dataset.type=type;b.disabled=type==='golden'?!gold:!left;
       const img=document.createElement('img');img.alt='';if(icons?.[type])img.src=icons[type];
       const name=document.createElement('span');copy(name,()=>t('flowers.'+type));b.append(img,name);
       b.addEventListener('pointerdown',e=>startSeed(e,type,img.src));trayRow.append(b);}
   }
   function startSeed(e,type,src){
-    if(!seedsLeft()||!api)return;e.preventDefault();ghost=document.createElement('img');ghost.className='garden3d-ghost';ghost.src=src;ghost.alt='';document.body.append(ghost);
+    if(!(type==='golden'?goldenLeft():seedsLeft())||!api)return;e.preventDefault();ghost=document.createElement('img');ghost.className='garden3d-ghost';ghost.src=src;ghost.alt='';document.body.append(ghost);
     const move=ev=>{ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';};move(e);
     const up=async ev=>{removeEventListener('pointermove',move);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);ghost?.remove();ghost=null;
       if(ev.type!=='pointerup')return;const at=api.groundAt(ev.clientX,ev.clientY);if(!at)return;

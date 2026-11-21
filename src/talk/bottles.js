@@ -9,7 +9,7 @@ import {openSheet} from '../design/sheet.js';
 import {icon} from '../design/icons.js';
 import {QUESTION_BANK} from '../../experience/questions.mjs';
 
-export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,partner,throwBottle,answerBottle,openPrize,notify}){
+export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,partner,throwBottle,answerBottle,openPrize,openAlbum,prizes,notify}){
   const page=$('page-questions');if(!page)return {render(){},clear(){}};
   const root=el('section',undefined,'bt');page.prepend(root);page.classList.add('bt-on');
   const canvas=document.createElement('canvas');canvas.className='bt-sea';canvas.setAttribute('role','img');copy(canvas,()=>t('bt.seaLabel'),'aria-label');
@@ -112,34 +112,56 @@ export function createBottles({$,el,button,t,copy,locale,getSnapshot,me,person,p
   function paintOpened(){
     opened.replaceChildren();const {rs,as}=rounds();const order=rs.filter(r=>r.revealed_at).sort((a,b)=>String(a.revealed_at).localeCompare(String(b.revealed_at))||String(a.id).localeCompare(String(b.id)));
     // every third opened bottle holds a shell for each of you (backend/019)
-    const shell=new Set(order.filter((r,i)=>(i+1)%3===0).map(r=>r.id)),prizes=getSnapshot()?.bottlePrizes??[];
+    const shell=new Set(order.filter((r,i)=>(i+1)%3===0).map(r=>r.id)),won=getSnapshot()?.bottlePrizes??[];
     const done=[...order].reverse();
     const toNext=3-(order.length%3);
-    opened.append(el('div',undefined,'bt-next'));opened.lastChild.append(icon('sparkles',16),el('span',()=>t('bt.nextShell',{count:toNext})));
+    const next=el('div',undefined,'bt-next');next.append(icon('sparkles',16),el('span',()=>t('bt.nextShell',{count:toNext})));
+    if(prizes){const inside=button(()=>t('prize.inside'),()=>prizes.catalog(id=>owned(id)),'bt-inside');next.append(inside);}
+    opened.append(next);
+    paintAlbum(order);
     if(!done.length)return;
     opened.append(el('h3',()=>t('bt.opened',{count:done.length}),'bt-h'));const row=el('div',undefined,'bt-shelf');
-    for(const r of done){const mineP=prizes.find(p=>p.round_id===r.id&&p.owner_id===me()),hasShell=shell.has(r.id);
+    for(const r of done){const mineP=won.find(p=>p.round_id===r.id&&p.owner_id===me()),hasShell=shell.has(r.id);
       const b=button(()=>'',()=>{if(hasShell&&!mineP)openShell(r);else read(r);},'bt-done'+(hasShell&&!mineP?' bt-has-shell':''));const q=el('span',undefined,'bt-done-q');q.textContent=prompt(r.question_id);q.dir='auto';
       const art=el('span',undefined,'bt-done-art'+(hasShell?' bt-has-shell':''));art.append(hasShell?shellIcon():icon('mail',18));
-      const end=hasShell&&!mineP?el('span',()=>t('bt.openShell'),'bt-done-cta'):mineP?el('span',()=>t('bt.prize.'+mineP.tier)+' · +'+mineP.points,'bt-done-prize '+mineP.tier):el('span',dateFmt(r.revealed_at),'bt-done-date');
+      const end=hasShell&&!mineP?el('span',()=>t('bt.openShell'),'bt-done-cta'):mineP?el('span',()=>(mineP.item&&prizes?prizes.name(mineP.item):t('bt.prize.'+mineP.tier))+' · +'+mineP.points,'bt-done-prize '+mineP.tier):el('span',dateFmt(r.revealed_at),'bt-done-date');
       b.append(art,q,end);row.append(b);}
     opened.append(row);
     function read(r){const s=openSheet({title:h=>copy(h,()=>t('bt.openedTitle')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'bt-read'});
       const q=el('b',undefined,'bt-question');q.textContent=prompt(r.question_id);q.dir='auto';s.body.append(q);
-      for(const a of as.filter(a=>a.round_id===r.id).sort((x)=>x.owner_id===me()?-1:1)){const p=el('div',undefined,'bt-paper');p.append(el('span',()=>a.owner_id===me()?t('bt.you'):person(a.owner_id),'bt-kicker'));const body=el('p',undefined,'bt-answer');body.textContent=a.body;body.dir='auto';p.append(body);s.body.append(p);}}
+      for(const a of as.filter(a=>a.round_id===r.id).sort((x)=>x.owner_id===me()?-1:1)){const p=el('div',undefined,'bt-paper');p.append(el('span',()=>a.owner_id===me()?t('bt.you'):person(a.owner_id),'bt-kicker'));const body=el('p',undefined,'bt-answer');body.textContent=a.body;body.dir='auto';p.append(body);s.body.append(p);}
+      const mp=(getSnapshot()?.bottlePrizes??[]).find(p=>p.round_id===r.id&&p.owner_id===me());
+      if(mp&&prizes){const v=button(()=>t('prize.yours',{item:prizes.name(mp.item??'points')}),()=>{s.close();prizes.view(mp);},'bt-inside');v.prepend(icon('box',16));s.body.append(v);}}
   }
   function shellIcon(){const NS='http://www.w3.org/2000/svg',sv=document.createElementNS(NS,'svg');sv.setAttribute('viewBox','0 0 24 24');sv.setAttribute('width','22');sv.setAttribute('height','22');sv.setAttribute('aria-hidden','true');
     for(const [tag,at] of [['path',{d:'M12 3c5 0 9 4 9 9 0 3-2 6-9 9C5 18 3 15 3 12c0-5 4-9 9-9z',fill:'#FFC9A8'}],['path',{d:'M12 4v16M7 6l5 14M17 6l-5 14M4 10l8 10M20 10l-8 10',stroke:'#C98A6A','stroke-width':'1.2',fill:'none'}]]){const n=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(at))n.setAttribute(k,v);sv.append(n);}return sv;}
   // opening your shell: the box shakes, opens, and shows what was inside
   async function openShell(r){
-    const s=openSheet({title:h=>copy(h,()=>t('bt.shellTitle')),closeLabel:b=>copy(b,()=>t('common.close'),'aria-label'),className:'bt-prize-sheet'});
-    const stage=el('div',undefined,'bt-prize shaking');const box=el('div',undefined,'bt-box');box.append(el('span',undefined,'bt-box-lid'),el('span',undefined,'bt-box-body'),el('span',undefined,'bt-box-ribbon'));
-    const label=el('p',()=>t('bt.opening'),'bt-prize-label');stage.append(el('span',undefined,'bt-rays'),box);s.body.append(stage,label);
-    try{const [prize]=await Promise.all([openPrize(r.id),new Promise(res=>setTimeout(res,1100))]);
-      stage.classList.remove('shaking');stage.classList.add('open',prize.tier);
-      copy(label,()=>t('bt.prize.'+prize.tier));const pts=el('p',undefined,'bt-prize-points');pts.textContent='+'+prize.points;s.body.append(pts,el('p',()=>t('bt.prizeHint'),'bt-hint'));
-      notify(()=>t('bt.prizeToast',{points:prize.points}));}
-    catch{stage.classList.remove('shaking');copy(label,()=>t('bt.failed'));}
+    if(prizes){await prizes.open(()=>t('bt.shellTitle'),()=>openPrize(r.id));return;}
+  }
+  // what you already own (for "What can be inside"): items you won, and shop items that are yours
+  function owned(id){const snap=getSnapshot(),mine=[...(snap?.bottlePrizes??[]),...(snap?.rewardBoxes??[])].filter(p=>p.owner_id===me());
+    return mine.some(p=>p.item===id)||(snap?.shopPurchases??[]).some(p=>p.profile_id===me()&&p.item===id);}
+  // the stamp album (mockup QPostcards): a stamp for every bottle opened, rows of five; a full row holds a big box
+  const STAMP={everyday:['#E8644A','sun'],memories:['#5A3C66','heart'],future:['#1F5FA8','plane'],care:['#2E6A44','sprout']};
+  function paintAlbum(order){
+    const box=el('section',undefined,'bt-album');const rows=Math.max(1,Math.ceil((order.length+1)/5));
+    const head=el('div',undefined,'bt-album-head');head.append(el('h3',()=>t('album.title'),'bt-h'),el('span',()=>t('album.count',{count:order.length}),'bt-album-count'));box.append(head);
+    const boxes=(getSnapshot()?.rewardBoxes??[]).filter(b=>b.owner_id===me()&&b.source.startsWith('album:'));
+    for(let r=0;r<rows;r++){
+      const line=el('div',undefined,'bt-album-row');
+      for(let k=0;k<5;k++){const round=order[r*5+k];const st=el('span',undefined,'bt-stamp'+(round?'':' empty'));
+        if(round){const [col,ic]=STAMP[themeOf(round.question_id)]??['#C9443A','star'];st.style.setProperty('--stamp',col);st.append(icon(ic,18));const n=el('b');n.textContent=String(r*5+k+1);st.append(n);
+          st.setAttribute('role','img');copy(st,()=>prompt(round.question_id),'aria-label');}
+        line.append(st);}
+      const full=order.length>=(r+1)*5,got=boxes.find(b=>b.source==='album:'+(r+1));
+      const end=el('span',undefined,'bt-album-box');
+      if(got&&prizes){const v=button(()=>'',()=>prizes.view(got),'bt-album-open got');v.append(icon('box',16));copy(v,()=>prizes.name(got.item??'points'),'aria-label');end.append(v);}
+      else if(full&&prizes){const o=button(()=>t('album.open'),async()=>{await prizes.open(()=>t('album.boxTitle'),()=>openAlbum(r+1));},'bt-album-open');o.prepend(icon('box',16));end.append(o);}
+      else{const lock=el('span',undefined,'bt-album-lock');lock.append(icon('box',16));end.append(lock);}
+      line.append(end);box.append(line);}
+    box.append(el('p',()=>t('album.hint'),'bt-hint'));
+    opened.append(box);
   }
   return {render,clear(){card.replaceChildren();opened.replaceChildren();state='none';draft='';chosen=null;}};
 }

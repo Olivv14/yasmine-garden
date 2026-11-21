@@ -1706,3 +1706,40 @@ arch.thirsty	The {{flower}} is thirsty	{{flower}} tiene sed	{{flower}} a soif	{{
 arch.yourSide	Your side of the garden	Tu lado del jardín	Ton côté du jardin	Il tuo lato del giardino	جيهتك من الجنينة
 arch.herSide	{{name}}'s side of the garden	El lado de {{name}} del jardín	Le côté de {{name}} dans le jardin	Il lato di {{name}} del giardino	جيهة {{name}} من الجنينة
 arch.water	Water it	Regarla	L'arroser	Annaffiala	أسقيها
+prize.item.points	Just points	Solo puntos	Juste des points	Solo punti	نقاط برك
+prize.item.seed	A seed packet	Un sobre de semillas	Un sachet de graines	Una bustina di semi	باكو زريعة
+prize.item.sticker	A sticker for your chat	Un sticker para tu chat	Un sticker pour ton chat	Uno sticker per la chat	ستيكر للحكي متاعك
+prize.item.golden	The golden jasmine	El jazmín dorado	Le jasmin doré	Il gelsomino d'oro	الياسمينة الذهبية
+prize.what.points	They count everywhere points count	Cuentan donde cuentan los puntos	Ils comptent partout où les points comptent	Contano ovunque contano i punti	تتحسب وين تتحسب النقاط
+prize.what.seed	One more flower to plant in the garden	Una flor más para plantar en el jardín	Une fleur de plus à planter au jardin	Un fiore in più da piantare nel giardino	وردة زايدة تغرسها في الجنينة
+prize.what.sticker	A golden jasmine sticker for Talk	Un sticker de jazmín dorado para Hablar	Un sticker jasmin doré pour Parler	Uno sticker di gelsomino d'oro per Parla	ستيكر ياسمينة ذهبية للحكي
+prize.what.golden	A rare flower for your side of the garden	Una flor rara para tu lado del jardín	Une fleur rare pour ton côté du jardin	Un fiore raro per il tuo lato del giardino	وردة نادرة لجيهتك من الجنينة
+prize.what.heart	A new heart button, yours for free	Un nuevo botón de corazón, gratis para ti	Un nouveau bouton cœur, offert	Un nuovo bottone a cuore, tuo gratis	بوطون قلب جديد، ببلاش
+prize.what.theme	New colours for the whole app, yours for free	Colores nuevos para toda la app, gratis	De nouvelles couleurs pour toute l'app, offertes	Nuovi colori per tutta l'app, gratis	ألوان جديدة للتطبيقة الكلّ، ببلاش
+prize.what.mascot	A new friend for Emmy, yours for free	Un nuevo amigo para Emmy, gratis	Un nouvel ami pour Emmy, offert	Un nuovo amico per Emmy, gratis	صاحب جديد لإيمي، ببلاش
+prize.plant	Plant it now	Plantarla ya	La planter maintenant	Piantalo ora	إغرسها توّا
+prize.addSticker	Add to my stickers	Añadir a mis stickers	Ajouter à mes stickers	Aggiungi ai miei sticker	زيدو للستيكرات متاعي
+prize.stickerAdded	In your stickers	En tus stickers	Dans tes stickers	Nei tuoi sticker	في الستيكرات متاعك
+prize.useIt	Use it	Usarlo	L'utiliser	Usalo	استعملو
+prize.show	Show {{name}}	Enseñárselo a {{name}}	Montrer à {{name}}	Fallo vedere a {{name}}	ورّيه لـ{{name}}
+prize.showText	I found {{item}} in a {{tier}}!	¡Encontré {{item}} en una {{tier}}!	J'ai trouvé {{item}} dans une {{tier}} !	Ho trovato {{item}} in una {{tier}}!	لقيت {{item}} في {{tier}}!
+prize.shown	Sent	Enviado	Envoyé	Inviato	تبعث
+prize.toast	{{item}} · +{{points}}	{{item}} · +{{points}}	{{item}} · +{{points}}	{{item}} · +{{points}}	{{item}} · +{{points}}
+prize.inside	What can be inside	Qué puede haber dentro	Ce qu'il peut y avoir dedans	Cosa può esserci dentro	شنوّة ينجم يكون داخل
+prize.odds.small	most boxes · {{odds}}	la mayoría · {{odds}}	la plupart · {{odds}}	quasi tutte · {{odds}}	أغلب الصناديق · {{odds}}
+prize.odds.big	sometimes · {{odds}}	a veces · {{odds}}	parfois · {{odds}}	a volte · {{odds}}	ساعات · {{odds}}
+prize.odds.legendary	rare · {{odds}}	raro · {{odds}}	rare · {{odds}}	raro · {{odds}}	نادر · {{odds}}
+prize.catalogHint	Coloured ones are already yours. A box never gives you something twice while new things remain.	Los de color ya son tuyos. Una caja no repite mientras queden cosas nuevas.	Ceux en couleur sont déjà à toi. Une boîte ne donne jamais deux fois la même chose tant qu'il en reste de nouvelles.	Quelli colorati sono già tuoi. Una scatola non ripete finché restano cose nuove.	الملوّنين متاعك. الصندوق ما يعاودش نفس الحاجة ما دام فمّا جديد.
+prize.yours	Your prize: {{item}}	Tu premio: {{item}}	Ton cadeau : {{item}}	Il tuo premio: {{item}}	الجايزة متاعك: {{item}}
+album.title	Your stamp album	Tu álbum de sellos	Ton album de timbres	Il tuo album di francobolli	ألبوم الطوابع متاعك
+album.count	{{count}} stamps	{{count}} sellos	{{count}} timbres	{{count}} francobolli	{{count}} طوابع
+album.open	Big box	Caja grande	Grande boîte	Scatola grande	صندوق كبير
+album.boxTitle	A full row of stamps	Una fila llena de sellos	Une rangée de timbres complète	Una fila piena di francobolli	صفّ طوابع كامل
+album.hint	Every bottle you both open is a stamp. Five in a row open a big box.	Cada botella que abren los dos es un sello. Cinco en fila abren una caja grande.	Chaque bouteille ouverte à deux est un timbre. Cinq d'affilée ouvrent une grande boîte.	Ogni bottiglia aperta insieme è un francobollo. Cinque in fila aprono una scatola grande.	كل قرعة تحلّوها الزوز طابع. خمسة في صفّ يحلّو صندوق كبير.
+shelf.openChest	Open the legendary chest	Abrir el cofre legendario	Ouvrir le coffre légendaire	Apri lo scrigno leggendario	حلّ الصندوق الأسطوري
+shelf.chestOpened	Chest opened · {{item}}	Cofre abierto · {{item}}	Coffre ouvert · {{item}}	Scrigno aperto · {{item}}	الصندوق تحلّ · {{item}}
+shelf.chestTitle.tn	The Tunisian chest	El cofre de Túnez	Le coffre tunisien	Lo scrigno tunisino	الصندوق التونسي
+shelf.chestTitle.ve	The Venezuelan chest	El cofre de Venezuela	Le coffre vénézuélien	Lo scrigno venezuelano	الصندوق الفنزويلي
+shelf.goalChest	Fill a whole shelf: its country's legendary chest	Llena una repisa entera: el cofre legendario de su país	Remplis toute une étagère : le coffre légendaire de son pays	Riempi un intero scaffale: lo scrigno leggendario del suo paese	عمّر رفّ كامل: الصندوق الأسطوري متاع بلادو
+flowers.golden	Golden jasmine	Jazmín dorado	Jasmin doré	Gelsomino d'oro	ياسمينة ذهبية
+garden3d.goldenDrag	Your golden jasmine is ready: drag it onto your side	Tu jazmín dorado está listo: arrástralo a tu lado	Ton jasmin doré est prêt : glisse-le sur ton côté	Il tuo gelsomino d'oro è pronto: trascinalo sul tuo lato	الياسمينة الذهبية حاضرة: إسحبها لجيهتك

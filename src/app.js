@@ -34,13 +34,14 @@ import {syncDiscoveries,clearDiscoveries} from './garden3d/discoveries.js';
 import {createShop} from './shop/shop.js';
 import {seeds as seedsFor} from './games/score.js';
 import {createInbox} from './notify/inbox.js';
+import {createPrizes} from './prizes/prizes.js';
 initializeCopy();
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined&&!(typeof text==='function'&&text()===''))copy(n,text);if(['p','h3','a','bdi'].includes(tag))n.dir='auto';if(cls)n.className=cls;return n;};
 const button=(text,fn,cls)=>{const b=el('button',text,cls);b.type='button';b.onclick=fn;return b;};
 const uid=()=>crypto.randomUUID(),MAX_FILE=26214400;
 const MOODS=Object.fromEntries(['none','calm','hopeful','nostalgic','hug','difficult'].map(k=>[k,()=>t('mood.'+k)]));
-const FLOWERS=Object.fromEntries(FLOWER_TYPES.map(k=>[k,()=>t('flowers.'+k)]));
+const FLOWERS=Object.fromEntries([...FLOWER_TYPES,'golden'].map(k=>[k,()=>t('flowers.'+k)]));
 let avatarUI,nativeUI;
 let client,auth,operations,api,snapshot=null,epoch=0,selectedQuestion='q1',page='garden',authUser=null,authUnsubscribe=null,authSerial=Promise.resolve(),toastTimer,activeMutations=0;
 let mediaUrls=new Set(),viewGeneration=0,musicGeneration=0,musicIntent=false,musicIndex=0,musicURL=null,receptionInitialized=false,seenThoughtIds=new Set(),seenMessageIds=new Set();
@@ -70,16 +71,20 @@ const eggs=createEggs({el,t,copy,notify:x=>notify(x),me:()=>state.profile,person
 const usHero=createUsHero({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,photoOf:id=>avatarUI?.photo(id)??null,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x)});
 const usRedo=createUsRedo({$,el,button,t,copy,getSnapshot:()=>snapshot,me:()=>state.profile,person,photoOf:id=>avatarUI?.photo(id)??null,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,partnerOnline:()=>chat.partnerOnline(),music,notify:x=>notify(x),tidyPhotos:()=>avatarUI?.tidy?.()??Promise.resolve()});
 // Questions as messages in a bottle: throwing one starts a blind round with your answer; throwing it back answers it
+// what is inside the boxes (backend/020): shells in bottles, full rows of stamps, full shelves
+const prizes=createPrizes({el,button,t,copy,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,
+  actions:{notify:x=>notify(x),plant:()=>{navigate('garden');scrollTo({top:0});setTimeout(()=>{if(home.garden3d)home.garden3d.openFull();else home.openPlant();},350);},
+    saveSticker:data=>task(()=>api.rpc('save_sticker',{p_id:crypto.randomUUID(),p_image:data})),openShop:()=>shop.open(),sendText:body=>chat.sendText(body)}});
 const bottles=createBottles({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,notify:x=>notify(x),
   throwBottle:async(qid,body)=>{const id=operations.id('round:'+qid);try{await task(()=>api.rpc('start_round',{p_id:id,p_question_id:qid}));}catch(e){if(e.code!=='23505')throw e;}operations.done('round:'+qid);await task(()=>api.rpc('submit_round_answer',{p_round_id:id,p_body:body}));},
   answerBottle:(roundId,body)=>task(()=>api.rpc('submit_round_answer',{p_round_id:roundId,p_body:body})),
-  openPrize:roundId=>task(()=>api.rpc('open_bottle_prize',{p_round_id:roundId}))});
+  openPrize:roundId=>task(()=>api.rpc('open_bottle_prize',{p_round_id:roundId})),openAlbum:row=>task(()=>api.rpc('open_album_box',{p_row:row})),prizes});
 document.addEventListener('chat-words',e=>eggs.chatWords(e.detail));
 let eggsStarted=false;
 let composerTabs=null;
 const pushGuide=createPushGuide({$,el,button,t,copy});
 const homeDusk=createHomeDusk({$,el,button,t,copy,partnerName:()=>{const id=snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id;return id?person(id):'';}});
-const learn=createLearn({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,getApi:()=>api,me:()=>state.profile,person,notify:x=>notify(x),showInGarden:id=>{navigate('garden');scrollTo({top:0,behavior:'smooth'});setTimeout(()=>home.garden3d?.showSpot(id),400);}});
+const learn=createLearn({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,getApi:()=>api,me:()=>state.profile,person,notify:x=>notify(x),prizes,openChest:country=>task(()=>api.rpc('claim_shelf_chest',{p_country:country})),showInGarden:id=>{navigate('garden');scrollTo({top:0,behavior:'smooth'});setTimeout(()=>home.garden3d?.showSpot(id),400);}});
 // Opening a round from Play marks its bell rows (your turn, the result) as read.
 function markRoundSeen(roundId){const ids=(snapshot?.notifications??[]).filter(n=>n.ref_id===roundId&&!n.read_at&&n.recipient_id===state.profile&&['game_turn','game_result'].includes(n.kind)).map(n=>n.id);
   if(ids.length)task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true)).catch(()=>{});}

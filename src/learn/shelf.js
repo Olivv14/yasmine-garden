@@ -13,7 +13,7 @@ function replica(id,scale=1){const [w,h,body]=SHELF_ART[id]??[40,40,''];const s=
   s.setAttribute('width',String(Math.round(w*scale)));s.setAttribute('height',String(Math.round(h*scale)));s.setAttribute('aria-hidden','true');s.innerHTML=body;return s;}
 const voiceFor=from=>{try{const vs=speechSynthesis.getVoices();return (VOICE[from]??[]).map(l=>vs.find(v=>v.lang?.toLowerCase().startsWith(l.toLowerCase()))).find(Boolean)??null;}catch{return null;}};
 
-export function createShelf({el,button,t,copy,locale,getSnapshot,me,partner,person,showInGarden}){
+export function createShelf({el,button,t,copy,locale,getSnapshot,me,partner,person,showInGarden,prizes,openChest}){
   const root=el('section',undefined,'shelf');root.id='learnShelf';
   let picked=null;
   const date=iso=>{try{return new Intl.DateTimeFormat(locale()==='aeb-TN'?'ar-TN':locale(),{day:'numeric',month:'short'}).format(new Date(iso));}catch{return '';}};
@@ -40,11 +40,15 @@ export function createShelf({el,button,t,copy,locale,getSnapshot,me,partner,pers
         wood.append(b);
       }
       root.append(wood);}
-      if(full)root.append(el('p',()=>t('shelf.full.'+sh.from),'shelf-full'));
+      if(full){root.append(el('p',()=>t('shelf.full.'+sh.from),'shelf-full'));
+        // the country's legendary chest (backend/020): opened once, by you
+        const got=(snap.rewardBoxes??[]).find(b=>b.owner_id===me()&&b.source==='chest:'+sh.from);
+        if(prizes&&openChest){const c=button(()=>got?t('shelf.chestOpened',{item:prizes.name(got.item??'points')}):t('shelf.openChest'),()=>got?prizes.view(got):prizes.open(()=>t('shelf.chestTitle.'+sh.from),()=>openChest(sh.from)),'shelf-chest'+(got?' got':''));
+          c.prepend(icon('box',18));root.append(c);}}
     }
     if(picked)root.append(card(CULTURE.find(c=>c.id===picked),mine,theirs,when));
     else root.append(el('p',()=>found?t('shelf.pick'):t('shelf.empty'),'shelf-hint'));
-    const goal=el('div',undefined,'shelf-goal');goal.append(icon('star',20),el('span',()=>t('shelf.goal')));root.append(goal);
+    const goal=el('div',undefined,'shelf-goal');goal.append(icon('star',20),el('span',()=>t('shelf.goalChest')));root.append(goal);
   }
   function card(c,mine,theirs,when){
     const box=el('article',undefined,'shelf-card');const have=mine.has(c.id),theirsOnly=!have&&theirs.has(c.id);

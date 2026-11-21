@@ -220,7 +220,10 @@ const lights=[];
 const FL={rose:'#D9405F',marigold:'#F28A12',jasmine:'#FFFFFF',lavender:'#8E6FD8',lilium:'#FFF1E8',orchid:'#C548A8'};
 const stem=(h,bend=0)=>{const c=new THREE.QuadraticBezierCurve3(new THREE.Vector3(0,0,0),new THREE.Vector3(bend*.5,h*.5,0),new THREE.Vector3(bend,h,0));return mesh(new THREE.TubeGeometry(c,8,.018,5,false),mat.leaf);};
 const leafM=(x,y,rot,s=1,m=mat.leaf)=>{const l=mesh(new THREE.SphereGeometry(.1*s,8,6),m);l.scale.set(1,.18,.42);l.position.set(x,y,0);l.rotation.set(0,rot,rot>0?-.5:.5);return l;};
-function flower(type,stage){const g=new THREE.Group();
+// the golden jasmine (a legendary prize, backend/020): a jasmine whose flowers are gold and glow a little
+const goldM=new THREE.MeshStandardMaterial({color:'#F2C14E',side:THREE.DoubleSide,roughness:.28,metalness:.55,emissive:'#8A6418',emissiveIntensity:.45});
+function flower(type,stage){if(type==='golden'){const j=flower('jasmine',stage);j.traverse(o=>{if(o.isMesh&&(o.material===jasM||o.material===mat.white))o.material=goldM;});return j;}
+ const g=new THREE.Group();
  const mound=mesh(new THREE.SphereGeometry(.16,10,6),mat.soil);mound.scale.y=.32;g.add(mound);
  if(stage===0){const sd=mesh(new THREE.SphereGeometry(.03,8,6),M('#C9A86B'));sd.position.y=.05;g.add(sd);return g;}
  if(stage===1){g.add(stem(.18),leafM(-.07,.15,.3,.9,mat.leafLight),leafM(.07,.17,-.3,.9));return g;}
@@ -735,7 +738,7 @@ return {
  // canvas can make an iPhone drop the garden's own, and the garden would go blank)
  flowerIcons(){const out={},S=128,rt=new THREE.WebGLRenderTarget(S,S,{colorSpace:THREE.SRGBColorSpace}),px=new Uint8Array(S*S*4),cv=document.createElement('canvas');cv.width=cv.height=S;const g=cv.getContext('2d'),img=g.createImageData(S,S);
   const prevT=renderer.getRenderTarget(),prevC=renderer.getClearColor(new THREE.Color()),prevA=renderer.getClearAlpha();renderer.setClearColor(0x000000,0);
-  try{for(const t of ['rose','jasmine','orchid','marigold','lavender','lilium']){const sc=new THREE.Scene();sc.add(new THREE.HemisphereLight('#FFE6CC','#5A3A4A',1.6));const dl=new THREE.DirectionalLight('#FFD2A0',2.4);dl.position.set(3,5,4);sc.add(dl);
+  try{for(const t of ['rose','jasmine','orchid','marigold','lavender','lilium','golden']){const sc=new THREE.Scene();sc.add(new THREE.HemisphereLight('#FFE6CC','#5A3A4A',1.6));const dl=new THREE.DirectionalLight('#FFD2A0',2.4);dl.position.set(3,5,4);sc.add(dl);
    const f=flower(t,3);sc.add(f);const box=new THREE.Box3().setFromObject(f),c=box.getCenter(new THREE.Vector3()),sz=box.getSize(new THREE.Vector3());const dist=Math.max(sz.x,sz.y,sz.z)*1.25/Math.tan(15*Math.PI/180)/2;
    const cm=new THREE.PerspectiveCamera(30,1,.01,100);cm.position.set(c.x,c.y+dist*.32,c.z+dist);cm.lookAt(c);
    renderer.setRenderTarget(rt);renderer.clear();renderer.render(sc,cm);renderer.readRenderTargetPixels(rt,0,0,S,S,px);
