@@ -1584,5 +1584,13 @@
   "pu.searchSong": "لوّج على غناية",
   "pu.added": "تزادت و تخدم: {{title}}",
   "pu.connectToSearch": "اربط سبوتيفاي باش تلوّج على الغناني",
-  "pu.allPlaylists": "الليستات الكل"
+  "pu.allPlaylists": "الليستات الكل",
+  "duel.fly": "منين تطير الكلمات؟",
+  "duel.from": "من",
+  "duel.code.it": "ROM",
+  "duel.code.ve": "CCS",
+  "duel.code.tn": "TUN",
+  "duel.gate": "7 كلمات · 10 ثواني لكل وحدة",
+  "duel.boardsNext": "{{name}} تطير بنفس الكلمات بعدك",
+  "duel.takeoff": "طير"
 }

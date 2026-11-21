@@ -1585,3 +1585,11 @@ pu.searchSong	Search a song	Busca una canción	Cherche une chanson	Cerca una can
 pu.added	Added and playing: {{title}}	Añadida y sonando: {{title}}	Ajoutée et en lecture : {{title}}	Aggiunta e in riproduzione: {{title}}	تزادت و تخدم: {{title}}
 pu.connectToSearch	Connect Spotify to search songs	Conecta Spotify para buscar canciones	Connecte Spotify pour chercher des chansons	Collega Spotify per cercare canzoni	اربط سبوتيفاي باش تلوّج على الغناني
 pu.allPlaylists	All playlists	Todas las listas	Toutes les listes	Tutte le playlist	الليستات الكل
+duel.fly	Where do the words fly from?	¿De dónde vuelan las palabras?	D'où s'envolent les mots ?	Da dove volano le parole?	منين تطير الكلمات؟
+duel.from	From	Desde	Depuis	Da	من
+duel.code.it	ROM	ROM	ROM	ROM	ROM
+duel.code.ve	CCS	CCS	CCS	CCS	CCS
+duel.code.tn	TUN	TUN	TUN	TUN	TUN
+duel.gate	7 words · 10 seconds each	7 palabras · 10 segundos cada una	7 mots · 10 secondes chacun	7 parole · 10 secondi ciascuna	7 كلمات · 10 ثواني لكل وحدة
+duel.boardsNext	{{name}} flies the same words after you	{{name}} vuela las mismas palabras después	{{name}} prend le même vol après toi	{{name}} vola le stesse parole dopo di te	{{name}} تطير بنفس الكلمات بعدك
+duel.takeoff	Take off	Despegar	Décoller	Decolla	طير

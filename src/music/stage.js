@@ -109,15 +109,15 @@ export function createMusic({$,el,button,t,copy,getSnapshot,getClient,me,person,
     else if(listen){listen.started=Date.now()-sec*1000;together.share({item:now,playing:true,position:sec});}
     paintLyric();}
   function seekBar(){
-    const box=el('div',undefined,'seek');const range=document.createElement('input');range.type='range';range.min='0';range.step='1';range.className='seek-range';copy(range,()=>t('music.seek'),'aria-label');
+    const box=el('div',undefined,'seek');const range=document.createElement('input');range.type='range';range.min='0';range.step='any';range.className='seek-range';copy(range,()=>t('music.seek'),'aria-label');
     const a=el('span',undefined,'seek-time'),b=el('span',undefined,'seek-time');
     range.addEventListener('input',()=>{dragging=true;a.textContent=clock(+range.value);});
     range.addEventListener('change',()=>{dragging=false;seekTo(+range.value);});
     range.addEventListener('pointerup',()=>{if(dragging){dragging=false;seekTo(+range.value);}});
     box.append(a,range,b);return box;}
   function paintSeek(){const box=sheet?.body.querySelector('.seek');if(!box)return;const [a,range,b]=box.children,len=length();
-    box.hidden=!now||!len;if(box.hidden)return;range.max=String(Math.round(len));b.textContent=clock(len);
-    if(!dragging){const pos=Math.min(len,position());range.value=String(Math.round(pos));a.textContent=clock(pos);range.style.setProperty('--fill',(len?pos/len*100:0)+'%');}}
+    box.hidden=!now||!len;if(box.hidden)return;const mx=String(Math.round(len*10)/10);if(range.max!==mx)range.max=mx;b.textContent=clock(len);
+    if(!dragging){const pos=Math.min(len,position());range.value=String(Math.round(pos*10)/10);a.textContent=clock(pos);range.style.setProperty('--fill',(len?pos/len*100:0).toFixed(2)+'%');}}
   // The current lyric line, for the toad card on Home.
   const currentLine=()=>{if(!isPlaying()||lyrics?.state!=='synced')return '';return lyrics.synced[lineAt(lyrics.synced,position())]?.text??'';};
 

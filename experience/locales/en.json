@@ -1584,5 +1584,13 @@
   "pu.searchSong": "Search a song",
   "pu.added": "Added and playing: {{title}}",
   "pu.connectToSearch": "Connect Spotify to search songs",
-  "pu.allPlaylists": "All playlists"
+  "pu.allPlaylists": "All playlists",
+  "duel.fly": "Where do the words fly from?",
+  "duel.from": "From",
+  "duel.code.it": "ROM",
+  "duel.code.ve": "CCS",
+  "duel.code.tn": "TUN",
+  "duel.gate": "7 words · 10 seconds each",
+  "duel.boardsNext": "{{name}} flies the same words after you",
+  "duel.takeoff": "Take off"
 }
