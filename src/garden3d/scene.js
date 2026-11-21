@@ -31,11 +31,12 @@ const PALS={
 };let P=PALS[LIGHT];
 
 // ---------- renderer ----------
-const renderer=new THREE.WebGLRenderer({antialias:(devicePixelRatio||1)<2,powerPreference:'high-performance'});
+// HD: antialiasing on every phone (cheap on phone GPUs), soft shadow edges, textures sharp at grazing angles
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
 renderer.setPixelRatio(PR);renderer.setSize(W,H);
 renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=P.exposure;
-renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;renderer.shadowMap.type=THREE.PCFShadowMap;
+renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 GEL.append(renderer.domElement);
 
 const scene=new THREE.Scene();
@@ -589,6 +590,46 @@ function bake(root){root.updateMatrixWorld(true);const skip=new Set();root.trave
  root.traverse(o=>{if(!skip.has(o)&&o!==root&&!o.isCamera){o.updateMatrix();o.matrixAutoUpdate=false;}});
  return {merged:done.length,meshes:n};}
 G.bake=bake(scene);
+{const an=renderer.capabilities.getMaxAnisotropy();scene.traverse(o=>{const ms=Array.isArray(o.material)?o.material:[o.material];for(const m of ms)for(const k of ['map','normalMap','roughnessMap'])if(m?.[k]&&m[k].anisotropy<an){m[k].anisotropy=an;m[k].needsUpdate=true;}});}
+
+// ---------- easter eggs (after the bake, so they can move): a sleeping cat, a seashell, and little bursts ----------
+// Bsissa, the cat, asleep on the red cushion of the bench under the pergola
+const catG=new THREE.Group();catG.userData.dyn=true;{const fur=M('#E39A4E',{roughness:.9}),furL=M('#F6D2A2',{roughness:.9}),dark=M('#2A1A10');
+ const body=mesh(new THREE.SphereGeometry(.17,18,12),fur);body.scale.set(1.15,.62,.9);catG.add(body);
+ const head=new THREE.Group();head.position.set(.17,.06,.05);catG.add(head);G.catHead=head;
+ head.add(mesh(new THREE.SphereGeometry(.09,16,12),fur));for(const z of [-.05,.05]){const e=mesh(new THREE.ConeGeometry(.035,.07,8),fur);e.position.set(0,.09,z);head.add(e);}
+ const muzzle=mesh(new THREE.SphereGeometry(.045,12,8),furL);muzzle.position.set(.065,-.02,0);muzzle.scale.set(.8,.7,1);head.add(muzzle);
+ for(const z of [-.035,.035]){const eye=mesh(new THREE.SphereGeometry(.012,8,6),dark);eye.position.set(.075,.025,z);eye.scale.y=.25;head.add(eye);G['catEye'+(z<0?'L':'R')]=eye;}
+ const tail=mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-.16,-.02,0),new THREE.Vector3(-.24,-.03,.12),new THREE.Vector3(-.12,-.04,.22),new THREE.Vector3(.04,-.05,.2)]),16,.03,8,false),fur);catG.add(tail);G.catTail=tail;
+ const local=new THREE.Vector3(.38,.66,-.35).applyAxisAngle(UP,-.35).add(new THREE.Vector3(2.3,0,-.4));catG.position.copy(local);catG.rotation.y=-.35+Math.PI;catG.scale.setScalar(1.15);scene.add(catG);}
+// a seashell on the top step down to the sea
+const shellG=new THREE.Group();shellG.userData.dyn=true;{const sm=M('#FFD9C7',{roughness:.45}),sl=M('#E8A890');
+ const sh=mesh(new THREE.SphereGeometry(.16,20,10,0,Math.PI*2,0,Math.PI/2),sm);sh.scale.set(1,.45,.9);shellG.add(sh);
+ for(let i=-3;i<=3;i++){const r=mesh(new THREE.BoxGeometry(.012,.02,.3),sl);r.rotation.y=i*.25;r.position.y=.035;shellG.add(r);}
+ const a=Math.PI/2.6;shellG.position.set(Math.cos(a)*6.05*IK,.02,Math.sin(a)*6.05*IK);shellG.rotation.y=.6;scene.add(shellG);}
+// the eggs you can tap: precise meshes (cat, shell) or places (fountain, lanterns, the boat)
+G.eggs=[{id:'fountain',p:[-.1,1.0,-.4],r:1.15},{id:'boat',p:[Math.cos(Math.PI/2.6+.25)*8.7*IK,-2.0,Math.sin(Math.PI/2.6+.25)*8.7*IK],r:1.5},
+  ...lanterns.map(l=>({id:'lantern',p:[l.position.x,l.position.y+.35,l.position.z],r:.45}))];
+// little bursts: coins, fireflies, hearts, bubbles, petals
+const bursts=[];const burstG=new THREE.SphereGeometry(1,8,6),petalG=new THREE.CircleGeometry(1,6);
+function burst(at,{color='#FFD58A',n=24,speed=1.6,up=2.2,life=1.8,size=.035,grav=4,glow=false,petal=false,spread=.25}={}){
+ const m=new THREE.MeshBasicMaterial({color,transparent:true,side:THREE.DoubleSide,depthWrite:false,fog:false});
+ for(let i=0;i<n;i++){const o=new THREE.Mesh(petal?petalG:burstG,m);o.scale.setScalar(size*(glow?1:rr(.7,1.3)));o.position.set(at[0]+rr(-spread,spread),at[1]+rr(-spread*.4,spread*.4),at[2]+rr(-spread,spread));
+  const a=rnd()*Math.PI*2,v=rr(.3,1)*speed;o.userData={v:new THREE.Vector3(Math.cos(a)*v,rr(.5,1)*up,Math.sin(a)*v),life:life*rr(.7,1.2),age:0,grav,petal,spin:rr(-6,6)};scene.add(o);bursts.push(o);}
+ lastActive=performance.now();}
+function stepBursts(dt){for(let i=bursts.length-1;i>=0;i--){const o=bursts[i],u=o.userData;u.age+=dt;u.v.y-=u.grav*dt;
+  if(u.petal){u.v.x+=Math.sin(u.age*3+i)*dt*.6;o.rotation.x+=u.spin*dt;o.rotation.y+=u.spin*.7*dt;}
+  o.position.addScaledVector(u.v,dt);o.material.opacity=Math.max(0,1-u.age/u.life);if(u.age>=u.life){scene.remove(o);bursts.splice(i,1);}}
+ if(bursts.length)lastActive=performance.now();}
+let catWake=0,skyTaps=[];
+function egg(id,hp){
+ if(id==='cat'){catWake=performance.now();burst([catG.position.x,catG.position.y+.35,catG.position.z],{color:'#FF6B8A',n:10,speed:.25,up:.9,grav:-.2,life:2.4,size:.05});}
+ else if(id==='fountain'){burst([-.1,1.15,-.4],{color:'#F2C14E',n:8,speed:.6,up:3,size:.04,life:1.1});setTimeout(()=>burst([-.1,.5,-.4],{color:'#BFE3FF',n:30,speed:1.4,up:1.6,size:.03,life:1.2}),550);}
+ else if(id==='lantern'){if(LIGHT==='day'){eventCb?.({kind:'egg',id:'lanternDay'});return;}burst(hp,{color:'#FFE9A0',n:26,speed:.9,up:.5,grav:-.15,life:3,size:.025,glow:true,spread:.5});}
+ else if(id==='shell'){burst([shellG.position.x,.3,shellG.position.z],{color:'#DFF4FF',n:16,speed:.3,up:1,grav:-.4,life:2.2,size:.04});}
+ else if(id==='boat'){burst(hp,{color:'#FFFFFF',n:20,speed:1.2,up:1.4,size:.035,life:1.1});}
+ else if(id==='petals'){for(let k=0;k<4;k++)setTimeout(()=>burst([rr(-3,3),7,rr(-2,3)],{color:['#FF9EC2','#FFFFFF','#FFD58A','#C9A8FF'][k],n:22,speed:.5,up:0,grav:.9,life:7,size:.07,petal:true,spread:3}),k*300);}
+ eventCb?.({kind:'egg',id});}
 
 
 
@@ -608,8 +649,10 @@ let busy=false,lastActive=performance.now();
 controls.addEventListener('start',()=>{busy=true;controls.autoRotate=false;});controls.addEventListener('end',()=>{busy=false;lastActive=performance.now();});
 
 // sharp on every screen, stepping down only if the phone struggles
-const DPR=devicePixelRatio||1,LV=[Math.min(DPR,2),Math.min(DPR,1.6),Math.min(DPR,1.25)];let lvl=0;
-function resize(){const w=GEL.clientWidth,h=GEL.clientHeight;if(!w||!h)return;renderer.setPixelRatio(LV[lvl]);renderer.setSize(w,h);cam.aspect=w/h;cam.fov=w/h<.82?46:42;cam.updateProjectionMatrix();lastActive=performance.now();}
+const DPR=devicePixelRatio||1,LV=[Math.min(DPR,2.5),Math.min(DPR,2),Math.min(DPR,1.5)];let lvl=0,shownW=0,shownH=0,shownPR=0;
+// a resize clears the picture: only when the size really changed, and drawn again at once (no blank frame, no flicker)
+function resize(){const w=GEL.clientWidth,h=GEL.clientHeight;if(!w||!h)return;if(w===shownW&&h===shownH&&LV[lvl]===shownPR)return;shownW=w;shownH=h;shownPR=LV[lvl];
+ renderer.setPixelRatio(LV[lvl]);renderer.setSize(w,h);cam.aspect=w/h;cam.fov=w/h<.82?46:42;cam.updateProjectionMatrix();lastActive=performance.now();try{renderer.render(scene,cam);}catch{}}
 const sizeWatch=new ResizeObserver(resize);sizeWatch.observe(GEL);resize();
 
 // rest when the garden is scrolled away or the app is in the background
@@ -675,13 +718,17 @@ const onUp=e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>7)retur
  // the toad counts every tap (quick taps make him dance), so a tap on him is never a double tap to fly
  if(G.toadBody&&ray.intersectObject(G.toadBody,true).length){lastTap=null;tapCb?.({kind:'toad'});return;}
  const tnow=performance.now();if(lastTap&&tnow-lastTap.t<320&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<30){lastTap=null;onDbl(e);return;}lastTap={t:tnow,x:e.clientX,y:e.clientY};if(!tapCb)return;
+ if(ray.intersectObject(catG,true).length){egg('cat');return;}if(ray.intersectObject(shellG,true).length){egg('shell');return;}
  const fh=ray.intersectObject(flowerRoot,true);if(fh.length&&fh[0].object.userData.flowerId){tapCb({kind:'flower',id:fh[0].object.userData.flowerId});return;}
  if(LIGHT==='night'&&moonMesh&&ray.intersectObject(moonMesh,false).length){tapCb({kind:'moon'});return;}
  const hs=ray.intersectObjects(scene.children,true).filter(h=>h.object.isMesh&&h.distance<120);
  if(hs.length){const hp=hs[0].point;let best=null,bd=Infinity;
   for(const s of G.spots||[]){if(s.id==='catatumbo'&&LIGHT!=='night')continue;const dd=hp.distanceTo(_v.set(...s.p));if(dd<s.r&&dd<bd){bd=dd;best=s.id;}}
   if(best){tapCb({kind:'spot',id:best});return;}
+  for(const e of G.eggs||[]){if(hp.distanceTo(_v.set(...e.p))<e.r){egg(e.id,hp.toArray());return;}}
   if(hp.y<.4&&Math.hypot(hp.x,hp.z)<5.4){tapCb({kind:'soil'});return;}}
+ // five taps on the sky within three seconds: petals rain on the island
+ {const now=performance.now();skyTaps=skyTaps.filter(x=>now-x<3000);skyTaps.push(now);if(skyTaps.length>=5){skyTaps=[];egg('petals');}}
  tapCb({kind:'none'});};
 renderer.domElement.addEventListener('pointerdown',onDown);renderer.domElement.addEventListener('pointermove',onMove);renderer.domElement.addEventListener('pointerup',onCanUp);renderer.domElement.addEventListener('pointercancel',onCanUp);renderer.domElement.addEventListener('pointerup',onUp);
 
@@ -699,6 +746,9 @@ renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.el
  controls.update(step);
  glowRing.visible=!canDrag;glowRing.material.opacity=.35+.25*Math.sin(t*3);
  if(canDrag&&canHover&&drops.length<40){const d=mesh(dropG,dropM,{cast:false});const sp=new THREE.Vector3(1.1,1.06,0).applyMatrix4(can.matrixWorld);d.position.copy(sp);d.userData.v=-.5;scene.add(d);drops.push(d);}
+ stepBursts(step);
+ {const k=Math.max(0,1-(performance.now()-catWake)/3500),awake=k>0;catG.children[0].scale.y=.62+Math.sin(t*2.2)*.025;G.catHead.rotation.z=awake?.45*Math.min(1,k*3):Math.sin(t*.7)*.04;
+  G.catEyeL.scale.y=G.catEyeR.scale.y=awake?1:.25;G.catTail.rotation.y=Math.sin(t*(awake?6:1.2))*(awake?.25:.08);}
  for(let i=drops.length-1;i>=0;i--){const d=drops[i];d.userData.v-=9.8*step;d.position.y+=d.userData.v*step;if(d.position.y<.12){scene.remove(d);drops.splice(i,1);}}
  const playing=toadPlaying;
  if(!reduce){const w=G.water;if(w)w.material.uniforms.time.value+=step*.45;if(G.fallTex)G.fallTex.offset.y+=step*1.1;
@@ -719,7 +769,8 @@ renderer.setAnimationLoop(()=>{const dt=Math.min(clock.getDelta(),.1),t=clock.el
   if(G.camelTail){G.camelTail.rotation.z=Math.sin(t*2.3)*.35;G.camelTail.updateMatrix();}}
  renderer.render(scene,cam);
  if(frameCb)frameCb();
- if(++warm>120&&!idle){fpsN++;fpsT+=dt;if(fpsT>2.5){const fps=fpsN/fpsT;fpsN=0;fpsT=0;if(fps<45&&lvl<LV.length-1&&LV[lvl+1]<LV[lvl]){lvl++;resize();}}}});
+ // step down only after 4 s of real slowness while you move the garden (a short busy moment never blurs it)
+ if(++warm>180&&busy){fpsN++;fpsT+=dt;if(fpsT>4){const fps=fpsN/fpsT;fpsN=0;fpsT=0;if(fps<32&&lvl<LV.length-1&&LV[lvl+1]<LV[lvl]){lvl++;resize();}}}});
 // get the other times of day ready in the background, so switching is instant
 const warmTimer=setTimeout(()=>{if(busy)return;const cur=LIGHT;for(const L of ['day','dusk','night'])if(L!==cur){applyLight(L);renderer.compile(scene,cam);}applyLight(cur);updGlow();},2500);
 

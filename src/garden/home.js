@@ -40,7 +40,7 @@ export function createGardenHome({$,el,button,t,copy,locale,getSnapshot,me,perso
 
   // night events in the 3D sky: a shooting star (at most one note every two minutes) and a full moon
   let lastStarNote=0;
-  function skyEvent(e){if(document.hidden)return;if(e.kind==='ownSide'){notify(()=>t('garden3d.ownSide'));return;}if(e.kind==='star'){if(Date.now()-lastStarNote<120000)return;lastStarNote=Date.now();notify(()=>t('garden.shootingStar'));}if(e.kind==='fullMoon')notify(()=>t('garden.fullMoon'));}
+  function skyEvent(e){if(document.hidden)return;if(e.kind==='ownSide'){notify(()=>t('garden3d.ownSide'));return;}if(e.kind==='star'){if(Date.now()-lastStarNote<120000)return;lastStarNote=Date.now();notify(()=>t('garden.shootingStar'));}if(e.kind==='fullMoon')notify(()=>t('garden.fullMoon'));if(e.kind==='egg'&&e.id)notify(()=>t('egg.'+e.id));}
   function greeting(){const h=new Date().getHours(),key=h<5||h>=22?'home.greetNight':h<12?'home.greetMorning':h<18?'home.greetAfternoon':'home.greetEvening';copy($('gardenTitle'),()=>t(key,{name:person(me())}));}
   // What's new from your partner, in one line: their latest planting, shared note or answer.
   function partnerLine(snap){
