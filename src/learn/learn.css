@@ -53,3 +53,42 @@ html.learn-open .bottom-nav,html.learn-open #affectionDock{visibility:hidden}
 .learn-session .learn-word{font-size:clamp(26px,4.6dvh,34px)}
 .learn-session button.ls-option{min-block-size:46px}
 .learn-session .ls-rate button{min-block-size:52px}
+/* The discovery shelf (mockup "Discovery shelf"): replicas on two wooden shelves, a paper card for the one you tap */
+.shelf{display:grid;gap:10px;padding:18px 14px 16px;border-radius:24px;color:#FFF4E6;margin-block:0 16px;background:linear-gradient(180deg,#1F2148 0%,#3A2A50 40%,#1C1418 100%);border:1px solid rgba(255,226,198,.16)}
+.shelf-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.shelf-title{margin:0;font:800 22px/1.1 var(--font-display,'Bricolage Grotesque'),sans-serif;color:#FFF4E6}
+.shelf-sub{margin:2px 0 0;font:600 12px var(--font-sans);color:#FFE2C6}
+.shelf-ring{--p:0%;flex:none;inline-size:54px;block-size:54px;border-radius:50%;background:conic-gradient(#FFD58A 0 var(--p),rgba(255,226,198,.15) var(--p) 100%);display:grid;place-items:center}
+.shelf-ring-in{inline-size:42px;block-size:42px;border-radius:50%;background:#2A2250;display:grid;place-items:center;font:800 13px var(--font-sans);color:#FFF4E6}
+.shelf-label{margin:8px 0 0;font:700 11px var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:#FF9E9E}
+.shelf-label[data-from=ve]{color:#FFE07A}
+.shelf-wood{position:relative;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;justify-items:center;padding:6px 2px 14px;margin-block-end:6px;
+  background:linear-gradient(#8A5A3A,#5A3A24) bottom/100% 12px no-repeat}
+.shelf-wood::after{content:"";position:absolute;inset-inline:0;bottom:-8px;block-size:10px;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);pointer-events:none}
+.shelf-wood.full{filter:drop-shadow(0 0 10px rgba(255,213,138,.55))}
+.shelf button.shelf-item{display:grid;place-items:end center;inline-size:100%;min-block-size:70px;padding:0 0 2px;margin:0;border:0;background:none;color:inherit;position:relative;cursor:pointer;border-radius:12px;transition:transform .2s}
+.shelf button.shelf-item svg{max-inline-size:58px;max-block-size:66px;inline-size:auto;block-size:auto;filter:drop-shadow(0 4px 4px rgba(0,0,0,.35))}
+.shelf button.shelf-item.found:active,.shelf button.shelf-item.picked{transform:translateY(-4px)}
+.shelf button.shelf-item.picked::before{content:"";position:absolute;inset:auto 18% -6px;block-size:4px;border-radius:2px;background:#FFD58A}
+.shelf-unknown{inline-size:46px;block-size:56px;border-radius:12px;border:2px dashed rgba(255,226,198,.3);display:grid;place-items:center;color:rgba(255,226,198,.5)}
+.shelf-unknown.big{inline-size:64px;block-size:78px;color:#8A6A4A;border-color:#B89A7A}
+.shelf-them{position:absolute;top:2px;inset-inline-end:4px;inline-size:20px;block-size:20px;border-radius:50%;background:#9FE0B8;color:#1C1418;font:800 10px var(--font-sans);display:grid;place-items:center;box-shadow:0 0 0 2px #2A2250}
+.shelf-full{margin:0;text-align:center;font:600 20px var(--font-hand,'Caveat'),cursive;color:#FFD58A}
+.shelf-hint{margin:4px 0 0;text-align:center;font:600 13px var(--font-sans);color:#FFE2C6}
+.shelf-card{margin-block-start:6px;padding:16px;border-radius:6px 18px 18px 6px;color:#3A2416;box-shadow:0 12px 24px rgba(0,0,0,.4);
+  background:repeating-linear-gradient(180deg,transparent 0 29px,rgba(150,110,70,.22) 29px 30px),linear-gradient(180deg,#FBF3E4,#EFDDBA);animation:shelf-in .25s ease-out}
+@keyframes shelf-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.shelf-card{animation:none}}
+.shelf-card-row{display:flex;gap:14px;align-items:center}
+.shelf-card-row svg{flex:none;max-inline-size:72px;max-block-size:86px;inline-size:auto;block-size:auto}
+.shelf-card-words{min-inline-size:0}
+.shelf-eyebrow{margin:0;font:700 10px var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:#8A6A4A}
+.shelf-word{margin:2px 0 0;font:800 22px/1.15 var(--font-display,'Bricolage Grotesque'),sans-serif;color:#3A2416}
+.shelf-meaning{margin:2px 0 0;font:600 20px/1.15 var(--font-hand,'Caveat'),cursive;color:#3A2416}
+.shelf-card-acts{display:flex;gap:8px;margin-block-start:12px}
+.shelf button.shelf-btn,#learnShelf button.shelf-btn{flex:1;min-block-size:44px;border-radius:12px;font:700 13px var(--font-sans);display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 10px}
+.shelf button.shelf-btn.dark,#learnShelf button.shelf-btn.dark{border:0;background:#3A2416;color:#FBF3E4}
+.shelf button.shelf-btn.line,#learnShelf button.shelf-btn.line{border:1px solid #8A6A4A;background:transparent;color:#3A2416}
+.shelf-goal{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:18px;background:rgba(18,10,20,.62);border:1px solid rgba(255,213,138,.35);color:#FFD58A;margin-block-start:4px}
+.shelf-goal svg{fill:#FFD58A;flex:none}
+.shelf-goal span{font:600 12px var(--font-sans);color:#FFE2C6}

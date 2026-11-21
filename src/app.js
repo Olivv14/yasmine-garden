@@ -63,7 +63,7 @@ const chat=createChat({$,el,button,t,copy,locale,getClient:()=>client,getApi:()=
 const calls=createCalls({el,button,t,copy,me:()=>state.profile,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,photoOf:id=>avatarUI?.photo(id)??null,signal:p=>chat.callSignal(p),onSignal:fn=>chat.onCall(fn),iceServers:()=>client?.connectionPublicConfig?.iceServers??[]});
 const shell=createShell({$,el,button,t,copy,navigate:next=>navigate(next),getSnapshot:()=>snapshot,me:()=>state.profile,person,home,player,music,chat,openRound:id=>play?.openRound(id),markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true))});
 const play=createPlay({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,me:()=>state.profile,person,photoOf:id=>avatarUI?.photo(id)??null,getApi:()=>api,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x),
-  navigate:next=>navigate(next),openPlant:()=>home.openPlant(),onWaiting:n=>shell?.playWaiting(n),onRound:id=>markRoundSeen(id)});
+  navigate:next=>navigate(next),openPlant:()=>home.openPlant(),onWaiting:n=>shell?.playWaiting(n),partnerOnline:()=>chat?.partnerOnline?.()??false,onRound:id=>markRoundSeen(id)});
 const shop=createShop({el,button,t,copy,getSnapshot:()=>snapshot,me:()=>state.profile,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,person,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x)});$('openShop').onclick=()=>shop.open();
 const eggs=createEggs({el,t,copy,notify:x=>notify(x),me:()=>state.profile,person,partner:()=>snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id??null,isMusicPlaying:()=>document.getElementById('musicPlayer')?.paused===false||document.documentElement.classList.contains('music-on'),page:()=>page});
 const usHero=createUsHero({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,photoOf:id=>avatarUI?.photo(id)??null,rpc:(name,args)=>task(()=>api.rpc(name,args)),notify:x=>notify(x)});
@@ -78,7 +78,7 @@ let eggsStarted=false;
 let composerTabs=null;
 const pushGuide=createPushGuide({$,el,button,t,copy});
 const homeDusk=createHomeDusk({$,el,button,t,copy,partnerName:()=>{const id=snapshot?.members?.find(m=>m.profile_id!==state.profile)?.profile_id;return id?person(id):'';}});
-const learn=createLearn({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,getApi:()=>api,me:()=>state.profile,person,notify:x=>notify(x)});
+const learn=createLearn({$,el,button,t,copy,locale,getSnapshot:()=>snapshot,getClient:()=>client,getApi:()=>api,me:()=>state.profile,person,notify:x=>notify(x),showInGarden:id=>{navigate('garden');scrollTo({top:0,behavior:'smooth'});setTimeout(()=>home.garden3d?.showSpot(id),400);}});
 // Opening a round from Play marks its bell rows (your turn, the result) as read.
 function markRoundSeen(roundId){const ids=(snapshot?.notifications??[]).filter(n=>n.ref_id===roundId&&!n.read_at&&n.recipient_id===state.profile&&['game_turn','game_result'].includes(n.kind)).map(n=>n.id);
   if(ids.length)task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true)).catch(()=>{});}
