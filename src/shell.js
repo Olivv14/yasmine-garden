@@ -82,14 +82,14 @@ export function createShell({$,el,button,t,copy,navigate,getSnapshot,me,person,h
 
   const partnerName=()=>{const snap=getSnapshot(),id=snap?.members?.find(m=>m.profile_id!==me())?.profile_id;return id?person(id):'';};
   // ---- The toad's card on Home drives the music player; the toad in the garden plays along
-  const playIcon=()=>$('toadPlay').replaceChildren(icon(player.paused&&!soundPlaying()?'playTrack':'pause',18));
+  let toadIcon=null;const playIcon=(on=!(player.paused&&!soundPlaying()))=>{if(toadIcon===on&&$('toadPlay').firstChild)return;toadIcon=on;$('toadPlay').replaceChildren(icon(on?'pause':'playTrack',18));};
   function paintToad(){
     const playing=music.isPlaying()||(!player.paused&&!player.ended)||soundPlaying(),title=music.nowTitle()||$('trackTitle')?.textContent?.trim()||'';
     const partnerSong=!playing?music.partnerListening():null;
-    if(partnerSong)copy($('toadLine'),()=>t('together.listening',{name:partnerName(),title:partnerSong.title}));else{copy($('toadLine'),'');$('toadLine').textContent=music.currentLine();}
+    if(partnerSong)copy($('toadLine'),()=>t('together.listening',{name:partnerName(),title:partnerSong.title}));else{const line=music.currentLine();if($('toadLine').textContent!==line){copy($('toadLine'),'');$('toadLine').textContent=line;}}
     copy($('toadState'),()=>t(playing?'toad.playing':'toad.resting'));
-    $('toadSong').textContent=title;
-    copy($('toadPlay'),()=>t(playing?'music.pause':'music.play'),'aria-label');playIcon();
+    if($('toadSong').textContent!==title)$('toadSong').textContent=title;
+    copy($('toadPlay'),()=>t(playing?'music.pause':'music.play'),'aria-label');playIcon(playing);
     $('toadCard').classList.toggle('on',playing);
     garden3d()?.setPlaying(playing);garden3d()?.setSong(playing?title:null);
   }

@@ -63,7 +63,9 @@ export function createGate({$,signInWithWord,reducedMotion=()=>false,onHidden}){
     if(shell)shell.inert=true;log.replaceChildren();for(const [,el] of [['phrase',phrase.parentElement],['word',form],['log',log]])el.hidden=true;gate.dataset.step='quiet';}
   function finish(){
     if(!appReady||!logsDone||gate.hidden)return;
-    timers.push(setTimeout(()=>{gate.classList.add('leaving');timers.push(setTimeout(hide,reducedMotion()?0:620));},reducedMotion()?0:420));
+    // coming back (the quiet screen): leave straight away with a short fade; after the secret word, the slower goodbye
+    const q=gate.dataset.step==='quiet',fast=reducedMotion();
+    timers.push(setTimeout(()=>{gate.classList.add('leaving');timers.push(setTimeout(hide,fast?0:q?260:620));},fast||q?0:420));
   }
   return {show,hide,resume,quiet,isQuiet:()=>!gate.hidden&&gate.dataset.step==='quiet',
     open:()=>!gate.hidden,
