@@ -1612,5 +1612,14 @@
   "bt.throw": "Lancia la bottiglia",
   "bt.opened": "Bottiglie aperte · {{count}}",
   "bt.openedTitle": "Una bottiglia aperta",
-  "bt.you": "Tu"
+  "bt.you": "Tu",
+  "bt.nextShell": "Ancora {{count}} bottiglie aperte per la prossima conchiglia",
+  "bt.openShell": "C'è una conchiglia · aprila",
+  "bt.shellTitle": "Una conchiglia nella bottiglia",
+  "bt.opening": "Apertura…",
+  "bt.prize.small": "Un piccolo premio",
+  "bt.prize.big": "Un grande premio!",
+  "bt.prize.legendary": "Leggendario!",
+  "bt.prizeHint": "Punti per il negozio e nuovi semi per il giardino",
+  "bt.prizeToast": "+{{points}} punti dal mare"
 }

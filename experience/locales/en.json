@@ -1612,5 +1612,14 @@
   "bt.throw": "Throw the bottle",
   "bt.opened": "Opened bottles · {{count}}",
   "bt.openedTitle": "An opened bottle",
-  "bt.you": "You"
+  "bt.you": "You",
+  "bt.nextShell": "{{count}} more opened bottles to the next shell",
+  "bt.openShell": "A shell inside · open it",
+  "bt.shellTitle": "A shell in the bottle",
+  "bt.opening": "Opening…",
+  "bt.prize.small": "A small prize",
+  "bt.prize.big": "A big prize!",
+  "bt.prize.legendary": "Legendary!",
+  "bt.prizeHint": "Points for the shop and new seeds for the garden",
+  "bt.prizeToast": "+{{points}} points from the sea"
 }

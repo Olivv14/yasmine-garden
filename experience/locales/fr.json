@@ -1612,5 +1612,14 @@
   "bt.throw": "Lancer la bouteille",
   "bt.opened": "Bouteilles ouvertes · {{count}}",
   "bt.openedTitle": "Une bouteille ouverte",
-  "bt.you": "Toi"
+  "bt.you": "Toi",
+  "bt.nextShell": "Encore {{count}} bouteilles ouvertes avant le prochain coquillage",
+  "bt.openShell": "Un coquillage dedans · ouvre-le",
+  "bt.shellTitle": "Un coquillage dans la bouteille",
+  "bt.opening": "Ouverture…",
+  "bt.prize.small": "Un petit cadeau",
+  "bt.prize.big": "Un gros cadeau !",
+  "bt.prize.legendary": "Légendaire !",
+  "bt.prizeHint": "Des points pour la boutique et de nouvelles graines pour le jardin",
+  "bt.prizeToast": "+{{points}} points venus de la mer"
 }

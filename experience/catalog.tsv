@@ -1613,3 +1613,12 @@ bt.throw	Throw the bottle	Lanzar la botella	Lancer la bouteille	Lancia la bottig
 bt.opened	Opened bottles · {{count}}	Botellas abiertas · {{count}}	Bouteilles ouvertes · {{count}}	Bottiglie aperte · {{count}}	قراعي محلولة · {{count}}
 bt.openedTitle	An opened bottle	Una botella abierta	Une bouteille ouverte	Una bottiglia aperta	قرعة محلولة
 bt.you	You	Tú	Toi	Tu	إنت
+bt.nextShell	{{count}} more opened bottles to the next shell	{{count}} botellas abiertas más para la próxima concha	Encore {{count}} bouteilles ouvertes avant le prochain coquillage	Ancora {{count}} bottiglie aperte per la prossima conchiglia	مازال {{count}} قراعي محلولين للصدفة الجاية
+bt.openShell	A shell inside · open it	Hay una concha · ábrela	Un coquillage dedans · ouvre-le	C'è una conchiglia · aprila	فيها صدفة · حلّها
+bt.shellTitle	A shell in the bottle	Una concha en la botella	Un coquillage dans la bouteille	Una conchiglia nella bottiglia	صدفة في القرعة
+bt.opening	Opening…	Abriendo…	Ouverture…	Apertura…	قاعد يتحل…
+bt.prize.small	A small prize	Un premio pequeño	Un petit cadeau	Un piccolo premio	هدية صغيرة
+bt.prize.big	A big prize!	¡Un premio grande!	Un gros cadeau !	Un grande premio!	هدية كبيرة!
+bt.prize.legendary	Legendary!	¡Legendario!	Légendaire !	Leggendario!	أسطورية!
+bt.prizeHint	Points for the shop and new seeds for the garden	Puntos para la tienda y semillas nuevas para el jardín	Des points pour la boutique et de nouvelles graines pour le jardin	Punti per il negozio e nuovi semi per il giardino	نقاط للحانوت و زريعة جديدة للجنينة
+bt.prizeToast	+{{points}} points from the sea	+{{points}} puntos del mar	+{{points}} points venus de la mer	+{{points}} punti dal mare	+{{points}} نقطة من البحر
