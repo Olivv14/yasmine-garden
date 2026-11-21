@@ -109,6 +109,7 @@ export function createGarden3D({t,copy,onFlower,onMoon,onSpot,onToad,onEvent,onR
   }
 
   return {element,start,
+    showSpot(id){return api?.showSpot?.(id)??false;},
     get light(){return light();},
     update({flowers=[],mode}={}){lastFlowers=flowers.filter(f=>!f.deleted_at);harissa=mode==='harissa';sendFlowers();api?.setLight(light());},
     previewLight(L){preview=['day','dusk','night'].includes(L)?L:null;api?.setLight(light());return light();},

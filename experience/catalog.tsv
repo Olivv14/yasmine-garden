@@ -1622,3 +1622,46 @@ bt.prize.big	A big prize!	¡Un premio grande!	Un gros cadeau !	Un grande premio!
 bt.prize.legendary	Legendary!	¡Legendario!	Légendaire !	Leggendario!	أسطورية!
 bt.prizeHint	Points for the shop and new seeds for the garden	Puntos para la tienda y semillas nuevas para el jardín	Des points pour la boutique et de nouvelles graines pour le jardin	Punti per il negozio e nuovi semi per il giardino	نقاط للحانوت و زريعة جديدة للجنينة
 bt.prizeToast	+{{points}} points from the sea	+{{points}} puntos del mar	+{{points}} points venus de la mer	+{{points}} punti dal mare	+{{points}} نقطة من البحر
+gs.td.howSpicy	How spicy tonight?	¿Qué tan picante esta noche?	Quel piment ce soir ?	Quanto piccante stasera?	قدّاش حارّ الليلة؟
+gs.td.counts	Your truths: {{truths}} · Your dares: {{dares}}	Tus verdades: {{truths}} · Tus retos: {{dares}}	Tes vérités : {{truths}} · Tes actions : {{dares}}	Le tue verità: {{truths}} · I tuoi obblighi: {{dares}}	صراحاتك: {{truths}} · تحدّياتك: {{dares}}
+gs.hockey.firstTo	First to {{win}}	El primero en llegar a {{win}}	Le premier à {{win}}	Vince chi arriva a {{win}}	اللي يوصل {{win}} الأوّل
+gs.hockey.sub	Live when you're both here, or train against the toad	En vivo cuando están los dos, o entrena contra el sapo	En direct quand vous êtes là tous les deux, ou entraîne-toi contre le crapaud	Dal vivo quando ci siete entrambi, o allenati contro il rospo	مباشر كي تكونو الزوز هوني، ولا تدرّب ضدّ الجرانة
+gs.live	Play {{name}} live	Juega en vivo con {{name}}	Joue en direct avec {{name}}	Gioca dal vivo con {{name}}	إلعب مباشر مع {{name}}
+gs.online	{{name}} is here now · tap to play	{{name}} está aquí ahora · toca para jugar	{{name}} est là maintenant · touche pour jouer	{{name}} è qui adesso · tocca per giocare	{{name}} هوني توّا · إنقر باش تلعب
+gs.offline	Not here right now · tap and wait for {{name}}	No está ahora · toca y espera a {{name}}	Pas là pour l'instant · touche et attends {{name}}	Non c'è adesso · tocca e aspetta {{name}}	موش هوني توّا · إنقر واستنّى {{name}}
+gs.train	Train against the toad	Entrena contra el sapo	Entraîne-toi contre le crapaud	Allenati contro il rospo	تدرّب ضدّ الجرانة
+gs.levels	Easy · medium · hard	Fácil · medio · difícil	Facile · moyen · difficile	Facile · medio · difficile	ساهل · متوسّط · صعيب
+gs.record	All-time wins: you {{me}} · {{name}} {{them}}	Victorias de siempre: tú {{me}} · {{name}} {{them}}	Victoires depuis le début : toi {{me}} · {{name}} {{them}}	Vittorie di sempre: tu {{me}} · {{name}} {{them}}	الربحات الكلّ: إنت {{me}} · {{name}} {{them}}
+gs.pool.title	8-ball, your fingers are the cue	Bola 8: tus dedos son el taco	Billard à 8 : tes doigts sont la queue	Palla 8: le tue dita sono la stecca	بيار 8: صوابعك هوما العصا
+gs.pool.sub	Drag on the table to aim, pull back, let go	Arrastra en la mesa para apuntar, tira hacia atrás y suelta	Glisse sur la table pour viser, tire en arrière, lâche	Trascina sul tavolo per mirare, tira indietro, lascia	إسحب على الطاولة باش تصوّب، رجّع لتالي، وسيّب
+gs.pool.together	Play together	Jugar juntos	Jouer ensemble	Giocare insieme	إلعبو مع بعضكم
+gs.pool.here	{{name}} is here · live	{{name}} está aquí · en vivo	{{name}} est là · en direct	{{name}} è qui · dal vivo	{{name}} هوني · مباشر
+gs.pool.notHere	Live, when {{name}} is here	En vivo, cuando {{name}} esté	En direct, quand {{name}} est là	Dal vivo, quando c'è {{name}}	مباشر، كي يكون {{name}} هوني
+gs.pool.toad	Against the toad	Contra el sapo	Contre le crapaud	Contro il rospo	ضدّ الجرانة
+gs.pool.toadHint	Practise alone	Practica a solas	Entraîne-toi seul	Allenati da solo	تدرّب وحدك
+gs.km.intro	You answer 5 questions about yourself. Then {{name}} guesses.	Respondes 5 preguntas sobre ti. Luego {{name}} adivina.	Tu réponds à 5 questions sur toi. Puis {{name}} devine.	Rispondi a 5 domande su di te. Poi {{name}} indovina.	تجاوب على 5 أسئلة عليك. من بعد {{name}} يحزّر.
+gs.km.score	{{score}} of {{total}}	{{score}} de {{total}}	{{score}} sur {{total}}	{{score}} su {{total}}	{{score}} من {{total}}
+gs.km.knewYou	{{name}} knew you	{{name}} te conoció	{{name}} te connaissait	{{name}} ti ha indovinato	{{name}} عرفك
+gs.km.youKnew	You knew {{name}}	Conociste a {{name}}	Tu connaissais {{name}}	Hai indovinato {{name}}	إنت عرفت {{name}}
+gs.km.lastTime	last time	la última vez	la dernière fois	l'ultima volta	المرّة اللي فاتت
+gs.km.guess	Guess {{name}}'s answers	Adivina las respuestas de {{name}}	Devine les réponses de {{name}}	Indovina le risposte di {{name}}	حزّر أجوبة {{name}}
+gs.km.nothing	Nothing from {{name}} to guess yet	Aún no hay nada de {{name}} que adivinar	Rien de {{name}} à deviner pour l'instant	Ancora niente di {{name}} da indovinare	مازال ما فمّا شي من {{name}} باش تحزّر
+gs.km.answer	Answer about me	Responder sobre mí	Répondre sur moi	Rispondi su di me	جاوب عليّ
+shelf.title	Your discoveries	Tus descubrimientos	Tes découvertes	Le tue scoperte	اكتشافاتك
+shelf.count	{{found}} of {{total}} found in the garden	{{found}} de {{total}} encontrados en el jardín	{{found}} sur {{total}} trouvées dans le jardin	{{found}} su {{total}} trovate nel giardino	{{found}} من {{total}} لقيتهم في الجنينة
+shelf.from.tn	From Tunisia · {{found}} of {{total}}	De Túnez · {{found}} de {{total}}	De Tunisie · {{found}} sur {{total}}	Dalla Tunisia · {{found}} su {{total}}	من تونس · {{found}} من {{total}}
+shelf.from.ve	From Venezuela · {{found}} of {{total}}	De Venezuela · {{found}} de {{total}}	Du Venezuela · {{found}} sur {{total}}	Dal Venezuela · {{found}} su {{total}}	من فنزويلا · {{found}} من {{total}}
+shelf.hidden	Still hidden in the garden	Aún escondido en el jardín	Encore caché dans le jardin	Ancora nascosto nel giardino	مازال مخبّي في الجنينة
+shelf.full.tn	The whole Tunisian shelf is yours!	¡Toda la repisa de Túnez es tuya!	Toute l'étagère tunisienne est à toi !	Tutto lo scaffale tunisino è tuo!	الرفّ التونسي الكلّ متاعك!
+shelf.full.ve	The whole Venezuelan shelf is yours!	¡Toda la repisa de Venezuela es tuya!	Toute l'étagère vénézuélienne est à toi !	Tutto lo scaffale venezuelano è tuo!	الرفّ الفنزويلي الكلّ متاعك!
+shelf.pick	Tap a discovery to see its word	Toca un descubrimiento para ver su palabra	Touche une découverte pour voir son mot	Tocca una scoperta per vedere la sua parola	إنقر على اكتشاف باش تشوف الكلمة متاعو
+shelf.empty	Tap things in the garden to fill your shelves	Toca cosas en el jardín para llenar tus repisas	Touche des choses dans le jardin pour remplir tes étagères	Tocca le cose nel giardino per riempire i tuoi scaffali	إنقر على الحاجات في الجنينة باش تعمّر رفوفك
+shelf.goal	Fill a whole shelf to complete its country	Llena una repisa entera para completar su país	Remplis toute une étagère pour compléter son pays	Riempi un intero scaffale per completare il suo paese	عمّر رفّ كامل باش تكمّل البلاد متاعو
+shelf.foundByYouOn	Found by you · {{date}}	Lo encontraste tú · {{date}}	Trouvé par toi · {{date}}	Trovato da te · {{date}}	لقيتو إنت · {{date}}
+shelf.foundByYou	Found by you	Lo encontraste tú	Trouvé par toi	Trovato da te	لقيتو إنت
+shelf.foundBy	Found by {{name}}	Lo encontró {{name}}	Trouvé par {{name}}	Trovato da {{name}}	لقاه {{name}}
+shelf.notYet	Not found yet	Aún sin encontrar	Pas encore trouvé	Non ancora trovato	مازال ما تلقاش
+shelf.partnerHint	{{name}} found this one. Find it in the garden to keep it too.	{{name}} encontró este. Búscalo en el jardín para tenerlo tú también.	{{name}} a trouvé celui-ci. Trouve-le dans le jardin pour le garder aussi.	{{name}} ha trovato questo. Trovalo nel giardino per tenerlo anche tu.	{{name}} لقى هذا. لوّج عليه في الجنينة باش يولّي متاعك زادة.
+shelf.hiddenHint	Something from here is hidden in the garden. Tap around to find it.	Algo de aquí está escondido en el jardín. Toca por ahí para encontrarlo.	Quelque chose d'ici est caché dans le jardin. Touche partout pour le trouver.	Qualcosa di qui è nascosto nel giardino. Tocca in giro per trovarlo.	فمّا حاجة من هوني مخبّية في الجنينة. إنقر هنا وهناك باش تلقاها.
+shelf.hear	Hear it	Escúchala	L'écouter	Ascoltala	إسمعها
+shelf.see	See it in the garden	Verlo en el jardín	Le voir dans le jardin	Vedilo nel giardino	شوفو في الجنينة

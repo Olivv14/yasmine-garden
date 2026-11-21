@@ -14,7 +14,7 @@ import {authorTone} from '../garden/model.js';
 import {icon} from '../design/icons.js';
 
 const MISSING=['PGRST202','42883','42P01'];
-export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,photoOf=()=>null,getApi=()=>null,rpc,notify,navigate,openPlant,onWaiting,onRound}){
+export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,person,photoOf=()=>null,getApi=()=>null,rpc,notify,navigate,openPlant,onWaiting,onRound,partnerOnline=()=>false}){
   const mount=$('playMount');
   const partner=()=>getSnapshot()?.members.map(m=>m.profile_id).find(id=>id!==me())??null;
   const tones=()=>{const s=getSnapshot();return s?{me:authorTone(me(),s.members,s.profiles),partner:authorTone(partner(),s.members,s.profiles)}:{me:'oliver',partner:'yasmine'};};
@@ -35,10 +35,10 @@ export function createPlay({$,el,button,t,copy,locale,getSnapshot,getClient,me,p
     catch(e){if(e?.code==='PT409')return true;if(MISSING.includes(e?.code))notify(()=>t('game.needsUpdate'));return false;}
     dispatch(id);return true;
   }
-  const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer};
+  const shared={el,button,t,copy,locale,me,person,partner,getSnapshot,start,answer,photo:photoOf};
   const td=createTruthDare({el,button,t,copy,me,person,partner,record,notify});
-  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf});
-  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf});
+  const hockey=createHockey({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,notify,photo:photoOf,getSnapshot,partnerOnline});
+  const pool=createPool({el,button,t,copy,getClient,pairId:()=>getSnapshot()?.pairId,me,isHost:()=>getSnapshot()?.members.find(m=>m.profile_id===me())?.slot===1,partner,person,tones,record,photo:photoOf,getSnapshot,partnerOnline});
   const duel=createDuel(shared),knowme=createKnowMe(shared);
   const piano=createPiano({el,button,t,copy,me,getSnapshot,download:m=>getApi().download(m),record});
   const dance=createDance({el,button,t,copy,me,person,partner,getSnapshot,getClient,getApi,notify});

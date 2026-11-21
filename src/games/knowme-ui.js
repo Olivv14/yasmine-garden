@@ -2,22 +2,42 @@
 // Your answers stay hidden from your partner until they have guessed (backend/010 read policy);
 // the server counts the matches. Questions and answers come from the catalog in five languages.
 import {KNOWME_SIZE,OPTIONS,questionKey,optionKey,pickQuestions} from './knowme.js';
-import {answersOf,waitingForThem,finishedRounds} from './score.js';
+import {answersOf,waitingForThem,waitingForMe,finishedRounds} from './score.js';
+import {face} from './starts.js';
 import {icon} from '../design/icons.js';
 
-export function createKnowMe({el,button,t,copy,me,person,partner,getSnapshot,start,answer}){
+export function createKnowMe({el,button,t,copy,me,person,partner,getSnapshot,start,answer,photo=()=>null}){
   const root=el('article',undefined,'card game-card knowme');root.id='knowMe';
   // view: home, ask (answering, about you or guessing), after (saved, or failed to save), result
   let view='home',run=null,saving=false,failed=false,shownResult=null;
   const name=()=>person(partner());
   const head=()=>{const h=el('div',undefined,'game-head');h.append(icon('knowme',22),el('h3',()=>t('knowme.title'),'title'));return h;};
 
+  // the start screen (mockup): the two of you, the five questions you are about to answer (the first ones
+  // readable, the rest fading), how well your partner knew you last time, and the two ways in
+  let preview=null;
+  const recentMine=snap=>(snap?.playRounds??[]).filter(r=>r.game==='know_me'&&r.started_by===me()).slice(0,4).flatMap(r=>r.items);
   function home(){
     view='home';shownResult=null;const snap=getSnapshot();
-    root.replaceChildren(head(),el('p',()=>t('knowme.intro',{name:name()}),'small'));
-    const go=button(()=>t('knowme.start'),()=>begin(null),'primary');go.id='knowmeStart';root.append(go);
-    for(const r of waitingForThem(snap,me()).filter(r=>r.game==='know_me').slice(0,2))root.append(el('p',()=>t('knowme.waiting',{name:name()}),'small muted'));
-    const last=finishedRounds(snap).find(f=>f.round.game==='know_me');if(last)root.append(result(last.round,true));
+    preview??=pickQuestions(recentMine(snap),KNOWME_SIZE);
+    root.replaceChildren(head());
+    const pair=el('div',undefined,'km-pair');const heart=el('span',undefined,'km-heart');heart.append(icon('heart',26));
+    pair.append(face(el,me(),{photo,person,cls:'km-face me'}),heart,face(el,partner(),{photo,person,cls:'km-face them'}));
+    root.append(pair,el('p',()=>t('gs.km.intro',{name:name()}),'km-intro'));
+    const list=el('ol',undefined,'km-preview');
+    preview.forEach((q,i)=>{const li=document.createElement('li');li.dataset.i=String(i);li.append(el('span',String(i+1),'km-n'),el('span',()=>t(questionKey(q)),'km-q'));list.append(li);});
+    root.append(list);
+    const last=finishedRounds(snap).find(f=>f.round.game==='know_me');
+    if(last){const a=answersOf(snap,last.round.id),self=a.find(x=>x.role==='self'),guess=a.find(x=>x.role==='guess');
+      if(self&&guess){const box=el('div',undefined,'km-last');const mine=self.profile_id===me();
+        const score=el('b');score.textContent=t('gs.km.score',{score:guess.score,total:last.round.items.length});copy(score,()=>t('gs.km.score',{score:guess.score,total:last.round.items.length}));
+        box.append(el('span',()=>mine?t('gs.km.knewYou',{name:name()}):t('gs.km.youKnew',{name:name()})),score,el('span',()=>t('gs.km.lastTime')));root.append(box);}}
+    for(const r of waitingForThem(snap,me()).filter(r=>r.game==='know_me').slice(0,1))root.append(el('p',()=>t('knowme.waiting',{name:name()}),'small muted km-wait'));
+    const toGuess=waitingForMe(snap,me()).find(r=>r.game==='know_me');
+    const acts=el('div',undefined,'km-acts');
+    const g=button(()=>toGuess?t('gs.km.guess',{name:name()}):t('gs.km.nothing',{name:name()}),()=>{if(toGuess)begin(toGuess);},'km-guess');g.disabled=!toGuess;
+    const go=button(()=>t('gs.km.answer'),()=>begin(null),'km-answer');go.id='knowmeStart';
+    acts.append(g,go);root.append(acts);
   }
   // A finished round: every question with the real answer and the guess.
   function result(round,compact=false){
@@ -42,7 +62,7 @@ export function createKnowMe({el,button,t,copy,me,person,partner,getSnapshot,sta
   function begin(round){
     const snap=getSnapshot();
     const recent=(snap?.playRounds??[]).filter(r=>r.game==='know_me'&&r.started_by===me()).slice(0,4).flatMap(r=>r.items);
-    run={round,id:crypto.randomUUID(),items:round?round.items:pickQuestions(recent,KNOWME_SIZE),idx:0,picks:[]};
+    run={round,id:crypto.randomUUID(),items:round?round.items:(preview??pickQuestions(recent,KNOWME_SIZE)),idx:0,picks:[]};if(!round)preview=null;
     failed=false;view='ask';ask();
   }
   // the question on a cream card under a little sunset with the two of you

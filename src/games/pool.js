@@ -5,6 +5,7 @@
 import {POOL,POCKETS,HEAD,newGame,strike,runShot,applyShot,freeSpot,groupOf,targetsFor,tableKey,left} from './pool-rules.js';
 import {toadShot} from './pool-bot.js';
 import {levelOrDefault} from './bot.js';
+import {pic,face as faceOf,wins} from './starts.js';
 import {createToadPicker} from './toads.js';
 import {SCENE_ART} from './scene-art.js';
 import {homography} from './persp.js';
@@ -16,17 +17,27 @@ const COLORS={1:'#D9A520',2:'#1F3E8C',3:'#A3271F',4:'#5A2D7A',5:'#C25418',6:'#1E
 const CLOTH=homography([[86,74],[284,74],[312,476],[58,476]]),ART_W=370,ART_H=590;
 const colorOf=n=>COLORS[n>8?n-8:n]??'#FFFFFF';
 
-export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,photo=()=>null}){
+export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,photo=()=>null,getSnapshot=()=>null,partnerOnline=()=>false}){
   const root=el('article',undefined,'card game-card pool-card');root.id='pool';
   // home: title, the two ways to play, the toad cards
   const home=el('div',undefined,'pl-home');
   const head=el('div',undefined,'game-head');head.append(icon('pool',22),el('h3',()=>t('pool.title'),'title'));
-  const intro=el('p',()=>t('pool.intro'),'small');
-  const join=button(()=>t('pool.join'),()=>startLive(),'primary');join.id='poolJoin';
-  const bot=button(()=>t('pool.bot'),()=>{picker.hidden=!picker.hidden;},'');bot.id='poolBot';
+  // the start screen (mockup): the table and the rack, play together or against the toad, your record
+  const hero=pic('pool','gs-hero gs-pool');
+  const what=el('div',undefined,'gs-what');what.append(el('b',()=>t('gs.pool.title')),el('span',()=>t('gs.pool.sub')));
+  const join=button(()=>'',()=>startLive(),'gs-square main');join.id='poolJoin';
+  const joinFaces=el('span',undefined,'gs-faces small'),joinState=el('span',undefined,'gs-way-hint');
+  join.append(joinFaces,el('b',()=>t('gs.pool.together')),joinState);
+  const bot=button(()=>'',()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'gs-square');bot.id='poolBot';
+  bot.append(pic('toad','gs-toad'),el('b',()=>t('gs.pool.toad')),el('span',()=>t('gs.pool.toadHint'),'gs-way-hint'));
   const picker=createToadPicker({el,button,t,copy,choose:l=>startBot(l),game:'pool'});picker.hidden=true;
-  const starts=el('div',undefined,'game-actions');starts.append(join,bot);
-  home.append(head,intro,starts,picker);
+  const starts=el('div',undefined,'gs-squares');starts.append(join,bot);
+  const recordLine=el('p',undefined,'gs-record');
+  function paintHome(){joinFaces.replaceChildren(faceOf(el,me(),{photo,person}),faceOf(el,partner(),{photo,person}));
+    const on=partnerOnline();join.classList.toggle('online',on);copy(joinState,()=>on?t('gs.pool.here',{name:person(partner())}):t('gs.pool.notHere',{name:person(partner())}));
+    const w=wins(getSnapshot(),'pool',me(),partner());recordLine.hidden=!(w.me||w.them);copy(recordLine,()=>t('gs.record',{me:w.me,name:person(partner()),them:w.them}));}
+  document.addEventListener('partner-presence',()=>{if(root.isConnected)paintHome();});
+  home.append(head,hero,what,starts,picker,recordLine);
   // the match (approved PoolDusk / PoolAim): chip, scoreboard, the table, the pull bar
   const match=el('div',undefined,'pl-match');match.hidden=true;
   const chip=el('span',undefined,'game-chip in-bar');
@@ -243,5 +254,5 @@ export function createPool({el,button,t,copy,getClient,pairId,me,isHost,partner,
     return {at:[cue.x+dir[0]*tt,cue.y+dir[1]*tt],ball:null};}
   function hash(str){let h=0;for(let i=0;i<str.length;i++)h=(h*31+str.charCodeAt(i))|0;return (h>>>0).toString(16);}
   function norm([x,y]){const n=Math.sqrt(x*x+y*y)||1;return [x/n,y/n];}
-  return {element:root,stop,get live(){return live;}};
+  return {element:root,stop,render(){paintHome();},get live(){return live;}};
 }

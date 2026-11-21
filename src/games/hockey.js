@@ -10,6 +10,7 @@ import {LEVEL_CARD} from '../shop/items.js';
 import {SCENE_ART} from './scene-art.js';
 import {homography} from './persp.js';
 import {icon} from '../design/icons.js';
+import {pic,face as faceOf,wins} from './starts.js';
 
 const SEND_MS=33,WIN=7;
 // the drawn table's playing surface in the art's coordinates (far-left, far-right, near-right, near-left)
@@ -18,17 +19,27 @@ const SURFACE=homography([[70,64],[300,64],[334,470],[36,470]]),ART_W=370,ART_H=
 const MALLET={oliver:['#FFC9C0','#E0473C','#8A1A14','#4A0C08'],yasmine:['#D8FFE6','#2FB070','#0E5A34','#06301A'],toad:['#D9F2C2','#8CC06A','#3F7A30','#1F4418']};
 const SCORE_TINT={oliver:'#FFB4A8',yasmine:'#C6EDA8',toad:'#C6EDA8'};
 
-export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,notify,photo=()=>null}){
+export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partner,person,tones,record,notify,photo=()=>null,getSnapshot=()=>null,partnerOnline=()=>false}){
   const root=el('article',undefined,'card game-card hockey-card');root.id='airHockey';
   // home: title, the two ways to play, and the toad cards
   const home=el('div',undefined,'hk-home');
   const head=el('div',undefined,'game-head');head.append(icon('live',22),el('h3',()=>t('game.hockey.title'),'title'));
-  const intro=el('p',()=>t('game.hockey.intro'),'small');
-  const join=button(()=>t('game.hockey.join'),()=>start(),'primary');join.id='hockeyJoin';
-  const bot=button(()=>t('game.hockey.bot'),()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'');bot.id='hockeyBot';
-  const starts=el('div',undefined,'game-actions');starts.append(join,bot);
+  // the start screen (mockup): the table from above, first to 7, play live or train against the toad, your record
+  const hero=pic('hockey','gs-hero gs-hockey');
+  const what=el('div',undefined,'gs-what');what.append(el('b',()=>t('gs.hockey.firstTo',{win:WIN})),el('span',()=>t('gs.hockey.sub')));
+  const join=button(()=>'',()=>start(),'gs-way main');join.id='hockeyJoin';
+  const joinFaces=el('span',undefined,'gs-faces'),joinWords=el('span',undefined,'gs-way-words'),joinState=el('span',undefined,'gs-way-hint');
+  joinWords.append(el('b',()=>t('gs.live',{name:person(partner())})),joinState);join.append(joinFaces,joinWords);
+  const bot=button(()=>'',()=>{picker.hidden=!picker.hidden;if(!picker.hidden)picker.scrollIntoView?.({block:'start',behavior:'smooth'});},'gs-way');bot.id='hockeyBot';
+  const botWords=el('span',undefined,'gs-way-words');botWords.append(el('b',()=>t('gs.train')),el('span',()=>t('gs.levels'),'gs-way-hint'));bot.append(pic('toad','gs-toad'),botWords);
+  const starts=el('div',undefined,'gs-ways');starts.append(join,bot);
   const picker=createToadPicker({el,button,t,copy,choose:level=>startBot(level),game:'hockey'});picker.hidden=true;
-  home.append(head,intro,starts,picker);
+  const recordLine=el('p',undefined,'gs-record');
+  function paintHome(){joinFaces.replaceChildren(faceOf(el,me(),{photo,person}),faceOf(el,partner(),{photo,person}));
+    const on=partnerOnline();join.classList.toggle('online',on);copy(joinState,()=>on?t('gs.online',{name:person(partner())}):t('gs.offline',{name:person(partner())}));
+    const w=wins(getSnapshot(),'hockey',me(),partner());recordLine.hidden=!(w.me||w.them);copy(recordLine,()=>t('gs.record',{me:w.me,name:person(partner()),them:w.them}));}
+  document.addEventListener('partner-presence',()=>{if(root.isConnected)paintHome();});
+  home.append(head,hero,what,starts,picker,recordLine);
   // the match: chip, scoreboard, table, status
   const match=el('div',undefined,'hk-match');match.hidden=true;
   const chip=el('span',undefined,'game-chip in-bar');
@@ -184,5 +195,5 @@ export function createHockey({el,button,t,copy,getClient,pairId,me,isHost,partne
     const items=[{pos:hostPos,draw:()=>mallet(hostPos,host()?meSet:themSet)},{pos:guestPos,draw:()=>mallet(guestPos,host()?themSet:meSet)},{pos:state.puck,draw:()=>puck(state.puck)}];
     items.sort((a,b)=>at(a.pos).p[1]-at(b.pos).p[1]);for(const i of items)i.draw();
   }
-  return {element:root,stop,get live(){return live;}};
+  return {element:root,stop,render(){paintHome();},get live(){return live;}};
 }

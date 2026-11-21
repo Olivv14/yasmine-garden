@@ -744,6 +744,9 @@ return {
   finally{renderer.setRenderTarget(prevT);renderer.setClearColor(prevC,prevA);rt.dispose();}
   return out;},
  resetView(){flyTo(new THREE.Vector3(...V1),new THREE.Vector3(...V0));},
+ // fly to one of the Tunisian or Venezuelan spots (from the Learn shelf)
+ showSpot(id){const s=(G.spots||[]).find(x=>x.id===id);if(!s)return false;const tp=new THREE.Vector3(...s.p);tp.y=Math.max(0,Math.min(tp.y,2));
+  const dir=cam.position.clone().sub(controls.target).setY(0).normalize();const pos=tp.clone().addScaledVector(dir,7);pos.y=tp.y+4;controls.autoRotate=false;flyTo(tp,pos);return true;},
  // a small picture of the garden as it is now (shown at once next time the app opens, while the 3D wakes up)
  snapshot(maxW=720){renderer.render(scene,cam);const c=renderer.domElement;if(!c.width)return null;const k=Math.min(1,maxW/c.width),o=document.createElement('canvas');o.width=Math.round(c.width*k);o.height=Math.round(c.height*k);o.getContext('2d').drawImage(c,0,0,o.width,o.height);return o.toDataURL('image/jpeg',.72);},
  onEvent(fn){eventCb=fn;sayFullMoon();},
