@@ -128,6 +128,11 @@ const TABS=['garden','talk','play','learn','us'],TAB_OF={today:'talk',journal:'t
 function navigate(next){const tab=TAB_OF[next]??(TABS.includes(next)?next:'garden');rememberPlace({page:next});if(page==='play'&&tab!=='play')play.stop();page=tab;for(const b of document.querySelectorAll('[data-page]'))b.setAttribute('aria-current',String(b.dataset.page===tab?'page':'false'));for(const p of TABS)$('page-'+p).hidden=p!==tab;if(tab==='talk'&&next!=='talk')shell.talkPane(next==='questions'?'questions':'journal');shell.tabChanged(tab);if(tab==='learn')learn.render();$('main').focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});}
 function openReception(){const panel=$('receptionPanel');panel.hidden=false;$('receptionToggle').setAttribute('aria-expanded','true');$('incomingToast').hidden=true;panel.scrollIntoView({block:'nearest'});$('receptionTitle').focus({preventScroll:true});}
 function closeReception(){ $('receptionPanel').hidden=true;$('receptionToggle').setAttribute('aria-expanded','false');$('receptionToggle').focus();}
+// The app stays fixed to the screen: no pinch zoom and no sideways sliding anywhere. Only the 3D garden moves with
+// your fingers (it handles its own pinch and drag). iPhone can ignore the viewport's "no zoom", so its pinch gestures
+// are stopped here too, and a two-finger move outside the garden never reaches the page.
+for(const ev of ['gesturestart','gesturechange','gestureend'])document.addEventListener(ev,e=>e.preventDefault(),{passive:false});
+document.addEventListener('touchmove',e=>{if(e.touches.length>1&&!e.target.closest?.('.garden3d-stage,.pu-frame,.ed-stage,.ed-item'))e.preventDefault();},{passive:false});
 // the bell opens "Under the arch" (the old panel stays for notification settings and the thought history)
 const inbox=createInbox({el,button,t,copy,locale,getSnapshot:()=>snapshot,me:()=>state.profile,person,
   markRead:ids=>task(()=>api.rpc('mark_notifications_read',{p_ids:ids},true)),markThought:e=>api.markThoughtRead(e).then(()=>api.refresh()),
